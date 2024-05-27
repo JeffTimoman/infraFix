@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Database\Factories\RandomUserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -19,6 +20,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'username' => 'admin',
             'password' => bcrypt('admin123'),
+            'email_verified_at' => now(),
+            'date_of_birth' => '1999-01-01',
             'role' => 'admin',
         ]);
 
@@ -28,6 +31,8 @@ class UserSeeder extends Seeder
             'email' => 'manager@admin.com',
             'username' => 'manager',
             'password' => bcrypt('admin123'),
+            'email_verified_at' => now(),
+            'date_of_birth' => '1999-01-01',
             'role' => 'manager',
         ]);
 
@@ -37,6 +42,8 @@ class UserSeeder extends Seeder
             'email' => 'government@admin.com',
             'username' => 'government',
             'password' => bcrypt('admin123'),
+            'email_verified_at' => now(),
+            'date_of_birth' => '1999-01-01',
             'role' => 'government',
         ]);
 
@@ -46,6 +53,8 @@ class UserSeeder extends Seeder
             'email' => 'user@admin.com',
             'username' => 'user',
             'password' => bcrypt('admin123'),
+            'email_verified_at' => now(),
+            'date_of_birth' => '1999-01-01',
             'role' => 'user',
         ]);
     }

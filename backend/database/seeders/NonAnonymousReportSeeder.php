@@ -5,10 +5,11 @@ namespace Database\Seeders;
 use App\Models\DamageType;
 use App\Models\Kelurahan;
 use App\Models\Report;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AnonymousReportSeeder extends Seeder
+class NonAnonymousReportSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,20 +18,16 @@ class AnonymousReportSeeder extends Seeder
     {
         $damage_types = DamageType::all();
         $kelurahan = Kelurahan::all();
-
+        $users = User::where('role', 'user')->get();
         for ($i = 1; $i <= 50; $i++){
             $random_report_code = bin2hex(random_bytes(10));
-            $random_access_key = 'iniaccesskey';
-            $hashed_report_code = encrypt($random_report_code, $random_access_key);
-
             $data = [
                 'report_code' => $random_report_code,
-                // 'access_key' => $random_access_key,
-                'hashed_report_code' => $hashed_report_code,
-                'anonymous' => true,
-                'title' => 'Anonymous'.$i,
-                'description' => 'Description '.$i,
-                'address' => 'Address '.$i,
+                'title' => 'Non Anonymous'.$i,
+                'description' => 'Non Anonymous Description '.$i,
+                'address' => 'Non Anonymous Address '.$i,
+                'anonymous' => false,
+                'user_id' => $users->random()->id,
                 'damage_type_id' => $damage_types->random()->id,
                 'kelurahan_id' => $kelurahan->random()->id,
             ];
