@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DamageTypeSeeder::class,
             DaerahSeeder::class,
+            AnonymousReportSeeder::class,
         ]);
     }
 }
