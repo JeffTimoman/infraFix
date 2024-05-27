@@ -1,17 +1,18 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+namespace App\Models;
 
-return new class extends Migration
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Report extends Model
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
-    {
-        Schema::create('reports', function (Blueprint $table) {
+    use HasFactory;
+    protected $fillable = ['report_code', 'title', 'description', 'address', 'anonymous', 'email', 'user_id', 'access_key', 'hashed_report_code', 'case_id', 'damage_type_id', 'kelurahan_id' ];
+}
+
+/*
+ Schema::create('reports', function (Blueprint $table) {
             $table->id();
 
             $table->string('report_code')->default('')->unique();
@@ -37,14 +38,4 @@ return new class extends Migration
             $table->foreignId('kelurahan_id')->nullable()->constrained('kelurahan', 'id')->onDelete('cascade');
 
             $table->timestamps();
-        });
-    }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('reports');
-    }
-};
+*/

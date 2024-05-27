@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookmark', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('user', 'id')->onDelete('cascade');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookmark');
+        Schema::dropIfExists('bookmarks');
     }
 };
