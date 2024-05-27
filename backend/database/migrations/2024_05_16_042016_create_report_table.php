@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reports', function (Blueprint $table) {
+        Schema::create('report', function (Blueprint $table) {
             $table->id();
 
             $table->string('report_code')->default('')->unique();
@@ -29,7 +29,6 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('user')->onDelete('cascade');
 
             #If the report is anonymous, the user_id will be null
-            $table->string('access_key')->default('');
             $table->string('hashed_report_code')->default('');
 
             $table->foreignId('case_id')->nullable()->constrained('case', 'id')->onDelete('cascade');
@@ -45,6 +44,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reports');
+        Schema::dropIfExists('report');
     }
 };

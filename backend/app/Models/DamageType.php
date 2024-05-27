@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class DamageType extends Model
 {
     use HasFactory;
-    protected $table = 'damage_types';
+    protected $table = 'damage_type';
 }

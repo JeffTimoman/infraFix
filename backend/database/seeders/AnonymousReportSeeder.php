@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\DamageType;
 use App\Models\Kelurahan;
+use App\Models\Report;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,7 +25,7 @@ class AnonymousReportSeeder extends Seeder
 
             $data = [
                 'report_code' => $random_report_code,
-                'access_key' => $random_access_key,
+                // 'access_key' => $random_access_key,
                 'hashed_report_code' => $hashed_report_code,
                 'anonymous' => true,
                 'title' => 'Report '.$i,
@@ -33,6 +34,8 @@ class AnonymousReportSeeder extends Seeder
                 'damage_type_id' => $damage_types->random()->id,
                 'kelurahan_id' => $kelurahan->random()->id,
             ];
+
+            Report::create($data);
         }
     }
 }

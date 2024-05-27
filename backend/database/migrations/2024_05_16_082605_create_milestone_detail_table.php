@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('milestone_details', function (Blueprint $table) {
-            $table->foreignId('milestone_id')->constrained('milestone', 'id')->onDelete('cascade');
-            $table->foreignId('case_id')->constrained('case', 'id')->onDelete('cascade');
-            $table->string('description')->default('');
+        Schema::create('milestone_detail', function (Blueprint $table) {
+            $table->foreignId('milestone_id')->constrained('milestone', 'id')->onDelete('cascade')->nullable();
+            $table->foreignId('case_id')->constrained('case', 'id')->onDelete('cascade')->nullable();
+            $table->string('description');
 
-            $table->primary(['milestone_id', 'case_id', 'created_at']);
+            $table->primary(['milestone_id', 'case_id']);
             $table->timestamps();
 
         });
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('milestone_details');
+        Schema::dropIfExists('milestone_detail');
     }
 };
