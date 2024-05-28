@@ -1,21 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Laporan Belum Diunggah</title>
-</head>
-<body>
+@extends('layouts.manager')
+
+@section('style')
+    <style>
+        .main {
+            background-color: #F1F1F1;
+        }
+
+        .cardbox:nth-child(3) .card {
+            background-color: #a50000;
+        }
+
+        .cardbox:nth-child(3) .material-symbols-outlined {
+            color: white;
+        }
+
+        .cardbox h5 {
+            font-size: 30px;
+        }
+
+        .cardbox p {
+            font-size: 20px;
+            color: #D4D4D4;
+        }
+
+        .cardbox:nth-child(3) h5 {
+            color: white;
+        }
+
+        .cardbox:nth-child(3) p {
+            color: #D8A4A4;
+        }
+
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+            /* Distribute space between items */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-icon {
+            /* Optional: styles for the card icon */
+        }
+
+        .reportBox {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+        }
+
+        .report {
+            background-color: white;
+        }
+
+        .table-header {
+            display: flex;
+            border-bottom: 3px solid #EDEDED;
+            /* background-color: #a50000; */
+            align-items: center;
+            /* margin-bottom: 3px; */
+        }
+
+        .table-title {
+            width: 50%;
+        }
+
+
+        .table-button {
+            width: 50%;
+            display: flex;
+            justify-content: end;
+        }
+
+        .table-title h5 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .button-seeAll {
+            border-radius: 20px;
+            border-width: 0px;
+            background-color: #a50000;
+            width: 92px;
+            height: 43px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .report-table {
+            width: 100%;
+        }
+
+        .report-table th {
+            border-bottom: 3px solid #EDEDED;
+            text-align: center;
+        }
+
+        .report-table td {
+            border-bottom: 1px solid #EDEDED;
+            text-align: center;
+        }
+    </style>
+@endsection
+
+@section('title')
+    Laporan Belum Diunggah
+@endsection
+
+@section('content')
     <div class="container-fluid">
         <div class="row" style="background-color: #EDEDED;">
             <!-- 1 -->
             <div class="row justify-content-evenly p-5">
-                <div class="col-lg-5">
+                <div class="col-lg-6">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link rounded" style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;" aria-current="page" href="{{ route ('gov.laporan_semua')}}">Semua</a>
+                            <a class="nav-link rounded" style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;" aria-current="page" href="{{ route ('manager.laporan_semua')}}">Semua</a>
                         </li>
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <li class="nav-item active rounded">
@@ -26,8 +139,8 @@
                 @include('components.filter')
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 44rem;">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 41.2rem; width: 82vw;">
                     <div class="row">
                         <table class="table align-middle">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
@@ -66,13 +179,13 @@
                         </table>
                     </div>
                     <div class="row justify-content-end align-items-end py-5">
-                        <div class="col-lg-2">
-                            <form action="{{ route('gov.laporan_semua')}}" method="GET">
+                        <div class="col-lg-3">
+                            <form action="{{ route('manager.laporan_semua')}}" method="GET">
                             <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
                             </form>
                         </div>
                         <div class="col-lg-2">
-                        <form action="{{ route('gov.laporan_semua')}}" method="GET">
+                        <form action="{{ route('manager.laporan_semua')}}" method="GET">
                             <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
                         </form>
                         </div>
@@ -81,6 +194,4 @@
             </div>
         </div>
     </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</html>
+@endsection

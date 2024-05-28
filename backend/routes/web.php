@@ -41,35 +41,31 @@ Route::prefix('admin')->group(function(){
 Route::prefix('manager')->group(function(){
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', function(){
-        return view('manager.dashboard');
-    })->name('manager.dashboard');
+        return view('manager.dashboard'); })->name('manager.dashboard');
+
+    Route::prefix('/laporan')->group(function(){
+        Route::get('/semua', function(){
+            return view('manager.laporan.laporan_semua'); })->name('manager.laporan_semua');
+        Route::get('/belum_unggah', function(){
+            return view('manager.laporan.laporan_belum_unggah'); })->name('manager.laporan_belum_unggah');
+    });
+
+    Route::get('/hot_topic', function(){
+        return view('manager.hot_topic'); })->name('manager.hot_topic');
+    
+    Route::prefix('/unggah')->group(function(){
+        Route::get('/1', function(){
+            return view('manager.unggah.unggah_1'); })->name('manager.unggah_1');
+        Route::get('/2', function(){
+            return view('manager.unggah.unggah_2'); })->name('manager.unggah_2');
+        Route::get('/3', function(){
+            return view('manager.unggah.unggah_3'); })->name('manager.unggah_3');
+    });
 
     // Selalu bikin controller itu di dalam folder Controller/manager/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/manager/apagitu
     // Cssnya tolong pake in line css aja, jangan pake file css
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
-
-    Route::get('/beranda', function(){
-        return view('government.beranda'); });
-
-    Route::prefix('/laporan')->group(function(){
-        Route::get('/semua', function(){
-            return view('government.laporan_semua'); })->name('gov.laporan_semua');
-        Route::get('/belum_unggah', function(){
-            return view('government.laporan_belum_unggah'); })->name('gov.laporan_belum_unggah');
-    });
-
-    Route::get('/hot_topic', function(){
-        return view('government.hot_topic'); });
-
-    Route::prefix('/unggah')->group(function(){
-        Route::get('/1', function(){
-            return view('government.unggah_1'); })->name('gov.unggah_1');
-        Route::get('/2', function(){
-            return view('government.unggah_2'); })->name('gov.unggah_2');
-        Route::get('/3', function(){
-            return view('government.unggah_3'); })->name('gov.unggah_3');
-    });
 });
 
 Route::prefix("government")->group(function(){
