@@ -18,7 +18,6 @@ return new class extends Migration
 
             $table->primary(['milestone_id', 'case_id']);
             $table->timestamps();
-
         });
     }
 

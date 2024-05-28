@@ -1,149 +1,197 @@
-<style>
-    .bg-custom {
-        background-color: #a50000 !important;
+@if (Auth::check())
+    <style>
+        nav.bg-body-tertiary {
+            background-color: #A50000 !important;
+        }
 
-        font-family: "Inter", sans-serif;
-        font-weight: 600;
-    }
-
-    .temp{
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-gap{
-        gap: 3rem;
-
-    }
-
-    .dropdown-menu-modified{
-        
-    }
-
-</style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
-<header class="p-3 mb-3 border-bottom bg-custom">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-between">
-            <a href="#" class="d-flex align-items-center col-md-1">
-                <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" height="50">
-                {{-- <p class="text-light align-items-center">InfraFix</p> --}}
+        .sidebar.bg-body-tertiary {
+            background-color: #A50000 !important;
+        }
+    </style>
+    <nav class="navbar bg-body-tertiary navbar-dark navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" width="100">
             </a>
 
-            <ul class="nav col-md-8 ms-5 d-flex align-items-center nav-gap">
-                <li><a href="#" class="nav-link px-2 text-light ms-3">Beranda</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Lapor</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Tentang Aplikasi</a></li>
-            </ul>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="ms-auto">
-                <a href="#" class="btn text-light" style="text-decoration: none">Masuk</a>
-                <a href="#" class="btn btn-outline-light">Daftar</a>
+            <!-- sidebar -->
+            <div class="sidebar offcanvas offcanvas-end bg-body-tertiary" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <!-- atasnye sidebar -->
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close shadow-none text-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close" style="color: white;"></button>
+                </div>
+                <!-- badan sidebar -->
+                <div class="offcanvas-body d-flex flex-column p-4 flex-lg-row p-lg-1 justify-content-between align-items-center"
+                    style="font-weight: 600; ">
+                    <ul class="navbar-nav justify-content-center align-items-center   "
+                        style="margin-left: 15%; margin-right: 15%;">
+                        <li class="nav-item mx-5">
+                            <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                        </li>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="#">Lapor</a>
+                        </li>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="#">Tentang</a>
+                        </li>
+                    </ul>
+                    <!-- sudah ada akun -->
+                    <div class="d-flex justify-content-center align-items-center flex-lg-row text-end  "
+                        style="font-weight: 500;">
+                        <div class="dropdown">
+                            <button
+                                class="btn btn-secondary dropdown-toggle d-flex align-items-center justify-content-end border-0 gap-2"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="background-color: transparent; ">
+                                <div class=" d-flex align-items-center justify-content-start gap-2 text-capitalize">
+                                    <img class="rounded-circle" src="{{ asset('upload/profilepicture/default.png') }}"
+                                        alt="" width="32" height="32">
+                                    <span>{{ Auth::user()->name }}</span>
+                                </div>
+                            </button>
+                            @if (Auth::user()->role == 'admin')
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Admin Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Manager Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Government Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
+                                                Admin</small> </a></li>
+                                </ul>
+                            @endif
+                            @if (Auth::user()->role == 'manager')
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Manager Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
+                                                Manager</small> </a></li>
+                                </ul>
+                            @endif
+                            @if (Auth::user()->role == 'government')
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Government Dashboard</a></li>
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
+                                                Manager</small> </a></li>
+                                </ul>
+                            @endif
+                            @if (Auth::user()->role == 'user')
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
+                                                Manager</small> </a></li>
+                                </ul>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-    </div>
-</header>
+    </nav>
+@else
+    <style>
+        nav.bg-body-tertiary {
+            background-color: #A50000 !important;
+        }
 
-<header class="p-3 mb-3 border-bottom bg-custom">
-    <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-between">
-            <a href="#" class="d-flex align-items-center col-md-1">
-                <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" height="50">
+        .sidebar.bg-body-tertiary {
+            background-color: #A50000 !important;
+        }
+
+        .btn-daftar:hover {
+            background-color: white !important;
+            color: #A50000 !important;
+            transition: ease-in-out 0.3s;
+        }
+
+        .btn-daftar {
+            transition: ease-in-out 0.3s;
+        }
+
+        .btn-masuk {
+            /* make a white line below */
+
+            color: rgb(212, 203, 203) !important;
+            transition: ease-in-out 0.3s;
+        }
+
+        .btn-masuk:hover {
+            color: white !important;
+            transition: ease-in-out 0.3s;
+        }
+    </style>
+    <nav class="navbar  navbar-dark navbar-expand-lg fixed bg-body-tertiary">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" width="100">
             </a>
 
-            <ul class="nav col-md-8 ms-5 d-flex align-items-center nav-gap">
-                <li><a href="#" class="nav-link px-2 text-light ms-3">Beranda</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Lapor</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Tentang Aplikasi</a></li>
-            </ul>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <div class="dropdown text-end ms-auto">
-                <a href="#" class="d-block text-decoration-none dropdown-toggle text-light"
-                    data-bs-toggle="dropdown" aria-expanded="false" style="">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                    class="rounded-circle mx-2">
-                    Ajeng &nbsp;
-                </a>
-                <ul class="dropdown-menu text-small dropdown-menu-modified">
-                    <li><a class="dropdown-item" href="#">Admin</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
+            <!-- sidebar -->
+            <div class="sidebar tessa offcanvas offcanvas-end bg-body-tertiary" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <!-- atasnye sidebar -->
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close shadow-none text-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close" style="color: white;"></button>
+                </div>
+                <!-- badan sidebar -->
+                <div class="offcanvas-body d-flex flex-column p-4 flex-lg-row p-lg-1 justify-content-between align-items-center"
+                    style="font-weight: 600; ">
+                    <ul class="navbar-nav justify-content-center align-items-center   "
+                        style="margin-left: 15%; margin-right: 15%;">
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" aria-current="page" href="#">Beranda</a>
+                        </li>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="#">Lapor</a>
+                        </li>
+                        <li class="nav-item mx-5">
+                            <a class="nav-link" href="#">Tentang</a>
+                        </li>
+                    </ul>
+                    <!-- login / sign up -->
+                    <div class="d-flex justify-content-center align-items-center gap-3 flex-lg-row"
+                        style="font-weight: 500; ">
+                        <a href="{{ route('auth.login') }}" class="text-white text-decoration-none btn-masuk">
+                            Masuk
+                        </a>
+                        <a href="{{ route('auth.register') }}"
+                            class=" text-decoration-none  px-3 bg-transparent rounded-3 text-white btn-daftar"
+                            style="
+                    border: 1px solid rgba(255, 255, 255, 0.585); padding-top: 10px; padding-bottom: 10px;
+                    background-color: #fff;">Daftar</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-{{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav> --}}
-
-
-{{-- admin mode --}}
-{{--
-<header class="p-3 mb-3 border-bottom  bg-custom">
-    <div class="container">
-        <div class="d-flex flex-wrap justify-content-around">
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 ">
-                <li><a href="#" class="nav-link px-2 text-light">Beranda</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Lapor</a></li>
-                <li><a href="#" class="nav-link px-2 text-light">Tentang Aplikasi</a></li>
-            </ul>
-            <div class="dropdown text-end">
-                <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32"
-                        class="rounded-circle">
-                </a>
-                <ul class="dropdown-menu text-small">
-                    <li><a class="dropdown-item" href="#">New project...</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</header>
- --}}
+    </nav>
+@endif
