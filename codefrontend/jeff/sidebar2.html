@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar With Bootstrap</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        .sidebar a {
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar li {
+            list-style: none;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .main {
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.35s ease-in-out;
+            background-color: #fafbfe;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #sidebar {
+            width: 70px;
+            min-width: 70px;
+            z-index: 1000;
+            transition: all .25s ease-in-out;
+            background-color: #a50000;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #sidebar.expand {
+            width: 260px;
+            font-family: 'Poppins', sans-serif;
+            min-width: 260px;
+        }
+
+        .toggle-btn {
+            background-color: transparent;
+            cursor: pointer;
+            border: 0;
+            font-family: 'Poppins', sans-serif;
+            padding: 1rem 1.5rem;
+        }
+
+        .toggle-btn i {
+            font-size: 1.5rem;
+            color: #FFF;
+        }
+
+        .sidebar-logo {
+            margin: auto 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .sidebar-logo a {
+            color: #FFF;
+            font-size: 1.15rem;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+
+        #sidebar:not(.expand) .sidebar-logo,
+        #sidebar:not(.expand) a.sidebar-link span {
+            display: none;
+        }
+
+        .sidebar-nav {
+            padding: 2rem 0;
+            font-family: 'Poppins', sans-serif;
+            flex: 1 1 auto;
+        }
+
+        a.sidebar-link {
+            padding: .625rem 1.625rem;
+            color: #FFF;
+            font-family: 'Poppins', sans-serif;
+            display: block;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-link i {
+            font-size: 1.1rem;
+            margin-right: .75rem;
+        }
+
+        a.sidebar-link:hover {
+            background-color: rgba(221, 185, 92, 0.75);
+            border-left: 3px solid #D8A4A4;
+        }
+
+        a.sidebar-link.active{
+            background-color: rgba(221, 185, 92, 0.75);
+            border-left: 3px solid #D8A4A4;
+        }
+
+        .sidebar-item {
+            position: relative;
+        }
+
+        #sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+            position: absolute;
+            top: 0;
+            left: 70px;
+            background-color: #E64E4E;
+            padding: 0;
+            min-width: 15rem;
+            display: none;
+        }
+
+        #sidebar:not(.expand) .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+            display: block;
+            max-height: 15em;
+            width: 100%;
+            opacity: 1;
+        }
+
+        #sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+            border: solid;
+            border-width: 0 .075rem .075rem 0;
+            content: "";
+            display: inline-block;
+            padding: 2px;
+            position: absolute;
+            right: 1.5rem;
+            top: 1.4rem;
+            transform: rotate(-135deg);
+            transition: all .2s ease-out;
+        }
+
+        #sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+            transform: rotate(45deg);
+            transition: all .2s ease-out;
+        }
+    </style>
+    <style>
+        
+        .main {
+            background-color: #F1F1F1;
+        }
+        .cardbox:nth-child(3) .card {
+            background-color: #a50000;
+        }
+
+        .cardbox:nth-child(3) .material-symbols-outlined {
+            color: white;
+        }
+
+        .cardbox h5 {
+            font-size: 30px;
+        }
+
+        .cardbox p {
+            font-size: 20px;
+            color: #D4D4D4;
+        }
+
+        .cardbox:nth-child(3) h5 {
+            color: white;
+        }
+
+        .cardbox:nth-child(3) p {
+            color: #D8A4A4;
+        }
+
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+            /* Distribute space between items */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-icon {
+            /* Optional: styles for the card icon */
+        }
+
+        .reportBox {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+        }
+
+        .report {
+            background-color: white;
+        }
+
+        .table-header {
+            display: flex;
+            border-bottom: 3px solid #EDEDED;
+            /* background-color: #a50000; */
+            align-items: center;
+            /* margin-bottom: 3px; */
+        }
+
+        .table-title {
+            width: 50%;
+        }
+
+
+        .table-button {
+            width: 50%;
+            display: flex;
+            justify-content: end;
+        }
+
+        .table-title h5 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .button-seeAll {
+            border-radius: 20px;
+            border-width: 0px;
+            background-color: #a50000;
+            width: 92px;
+            height: 43px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .report-table {
+            width: 100%;
+        }
+
+        .report-table th {
+            border-bottom: 3px solid #EDEDED;
+            text-align: center;
+        }
+
+        .report-table td {
+            border-bottom: 1px solid #EDEDED;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="wrapper sidebar">
+        <aside id="sidebar">
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="#">Logo</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link active">
+                        <i class="lni lni-user"></i>
+                        <span>Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-agenda"></i>
+                        <span>Task</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-protection"></i>
+                        <span>Auth</span>
+                    </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Login</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Register</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                        <i class="lni lni-layout"></i>
+                        <span>Multi Level</span>
+                    </a>
+                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
+                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
+                                Two Links
+                            </a>
+                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Link 1</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Link 2</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-popup"></i>
+                        <span>Notification</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-cog"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="#" class="sidebar-link">
+                    <i class="lni lni-exit"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+        
+        <div class="main container-fluid">
+            <div class="container-fluid p-2">
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="cardbox col-12 col-md-4 ">
+                            <div class="card border-0">
+                                <div class="card-body py-4">
+                                    <div class="card-text">
+                                        <h5 class="mb-2 fw-bold">
+                                            600
+                                        </h5>
+                                        <p class="mb-2 fw-bold">
+                                            Laporan
+                                        </p>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-gauge"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cardbox col-12 col-md-4 ">
+                            <div class="card border-0">
+                                <div class="card-body py-4">
+                                    <div class="card-text">
+                                        <h5 class="mb-2 fw-bold">
+                                            600
+                                        </h5>
+                                        <p class="mb-2 fw-bold">
+                                            Pengguna
+                                        </p>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-gauge"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cardbox col-12 col-md-4 ">
+                            <div class="card border-0">
+                                <div class="card-body py-4">
+                                    <div class="card-text">
+                                        <h5 class="mb-2 fw-bold">
+                                            600
+                                        </h5>
+                                        <p class="mb-2 fw-bold">
+                                            Laporan
+                                        </p>
+                                    </div>
+                                    <div class="card-icon">
+                                        <i class="fa-solid fa-gauge"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="reportbox col-12 col-md-8 ">
+                            <div class="report border-0">
+                                <div class="report-body py-2">
+                                    <div class="table-header py-2 px-3">
+                                        <div class="table-title">
+                                            <h5>Laporan</h5>
+                                        </div>
+                                        <div class="table-button">
+                                            <button class="button-seeAll">Semua</button>
+                                        </div>
+                                    </div>
+                                    <table class="report-table ">
+                                        <thead>
+                                            <tr>
+                                                <th>Judul</th>
+                                                <th>Tanggal</th>
+                                                <th>Prioritas</th>
+                                                <th>Tanggal</th>
+                                            </tr>
+                                        </thead>
+                
+                                        <tbody>
+                                            <!-- Example content rows -->
+                                            <tr>
+                                                <td>Judul 1</td>
+                                                <td>2024-05-21</td>
+                                                <td>High</td>
+                                                <td>2024-05-21</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Judul 2</td>
+                                                <td>2024-05-22</td>
+                                                <td>Medium</td>
+                                                <td>2024-05-22</td>
+                                            </tr>
+                                        </tbody>
+                
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="reportbox col-12 col-md-4 ">
+                            <div class="report border-0">
+                                <div class="report-body py-2">
+                                    <div class="table-header py-2 px-3">
+                                        <div class="table-title">
+                                            <h5>Komentar Baru</h5>
+                                        </div>
+                                        <div class="table-button">
+                                            <button class="button-seeAll">Semua</button>
+                                        </div>
+                                    </div>
+                                    <table class="report-table ">
+                                        <thead>
+                                            <tr class="report-highlight">
+                                                <th>Nama</th>
+                                                <th>Komentar</th>
+                                            </tr>
+                                        </thead>
+                
+                                        <tbody>
+                                            <!-- Example content rows -->
+                                            <tr>
+                                                <td>Jep</td>
+                                                <td>Jelek banget jalannya</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Shandez</td>
+                                                <td>Tidakkkk lubanggg</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script>
+        const hamBurger = document.querySelector(".toggle-btn");
+        
+            hamBurger.addEventListener("click", function () {
+            document.querySelector("#sidebar").classList.toggle("expand");
+        });
+    </script>
+</body>
+
+</html>

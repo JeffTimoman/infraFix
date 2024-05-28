@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    <style>
+        body {
+            background-color: #F1F1F1;
+            font-family: 'Inter', sans-serif;
+
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            transition: all 0.35s ease-in-out;
+            background-color: #F1F1F1;
+            min-width: 0;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24;
+            color: #a50000;
+            font-size: 60px;
+            /* Sets the size to 60px x 60px */
+            width: 60px;
+            /* Sets the width to 60px */
+            height: 60px;
+            /* Sets the height to 60px */
+            display: inline-block;
+            /* Ensures the element respects the width and height */
+            line-height: 60px;
+        }
+
+
+        .cardbox:nth-child(3) .card {
+            background-color: #a50000;
+        }
+
+        .cardbox:nth-child(3) .material-symbols-outlined {
+            color: white;
+        }
+
+        .cardbox h5 {
+            font-size: 30px;
+        }
+
+        .cardbox p {
+            font-size: 20px;
+            color: #D4D4D4;
+        }
+
+        .cardbox:nth-child(3) h5 {
+            color: white;
+        }
+
+        .cardbox:nth-child(3) p {
+            color: #D8A4A4;
+        }
+
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+            /* Distribute space between items */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-icon {
+            /* Optional: styles for the card icon */
+        }
+
+        .reportBox {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+        }
+
+        .report {
+            background-color: white;
+        }
+
+        .table-header {
+            display: flex;
+            border-bottom: 3px solid #EDEDED;
+            /* background-color: #a50000; */
+            align-items: center;
+            /* margin-bottom: 3px; */
+        }
+
+        .table-title {
+            width: 50%;
+        }
+
+
+        .table-button {
+            width: 50%;
+            display: flex;
+            justify-content: end;
+        }
+
+        .table-title h5 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .button-seeAll {
+            border-radius: 20px;
+            border-width: 0px;
+            background-color: #a50000;
+            width: 92px;
+            height: 43px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .report-table {
+            width: 100%;
+        }
+
+        .report-table th {
+            border-bottom: 3px solid #EDEDED;
+            text-align: center;
+        }
+
+        .report-table td {
+            border-bottom: 1px solid #EDEDED;
+            text-align: center;
+        }
+
+        /* .report-table {
+    width: 100%; 
+    border-collapse: collapse;
+    border: 1px solid #ccc; 
+}
+.report-table th, .report-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+} */
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid p-2">
+        <div class="mb-3">
+            <div class="row">
+                <div class="cardbox col-12 col-md-4 ">
+                    <div class="card border-0">
+                        <div class="card-body py-4">
+                            <div class="card-text">
+                                <h5 class="mb-2 fw-bold">
+                                    600
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    Laporan
+                                </p>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fa-solid fa-gauge"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardbox col-12 col-md-4 ">
+                    <div class="card border-0">
+                        <div class="card-body py-4">
+                            <div class="card-text">
+                                <h5 class="mb-2 fw-bold">
+                                    600
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    Pengguna
+                                </p>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fa-solid fa-gauge"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardbox col-12 col-md-4 ">
+                    <div class="card border-0">
+                        <div class="card-body py-4">
+                            <div class="card-text">
+                                <h5 class="mb-2 fw-bold">
+                                    600
+                                </h5>
+                                <p class="mb-2 fw-bold">
+                                    Laporan
+                                </p>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fa-solid fa-gauge"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <div class="row">
+                <div class="reportbox col-12 col-md-8 ">
+                    <div class="report border-0">
+                        <div class="report-body py-2">
+                            <div class="table-header py-2 px-3">
+                                <div class="table-title">
+                                    <h5>Laporan</h5>
+                                </div>
+                                <div class="table-button">
+                                    <button class="button-seeAll">Semua</button>
+                                </div>
+                            </div>
+                            <table class="report-table ">
+                                <thead>
+                                    <tr>
+                                        <th>Judul</th>
+                                        <th>Tanggal</th>
+                                        <th>Prioritas</th>
+                                        <th>Tanggal</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+                                    <!-- Example content rows -->
+                                    <tr>
+                                        <td>Judul 1</td>
+                                        <td>2024-05-21</td>
+                                        <td>High</td>
+                                        <td>2024-05-21</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Judul 2</td>
+                                        <td>2024-05-22</td>
+                                        <td>Medium</td>
+                                        <td>2024-05-22</td>
+                                    </tr>
+                                </tbody>
+    
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="reportbox col-12 col-md-4 ">
+                    <div class="report border-0">
+                        <div class="report-body py-2">
+                            <div class="table-header py-2 px-3">
+                                <div class="table-title">
+                                    <h5>Komentar Baru</h5>
+                                </div>
+                                <div class="table-button">
+                                    <button class="button-seeAll">Semua</button>
+                                </div>
+                            </div>
+                            <table class="report-table ">
+                                <thead>
+                                    <tr class="report-highlight">
+                                        <th>Nama</th>
+                                        <th>Komentar</th>
+                                    </tr>
+                                </thead>
+    
+                                <tbody>
+                                    <!-- Example content rows -->
+                                    <tr>
+                                        <td>Jep</td>
+                                        <td>Jelek banget jalannya</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shandez</td>
+                                        <td>Tidakkkk lubanggg</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    </div>
+</body>
+
+</html>
