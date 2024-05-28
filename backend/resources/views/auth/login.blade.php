@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Register</title>
+@section('title')
+    Login
+@endsection
+
+@section('style')
     <style>
         .register-input {
             border: 1px solid #A50000;
@@ -18,20 +16,23 @@
             border-color: #E39292;
         }
     </style>
-</head>
+@endsection
 
-<body>
-    <div class="col-md-4">
-
+@section('content')
+    <div class="row mx-auto d-flex align-items-center justify-content-center w-50 mt-5" style="height: 80vh;">
+        {{-- <div class="col-md-4"> --}}
         <div class="d-flex justify-content-center align-item-center my-3">
-            <form action="" class="col-md-12 row d-flex justify-content-center align-item-center">
+            <form action="{{ route('auth.login') }}" class="col-md-12 row d-flex justify-content-center align-item-center"
+                method="POST">
+                @csrf
                 <h2 class="text-center">Login</h2>
                 <div class="col-md-12 mb-2">
-                    <input class="form-control register-input" placeholder="Username/Email" name="email">
+                    <input class="form-control register-input" placeholder="Username/Email" name="email" value="{{session('email')}}">
                 </div>
                 <div class="col-md-12 mb">
                     <input type="password" class="form-control register-input" placeholder="Kata Sandi" name="password">
-                        <p><small>Lupa kata sandi? <a href="" style="text-decoration: none; color: #A50000;">Ganti kata sandi.</a></small></p>
+                    <p><small>Lupa kata sandi? <a href="#" style="text-decoration: none; color: #A50000;">Ganti kata
+                                sandi.</a></small></p>
                 </div>
                 <div class="col-md-12 d-flex align-items-center justify-content-center">
                     <button class="btn btn-md text-light col-md-4" style="background-color: #A50000; ">Masuk</button>
@@ -39,22 +40,13 @@
                 </div>
                 <div class="col-md-12 text-center">
                     <p class="">
-                        <small>Belum punya akun? <a href="" style="text-decoration: none; color: #A50000;">Daftar</a><small>
+                        <small>Belum punya akun? <a href="{{route('auth.register')}}"
+                                style="text-decoration: none; color: #A50000;">Daftar</a><small>
 
                     </p>
                 </div>
             </form>
         </div>
+        {{-- </div> --}}
     </div>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-</body>
-
-</html>
+@endsection
