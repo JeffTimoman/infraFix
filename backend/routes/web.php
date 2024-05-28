@@ -26,7 +26,7 @@ Route::prefix('admin')->group(function(){
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', function(){
         return view('admin.dashboard');
-    });
+    })->name('admin.dashboard');
 
     // Selalu bikin controller itu di dalam folder Controller/admin/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/admin/apagitu
@@ -38,7 +38,7 @@ Route::prefix('manager')->group(function(){
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', function(){
         return view('manager.dashboard');
-    });
+    })->name('manager.dashboard');
 
     // Selalu bikin controller itu di dalam folder Controller/manager/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/manager/apagitu
@@ -50,7 +50,7 @@ Route::prefix("government")->group(function(){
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', function(){
         return view('government.dashboard');
-    });
+    })->name('government.dashboard');
 
     // Selalu bikin controller itu di dalam folder Controller/government/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
