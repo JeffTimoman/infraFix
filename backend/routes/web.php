@@ -50,25 +50,25 @@ Route::prefix('manager')->group(function(){
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 
     Route::get('/beranda', function(){
-        return view('government.beranda'); });
+        return view('manager.beranda'); });
 
     Route::prefix('/laporan')->group(function(){
         Route::get('/semua', function(){
-            return view('government.laporan_semua'); })->name('gov.laporan_semua');
+            return view('manager.laporan_semua'); })->name('manager.laporan_semua');
         Route::get('/belum_unggah', function(){
-            return view('government.laporan_belum_unggah'); })->name('gov.laporan_belum_unggah');
+            return view('manager.laporan_belum_unggah'); })->name('manager.laporan_belum_unggah');
     });
 
     Route::get('/hot_topic', function(){
-        return view('government.hot_topic'); });
+        return view('manager.hot_topic'); });
 
     Route::prefix('/unggah')->group(function(){
         Route::get('/1', function(){
-            return view('government.unggah_1'); })->name('gov.unggah_1');
+            return view('manager.unggah_1'); })->name('manager.unggah_1');
         Route::get('/2', function(){
-            return view('government.unggah_2'); })->name('gov.unggah_2');
+            return view('manager.unggah_2'); })->name('manager.unggah_2');
         Route::get('/3', function(){
-            return view('government.unggah_3'); })->name('gov.unggah_3');
+            return view('manager.unggah_3'); })->name('manager.unggah_3');
     });
 });
 
