@@ -140,7 +140,7 @@
             </div>
             <!-- 2 -->
             <div class="row justify-content-center mb-4">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 41.2rem; width: 82vw;">
+                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                     <div class="row">
                         <table class="table align-middle">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
@@ -178,13 +178,11 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row justify-content-end align-items-end py-5">
-                        <div class="col-lg-3">
-                            <form action="{{ route('manager.laporan_semua')}}" method="GET">
+                    <div class="row justify-content-end align-items-end py-4">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
+                        <form action="{{ route('manager.laporan_semua')}}" method="GET">
                             <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
-                            </form>
-                        </div>
-                        <div class="col-lg-2">
+                        </form>
                         <form action="{{ route('manager.laporan_semua')}}" method="GET">
                             <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
                         </form>

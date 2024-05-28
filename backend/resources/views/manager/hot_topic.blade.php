@@ -137,7 +137,7 @@
             </div>
             <!-- 2 -->
             <div class="row justify-content-center mb-4">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 41.2rem; width: 82vw;">
+                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                     <div class="row">
                         <table class="table">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
@@ -157,7 +157,7 @@
                                 <td>@mdo</td>
                                 <td>
                                     <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label for="">Edit</label>
+                                    <label style="color: grey;">Edit</label>
                                 </td>
                                 </tr>
                                 <tr>
@@ -167,7 +167,7 @@
                                 <td>@twitter</td>
                                 <td>
                                     <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label for="">Edit</label>
+                                    <label style="color: grey;" for="">Edit</label>
                                 </td>
                                 </tr>
                             </tbody>

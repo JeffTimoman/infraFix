@@ -55,12 +55,15 @@ Route::prefix('manager')->group(function(){
     
     Route::prefix('/unggah')->group(function(){
         Route::get('/1', function(){
-            return view('manager.unggah.unggah_1'); })->name('manager.unggah_1');
+            return view('manager.unggah_kasus.unggah_1'); })->name('manager.unggah_1');
         Route::get('/2', function(){
-            return view('manager.unggah.unggah_2'); })->name('manager.unggah_2');
+            return view('manager.unggah_kasus.unggah_2'); })->name('manager.unggah_2');
         Route::get('/3', function(){
-            return view('manager.unggah.unggah_3'); })->name('manager.unggah_3');
+            return view('manager.unggah_kasus.unggah_3'); })->name('manager.unggah_3');
     });
+
+    Route::get('/index', function(){
+        return view('manager.index'); })->name('manager.index');
 
     // Selalu bikin controller itu di dalam folder Controller/manager/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/manager/apagitu

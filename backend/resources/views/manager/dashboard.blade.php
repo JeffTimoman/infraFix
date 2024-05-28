@@ -161,7 +161,7 @@
             </div>
             <!-- 2 -->
             <div class="row justify-content-center mb-4"> 
-                <div class="col-lg-12 text-center rounded" style="background-color: white; height: 36rem; width: 82vw;">
+                <div class="col-lg-12 text-center rounded" style="background-color: white; height: 33rem; width: 82vw;">
                     <div class="row justify-content-between align-items-center p-3">
                         <div class="col-lg-3 text-start">
                             <h3 class="" style="font-weight: bold;">Laporan Terkini</h3>

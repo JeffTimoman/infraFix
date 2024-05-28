@@ -147,51 +147,46 @@
             </div>
             <!-- 2 -->
             <div class="row justify-content-center my-4">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 40rem; width: 82vw;">
-                    <div class="row text-start p-3">
-                        <h4>50 Laporan Terpilih</h4>
+                <div class="col-lg-10 rounded p-5" style="background-color: white; height: 40rem; width: 82vw;">
+                    <div class="row mb-4">
+                        <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Judul Kasus</label>
+                        <input type="text" id="inputJudulKasus" class="form-control" style="background-color: #F2F2F2;">
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                        <table class="table">
-                            <thead style="border-bottom-width: 3px; border-top-width: 3px;">
-                                <tr>
-                                <th scope="col">Judul Laporan</th>
-                                <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Tanggal Unggah</th>
-                                <th scope="col">Lokasi</th>
-                                <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table align-middle">
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                    <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
-                                    <label for="">Hapus</label>
-                                </td>
-                                </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                                <td>
-                                <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
-                                    <label for="">Hapus</label>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="row mb-4">
+                        <div class="col-lg-2">
+                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Tipe Kerusakan</label>
+                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKasus" value="Kerusakan Jalan Raya" style="background-color: #F2F2F2; margin-left: -0.7rem;">
                         </div>
                     </div>
-                    <div class="row"></div>
+                    <div class="row mb-4">
+                        <div class="col-lg-2">
+                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Status</label>
+                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKasus" value="Baru dilaporkan" style="background-color: #F2F2F2; margin-left: -0.7rem;">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="row">
+                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Lokasi</label>
+                        </div>
+                        <div class="row">
+                        <div class="col-lg-2">
+                            <label for="" class="form-label" style="margin-left: -0.5rem; font-size: medium; font-weight: 100;">Provinsi</label>
+                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticProvinsi" value="Tangerang Selatan" style="background-color: #F2F2F2; margin-left: -0.7rem;">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="" class="form-label" style="margin-left: -0.5rem; font-size: medium; font-weight: 100;">Kecamatan</label>
+                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKecamatan" value="Pondok Aren" style="background-color: #F2F2F2; margin-left: -0.7rem;">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="" class="form-label" style=" font-size: medium; font-weight: 100;">Alamat</label>
+                            <input type="text" id="inputAlamat" class="form-control" style="background-color: #F2F2F2;">
+                        </div>
+                        </div>
+                    </div>
+                    
                     <div class="row justify-content-end">
                         <div class="col-lg-2">
-                            <form action="{{ route('manager.unggah_2')}}" method="GET">
+                            <form action="{{ route('manager.unggah_3')}}" method="GET">
                                 <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
                             </form>
                         </div>
