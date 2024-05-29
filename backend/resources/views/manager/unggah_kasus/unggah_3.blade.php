@@ -131,7 +131,9 @@
             <!-- 1 -->
             <div class="row pt-3 px-5">
                 <div class="col-lg-2">
-                    <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    <span class="back-icon" onclick="goBack()">
+                        <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                    </span>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -139,65 +141,34 @@
                     <div class="container">
                         <div class="step-progress">
                         <div class="step done"></div>
-                        <div class="step"></div>
-                        <div class="step"></div>
+                        <div class="step done"></div>
+                        <div class="step done"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center my-4">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 40rem; width: 82vw;">
-                    <div class="row text-start p-3">
-                        <h4>50 Laporan Terpilih</h4>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-10">
-                        <table class="table">
-                            <thead style="border-bottom-width: 3px; border-top-width: 3px;">
-                                <tr>
-                                <th scope="col">Judul Laporan</th>
-                                <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Tanggal Unggah</th>
-                                <th scope="col">Lokasi</th>
-                                <th scope="col">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table align-middle">
-                                <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>
-                                    <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
-                                    <label for="">Hapus</label>
-                                </td>
-                                </tr>
-                                <tr>
-                                <th scope="row">2</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                                <td>
-                                <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
-                                    <label for="">Hapus</label>
-                                </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                    <div class="row"></div>
-                    <div class="row justify-content-end">
-                        <div class="col-lg-2">
-                            <form action="{{ route('manager.unggah_2')}}" method="GET">
-                                <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
-                            </form>
-                        </div>
-                    </div>
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 rounded p-1 justify-content-center" style="background-color: white; height: 35rem; width: 82vw;">
+                    <iframe class="" style="background-color: red; height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div class="col-lg-2 p-4">
+                    <!-- Kasi ALert yakin kirim -->
+                    <form action="{{ route('manager.hot_topic')}}" method="GET">
+                        <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white; margin-left: 4.3rem;">Kirim</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+@endsection
+
+@section('script')
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 @endsection

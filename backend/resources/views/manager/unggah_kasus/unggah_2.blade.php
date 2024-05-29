@@ -131,7 +131,9 @@
             <!-- 1 -->
             <div class="row pt-3 px-5">
                 <div class="col-lg-2">
-                    <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    <span class="back-icon" onclick="goBack()">
+                        <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                    </span>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -139,60 +141,33 @@
                     <div class="container">
                         <div class="step-progress">
                         <div class="step done"></div>
-                        <div class="step"></div>
+                        <div class="step done"></div>
                         <div class="step"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center my-4">
-                <div class="col-lg-10 rounded p-5" style="background-color: white; height: 40rem; width: 82vw;">
-                    <div class="row mb-4">
-                        <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Judul Kasus</label>
-                        <input type="text" id="inputJudulKasus" class="form-control" style="background-color: #F2F2F2;">
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-lg-2">
-                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Tipe Kerusakan</label>
-                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKasus" value="Kerusakan Jalan Raya" style="background-color: #F2F2F2; margin-left: -0.7rem;">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-lg-2">
-                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Status</label>
-                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKasus" value="Baru dilaporkan" style="background-color: #F2F2F2; margin-left: -0.7rem;">
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="row">
-                            <label for="" class="form-label" style="margin-left: -1rem; font-size: large; font-weight: 400;">Lokasi</label>
-                        </div>
-                        <div class="row">
-                        <div class="col-lg-2">
-                            <label for="" class="form-label" style="margin-left: -0.5rem; font-size: medium; font-weight: 100;">Provinsi</label>
-                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticProvinsi" value="Tangerang Selatan" style="background-color: #F2F2F2; margin-left: -0.7rem;">
-                        </div>
-                        <div class="col-lg-2">
-                            <label for="" class="form-label" style="margin-left: -0.5rem; font-size: medium; font-weight: 100;">Kecamatan</label>
-                            <input type="text" readonly class="form-control-plaintext p-2 rounded border" id="staticKecamatan" value="Pondok Aren" style="background-color: #F2F2F2; margin-left: -0.7rem;">
-                        </div>
-                        <div class="col-lg-8">
-                            <label for="" class="form-label" style=" font-size: medium; font-weight: 100;">Alamat</label>
-                            <input type="text" id="inputAlamat" class="form-control" style="background-color: #F2F2F2;">
-                        </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row justify-content-end">
-                        <div class="col-lg-2">
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 rounded p-1 justify-content-center" style="background-color: white; height: 35rem; width: 82vw;">
+                    <iframe class="" style="height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_isi_kasus')}}" frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                        <div class="col-lg-2 p-4">
                             <form action="{{ route('manager.unggah_3')}}" method="GET">
                                 <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
-    </div>
+    </div> 
+@endsection
+
+@section('script')
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 @endsection

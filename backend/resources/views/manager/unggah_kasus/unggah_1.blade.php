@@ -131,7 +131,10 @@
             <!-- 1 -->
             <div class="row pt-3 px-5">
                 <div class="col-lg-2">
-                    <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    <!-- Kasih Aler Yakin batal Bikin Kasus -->
+                    <form action="{{ route('manager.unggah_2')}}" method="GET">
+                        <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    </form>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -146,8 +149,8 @@
                 </div>
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center my-4">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 40rem; width: 82vw;">
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
                     <div class="row text-start p-3">
                         <h4>50 Laporan Terpilih</h4>
                     </div>
@@ -189,15 +192,15 @@
                         </div>
                     </div>
                     <div class="row"></div>
-                    <div class="row justify-content-end">
-                        <div class="col-lg-2">
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                        <div class="col-lg-2 p-4">
                             <form action="{{ route('manager.unggah_2')}}" method="GET">
                                 <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
                             </form>
                         </div>
                     </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

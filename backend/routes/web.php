@@ -60,7 +60,18 @@ Route::prefix('manager')->group(function(){
             return view('manager.unggah_kasus.unggah_2'); })->name('manager.unggah_2');
         Route::get('/3', function(){
             return view('manager.unggah_kasus.unggah_3'); })->name('manager.unggah_3');
+
+            Route::prefix('/scorll')->group(function(){
+                Route::get('/isi', function(){
+                    return view('manager.unggah_kasus.scroll.isi_kasus'); })->name('manager.scroll_isi_kasus');
+                Route::get('/ringkasan', function(){
+                    return view('manager.unggah_kasus.scroll.ringkasan_kasus'); })->name('manager.scroll_ringkasan_kasus');
+                Route::get('/edit', function(){
+                    return view('manager.unggah_kasus.scroll.edit_kasus'); })->name('manager.scroll_edit_kasus');
+            });
     });
+
+    
 
     Route::get('/index', function(){
         return view('manager.index'); })->name('manager.index');
