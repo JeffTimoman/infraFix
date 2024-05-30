@@ -26,11 +26,15 @@
 </head>
 
 <body>
-    <nav class="navbar bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Bootstrap" width="30" height="24">
-            </a>
+    <nav class="navbar-fluid bg-body">
+        <div class="container-fluid">
+            <div class="row" style="height: 3.5rem;">
+                <div class="col-sm-2 justify-content-center align-items-center" style="background-color: #A50000; padding-left: 2.2rem; padding-top: 0.8rem;">
+                    <a class="navbar-brand" href="#">
+                        <img src="{{asset('components/img/icon/infrafix.png')}}" alt="Bootstrap" width="30" height="24" style="scale: 250%;">
+                    </a>
+                </div>
+            </div>
         </div>
     </nav>
     @yield('content')
