@@ -117,98 +117,76 @@
 @endsection
 
 @section('title')
-Dashboard
+Laporan Belum Diunggah
 @endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
-        <div class="row justify-content-evenly p-4">
-            <div class="col-lg-3 rounded p-5" style="background-color: white;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4>600</h4>
-                    </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: #A50000; scale: 200%;">assignment</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: grey;">Laporan</h4>
-                </div>
+        <div class="row justify-content-evenly p-5">
+            <div class="col-lg-6">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link rounded" style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;" aria-current="page" href="{{ route ('manager.laporan_semua')}}">Semua</a>
+                    </li>
+                    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <li class="nav-item active rounded">
+                        <a class="nav-link" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" href="#">Belum Diunggah</a>
+                    </li>
+                </ul>
             </div>
-            <div class="col-lg-3 rounded p-5" style="background-color: white;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4>600</h4>
-                    </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: #A50000; scale: 200%;">pending_actions</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: grey;">Belum Diunggah</h4>
-                </div>
-            </div>
-            <div class="col-lg-3 rounded p-5" style="background-color: #A50000;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4 style="color: white;">600</h4>
-                    </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: white; scale: 200%;">newspaper</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: #D8A4A4;">Hot Topic</h4>
-                </div>
-            </div>
+            @include('components.filter')
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
-            <div class="col-lg-12 text-center rounded" style="background-color: white; height: 33rem; width: 82vw;">
-                <div class="row justify-content-between align-items-center p-3">
-                    <div class="col-lg-3 text-start">
-                        <h3 class="" style="font-weight: bold;">Laporan Terkini</h3>
-                    </div>
-                    <div class="col-lg-2">
-                        <form action="{{ route('manager.laporan_semua')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selengkapnya</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <table class="table">
+            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
+                <div class="row">
+                    <table class="table align-middle">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Urgensi</th>
                                 <th scope="col">Tanggal Unggah</th>
+                                <th scope="col">Lokasi</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="table align-middle">
+                        <tbody class="table">
                             <tr>
                                 <th scope="row">1</th>
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
+                                <td>
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
                                 <td>Larry the Bird</td>
                                 <td>Ngueng</td>
                                 <td>@twitter</td>
+                                <td>
+                                    <div class="form-check d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div class="row justify-content-end align-items-end py-4">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
+                        <form action="{{ route('manager.tambah_kasus.tambah_1')}}" method="GET">
+                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
+                        </form>
+                        <form action="{{ route('manager.unggah_kasus.unggah_1')}}" method="GET">
+                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

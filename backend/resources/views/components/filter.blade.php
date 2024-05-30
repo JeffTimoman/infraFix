@@ -11,7 +11,7 @@
                     <div class="offcanvas-body">
                         <div class="row px-4">
                             <label class="my-1" style="margin-left: -0.5rem; font-size:large;" for="">Provinsi</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" style="background-color: #F2F2F2;" id="">
                                     <option selected>Choose...</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -20,7 +20,7 @@
                         </div>
                         <div class="row px-4">
                             <label class="my-1" style="margin-left: -0.5rem; font-size:large;" for="">Kabupaten/Kota</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" style="background-color: #F2F2F2;" id="">
                                     <option selected>Choose...</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="row px-4">
                             <label class="my-1" style="margin-left: -0.5rem; font-size:large;" for="">Kecamatan</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" style="background-color: #F2F2F2;" id="">
                                     <option selected>Choose...</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -38,7 +38,7 @@
                         </div>
                         <div class="row px-4">
                             <label class="my-1" style="margin-left: -0.5rem; font-size:large;" for="">Kelurahan</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" style="background-color: #F2F2F2;" id="">
                                     <option selected>Choose...</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="row px-4">
                             <label class="my-1" style="margin-left: -0.5rem; font-size:large;" for="">Tipe Kerusakan</label>
-                                <select class="form-select" id="">
+                                <select class="form-select" style="background-color: #F2F2F2;" id="">
                                     <option selected>Choose...</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>

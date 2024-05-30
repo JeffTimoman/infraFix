@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.manager')
 
 @section('style')
     <style>
@@ -117,7 +117,7 @@
 @endsection
 
 @section('title')
-    Hot Topic
+    Laporan 
 @endsection
 
 @section('content')
@@ -126,19 +126,26 @@
             <!-- 1 -->
             <div class="row justify-content-evenly p-5">
                 <div class="col-lg-6">
-                    <div class="col-lg-6">
-                        <ul class="nav nav-pills">
-                            <li class="nav-item">
-                                <a class="nav-link active rounded" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" aria-current="page" href="#">Semua</a>
-                            </li>
-                    </div>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item">
+                            <a class="nav-link active rounded" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" aria-current="page" href="#">Semua</a>
+                        </li>
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <li class="nav-item">
+                            <a class="nav-link rounded" style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;" href="{{ route ('manager.laporan_belum_unggah')}}">Belum Diunggah</a>
+                        </li>
+                    </ul>
+                    <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger">Semua</button>
+                    <button type="button" class="btn btn-warning">Belum Diunggah</button>
+                    </div> -->
                 </div>
                 @include('components.filter')
             </div>
             <!-- 2 -->
             <div class="row justify-content-center mb-4">
                 <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
-                    <div class="row">
+                    <div class="row justify-content-center">
                         <table class="table">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
@@ -146,7 +153,6 @@
                                 <th scope="col">Tipe Kerusakan</th>
                                 <th scope="col">Tanggal Unggah</th>
                                 <th scope="col">Lokasi</th>
-                                <th scope="col">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="table align-middle">
@@ -155,25 +161,24 @@
                                 <td>Mark</td>
                                 <td>Otto</td>
                                 <td>@mdo</td>
-                                <td>
-                                    <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label style="color: grey;">Edit</label>
-                                </td>
                                 </tr>
                                 <tr>
                                 <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                </tr>
+                                <tr>
+                                <th scope="row">3</th>
                                 <td>Larry the Bird</td>
                                 <td>Ngueng</td>
                                 <td>@twitter</td>
-                                <td>
-                                    <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label style="color: grey;" for="">Edit</label>
-                                </td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+ @endsection
