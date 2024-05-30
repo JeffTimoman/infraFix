@@ -170,7 +170,7 @@
 
 <body>
     <div class="wrapper sidebar">
-        @include('components.admin_sidebar')
+        @include('components.manager_sidebar')
         <div class="main">
 
             @include('components.sidebar_navbar')
