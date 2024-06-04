@@ -42,7 +42,7 @@
 @endsection
 
 @section('content')
-    <div class="row mx-auto d-flex align-items-center justify-content-center w-50 mt-5" style="height: 70vh;">
+    <div class="row mx-auto d-flex align-items-center justify-content-center w-50 mt-5 card" style="height: 70vh;">
         {{-- <div class="col-md-4"> --}}
             <div class="d-flex justify-content-center align-item-center my-3">
                 <form action="{{route('auth.register')}}" class="col-md-12 row d-flex justify-content-center align-item-center" method="POST">

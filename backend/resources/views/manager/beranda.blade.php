@@ -47,7 +47,7 @@
                 </div>
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center mb-5"> 
+            <div class="row justify-content-center mb-5">
                 <div class="col-lg-10 text-center rounded" style="background-color: white; height: 36rem;">
                     <div class="row justify-content-between align-items-center p-3">
                         <div class="col-lg-2">
