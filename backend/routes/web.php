@@ -51,7 +51,7 @@ Route::prefix('admin')->group(function () {
 
     //Report
     Route::prefix('report')->group(function(){
-        Route::get('', [AdminReportController::class, 'index'])->name('report.index');
+        Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
     });
 
     //Damage
@@ -68,6 +68,10 @@ Route::prefix('admin')->group(function () {
     Route::prefix('city')->group(function(){
         Route::get('', [CityController::class, 'index'])->name('city.index');
         Route::get('create', [CityController::class, 'create'])->name('city.create');
+        Route::get('store', [CityController::class, 'store'])->name('city.store');
+        Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
+        Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
+
 
     });
 
