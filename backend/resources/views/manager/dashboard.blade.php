@@ -174,7 +174,7 @@ Dashboard
                     </div>
                     <div class="col-lg-2">
                         <form action="{{ route('manager.laporan_semua')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selengkapnya</button>
+                            <button type="submit" class="btn btn-m rounded" style="background-color: #A50000; color: white;">Selengkapnya</button>
                         </form>
                     </div>
                 </div>

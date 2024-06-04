@@ -118,6 +118,35 @@
         text-align: center;
     }
 </style>
+
+<style>
+    input[type="checkbox"]:checked {
+        background-color: #D8A4A4;
+        border-color: #A50000;
+    }
+
+    input[type="checkbox"]:checked::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+    }
+
+    /* Mengubah warna ceklis (centang) */
+    input[type="checkbox"]:checked::after {
+        content: "+";
+        scale: 110%;
+        /* Karakter centang */
+        display: block;
+        color: #A50000;
+        /* Warna centang */
+        position: relative;
+        top: -45%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 @endsection
 
 @section('title')
