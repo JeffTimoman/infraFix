@@ -155,10 +155,10 @@
                     <div class="report-body py-2">
                         <div class="row mb-3">
                             <div class="insert col-12 col-md-11">
-                                <form action="{{ route('city.store') }}" id="submit">
+                                <form action="{{ route('city.update', $id = $city->id) }}" id="submit">
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Nama</label>
-                                        <input type="name" class="form-control color-input" id="name" name="name" value="name" required>
+                                        <input type="name" class="form-control color-input" id="name" name="name" value="{{ $city->name }}" required>
                                 
                                     </div>
                                   
@@ -182,7 +182,7 @@
                         <div class="row mb-3">
                             <div class="button-header col-12 col-md-11">
                                 <button class="button-add" type="submit" onclick="document.getElementById('submit').submit()">
-                                    Tambah +
+                                    Ubah
                                 </button>
                             </div>
                         </div>     

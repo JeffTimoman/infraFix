@@ -5,12 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kota extends Model
+class ThisCase extends Model
 {
     use HasFactory;
-    protected $table = 'kota';
-    protected $fillable =[
-        'name',
-        'provinsi_id'
-    ];
+    protected $table = 'case';
 }

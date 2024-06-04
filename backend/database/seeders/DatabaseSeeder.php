@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             DaerahSeeder::class,
             NonAnonymousReportSeeder::class,
             AnonymousReportSeeder::class,
+            ReportImageSeeder::class,
+            CaseSeeder::class,
         ]);
     }
 }
