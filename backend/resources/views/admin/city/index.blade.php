@@ -179,9 +179,12 @@
                                     <td>
                                         <div class="actions">
                                             <div class="edit">
-                                                <span class="material-symbols-outlined">
-                                                    edit
-                                                </span>
+                                                <a href="{{ route('city.edit', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        edit
+                                                    </span>
+                                                </a>
+                                                
                                             </div>
                                             <div class="delete">
                                                 <span class="material-symbols-outlined">
