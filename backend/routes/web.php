@@ -41,39 +41,38 @@ Route::prefix('admin')->group(function () {
     })->name('admin.dashboard');
 
     //User
-    Route::prefix('user')->group(function(){
+    Route::prefix('user')->group(function () {
         Route::get('', [AdminUserController::class, 'index'])->name('user.index');
     });
 
     //Report
-    Route::prefix('report')->group(function(){
+    Route::prefix('report')->group(function () {
         Route::get('', [AdminReportController::class, 'index'])->name('report.index');
     });
 
     //Damage
-    Route::prefix('damage')->group(function(){
+    Route::prefix('damage')->group(function () {
         Route::get('', [DamageTypeController::class, 'index'])->name('damage_type.index');
     });
 
     //Province
-    Route::prefix('province')->group(function(){
+    Route::prefix('province')->group(function () {
         Route::get('', [ProvinceController::class, 'index'])->name('province.index');
     });
 
     //City
-    Route::prefix('city')->group(function(){
+    Route::prefix('city')->group(function () {
         Route::get('', [CityController::class, 'index'])->name('city.index');
         Route::get('create', [CityController::class, 'create'])->name('city.create');
-
     });
 
-     //Kecamatan
-     Route::prefix('kecamatan')->group(function(){
+    //Kecamatan
+    Route::prefix('kecamatan')->group(function () {
         Route::get('', [KecamatanController::class, 'index'])->name('kecamatan.index');
     });
 
     //Kelurahan
-    Route::prefix('kelurahan')->group(function(){
+    Route::prefix('kelurahan')->group(function () {
         Route::get('', [KelurahanController::class, 'index'])->name('kelurahan.index');
     });
 
@@ -136,17 +135,17 @@ Route::prefix('manager')->group(function () {
             return view('manager.tambah_kasus.tambah_3');
         })->name('manager.tambah_3');
 
-        Route::prefix('/scorll')->group(function () {
-            Route::get('/isi', function () {
-                return view('manager.tambah_kasus.scroll.isi_kasus');
-            })->name('manager.scroll_isi_kasus');
-            Route::get('/ringkasan', function () {
-                return view('manager.tambah_kasus.scroll.ringkasan_kasus');
-            })->name('manager.scroll_ringkasan_kasus');
-            Route::get('/edit', function () {
-                return view('manager.tambah_kasus.scroll.edit_kasus');
-            })->name('manager.scroll_edit_kasus');
-        });
+        // Route::prefix('/scorll')->group(function () {
+        //     Route::get('/isi', function () {
+        //         return view('manager.tambah_kasus.scroll.isi_kasus');
+        //     })->name('manager.scroll_isi_kasus');
+        //     Route::get('/ringkasan', function () {
+        //         return view('manager.tambah_kasus.scroll.ringkasan_kasus');
+        //     })->name('manager.scroll_ringkasan_kasus');
+        //     Route::get('/edit', function () {
+        //         return view('manager.tambah_kasus.scroll.edit_kasus');
+        //     })->name('manager.scroll_edit_kasus');
+        // });
     });
 
 

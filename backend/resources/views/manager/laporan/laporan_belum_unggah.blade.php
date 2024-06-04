@@ -114,6 +114,35 @@
         text-align: center;
     }
 </style>
+
+<style>
+    input[type="checkbox"]:checked {
+        background-color: #D8A4A4;
+        border-color: #A50000;
+    }
+
+    input[type="checkbox"]:checked::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+    }
+
+    /* Mengubah warna ceklis (centang) */
+    input[type="checkbox"]:checked::after {
+        content: "✔";
+        /* Karakter centang */
+        display: block;
+        color: #A50000;
+        /* Warna centang */
+        position: relative;
+        top: -45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
 @endsection
 
 @section('title')
@@ -180,11 +209,11 @@ Laporan Belum Diunggah
                 </div>
                 <div class="row justify-content-end align-items-end py-4">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
-                        <form action="{{ route('manager.tambah_kasus.tambah_1')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
+                        <form action="{{ route('manager.tambah_1')}}" method="GET">
+                            <button type="submit" class="btn btn-m rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
                         </form>
-                        <form action="{{ route('manager.unggah_kasus.unggah_1')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
+                        <form action="{{ route('manager.unggah_1')}}" method="GET">
+                            <button type="submit" class="btn btn-m rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
                         </form>
                     </div>
                 </div>
