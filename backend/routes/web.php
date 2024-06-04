@@ -74,9 +74,25 @@ Route::prefix('manager')->group(function(){
 
 Route::prefix("government")->group(function(){
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
+    Route::prefix("perkembangan")->group(function(){
+
+        Route::get('milestone1', function(){
+            return view('government.perkembangan.milestone1');
+        })->name('perkembangan.milestone1');
+    });
+
     Route::get('dashboard', function(){
         return view('government.dashboard');
     })->name('government.dashboard');
+
+    Route::get('home', function(){
+        return view('government.home');
+    })->name('government.home');
+
+    Route::get('tindakan', function(){
+        return view('government.tindakan');
+    })->name('government.tindakan');
+
 
     // Selalu bikin controller itu di dalam folder Controller/government/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
