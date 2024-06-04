@@ -18,7 +18,7 @@ class AnonymousReportSeeder extends Seeder
         $damage_types = DamageType::all();
         $kelurahan = Kelurahan::all();
 
-        for ($i = 1; $i <= 50; $i++){
+        for ($i = 1; $i <= 200; $i++){
             $random_report_code = bin2hex(random_bytes(10));
             $random_access_key = 'iniaccesskey';
             $hashed_report_code = encrypt($random_report_code, $random_access_key);

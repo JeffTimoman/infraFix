@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index']);
 
 Route::prefix('testjeff')->group(function () {
-    Route::get('report', [ReportController::class, 'index']);
-    Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
+    // Route::get('report', [ReportController::class, 'index']);
+    // Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
+});
+
+Route::prefix('report')->group(function(){
+    Route::get('', [ReportController::class, 'index']);
 });
 
 
