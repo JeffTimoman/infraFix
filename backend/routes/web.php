@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [MainController::class, 'index']);
 
-Route::prefix('testjeff')->group(function(){
+Route::prefix('testjeff')->group(function () {
     Route::get('report', [ReportController::class, 'index']);
     Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
 });
@@ -17,7 +17,7 @@ Route::prefix('testjeff')->group(function(){
 
 
 
-Route::prefix('auth')->group(function(){
+Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login');
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
@@ -26,9 +26,9 @@ Route::prefix('auth')->group(function(){
     Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 })->middleware(isNotLogin::class);
 
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function(){
+    Route::get('dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
 
@@ -38,9 +38,9 @@ Route::prefix('admin')->group(function(){
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/admin.blade.php
 });
 
-Route::prefix('manager')->group(function(){
+Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function(){
+    Route::get('dashboard', function () {
         return view('manager.dashboard');
     })->name('manager.dashboard');
 
@@ -49,32 +49,44 @@ Route::prefix('manager')->group(function(){
     // Cssnya tolong pake in line css aja, jangan pake file css
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 
-    Route::get('/beranda', function(){
-        return view('manager.beranda'); });
-
-    Route::prefix('/laporan')->group(function(){
-        Route::get('/semua', function(){
-            return view('manager.laporan_semua'); })->name('manager.laporan_semua');
-        Route::get('/belum_unggah', function(){
-            return view('manager.laporan_belum_unggah'); })->name('manager.laporan_belum_unggah');
+    Route::get('/beranda', function () {
+        return view('manager.beranda');
     });
 
-    Route::get('/hot_topic', function(){
-        return view('manager.hot_topic'); });
+    Route::prefix('/laporan')->group(function () {
+        Route::get('/semua', function () {
+            return view('manager.laporan_semua');
+        })->name('manager.laporan_semua');
+        Route::get('/belum_unggah', function () {
+            return view('manager.laporan_belum_unggah');
+        })->name('manager.laporan_belum_unggah');
+    });
 
-    Route::prefix('/unggah')->group(function(){
-        Route::get('/1', function(){
-            return view('manager.unggah_1'); })->name('manager.unggah_1');
-        Route::get('/2', function(){
-            return view('manager.unggah_2'); })->name('manager.unggah_2');
-        Route::get('/3', function(){
-            return view('manager.unggah_3'); })->name('manager.unggah_3');
+
+    Route::get('/hot_topic', function () {
+        return view('manager.hot_topic');
+    })->name('manager.hot_topic');
+    
+    Route::get('/hot_topic_post', function () {
+        return view('manager.hot_topic_post');
+    })->name('manager.hot_topic_post');
+
+    Route::prefix('/unggah')->group(function () {
+        Route::get('/1', function () {
+            return view('manager.unggah_1');
+        })->name('manager.unggah_1');
+        Route::get('/2', function () {
+            return view('manager.unggah_2');
+        })->name('manager.unggah_2');
+        Route::get('/3', function () {
+            return view('manager.unggah_3');
+        })->name('manager.unggah_3');
     });
 });
 
-Route::prefix("government")->group(function(){
+Route::prefix("government")->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function(){
+    Route::get('dashboard', function () {
         return view('government.dashboard');
     })->name('government.dashboard');
 

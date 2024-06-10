@@ -355,182 +355,185 @@
             </div>
 
             <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
-                <div class="row mt-3 d-flex justify-content-center align-items-center" style="height: 9vh;">
-                    <div class="col-md-5 ">
-                        <form class="search " method="GET" style=" ;border-radius: 20px; !important">
-                            <div class="input-group">
-                                <span class="input-group-text border-2 border-secondary " id="basic-addon1"
-                                    style=" background-color: #fff;border-right: 0; "><i
-                                        class="bi bi-search"></i></span>
-                                <input type="text"
-                                    class="form-control border-secondary border-2"style="border-left:0; "
-                                    name="query" placeholder="Search...">
+                <div class="row mt-3 ms-1 mb-2">
+                    <a href="{{ route('manager.hot_topic') }}"
+                        class="text-decoration-none text-dark link-secondary"><i class="bi bi-arrow-left d-flex"
+                            style="font-size: 25px; font-style:normal;"><span class="ms-2 fw-bold"
+                                style="font-size: 16px">Post</span></i>
+                    </a>
+                </div>
+                <div class="row d-flex justify-content-center" style="height: 78vh; ">
+                    <div class="col-md-12 overflow-auto" style=" height:78vh;">
+                            <div class="text-decoration-none border-0 container col-md-9 " style=" height: 100%;">
+                                <div
+                                    class="text-capitalize text-dark d-flex justify-content-between align-items-center">
+                                    <div class="text-wrap " style="width: 90%;height: 6vh">
+                                        <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
+                                            adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
+                                            Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
+                                            asperiores quam cupiditate fuga iusto nisi.lkds</h6>
+                                    </div>
+                                    <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
+                                        @php
+                                            $currentTime = now();
+                                            $timeDifference = now()->diffInHours($currentTime);
+                                            $formattedTime = $timeDifference > 0 ? $timeDifference . 'h' : '0h';
+                                        @endphp
+                                        <span class="text-secondary" style="font-size: 14px">{{ $formattedTime }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="text-danger text-capitalize" style=" font-size: 10px">
+                                    <span>4073 Laporan</span>
+                                </div>
+
+                                <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
+                                    <div class="span">
+                                        Lokasi: (nama lokasi)
+                                        <br>
+                                        Status: (judul status)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-1 text-dark" style=" font-size: 12px;">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
+                                            assumenda
+                                            perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
+                                            exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
+                                            ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
+                                            impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
+                                            minus debitis consequatur commodi molestias ipsam ex perferendis,
+                                            repellendus quos. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                            Eligendi soluta quibusdam, provident quaerat sit quam deserunt libero
+                                            consectetur doloribus ex quas reprehenderit ut aliquam in accusamus neque
+                                            fugit. Enim dolor odit optio libero iure similique ipsam rem deserunt est.
+                                            Eaque dolor, accusantium tempore blanditiis earum vero perspiciatis nemo quo
+                                            veritatis ut facilis corporis voluptas tempora. Placeat accusantium iste
+                                            facilis minima totam, omnis qui. Tenetur dolores ab cumque molestias
+                                            incidunt debitis consectetur exercitationem corrupti veritatis minus esse
+                                            totam porro nemo, sed minima sit delectus qui eos assumenda maxime. Quis,
+                                            eius incidunt dolor asperiores, earum maxime tenetur, quo magnam vitae
+                                            nesciunt est!</p>
+                                    </div>
+                                </div>
+                                {{-- untuk show gambar --}}
+                                <div class="row">
+                                    <div class="col-md-12 d-flex justify-content-center">
+                                        <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
+                                            alt="" width="900" height="288">
+                                    </div>
+                                </div>
+                                <div class="row" style=" height:5.5vh ;">
+                                    <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
+                                        <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
+                                            id="btn_like">
+                                            <i class="bi bi-heart"></i>
+                                            <span class="mb-1">23k</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
+                                        <button onclick="" class="btn text-dark" id="btn_komen">
+                                            <i class="bi bi-chat-left"></i>
+                                            <span class="mb-1">17k</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
+                                        <button onclick="" class="btn text-dark" id="btn_bookmark">
+                                            <i class="bi bi-bookmark"></i>
+                                            <span class="mb-1">9k</span>
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
+                                        <button onclick="" class="btn text-dark" id="btn_share">
+                                            <i class="bi bi-share"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row overflow-auto d-flex justify-content-center" style="height: 74vh;">
-                    <div class="col-md-12 p-0" style="">
-                        {{-- awal konten --}}
-                        <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten"
-                            style="height: 68vh; ">
-                            <a href="" class="text-decoration-none border-0">
-                                <div class="container col-md-9 overflow-hidden" style=" height: 100%;">
-
-                                    <div
-                                        class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                                        <div class="text-wrap " style="width: 90%;height: 6vh">
-                                            <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
-                                                Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
-                                                asperiores quam cupiditate fuga iusto nisi.lkds</h6>
+                        {{-- buatkan aku sisi untuk content komen seperti media sosial --}}
+                        <div class="row mt-5 mr-0 " >
+                            <div class="d-flex border-secondary" style="border-top:solid 1px;">
+                                <div class="col-md-12 p-0 d-flex justify-content-center">
+                                    <div class="col-md-9 d-flex flex-row justify-content-center align-items-start">
+                                        <div class="col-md-1 pt-2 justify-content-center d-flex">
+                                            <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
+                                                alt="" width="50" height="50"
+                                                class="rounded-circle border">
                                         </div>
-                                        <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
-
-                                            <span class="text-secondary" style="font-size: 14px">2h</span>
+                                        <div class="col-md-10 rounded hover_konten justify-content-center d-flex flex-column py-1 px-3">
+                                            <h6>namaUser</h6>
+                                            <p>Lorem</p>
                                         </div>
                                     </div>
-
-                                    <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                        <span>4073 Laporan</span>
-                                    </div>
-
-                                    <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
-                                        <div class="span">
-                                            Lokasi: (nama lokasi)
-                                            <br>
-                                            Status: (judul status)
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
-                                            assumenda
-                                            perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
-                                            exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
-                                            ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
-                                            impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
-                                            minus debitis consequatur commodi molestias ipsam ex perferendis,
-                                            repellendus quos. <span class="text-primary">show more...</span></p>
-                                    </div>
-                                    {{-- untuk show gambar --}}
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
-                                            alt="" width="900" height="288">
-                                    </div>
-                                    <div class="row" style=" height:5.5vh ;">
-                                        <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
-                                            <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
-                                                id="btn_like">
-                                                <i class="bi bi-heart"></i>
-                                                <span class="mb-1">23k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_komen">
-                                                <i class="bi bi-chat-left"></i>
-                                                <span class="mb-1">17k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                <i class="bi bi-bookmark"></i>
-                                                <span class="mb-1">9k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                            <button onclick="" class="btn text-dark" id="btn_share">
-                                                <i class="bi bi-share"></i>
-                                            </button>
-                                        </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                        <button class="btn text-dark" style="background-color: #fff">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                        {{-- akhir konten --}}
-
-                        {{-- awal konten --}}
-                        <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten"
-                            style="height: 68vh; ">
-                            <a href=" {{ Route('manager.hot_topic_post') }}" class="text-decoration-none border-0">
-                                <div class="container col-md-9 overflow-hidden" style=" height: 100%;">
-
-                                    <div
-                                        class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                                        <div class="text-wrap " style="width: 90%;height: 6vh">
-                                            <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
-                                                Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
-                                                asperiores quam cupiditate fuga iusto nisi.lkds</h6>
+                            </div>
+                            <div class="d-flex border-secondary" style="border-top:solid 1px;">
+                                <div class="col-md-12 p-0 d-flex justify-content-center">
+                                    <div class="col-md-9 d-flex flex-row justify-content-center align-items-start">
+                                        <div class="col-md-1 pt-2 justify-content-center d-flex">
+                                            <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
+                                                alt="" width="50" height="50"
+                                                class="rounded-circle border">
                                         </div>
-                                        <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
-
-                                            <span class="text-secondary" style="font-size: 14px">2h</span>
+                                        <div class="col-md-10 rounded hover_konten justify-content-center d-flex flex-column py-1 px-3">
+                                            <h6>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Temporibus, odio sed quasi, culpa odit numquam deserunt asperiores dicta neque, modi quaerat maxime soluta voluptate fuga id necessitatibus vel vitae ducimus.</h6>
+                                            <p>Lorem</p>
                                         </div>
                                     </div>
-
-                                    <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                        <span>4073 Laporan</span>
-                                    </div>
-
-                                    <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
-                                        <div class="span">
-                                            Lokasi: (nama lokasi)
-                                            <br>
-                                            Status: (judul status)
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
-                                            assumenda
-                                            perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
-                                            exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
-                                            ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
-                                            impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
-                                            minus debitis consequatur commodi molestias ipsam ex perferendis,
-                                            repellendus quos. <span class="text-primary">show more...</span></p>
-                                    </div>
-                                    {{-- untuk show gambar --}}
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
-                                            alt="" width="900" height="288">
-                                    </div>
-                                    <div class="row" style=" height:5.5vh ;">
-                                        <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
-                                            <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
-                                                id="btn_like">
-                                                <i class="bi bi-heart"></i>
-                                                <span class="mb-1">23k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_komen">
-                                                <i class="bi bi-chat-left"></i>
-                                                <span class="mb-1">17k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                <i class="bi bi-bookmark"></i>
-                                                <span class="mb-1">9k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                            <button onclick="" class="btn text-dark" id="btn_share">
-                                                <i class="bi bi-share"></i>
-                                            </button>
-                                        </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                        <button class="btn text-dark" style="background-color: #fff">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </button>
                                     </div>
                                 </div>
-                            </a>
+                            </div>
+                            <div class="d-flex border-secondary" style="border-top:solid 1px;">
+                                <div class="col-md-12 p-0 d-flex justify-content-center">
+                                    <div class="col-md-9 d-flex flex-row justify-content-center align-items-start">
+                                        <div class="col-md-1 pt-2 justify-content-center d-flex">
+                                            <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
+                                                alt="" width="50" height="50"
+                                                class="rounded-circle border">
+                                        </div>
+                                        <div class="col-md-10 rounded hover_konten justify-content-center d-flex flex-column py-1 px-3">
+                                            <h6>namaUser</h6>
+                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt qui, eligendi alias aliquam aut dolorem tenetur dicta odit. Porro tenetur magni fugit deserunt perspiciatis sunt blanditiis culpa, totam harum asperiores, fuga natus repellat, vero minus eos adipisci ipsum provident. Atque iusto, eos voluptate omnis itaque rem voluptatum illum veniam beatae voluptates maxime id corporis sunt dolorum vero nihil ipsa. Quisquam ratione, adipisci, non quis similique iste error rerum debitis recusandae dolorum perspiciatis qui illo minima! Doloribus numquam voluptatibus quidem veniam perferendis! Magnam nostrum corrupti numquam explicabo, nihil odio veritatis officia totam doloribus culpa voluptas quasi laborum repellat? Nisi, illum quidem.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                        <button class="btn text-dark" style="background-color: #fff">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex border-secondary" style="border-top:solid 1px;">
+                                <div class="col-md-12 p-0 d-flex justify-content-center">
+                                    <div class="col-md-9 d-flex flex-row justify-content-center align-items-start">
+                                        <div class="col-md-1 pt-2 justify-content-center d-flex">
+                                            <img src="{{ asset('components/img/konten/foto_konten1.png') }}"
+                                                alt="" width="50" height="50"
+                                                class="rounded-circle border">
+                                        </div>
+                                        <div class="col-md-10 rounded hover_konten justify-content-center d-flex flex-column py-1 px-3">
+                                            <h6>namaUser</h6>
+                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, ab! Corrupti quod fuga illo nulla quo error rem, voluptatum temporibus voluptates est excepturi aliquid, libero accusamus harum. Enim eos deserunt quia libero impedit a provident cupiditate sint, doloribus reiciendis, architecto unde rerum odit? Expedita et soluta voluptate labore ratione ab enim cupiditate nulla velit ducimus quasi libero esse, sint dolorem similique delectus earum sit dolorum fugit reprehenderit consectetur inventore! Id, amet. Tenetur temporibus explicabo architecto, beatae voluptatem, est dicta laborum corrupti tempora maxime magnam eaque quaerat repellat doloremque dolores, magni mollitia fugiat qui officia tempore exercitationem veniam reprehenderit nesciunt illo! Minima unde illum similique alias quo laborum nostrum autem vel. Ad minima ratione quas asperiores similique porro eum, officia harum iure enim saepe illum veritatis doloribus excepturi corrupti. Ullam non quidem consectetur, deleniti placeat dignissimos repellendus nesciunt blanditiis optio architecto sapiente nihil cupiditate sint vero voluptatum, facilis, nulla iusto reprehenderit. Voluptatibus minus, nisi voluptas, aliquam quos vero dignissimos dolores natus corrupti aspernatur maiores harum similique quisquam. Expedita, quaerat nam. Illo, ipsam nam porro omnis eos minima. Perspiciatis sapiente saepe cum, temporibus impedit, accusantium quam neque nulla ex numquam ratione? Nihil voluptatum esse repellat facilis et dolore nemo ratione a est.</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 d-flex justify-content-center align-items-center">
+                                        <button class="btn text-dark" style="background-color: #fff">
+                                            <i class="bi bi-exclamation-circle"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        {{-- akhir konten --}}
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -557,31 +560,31 @@
 
 {{-- month slider --}}
 <script>
-   $(document).ready(function(){
-       let val = $('.range_minimal').val();
-       let min = $('.range_minimal').attr('min');
-       let max = $('.range_minimal').attr('max');
-       let percent = ((val - min) / (max - min)) * 100;
-       $('.progres').css('left', percent + '%');
-       $('.input-min').val(val);
-   
-       val = $('.range_maksimal').val();
-       percent = ((val - min) / (max - min)) * 100;
-       $('.progres').css('right', (100 - percent) + '%');
-       $('.input-max').val(val);
-   
-       val = $('.range_minimal_month').val();
-       min = $('.range_minimal_month').attr('min');
-       max = $('.range_minimal_month').attr('max');
-       percent = ((val - min) / (max - min)) * 100;
-       $('.progres-month').css('left', percent + '%');
-       $('.input-min-month').val(val);
-   
-       val = $('.range_maksimal_month').val();
-       percent = ((val - min) / (max - min)) * 100;
-       $('.progres-month').css('right', (100 - percent) + '%');
-       $('.input-max-month').val(val);
-   });
+    $(document).ready(function() {
+        let val = $('.range_minimal').val();
+        let min = $('.range_minimal').attr('min');
+        let max = $('.range_minimal').attr('max');
+        let percent = ((val - min) / (max - min)) * 100;
+        $('.progres').css('left', percent + '%');
+        $('.input-min').val(val);
+
+        val = $('.range_maksimal').val();
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres').css('right', (100 - percent) + '%');
+        $('.input-max').val(val);
+
+        val = $('.range_minimal_month').val();
+        min = $('.range_minimal_month').attr('min');
+        max = $('.range_minimal_month').attr('max');
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres-month').css('left', percent + '%');
+        $('.input-min-month').val(val);
+
+        val = $('.range_maksimal_month').val();
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres-month').css('right', (100 - percent) + '%');
+        $('.input-max-month').val(val);
+    });
     $(document).ready(function() {
 
         $('.range_minimal').on('input', function() {
