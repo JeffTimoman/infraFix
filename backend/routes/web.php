@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProvinceController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
@@ -170,28 +171,32 @@ Route::prefix('manager')->group(function () {
 
 Route::prefix("government")->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::prefix("perkembangan")->group(function(){
+    // Route::prefix("perkembangan")->group(function(){
 
-        Route::get('milestone1', function(){
-            return view('government.perkembangan.milestone1');
-        })->name('perkembangan.milestone1');
-    });
+    //     Route::get('/{id}', [GovernmentController::class, 'perkembangan'])->name('perkembangan.milestone1');
+    // });
 
+<<<<<<< HEAD
+    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
+=======
     Route::get('dashboard', function () {
         return view('government.dashboard');
     })->name('government.dashboard');
+>>>>>>> 0abcb59d62bfe8186d9df46af2d014be0e9d9a40
 
-    Route::get('home', function(){
-        return view('government.home');
-    })->name('government.home');
+    Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
 
-    Route::get('tindakan', function(){
-        return view('government.tindakan');
-    })->name('government.tindakan');
+    Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
+
+    Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
 
 
     // Selalu bikin controller itu di dalam folder Controller/government/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
     // Cssnya tolong pake in line css aja, jangan pake file css
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
+});
+
+Route::get('/coba', function(){
+    return view('cobaBugGambar');
 });
