@@ -19,7 +19,7 @@ class NonAnonymousReportSeeder extends Seeder
         $damage_types = DamageType::all();
         $kelurahan = Kelurahan::all();
         $users = User::where('role', 'user')->get();
-        for ($i = 1; $i <= 50; $i++){
+        for ($i = 1; $i <= 200; $i++){
             $random_report_code = bin2hex(random_bytes(10));
             $data = [
                 'report_code' => $random_report_code,

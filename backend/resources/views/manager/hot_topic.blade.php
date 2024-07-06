@@ -1,23 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Hot Topic</title>
-</head>
-<body>
+@extends('layouts.admin')
+
+@section('style')
+    <style>
+        .main {
+            background-color: #F1F1F1;
+        }
+
+        .cardbox:nth-child(3) .card {
+            background-color: #a50000;
+        }
+
+        .cardbox:nth-child(3) .material-symbols-outlined {
+            color: white;
+        }
+
+        .cardbox h5 {
+            font-size: 30px;
+        }
+
+        .cardbox p {
+            font-size: 20px;
+            color: #D4D4D4;
+        }
+
+        .cardbox:nth-child(3) h5 {
+            color: white;
+        }
+
+        .cardbox:nth-child(3) p {
+            color: #D8A4A4;
+        }
+
+
+        .card-body {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+            /* Distribute space between items */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-text {
+            margin-right: 10px;
+            /* Adjust spacing between text and icon as needed */
+        }
+
+        .card-icon {
+            /* Optional: styles for the card icon */
+        }
+
+        .reportBox {
+            display: flex;
+            align-items: center;
+            /* Align items vertically in the center */
+            justify-content: space-between;
+        }
+
+        .report {
+            background-color: white;
+        }
+
+        .table-header {
+            display: flex;
+            border-bottom: 3px solid #EDEDED;
+            /* background-color: #a50000; */
+            align-items: center;
+            /* margin-bottom: 3px; */
+        }
+
+        .table-title {
+            width: 50%;
+        }
+
+
+        .table-button {
+            width: 50%;
+            display: flex;
+            justify-content: end;
+        }
+
+        .table-title h5 {
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .button-seeAll {
+            border-radius: 20px;
+            border-width: 0px;
+            background-color: #a50000;
+            width: 92px;
+            height: 43px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .report-table {
+            width: 100%;
+        }
+
+        .report-table th {
+            border-bottom: 3px solid #EDEDED;
+            text-align: center;
+        }
+
+        .report-table td {
+            border-bottom: 1px solid #EDEDED;
+            text-align: center;
+        }
+    </style>
+@endsection
+
+@section('title')
+    Hot Topic
+@endsection
+
+@section('content')
     <div class="container-fluid">
         <div class="row" style="background-color: #EDEDED;">
             <!-- 1 -->
             <div class="row justify-content-evenly p-5">
-                <div class="col-lg-5"></div>
+                <div class="col-lg-6">
+                    <div class="col-lg-6">
+                        <ul class="nav nav-pills">
+                            <li class="nav-item">
+                                <a class="nav-link active rounded" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" aria-current="page" href="#">Semua</a>
+                            </li>
+                    </div>
+                </div>
                 @include('components.filter')
             </div>
             <!-- 2 -->
-            <div class="row justify-content-center mb-5">
-                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 44rem;">
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                     <div class="row">
                         <table class="table">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
@@ -37,7 +157,7 @@
                                 <td>@mdo</td>
                                 <td>
                                     <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label for="">Edit</label>
+                                    <label style="color: grey;">Edit</label>
                                 </td>
                                 </tr>
                                 <tr>
@@ -47,7 +167,7 @@
                                 <td>@twitter</td>
                                 <td>
                                     <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label for="">Edit</label>
+                                    <label style="color: grey;" for="">Edit</label>
                                 </td>
                                 </tr>
                             </tbody>
@@ -56,6 +176,4 @@
             </div>
         </div>
     </div>
-</body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</html>
+@endsection
