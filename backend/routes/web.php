@@ -176,13 +176,7 @@ Route::prefix("government")->group(function () {
     //     Route::get('/{id}', [GovernmentController::class, 'perkembangan'])->name('perkembangan.milestone1');
     // });
 
-<<<<<<< HEAD
     Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
-=======
-    Route::get('dashboard', function () {
-        return view('government.dashboard');
-    })->name('government.dashboard');
->>>>>>> 0abcb59d62bfe8186d9df46af2d014be0e9d9a40
 
     Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
 
