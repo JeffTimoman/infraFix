@@ -22,5 +22,5 @@
     </div>
 @endsection
 @section('script')
-    d
+
 @endsection

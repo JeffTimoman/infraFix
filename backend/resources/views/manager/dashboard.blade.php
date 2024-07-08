@@ -114,67 +114,105 @@
         text-align: center;
     }
 </style>
+
+<style>
+    input[type="checkbox"]:checked {
+        background-color: #D8A4A4;
+        border-color: #A50000;
+    }
+
+    input[type="checkbox"]:checked::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+    }
+
+    /* Mengubah warna ceklis (centang) */
+    input[type="checkbox"]:checked::after {
+        content: "✔";
+        /* Karakter centang */
+        display: block;
+        color: #A50000;
+        /* Warna centang */
+        position: relative;
+        top: -45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+
 @endsection
 
 @section('title')
-Dashboard
+Laporan Belum Diunggah
 @endsection
 
 @section('content')
 <div class="container-fluid">
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
-        <div class="row justify-content-evenly p-4">
+        <div class="row justify-content-evenly p-5">
             <div class="col-lg-3 rounded p-5" style="background-color: white;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4>600</h4>
+                <a href="{{ route ('manager.laporan_semua')}}">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-3">
+                            <h4 class="text-dark">600</h4>
+                        </div>
+                        <div class="col-lg-3">
+                            <span class="material-symbols-outlined"
+                                style="color: #A50000; scale: 200%;">assignment</span>
+                        </div>
                     </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: #A50000; scale: 200%;">assignment</span>
+                    <div class="row">
+                        <h4 style="color: grey;">Laporan</h4>
                     </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: grey;">Laporan</h4>
-                </div>
+                </a>
             </div>
             <div class="col-lg-3 rounded p-5" style="background-color: white;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4>600</h4>
+                <a href="{{route('manager.laporan_belum_unggah')}}">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-3">
+                            <h4 class="text-dark">300</h4>
+                        </div>
+                        <div class="col-lg-3">
+                            <span class="material-symbols-outlined"
+                                style="color: #A50000; scale: 200%;">pending_actions</span>
+                        </div>
                     </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: #A50000; scale: 200%;">pending_actions</span>
+                    <div class="row">
+                        <h4 style="color: grey;">Belum Diunggah</h4>
                     </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: grey;">Belum Diunggah</h4>
-                </div>
+                </a>
             </div>
             <div class="col-lg-3 rounded p-5" style="background-color: #A50000;">
-                <div class="row justify-content-between">
-                    <div class="col-lg-3">
-                        <h4 style="color: white;">600</h4>
+                <a href="{{route('manager.hot_topic')}}">
+                    <div class="row justify-content-between">
+                        <div class="col-lg-3">
+                            <h4 style="color: white;">600</h4>
+                        </div>
+                        <div class="col-lg-3">
+                            <span class="material-symbols-outlined" style="color: white; scale: 200%;">newspaper</span>
+                        </div>
                     </div>
-                    <div class="col-lg-3">
-                        <span class="material-symbols-outlined" style="color: white; scale: 200%;">newspaper</span>
+                    <div class="row">
+                        <h4 style="color: #D8A4A4;">Hot Topic</h4>
                     </div>
-                </div>
-                <div class="row">
-                    <h4 style="color: #D8A4A4;">Hot Topic</h4>
-                </div>
+                </a>
             </div>
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-12 text-center rounded" style="background-color: white; height: 33rem; width: 82vw;">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 36rem;">
                 <div class="row justify-content-between align-items-center p-3">
-                    <div class="col-lg-3 text-start">
+                    <div class="col-lg-2">
                         <h3 class="" style="font-weight: bold;">Laporan Terkini</h3>
                     </div>
                     <div class="col-lg-2">
                         <form action="{{ route('manager.laporan_semua')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selengkapnya</button>
+                            <button type="submit" class="btn btn-lg rounded"
+                                style="background-color: #A50000; color: white;">Selengkapnya</button>
                         </form>
                     </div>
                 </div>

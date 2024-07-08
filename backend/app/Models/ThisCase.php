@@ -22,5 +22,7 @@ class ThisCase extends Model
         'case_number'
     ];
 
-  
+    public function milestone_details(){
+        $this->hasMany(MilestoneDetail::class);
+    }
 }

@@ -14,4 +14,5 @@ class MilestoneDetail extends Model
         'case_id',
         'description'
     ];
+
 }

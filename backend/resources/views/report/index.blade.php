@@ -162,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 row d-flex justify-content-between">
+                    <div class="col-md-12 row d-flex justify-content-between d-none">
                         <div class="col-md-5">
                             <label for="input-image" id="drop-area" class="">
                                 <input type="file" accept="image/*" id="input-image" class="d-none" multiple>
@@ -191,6 +191,63 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end align-items-center gap-3 border-top mt-3 pt-2">
+                            <button class="btn btn-danger btn-modified float-end btn-back"
+                                style="background-color: #A50000;">Kembali</button>
+                            <button class="btn btn-danger btn-modified float-end btn-nexts"
+                                style="background-color: #A50000;">Lanjut</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <div class="col-md-12" style="margin: 0; padding: 0;">
+                            <h3 class="text-center border-bottom pb-2" >Laporan</h3>
+                        </div>
+                        <div class="col-md-8 row">
+                            <div class="col-md-6">
+                                <h5>Tipe Kerusakan</h5>
+                                <p>Infrastruktur</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Provinsi, Kota, Kecamatan, Kelurahan</h5>
+                                <p>Jawa Barat, Kabupaten Bogor, Babakan Madang, Babakan Madang</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Detail Kerusakan</h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure nisi veritatis iusto
+                                    eveniet dolorem, at dignissimos dolores animi magnam quasi obcaecati explicabo tempora.
+                                    Officia itaque dicta doloremque, non iusto cupiditate!</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Alamat</h5>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="col-md-12">
+                                <h5>Gambar Terlampir</h5>
+                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                    alt="" height="100px" width="auto">
+                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                    alt="" height="100px" width="auto">
+                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                    alt="" height="100px" width="auto">
+                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                    alt="" height="100px" width="auto">
+                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                    alt="" height="100px" width="auto">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" name="email" id="email" style="background-color: rgb(214, 212, 212);" class="form-control form-input-modified">
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-end align-items-center gap-3 mt-3 pt-2">
+                            <button class="btn btn-danger btn-modified float-end btn-back"
+                                style="background-color: #A50000;">Kembali</button>
+                            <button class="btn btn-danger btn-modified float-end"
+                                style="background-color: #A50000;">Submit</button>
                         </div>
                     </div>
                 </div>

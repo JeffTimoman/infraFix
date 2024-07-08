@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
@@ -48,7 +49,7 @@ Route::prefix('admin')->group(function () {
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     //User
-    Route::prefix('user')->group(function(){
+    Route::prefix('user')->group(function () {
         Route::get('', [AdminUserController::class, 'index'])->name('user.index');
         Route::get('create', [AdminUserController::class, 'create'])->name('user.create');
         Route::get('store', [AdminUserController::class, 'store'])->name('user.store');
@@ -84,7 +85,7 @@ Route::prefix('admin')->group(function () {
     });
 
     //Damage
-    Route::prefix('damage')->group(function(){
+    Route::prefix('damage')->group(function () {
         Route::get('', [DamageTypeController::class, 'index'])->name('damage_type.index');
         Route::get('create', [DamageTypeController::class, 'create'])->name('damage_type.create');
         Route::get('store', [DamageTypeController::class, 'store'])->name('damage_type.store');
@@ -95,7 +96,7 @@ Route::prefix('admin')->group(function () {
     });
 
     //Province
-    Route::prefix('province')->group(function(){
+    Route::prefix('province')->group(function () {
         Route::get('', [ProvinceController::class, 'index'])->name('province.index');
         Route::get('create', [ProvinceController::class, 'create'])->name('province.create');
         Route::get('store', [ProvinceController::class, 'store'])->name('province.store');
@@ -106,7 +107,7 @@ Route::prefix('admin')->group(function () {
     });
 
     //City
-    Route::prefix('city')->group(function(){
+    Route::prefix('city')->group(function () {
         Route::get('', [CityController::class, 'index'])->name('city.index');
         Route::get('create', [CityController::class, 'create'])->name('city.create');
         Route::get('store', [CityController::class, 'store'])->name('city.store');
@@ -116,8 +117,8 @@ Route::prefix('admin')->group(function () {
 
     });
 
-     //Kecamatan
-     Route::prefix('kecamatan')->group(function(){
+    //Kecamatan
+    Route::prefix('kecamatan')->group(function () {
         Route::get('', [KecamatanController::class, 'index'])->name('kecamatan.index');
         Route::get('create', [KecamatanController::class, 'create'])->name('kecamatan.create');
         Route::get('store', [KecamatanController::class, 'store'])->name('kecamatan.store');
@@ -128,7 +129,7 @@ Route::prefix('admin')->group(function () {
     });
 
     //Kelurahan
-    Route::prefix('kelurahan')->group(function(){
+    Route::prefix('kelurahan')->group(function () {
         Route::get('', [KelurahanController::class, 'index'])->name('kelurahan.index');
         Route::get('', [KelurahanController::class, 'index'])->name('kelurahan.index');
         Route::get('create', [KelurahanController::class, 'create'])->name('kelurahan.create');
@@ -223,17 +224,17 @@ Route::prefix('manager')->group(function () {
             return view('manager.tambah_kasus.tambah_3');
         })->name('manager.tambah_3');
 
-        Route::prefix('/scorll')->group(function () {
-            Route::get('/isi', function () {
-                return view('manager.tambah_kasus.scroll.isi_kasus');
-            })->name('manager.scroll_isi_kasus');
-            Route::get('/ringkasan', function () {
-                return view('manager.tambah_kasus.scroll.ringkasan_kasus');
-            })->name('manager.scroll_ringkasan_kasus');
-            Route::get('/edit', function () {
-                return view('manager.tambah_kasus.scroll.edit_kasus');
-            })->name('manager.scroll_edit_kasus');
-        });
+        // Route::prefix('/scorll')->group(function () {
+        //     Route::get('/isi', function () {
+        //         return view('manager.tambah_kasus.scroll.isi_kasus');
+        //     })->name('manager.scroll_isi_kasus');
+        //     Route::get('/ringkasan', function () {
+        //         return view('manager.tambah_kasus.scroll.ringkasan_kasus');
+        //     })->name('manager.scroll_ringkasan_kasus');
+        //     Route::get('/edit', function () {
+        //         return view('manager.tambah_kasus.scroll.edit_kasus');
+        //     })->name('manager.scroll_edit_kasus');
+        // });
     });
 
 
@@ -250,28 +251,36 @@ Route::prefix('manager')->group(function () {
 
 Route::prefix("government")->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::prefix("perkembangan")->group(function(){
+    // Route::prefix("perkembangan")->group(function(){
 
-        Route::get('milestone1', function(){
-            return view('government.perkembangan.milestone1');
-        })->name('perkembangan.milestone1');
-    });
+    //     Route::get('/{id}', [GovernmentController::class, 'perkembangan'])->name('perkembangan.milestone1');
+    // });
 
-    Route::get('dashboard', function () {
-        return view('government.dashboard');
-    })->name('government.dashboard');
+    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
 
-    Route::get('home', function(){
-        return view('government.home');
-    })->name('government.home');
+    Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
 
-    Route::get('tindakan', function(){
-        return view('government.tindakan');
-    })->name('government.tindakan');
+    Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
+
+    Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
 
 
     // Selalu bikin controller itu di dalam folder Controller/government/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
     // Cssnya tolong pake in line css aja, jangan pake file css
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
+});
+
+Route::prefix('hottopic')->group(function () {
+    Route::get('/hot_topic', function () {
+        return view('hottopic.hot_topic');
+    })->name('hottopic.hot_topic');
+    Route::get('/hot_topic_post', function () {
+        return view('hottopic.hot_topic_post');
+    })->name('hottopic.hot_topic_post');
+});
+
+
+Route::get('/coba', function(){
+    return view('cobaBugGambar');
 });

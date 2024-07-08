@@ -118,6 +118,35 @@
         text-align: center;
     }
 </style>
+
+<style>
+    input[type="checkbox"]:checked {
+        background-color: #D8A4A4;
+        border-color: #A50000;
+    }
+
+    input[type="checkbox"]:checked::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+    }
+
+    /* Mengubah warna ceklis (centang) */
+    input[type="checkbox"]:checked::after {
+        content: "+";
+        scale: 110%;
+        /* Karakter centang */
+        display: block;
+        color: #A50000;
+        /* Warna centang */
+        position: relative;
+        top: -45%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+    }
+</style>
 @endsection
 
 @section('title')
@@ -173,7 +202,8 @@ Unggah Kasus
                                     <td>@mdo</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
                                         </div>
                                     </td>
                                 </tr>
@@ -184,7 +214,8 @@ Unggah Kasus
                                     <td>@twitter</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
                                         </div>
                                     </td>
                                 </tr>
@@ -198,7 +229,8 @@ Unggah Kasus
         <div class="row justify-content-end">
             <div class="col-lg-2 p-4">
                 <form action="{{ route('manager.tambah_3')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
+                    <button type="submit" class="btn btn-lg rounded"
+                        style="background-color: #A50000; color: white;">Selanjutnya</button>
                 </form>
             </div>
         </div>
