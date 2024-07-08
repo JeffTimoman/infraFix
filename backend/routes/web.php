@@ -1,14 +1,19 @@
 <?php
 
+use App\Http\Controllers\Admin\CaseController;
 use App\Http\Controllers\admin\CityController;
+use App\Http\Controllers\Admin\CommentController;
 use App\Http\Controllers\admin\DamageTypeController;
 use App\Http\Controllers\admin\KecamatanController;
 use App\Http\Controllers\admin\KelurahanController;
+use App\Http\Controllers\Admin\MilestoneController as AdminMilestoneController;
 use App\Http\Controllers\admin\ProvinceController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isNotLogin;
@@ -40,28 +45,64 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     //User
     Route::prefix('user')->group(function(){
         Route::get('', [AdminUserController::class, 'index'])->name('user.index');
+        Route::get('create', [AdminUserController::class, 'create'])->name('user.create');
+        Route::get('store', [AdminUserController::class, 'store'])->name('user.store');
+        Route::get('{id}', [AdminUserController::class, 'edit'])->name('user.edit');
+        Route::get('/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
+        Route::get('/{id}/details', [AdminUserController::class, 'details'])->name('user.details');
+        Route::get('/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
+
+    });
+
+    //Case
+    Route::prefix('case')->group(function(){
+        Route::get('', [CaseController::class, 'index'])->name('case.index');
+        Route::get('create', [CaseController::class, 'create'])->name('case.create');
+        Route::get('store', [CaseController::class, 'store'])->name('case.store');
+        Route::get('{id}', [CaseController::class, 'edit'])->name('case.edit');
+        Route::get('/{id}/update', [CaseController::class, 'update'])->name('case.update');
+        Route::get('/{id}/details', [CaseController::class, 'details'])->name('case.details');
+        Route::get('/{id}/destroy', [CaseController::class, 'destroy'])->name('case.destroy');
+
     });
 
     //Report
     Route::prefix('report')->group(function(){
         Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
+        Route::get('/{id}/details', [AdminReportController::class, 'details'])->name('admin.report.details');
+        Route::get('create', [AdminReportController::class, 'create'])->name('admin.report.create');
+        Route::get('store', [AdminReportController::class, 'store'])->name('admin.report.store');
+        Route::get('{id}', [AdminReportController::class, 'edit'])->name('admin.report.edit');
+        Route::get('/{id}/update', [AdminReportController::class, 'update'])->name('admin.report.update');
+        Route::get('/{id}/destroy', [AdminReportController::class, 'destroy'])->name('admin.report.destroy');
+
     });
 
     //Damage
     Route::prefix('damage')->group(function(){
         Route::get('', [DamageTypeController::class, 'index'])->name('damage_type.index');
+        Route::get('create', [DamageTypeController::class, 'create'])->name('damage_type.create');
+        Route::get('store', [DamageTypeController::class, 'store'])->name('damage_type.store');
+        Route::get('{id}', [DamageTypeController::class, 'edit'])->name('damage_type.edit');
+        Route::get('/{id}/update', [DamageTypeController::class, 'update'])->name('damage_type.update');
+        Route::get('/{id}/destroy', [DamageTypeController::class, 'destroy'])->name('damage_type.destroy');
+
     });
 
     //Province
     Route::prefix('province')->group(function(){
         Route::get('', [ProvinceController::class, 'index'])->name('province.index');
+        Route::get('create', [ProvinceController::class, 'create'])->name('province.create');
+        Route::get('store', [ProvinceController::class, 'store'])->name('province.store');
+        Route::get('{id}', [ProvinceController::class, 'edit'])->name('province.edit');
+        Route::get('/{id}/update', [ProvinceController::class, 'update'])->name('province.update');
+        Route::get('/{id}/destroy', [ProvinceController::class, 'destroy'])->name('province.destroy');
+
     });
 
     //City
@@ -71,18 +112,56 @@ Route::prefix('admin')->group(function () {
         Route::get('store', [CityController::class, 'store'])->name('city.store');
         Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
         Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
-
+        Route::get('/{id}/destroy', [CityController::class, 'destroy'])->name('city.destroy');
 
     });
 
      //Kecamatan
      Route::prefix('kecamatan')->group(function(){
         Route::get('', [KecamatanController::class, 'index'])->name('kecamatan.index');
+        Route::get('create', [KecamatanController::class, 'create'])->name('kecamatan.create');
+        Route::get('store', [KecamatanController::class, 'store'])->name('kecamatan.store');
+        Route::get('{id}', [KecamatanController::class, 'edit'])->name('kecamatan.edit');
+        Route::get('/{id}/update', [KecamatanController::class, 'update'])->name('kecamatan.update');
+        Route::get('/{id}/details', [KecamatanController::class, 'details'])->name('kecamatan.details');
+        Route::get('/{id}/destroy', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
     });
 
     //Kelurahan
     Route::prefix('kelurahan')->group(function(){
         Route::get('', [KelurahanController::class, 'index'])->name('kelurahan.index');
+        Route::get('', [KelurahanController::class, 'index'])->name('kelurahan.index');
+        Route::get('create', [KelurahanController::class, 'create'])->name('kelurahan.create');
+        Route::get('store', [KelurahanController::class, 'store'])->name('kelurahan.store');
+        Route::get('{id}', [KelurahanController::class, 'edit'])->name('kelurahan.edit');
+        Route::get('/{id}/update', [KelurahanController::class, 'update'])->name('kelurahan.update');
+        Route::get('/{id}/details', [KelurahanController::class, 'details'])->name('kelurahan.details');
+        Route::get('/{id}/destroy', [KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
+
+    });
+
+    Route::prefix('milestone')->group(function(){
+        Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
+        Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
+        Route::get('create', [AdminMilestoneController::class, 'create'])->name('milestone.create');
+        Route::get('store', [AdminMilestoneController::class, 'store'])->name('milestone.store');
+        Route::get('{id}', [AdminMilestoneController::class, 'edit'])->name('milestone.edit');
+        Route::get('/{id}/update', [AdminMilestoneController::class, 'update'])->name('milestone.update');
+        Route::get('/{id}/details', [AdminMilestoneController::class, 'details'])->name('milestone.details');
+        Route::get('/{id}/destroy', [AdminMilestoneController::class, 'destroy'])->name('milestone.destroy');
+
+    });
+
+    Route::prefix('comment')->group(function(){
+        Route::get('', [CommentController::class, 'index'])->name('comment.index');
+        Route::get('', [CommentController::class, 'index'])->name('comment.index');
+        Route::get('create', [CommentController::class, 'create'])->name('comment.create');
+        Route::get('store', [CommentController::class, 'store'])->name('comment.store');
+        Route::get('{id}', [CommentController::class, 'edit'])->name('comment.edit');
+        Route::get('/{id}/update', [CommentController::class, 'update'])->name('comment.update');
+        Route::get('/{id}/details', [CommentController::class, 'details'])->name('comment.details');
+        Route::get('/{id}/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
+
     });
 
     // Selalu bikin controller itu di dalam folder Controller/admin/apagitu

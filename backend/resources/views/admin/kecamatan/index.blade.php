@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('title')
-    Kecamatan    
+    Kecamatan
 @endsection
 @section('style')
     <style>
-        
+
     .content {
         display: flex;
         flex-direction: column;
@@ -23,7 +23,7 @@
         'GRAD' 0,
         'opsz' 24;
         color: #a50000;
-        
+
     }
 
 
@@ -47,7 +47,7 @@
     .reportBox{
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; 
+    justify-content: space-between;
     }
 
     .report{
@@ -80,7 +80,7 @@
 
 
     .report-table{
-    width: 100%;    
+    width: 100%;
     }
 
     .report-table th{
@@ -100,7 +100,7 @@
         width: 100%;
         height: 100%;
     }
-    
+
     .button-header{
         display: flex;
         justify-content: end;
@@ -136,17 +136,35 @@
         /* background-color: red; */
     }
 
-    </style>    
+    </style>
 @endsection
 @section('content')
     <div class="content">
         <div class="mb-3">
             <div class="row mb-3">
-                <div class="button-header col-12 col-md-11">
-                    <button class="button-add">
-                        Tambah +
-                    </button>
-                </div>
+                <div class="row mb-3 col-12 col-md-11 ">
+                    <div class="search col-md-8">
+                        <div class="form col-md-11">
+                            <form action="{{ route('kecamatan.index')}}" class="d-flex" role="search" method="GET">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="Search" name="query" value="{{ session('query') }}">
+                                    <button class="btn btn-outline-secondary search-btn" type="submit">
+                                        <i class="lni lni-search-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="add col-md-4">
+                        <a href="{{ route('kecamatan.create') }}">
+                            <div class="button-header ">
+                                <button class="button-add">
+                                    Tambah +
+                                </button>
+                            </div>
+                        </a>
+                    </div>
             </div>
             <div class="row mb-3">
                 <div class="reportbox col-12 col-md-11 ">
@@ -156,11 +174,8 @@
                                 <div class="table-title">
                                     <h5>Kecamatan</h5>
                                 </div>
-                                <div class="table-button">
-                                    <button class="button-seeAll">Kota</button>
-                                </div>
                             </div>
-                            <table class="report-table ">              
+                            <table class="report-table ">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -178,18 +193,22 @@
                                     <td>
                                         <div class="actions">
                                             <div class="edit">
-                                                <span class="material-symbols-outlined">
-                                                    edit
-                                                </span>
+                                                <a href="{{ route('kecamatan.edit', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        edit
+                                                    </span>
+                                                </a>
                                             </div>
                                             <div class="delete">
-                                                <span class="material-symbols-outlined">
-                                                    delete
-                                                </span>
+                                                <a href="{{ route('kecamatan.destroy', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                </a>
                                             </div>
-                                            
+
                                         </div>
-                                     
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -204,10 +223,10 @@
                         {{ $data->links('vendor.pagination.custom') }}
                     </div>
                 </div>
-           
+
         </div>
-    
-    
+
+
 </body>
 </html>
 @endsection

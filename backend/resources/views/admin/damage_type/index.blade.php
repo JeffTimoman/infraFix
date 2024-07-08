@@ -144,9 +144,11 @@
         <div class="mb-3">
             <div class="row mb-3">
                 <div class="button-header col-12 col-md-11">
-                    <button class="button-add">
-                        Tambah +
-                    </button>
+                    <a href="{{ route('damage_type.create') }}">
+                        <button class="button-add">
+                            Tambah +
+                        </button>
+                    </a>
                 </div>
             </div>
             <div class="row mb-3">
@@ -156,10 +158,7 @@
                             <div class="table-header py-2 px-3">
                                 <div class="table-title">
                                     <h5>Tipe Kerusakan</h5>
-                                </div>
-                                <div class="table-button">
-                                    <button class="button-seeAll">Semua</button>
-                                </div>
+                                </div>    
                             </div>
                             <table class="report-table ">              
                                 <thead>
@@ -177,14 +176,18 @@
                                     <td>
                                         <div class="actions">
                                             <div class="edit">
-                                                <span class="material-symbols-outlined">
-                                                    edit
-                                                </span>
+                                                <a href="{{ route('damage_type.edit', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        edit
+                                                    </span>
+                                                </a>
                                             </div>
                                             <div class="delete">
-                                                <span class="material-symbols-outlined">
-                                                    delete
-                                                </span>
+                                                <a href="{{ route('damage_type.destroy', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                </a>
                                             </div>
                                             
                                         </div>

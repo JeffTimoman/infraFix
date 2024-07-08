@@ -9,7 +9,16 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
+        $query = $request->input('query');
+        if($query){
+            session()->flash('query', $request->input('query'));
+            $query = $request->input('query');
+            $cities = Kota::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('id', 'LIKE', "%{$query}%")
+            ->paginate(5);
+            return view('admin.city.search', ['data' =>$cities]);
+        }
         $cities = Kota::paginate(5);
         return view('admin.city.index', ['data' => $cities]);
     }
@@ -21,15 +30,15 @@ class CityController extends Controller
 
     public function store(Request $request){
 
-      
+        // dd($request);
         $request->validate([
             'name'=> 'required',
             'province'=> 'required'
-        ]);       
-        
+        ]);
+
         $province_id = Provinsi::where('name', $request->input('province'))->first()->id;
-        
-        
+
+
         $data =[
             'name' =>$request->input('name'),
             'provinsi_id' => $province_id
@@ -58,15 +67,15 @@ class CityController extends Controller
         if(!$city){
             return redirect()->back()->withErrors(['City does not exist']);
         }
-      
+
         $request->validate([
             'name'=> 'required',
             'province'=> 'required'
-        ]);       
-        
+        ]);
+
         $province_id = Provinsi::where('name', $request->input('province'))->first()->id;
-        
-        
+
+
         $data =[
             'name' =>$request->input('name'),
             'provinsi_id' => $province_id
@@ -82,6 +91,16 @@ class CityController extends Controller
 
         $city->update($data);
         return redirect()->route('city.index')->with('success', 'City edited succesfully');
+    }
+
+    public function destroy(Request $request, $id){
+        $city = Kota::find($id);
+        if(!$city){
+            return redirect()->back()->withErrors(['City doesn not exist']);
+        }
+
+        $city->delete();
+        return redirect()->back()->with('success', 'Student deleted successfully');
     }
 
 }

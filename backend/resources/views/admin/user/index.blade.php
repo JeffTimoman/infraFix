@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('title')
-    User    
+    User
 @endsection
 @section('style')
     <style>
-        
+
     .content {
         display: flex;
         flex-direction: column;
@@ -23,11 +23,16 @@
         'GRAD' 0,
         'opsz' 24;
         color: #a50000;
-        
+
     }
 
 
     .row{
+        justify-content: center;
+    }
+
+    .row-header{
+        display: flex;
         justify-content: center;
     }
 
@@ -44,10 +49,19 @@
     color: #949494;
     }
 
+    .detail .material-symbols-outlined{
+        font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+    color: #D8A4A4;
+    }
+
     .reportBox{
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; 
+    justify-content: space-between;
     }
 
     .report{
@@ -80,7 +94,7 @@
 
 
     .report-table{
-    width: 100%;    
+    width: 100%;
     }
 
     .report-table th{
@@ -100,12 +114,19 @@
         width: 100%;
         height: 100%;
     }
-    
+
     .button-header{
         display: flex;
         justify-content: end;
         /* background-color: red; */
     }
+
+    .search-btn:hover {
+        background-color: #a50000;
+        border-color: #a50000;
+        color: white;
+    }
+
 
     .button-add{
         border-radius: 15px;
@@ -136,18 +157,38 @@
         /* background-color: red; */
     }
 
-    </style>    
+    </style>
 @endsection
 @section('content')
     <div class="content">
         <div class="mb-3">
             <div class="row mb-3">
-                <div class="button-header col-12 col-md-11">
-                    <button class="button-add">
-                        Tambah +
-                    </button>
+                <div class="row-header mb-3 col-12 col-md-11 ">
+                    <div class="search col-md-8">
+                        <div class="form col-md-11">
+                            <form action="{{ route('user.index')}}" class="d-flex" role="search" method="GET">
+                                <div class="input-group">
+                                    <input class="form-control" type="search" placeholder="Search" name="query" value="{{ session('query') }}">
+                                    <button class="btn btn-outline-secondary search-btn" type="submit">
+                                        <i class="lni lni-search-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <div class="add col-md-4">
+                        <a href="{{ route('user.create') }}">
+                            <div class="button-header ">
+                                <button class="button-add">
+                                    Tambah +
+                                </button>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
+
             <div class="row mb-3">
                 <div class="reportbox col-12 col-md-11 ">
                     <div class="report border-0">
@@ -156,24 +197,19 @@
                                 <div class="table-title">
                                     <h5>User</h5>
                                 </div>
-                                <div class="table-button">
-                                    <button class="button-seeAll">Semua</button>
-                                </div>
+
                             </div>
-                            <table class="report-table ">              
+                            <table class="report-table ">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Username</th>
-                                        <th>Password</th>
                                         <th>Profile Pic</th>
                                         <th>DOB</th>
                                         <th>Role</th>
                                         <th>Status</th>
-                                        <th>Email Verified at</th>
-                                        <th>Remember token</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -184,28 +220,36 @@
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->username }}</td>
-                                    <td>{{ $item->password }}</td>
                                     <td>{{ $item->profile_picture }}</td>
                                     <td>{{ $item->date_of_birth }}</td>
                                     <td>{{ $item->role }}</td>
                                     <td>{{ $item->is_active }}</td>
-                                    <td>{{ $item->email_verified_at }}</td>
-                                    <td>{{ $item->remember_token }}</td>
                                     <td>
-                                        <div class="actions">
+                                        <div class="actions col-12 col-md-12">
+                                            <div class="detail ">
+                                                <a href="{{ route('user.details', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        info
+                                                     </span>
+                                                </a>
+                                            </div>
                                             <div class="edit">
-                                                <span class="material-symbols-outlined">
-                                                    edit
-                                                </span>
+                                                <a href="{{ route('user.edit', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        edit
+                                                    </span>
+                                                </a>
                                             </div>
                                             <div class="delete">
-                                                <span class="material-symbols-outlined">
-                                                    delete
-                                                </span>
+                                                <a href="{{ route('user.destroy', $id = $item->id) }}">
+                                                    <span class="material-symbols-outlined">
+                                                        delete
+                                                    </span>
+                                                </a>
                                             </div>
-                                            
+
                                         </div>
-                                     
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -220,10 +264,10 @@
                         {{ $data->links('vendor.pagination.custom') }}
                     </div>
                 </div>
-           
+
         </div>
-    
-    
+
+
 </body>
 </html>
 @endsection

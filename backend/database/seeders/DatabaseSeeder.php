@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             AnonymousReportSeeder::class,
             ReportImageSeeder::class,
             CaseSeeder::class,
+            MilestoneSeeder::class,
+            CommentSeeder::class
         ]);
     }
 }
