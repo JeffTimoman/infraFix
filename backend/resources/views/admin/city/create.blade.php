@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Kelurahan    
+    Kota    
 @endsection
 @section('style')
     <style>

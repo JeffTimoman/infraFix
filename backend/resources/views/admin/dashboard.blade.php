@@ -127,15 +127,16 @@
                         <div class="card-body py-4">
                             <div class="card-text">
                                 <h5 class="mb-2 fw-bold">
-                                    600
+                                    {{ $data['report_total'] }}
                                 </h5>
                                 <p class="mb-2 fw-bold">
                                     Laporan
                                 </p>
                             </div>
                             <div class="card-icon">
-                                <i class="fa-solid fa-gauge"></i>
-                            </div>
+                                <span class="material-symbols-outlined">
+                                    lab_profile
+                                </span>                            </div>
                         </div>
                     </div>
                 </div>
@@ -144,15 +145,16 @@
                         <div class="card-body py-4">
                             <div class="card-text">
                                 <h5 class="mb-2 fw-bold">
-                                    600
+                                    {{ $data['user_total'] }}
                                 </h5>
                                 <p class="mb-2 fw-bold">
                                     Pengguna
                                 </p>
                             </div>
                             <div class="card-icon">
-                                <i class="fa-solid fa-gauge"></i>
-                            </div>
+                                <span class="material-symbols-outlined">
+                                    group
+                                </span>                              </div>
                         </div>
                     </div>
                 </div>
@@ -161,15 +163,16 @@
                         <div class="card-body py-4">
                             <div class="card-text">
                                 <h5 class="mb-2 fw-bold">
-                                    600
+                                    {{ $data['unconfirmed'] }}
                                 </h5>
                                 <p class="mb-2 fw-bold">
-                                    Laporan
+                                    Laporan belum terkonfirmasi
                                 </p>
                             </div>
                             <div class="card-icon">
-                                <i class="fa-solid fa-gauge"></i>
-                            </div>
+                                <span class="material-symbols-outlined">
+                                    brightness_alert
+                                </span>                          </div>
                         </div>
                     </div>
                 </div>
@@ -185,33 +188,30 @@
                                     <h5>Laporan</h5>
                                 </div>
                                 <div class="table-button">
-                                    <button class="button-seeAll">Semua</button>
+                                    <a href="{{ route('admin.report.index') }}">
+                                        <button class="button-seeAll">Semua</button>
+                                    </a>
                                 </div>
                             </div>
                             <table class="report-table ">
                                 <thead>
                                     <tr>
                                         <th>Judul</th>
-                                        <th>Tanggal</th>
-                                        <th>Prioritas</th>
+                                        <th>Tipe</th>
+                                        <th>Alamat</th>
                                         <th>Tanggal</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <!-- Example content rows -->
-                                    <tr>
-                                        <td>Judul 1</td>
-                                        <td>2024-05-21</td>
-                                        <td>High</td>
-                                        <td>2024-05-21</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Judul 2</td>
-                                        <td>2024-05-22</td>
-                                        <td>Medium</td>
-                                        <td>2024-05-22</td>
-                                    </tr>
+                                    @foreach($data['reports'] as $item)
+                                        <tr>
+                                            <td>{{ $item->title}}</td>
+                                            <td>{{ $item->damage_type}}</td>
+                                            <td>{{ $item->address}}</td>
+                                            <td>{{ $item->created_at}}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
 
                             </table>

@@ -9,7 +9,17 @@ class Report extends Model
 {
     use HasFactory;
     protected $table = 'report';
-    protected $fillable = ['report_code', 'title', 'description', 'address', 'anonymous', 'email', 'user_id', 'hashed_report_code', 'case_id', 'damage_type_id', 'kelurahan_id' ];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'address', 
+        'anonymous', 
+        'email', 
+        'user_id', 
+        'case_id', 
+        'damage_type_id', 
+        'kelurahan_id'
+    ];
 }
 
 /*

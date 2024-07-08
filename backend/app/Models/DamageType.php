@@ -9,4 +9,7 @@ class DamageType extends Model
 {
     use HasFactory;
     protected $table = 'damage_type';
+    protected $fillable = [
+        'name'        
+    ];
 }
