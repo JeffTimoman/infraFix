@@ -9,4 +9,5 @@ class MilestoneDetail extends Model
 {
     protected $table = 'milestone_detail';
     use HasFactory;
+    
 }
