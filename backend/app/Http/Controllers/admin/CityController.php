@@ -18,4 +18,70 @@ class CityController extends Controller
         $provinces = Provinsi::all();
         return view('admin.city.create', ['data' => $provinces]);
     }
+
+    public function store(Request $request){
+
+      
+        $request->validate([
+            'name'=> 'required',
+            'province'=> 'required'
+        ]);       
+        
+        $province_id = Provinsi::where('name', $request->input('province'))->first()->id;
+        
+        
+        $data =[
+            'name' =>$request->input('name'),
+            'provinsi_id' => $province_id
+        ];
+
+        // dd($data);
+
+        $check = Kota::where('name', $data['name'])->first();
+
+        if($check){
+            return redirect()->back()->withErrors(['Name already exists']);
+        }
+
+        Kota::create($data);
+        return redirect()->route('city.index')->with('success', 'City added succesfully');
+    }
+
+    public function edit($id){
+        $provinces = Provinsi::all();
+        $city = Kota::find($id);
+        return view('admin.city.edit', ['data' =>$provinces, 'city' =>$city]);
+    }
+
+    public function update(Request $request, $id){
+        $city = Kota::find($id);
+        if(!$city){
+            return redirect()->back()->withErrors(['City does not exist']);
+        }
+      
+        $request->validate([
+            'name'=> 'required',
+            'province'=> 'required'
+        ]);       
+        
+        $province_id = Provinsi::where('name', $request->input('province'))->first()->id;
+        
+        
+        $data =[
+            'name' =>$request->input('name'),
+            'provinsi_id' => $province_id
+        ];
+
+        // dd($data);
+
+        $check = Kota::where('name', $data['name'])->first();
+
+        if($check){
+            return redirect()->back()->withErrors(['Name already exists']);
+        }
+
+        $city->update($data);
+        return redirect()->route('city.index')->with('success', 'City edited succesfully');
+    }
+
 }

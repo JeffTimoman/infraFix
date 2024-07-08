@@ -5,12 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Kota extends Model
+class ReportImage extends Model
 {
     use HasFactory;
-    protected $table = 'kota';
-    protected $fillable =[
-        'name',
-        'provinsi_id'
-    ];
+    protected $table = 'report_image';
+    protected $fillable = ['report_id', 'name', 'case_id'];
 }

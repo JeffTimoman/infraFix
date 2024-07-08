@@ -17,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index']);
 
 Route::prefix('testjeff')->group(function () {
-    Route::get('report', [ReportController::class, 'index']);
-    Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
+    // Route::get('report', [ReportController::class, 'index']);
+    // Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
+});
+
+Route::prefix('report')->group(function(){
+    Route::get('', [ReportController::class, 'index']);
 });
 
 
@@ -46,8 +50,8 @@ Route::prefix('admin')->group(function () {
     });
 
     //Report
-    Route::prefix('report')->group(function () {
-        Route::get('', [AdminReportController::class, 'index'])->name('report.index');
+    Route::prefix('report')->group(function(){
+        Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
     });
 
     //Damage
@@ -64,6 +68,10 @@ Route::prefix('admin')->group(function () {
     Route::prefix('city')->group(function () {
         Route::get('', [CityController::class, 'index'])->name('city.index');
         Route::get('create', [CityController::class, 'create'])->name('city.create');
+        Route::get('store', [CityController::class, 'store'])->name('city.store');
+        Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
+        Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
+
     });
 
     //Kecamatan
@@ -162,9 +170,25 @@ Route::prefix('manager')->group(function () {
 
 Route::prefix("government")->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
+    Route::prefix("perkembangan")->group(function(){
+
+        Route::get('milestone1', function(){
+            return view('government.perkembangan.milestone1');
+        })->name('perkembangan.milestone1');
+    });
+
     Route::get('dashboard', function () {
         return view('government.dashboard');
     })->name('government.dashboard');
+
+    Route::get('home', function(){
+        return view('government.home');
+    })->name('government.home');
+
+    Route::get('tindakan', function(){
+        return view('government.tindakan');
+    })->name('government.tindakan');
+
 
     // Selalu bikin controller itu di dalam folder Controller/government/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu

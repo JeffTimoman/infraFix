@@ -36,7 +36,7 @@
                             <a class="nav-link active" aria-current="page" href="#">Beranda</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="#">Lapor</a>
+                            <a class="nav-link" href="/report">Lapor</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link" href="#">Tentang</a>
@@ -172,7 +172,7 @@
                             <a class="nav-link" aria-current="page" href="#">Beranda</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="#">Lapor</a>
+                            <a class="nav-link" href="/report">Lapor</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link" href="#">Tentang</a>
