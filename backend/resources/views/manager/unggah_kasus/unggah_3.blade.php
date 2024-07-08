@@ -148,15 +148,18 @@ Unggah Kasus
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mt-4">
-            <div class="col-lg-10 rounded p-1 justify-content-center" style="background-color: white; height: 35rem; width: 82vw;">
-                <iframe class="" style="background-color: red; height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0"></iframe>
+            <div class="col-lg-10 rounded p-1 justify-content-center"
+                style="background-color: white; height: 35rem; width: 82vw;">
+                <iframe class="" style="background-color: red; height: 34.5rem; width: 79vw;"
+                    src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0"></iframe>
             </div>
         </div>
         <div class="row justify-content-end">
             <div class="col-lg-2 p-4">
                 <!-- Kasi ALert yakin kirim -->
                 <form action="{{ route('manager.hot_topic')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white; margin-left: 4.3rem;">Kirim</button>
+                    <button type="submit" class="btn btn-lg rounded"
+                        style="background-color: #A50000; color: white; margin-left: 4.3rem;">Kirim</button>
                 </form>
             </div>
         </div>

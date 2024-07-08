@@ -31,7 +31,6 @@
         color: #D8A4A4;
     }
 
-
     .card-body {
         display: flex;
         align-items: center;
@@ -116,24 +115,11 @@
 </style>
 
 <style>
-    .nav_coba1 {
-        background-color: white;
+    .belum:hover a {
         border-color: #A50000;
-        color: black;
-        scale: 120%;
-        border-color: #A50000;
-        transition: .2s ease-in;
-    }
-
-    .nav_coba1 a {
-        color: black;
-    }
-
-    .nav-item2:hover a {
-        background-color: #A50000;
-        color: white;
-        transition: .2s ease-in;
-        /* border: solid black; */
+        border-width: thin;
+        border-style: ridge;
+        transition: .2s;
     }
 </style>
 @endsection
@@ -150,11 +136,15 @@ Laporan
             <div class="col-lg-6">
                 <ul class="nav nav-pills">
                     <li class="nav-item1">
-                        <a class="nav-link active rounded" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" aria-current="page" href="#">Semua</a>
+                        <a class="nav-link active rounded"
+                            style="background-color: #A50000; color: white; border-color: white; scale: 120%;"
+                            aria-current="page" href="#">Semua</a>
                     </li>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                    <li class="nav-item2 nav_coba1">
-                        <a class="nav-link rounded" style="" href="{{ route ('manager.laporan_belum_unggah')}}">Belum Diunggah</a>
+                    <li class="nav-item2 belum">
+                        <a class="nav-link rounded" style="background-color: white; color: black;  scale: 120%;"
+                            href="{{ route ('manager.laporan_belum_unggah')}}">Belum
+                            Diunggah</a>
                     </li>
                 </ul>
                 <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">

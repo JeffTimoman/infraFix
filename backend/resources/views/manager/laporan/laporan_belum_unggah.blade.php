@@ -142,6 +142,14 @@
         transform: translate(-50%, -50%);
     }
 </style>
+<style>
+    .semua:hover a {
+        border-color: white;
+        border-width: thin;
+        border-style: ridge;
+        transition: .2s;
+    }
+</style>
 
 @endsection
 
@@ -156,12 +164,16 @@ Laporan Belum Diunggah
         <div class="row justify-content-evenly p-5">
             <div class="col-lg-6">
                 <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a class="nav-link rounded" style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;" aria-current="page" href="{{ route ('manager.laporan_semua')}}">Semua</a>
+                    <li class="nav-item semua">
+                        <a class="nav-link rounded"
+                            style="background-color: white; border-color: #A50000; color: black; scale: 120%; border-color: #A50000;"
+                            aria-current="page" href="{{ route ('manager.laporan_semua')}}">Semua</a>
                     </li>
                     &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <li class="nav-item active rounded">
-                        <a class="nav-link" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" href="#">Belum Diunggah</a>
+                        <a class="nav-link"
+                            style="background-color: #A50000; color: white; border-color: white; scale: 120%;"
+                            href="#">Belum Diunggah</a>
                     </li>
                 </ul>
             </div>
@@ -207,14 +219,18 @@ Laporan Belum Diunggah
                         </tbody>
                     </table>
                 </div>
-                <div class="row justify-content-end align-items-end py-4">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
-                        <form action="{{ route('manager.tambah_1')}}" method="GET">
-                            <button type="submit" class="btn btn-m rounded" style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
-                        </form>
-                        <form action="{{ route('manager.unggah_1')}}" method="GET">
-                            <button type="submit" class="btn btn-m rounded" style="background-color: #A50000; color: white;">Buat Kasus</button>
-                        </form>
+                <div class="row">
+                    <div class="row justify-content-end align-items-end py-4">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
+                            <form action="{{ route('manager.tambah_1')}}" method="GET">
+                                <button type="submit" class="btn btn-m rounded"
+                                    style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
+                            </form>
+                            <form action="{{ route('manager.unggah_1')}}" method="GET">
+                                <button type="submit" class="btn btn-m rounded"
+                                    style="background-color: #A50000; color: white;">Buat Kasus</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
