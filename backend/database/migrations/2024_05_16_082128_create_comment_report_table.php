@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('comment_report', function (Blueprint $table) {
-            $table->foreignId('comment_id')->constrained('comment', 'id')->onDelete('cascade');
-            $table->foreignId('case_id')->constrained('case', 'id')->onDelete('cascade');
+            $table->foreignId('comment_id')->constrained('comments', 'id')->onDelete('cascade');
+            $table->foreignId('case_id')->constrained('cases', 'id')->onDelete('cascade');
 
             $table->boolean('closed')->default(false);
 

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('milestone_detail', function (Blueprint $table) {
-            $table->foreignId('milestone_id')->constrained('milestone', 'id')->onDelete('cascade')->nullable();
-            $table->foreignId('case_id')->constrained('case', 'id')->onDelete('cascade')->nullable();
+        Schema::create('milestone_details', function (Blueprint $table) {
+            $table->foreignId('milestone_id')->constrained('milestones', 'id')->onDelete('cascade')->nullable();
+            $table->foreignId('case_id')->constrained('cases', 'id')->onDelete('cascade')->nullable();
             $table->string('description');
 
             $table->primary(['milestone_id', 'case_id']);

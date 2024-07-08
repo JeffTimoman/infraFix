@@ -162,7 +162,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12 row d-flex justify-content-between d-none">
+                    <div class="col-md-12 row d-flex justify-content-between">
                         <div class="col-md-5">
                             <label for="input-image" id="drop-area" class="">
                                 <input type="file" accept="image/*" id="input-image" class="d-none" multiple>

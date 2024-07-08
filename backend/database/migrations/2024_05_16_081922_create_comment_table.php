@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
@@ -19,8 +19,8 @@ return new class extends Migration
             $table->boolean("anonymous")->default(false);
             $table->boolean("banned")->default(false);
 
-            $table->foreignId('user_id')->nullable()->constrained('user')->onDelete('cascade');
-            $table->foreignId('case_id')->nullable()->constrained('case', 'id')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('case_id')->nullable()->constrained('cases', 'id')->onDelete('cascade');
         });
     }
 

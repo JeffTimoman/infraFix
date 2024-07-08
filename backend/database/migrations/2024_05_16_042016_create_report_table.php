@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('report', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
 
             $table->string('report_code')->default('')->unique();
@@ -26,14 +26,14 @@ return new class extends Migration
 
             #If the report is anonymous, the email will be empty, if email not empty try to get the user_id
             $table->string('email')->default('');
-            $table->foreignId('user_id')->nullable()->constrained('user')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
 
             #If the report is anonymous, the user_id will be null
             $table->string('hashed_report_code')->default('');
 
-            $table->foreignId('case_id')->nullable()->constrained('case', 'id')->onDelete('cascade');
-            $table->foreignId('damage_type_id')->nullable()->constrained('damage_type', 'id')->onDelete('set null');
-            $table->foreignId('kelurahan_id')->nullable()->constrained('kelurahan', 'id')->onDelete('cascade');
+            $table->foreignId('case_id')->nullable()->constrained('cases', 'id')->onDelete('cascade');
+            $table->foreignId('damage_type_id')->nullable()->constrained('damage_types', 'id')->onDelete('set null');
+            $table->foreignId('kelurahan_id')->nullable()->constrained('kelurahans', 'id')->onDelete('cascade');
 
             $table->timestamps();
         });

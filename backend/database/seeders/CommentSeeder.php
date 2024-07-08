@@ -16,8 +16,8 @@ class CommentSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        $userIds = DB::table('user')->pluck('id')->toArray();
-        $caseIds = DB::table('case')->pluck('id')->toArray();
+        $userIds = DB::table('users')->pluck('id')->toArray();
+        $caseIds = DB::table('cases')->pluck('id')->toArray();
 
         for ($i = 0; $i < 50; $i++) {
             Comment::create([

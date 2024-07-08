@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookmark', function (Blueprint $table) {
+        Schema::create('bookmarks', function (Blueprint $table) {
             $table->timestamps();
 
-            $table->foreignId('user_id')->constrained('user', 'id')->onDelete('cascade');
-            $table->foreignId('case_id')->constrained('case', 'id')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade');
+            $table->foreignId('case_id')->constrained('cases', 'id')->onDelete('cascade');
 
             $table->primary(['user_id', 'case_id']);
         });

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class MilestoneDetail extends Model
 {
     use HasFactory;
-    protected $table = 'milestone_detail';
     protected $fillable =[
         'milestone_id',
         'case_id',

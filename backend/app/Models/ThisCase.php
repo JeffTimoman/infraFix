@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ThisCase extends Model
 {
     use HasFactory;
-    protected $table = 'case';
+    protected $table = 'cases';
     protected $fillable =[
         'title',
         'description',

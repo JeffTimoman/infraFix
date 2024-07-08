@@ -34,13 +34,13 @@ class DaerahSeeder extends Seeder
 
 
         foreach ($data as $provinsi => $kota) {
-            $provinsiId = DB::table('provinsi')->insertGetId(['name' => $provinsi]);
+            $provinsiId = DB::table('provinsis')->insertGetId(['name' => $provinsi]);
             foreach ($kota as $kotaName => $kecamatan) {
-                $kotaId = DB::table('kota')->insertGetId(['name' => $kotaName, 'provinsi_id' => $provinsiId]);
+                $kotaId = DB::table('kotas')->insertGetId(['name' => $kotaName, 'provinsi_id' => $provinsiId]);
                 foreach ($kecamatan as $kecamatanName => $kelurahan) {
-                    $kecamatanId = DB::table('kecamatan')->insertGetId(['name' => $kecamatanName, 'kota_id' => $kotaId]);
+                    $kecamatanId = DB::table('kecamatans')->insertGetId(['name' => $kecamatanName, 'kota_id' => $kotaId]);
                     foreach ($kelurahan as $kelurahanName) {
-                        DB::table('kelurahan')->insert(['name' => $kelurahanName, 'kecamatan_id' => $kecamatanId]);
+                        DB::table('kelurahans')->insert(['name' => $kelurahanName, 'kecamatan_id' => $kecamatanId]);
                     }
                 }
             }

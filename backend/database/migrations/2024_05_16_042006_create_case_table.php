@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('case', function (Blueprint $table) {
+        Schema::create('cases', function (Blueprint $table) {
             $table->id();
             $table->string("case_number");
 
@@ -24,12 +24,12 @@ return new class extends Migration
 
             $table->boolean('status')->default(false);
 
-            $table->foreignId('government_id')->nullable()->constrained('user', 'id')->onDelete('cascade');
+            $table->foreignId('government_id')->nullable()->constrained('users', 'id')->onDelete('cascade');
 
 
-            $table->foreignId('created_by')->nullable()->constrained('user', 'id')->onDelete('cascade');
+            $table->foreignId('created_by')->nullable()->constrained('users', 'id')->onDelete('cascade');
 
-            $table->foreignId('damage_type_id')->nullable()->constrained('damage_type', 'id')->onDelete('cascade');
+            $table->foreignId('damage_type_id')->nullable()->constrained('damage_types', 'id')->onDelete('cascade');
 
 
             $table->timestamps();
