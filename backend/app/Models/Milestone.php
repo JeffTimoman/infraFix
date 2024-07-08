@@ -11,8 +11,8 @@ class Milestone extends Model
     protected $table = 'milestone';
     //Milestone -> Milestone_details(has many)->
     //Milestone_detail -> case ->
-    public function milestone_details(){
-        $this->hasMany(MilestoneDetail::class);
-    }
+    // public function milestone_details(){
+    //     $this->hasMany(MilestoneDetail::class);
+    // }
 
 }

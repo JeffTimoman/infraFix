@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
 @section('style')
-    
+
 @endsection
 <style>
-    
+
     .main {
         background-color: #EDEDED;
     }
@@ -16,7 +16,7 @@
         height: 80vh;
     }
 
-</style> 
+</style>
 
 @section('content')
 
@@ -28,7 +28,12 @@
                     <div class="table-body py-1">
                         <div class="table-header mt-3 px-3">
                             <div class="table-title d-flex justify-content-end">
-                                <i class="fa-solid fa-gauge"></i>
+                                <a href="">
+
+                                    <span class="material-symbols-outlined">
+                                        tune
+                                    </span>
+                                </a>
                             </div>
                         </div>
                         <div class="costum-divider"></div>
@@ -39,19 +44,25 @@
                                         <th>Judul Laporan</th>
                                         <th>Daerah</th>
                                         <th>Jumlah Laporan</th>
-                                        <th>Urgensi</th>
                                         <th>Tanggal Unggah</th>
+                                        <th>Terima Laporan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <a href="government.home">
+
+                                    @foreach ($data as $item)
                                         <tr>
-                                            <td>Woilah</td>
-                                            <td>Sukabumi</td>
-                                            <td>107</td>
-                                            <td>High</td>
-                                            <td>2024-01-22</td>
+                                           <td>{{$item->title}}</td>
+                                            <td>{{$item->address}}</td>
+                                            <td>{{$item->case_number}}</td>
+                                            <td>{{$item->created_at}}</td>
+                                            <td>
+                                                <button class="btn btn-outline-success m-0" type="submit">Kutindak</button>
+                                            </td>
                                         </tr>
+                                    @endforeach
+
+                                    {{-- <a href="government.home">
                                     </a>
                                     <tr>
                                         <td>Hahaha Pize</td>
@@ -59,7 +70,7 @@
                                         <td>2000</td>
                                         <td>Low</td>
                                         <td>2025-13-60</td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                             {{-- {{$data->links()}} --}}
