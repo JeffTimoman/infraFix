@@ -14,6 +14,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
@@ -46,7 +47,6 @@ Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login');
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
-`````
     Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register');
     Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 })->middleware(isNotLogin::class);
@@ -172,7 +172,6 @@ Route::prefix('admin')->group(function () {
 Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
-
     Route::prefix('/laporan')->group(function () {
         Route::get('/semua', function () {
             return view('manager.laporan.laporan_semua');
