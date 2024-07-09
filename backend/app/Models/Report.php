@@ -17,7 +17,10 @@ class Report extends Model
         'user_id',
         'case_id',
         'damage_type_id',
-        'kelurahan_id'
+        'kelurahan_id',
+        'report_code',
+        'access_key',
+        'hashed_report_code'
     ];
 }
 

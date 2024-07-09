@@ -69,15 +69,50 @@
             background-color: #A50000;
             border-radius: 4px;
         }
+
+        .form-check-modified:checked {
+            background-color: #A50000;
+            border: 1px solid #A50000;
+        }
+
+        /* Define the initial state and transitions */
+        .form-section {
+            transition: transform 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+        }
+
+        /* Hide elements */
+        .d-none {
+            display: none;
+        }
+
+        /* Swipe left animation */
+        .swipe-left-enter {
+            transform: translateX(100%);
+        }
+
+        .swipe-left-enter-active {
+            transform: translateX(0);
+        }
+
+        .swipe-left-exit {
+            transform: translateX(0);
+        }
+
+        .swipe-left-exit-active {
+            transform: translateX(-100%);
+        }
     </style>
 @endsection
 
 @section('content')
     <div class="container">
-        <form action="#">
+        <form action="{{ route('report.store')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="col-md-12 mx-auto">
                 <div class="card p-5">
-                    <div class="col-md-12 d-none">
+                    <div class="col-md-12" id="form-1">
                         <div class="col-md-12 mb-3">
                             <label for="damage" class="form-label">Tipe Kerusakan</label>
                             <select name="damage" id="" class="form-select form-input-modified" style="">
@@ -93,16 +128,16 @@
                                 style="resize: none;" name="description"></textarea>
                         </div>
                         <div class="col-md-12 d-flex justify-content-end align-items-center gap-3">
-                            <button class="btn btn-danger btn-modified float-end btn-back"
-                                style="background-color: #A50000;">Lanjut</button>
+                            <button class="btn btn-danger btn-modified float-end btn-next"
+                                style="background-color: #A50000;" type="button">Lanjut</button>
                         </div>
                     </div>
 
-                    <div class="col-md-12 row d-none">
+                    <div class="col-md-12 row d-none" id='form-2'>
                         <div class="col-md-5">
                             <div class="col-md-11 mb-3">
                                 <label for="provinsi" class="form-label">Provinsi</label>
-                                <select name="provinsi" id="" class="form-select form-input-modified"
+                                <select name="provinsi" id="provinsi" class="form-select form-input-modified"
                                     style="" aria-placeholder="Pilih provinsi">
                                     <option value="" disabled selected>Pilih Provinsi</option>
                                     @foreach ($data['provinsis'] as $item)
@@ -113,33 +148,24 @@
 
                             <div class="col-md-11 mb-3">
                                 <label for="kota" class="form-label">Kota/Kabupaten</label>
-                                <select name="kota" id="" class="form-select form-input-modified"
+                                <select name="kota" id="kota" class="form-select form-input-modified"
                                     style="">
                                     <option value="" disabled selected>Pilih Kota/Kabupaten </option>
-                                    @foreach ($data['kotas'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
 
                             <div class="col-md-11 mb-3">
                                 <label for="kecamatan" class="form-label">Kecamatan</label>
-                                <select name="kecamatan" id="" class="form-select form-input-modified"
+                                <select name="kecamatan" id="kecamatan" class="form-select form-input-modified"
                                     style="">
                                     <option value="" disabled selected>Pilih Kecamatan</option>
-                                    @foreach ($data['kecamatans'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
                             <div class="col-md-11 mb-3">
                                 <label for="kelurahan" class="form-label">Kelurahan</label>
-                                <select name="kelurahan" id="" class="form-select form-input-modified"
+                                <select name="kelurahan" id="kelurahan" class="form-select form-input-modified"
                                     style="">
                                     <option value="" disabled selected>Pilih Kelurahan</option>
-                                    @foreach ($data['kelurahans'] as $item)
-                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                    @endforeach
                                 </select>
                             </div>
 
@@ -156,16 +182,16 @@
                         </div>
                         <div class="col-md-12 d-flex justify-content-end align-items-center gap-3">
                             <button class="btn btn-danger btn-modified float-end btn-back"
-                                style="background-color: #A50000;">Kembali</button>
-                            <button class="btn btn-danger btn-modified float-end btn-nexts"
-                                style="background-color: #A50000;">Lanjut</button>
+                                style="background-color: #A50000;" type="button">Kembali</button>
+                            <button class="btn btn-danger btn-modified float-end btn-next"
+                                style="background-color: #A50000;" type="button">Lanjut</button>
                         </div>
                     </div>
 
-                    <div class="col-md-12 row d-flex justify-content-between">
+                    <div class="col-md-12 row d-flex justify-content-between d-none" id=form-3>
                         <div class="col-md-5">
                             <label for="input-image" id="drop-area" class="">
-                                <input type="file" accept="image/*" id="input-image" class="d-none" multiple>
+                                <input type="file" accept="image/*" id="input-image" class="d-none" name="images[]" multiple>
                                 <div id="img-view" class=" d-flex flex-column justify-content-center align-items-center">
                                     <i class="fa-solid fa-cloud-arrow-up" style="font-size: 5rem; color: #A50000;"></i>
                                     <p style="margin: 0;">Seret dan Lepaskan Gambar</p>
@@ -179,75 +205,77 @@
                             <div class="col-md-12 row">
                                 <h4 style="border-bottom: solid 2.3px #A50000;">Gambar Diupload</h4>
                                 <div class="col-md-12" id="uploadedName">
-                                    <div
-                                        class="uploaded-image col-md-12 d-flex justify-content-start align-items-center gap-1 mb-2">
-                                        <div class="uploaded-image-icon mr-2 px-2" style="">
-                                            <i class="fa-solid fa-image" style="color: white;"></i>
-                                        </div>
-                                        <div class="uploaded-image-label text-light px-2">inigambar001.png</div>
-                                        <div class="uploaded-image-delete px-2" style="">
-                                            <i class="fa-solid fa-trash-can" style="color:white;"></i>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 d-flex justify-content-end align-items-center gap-3 border-top mt-3 pt-2">
                             <button class="btn btn-danger btn-modified float-end btn-back"
-                                style="background-color: #A50000;">Kembali</button>
-                            <button class="btn btn-danger btn-modified float-end btn-nexts"
-                                style="background-color: #A50000;">Lanjut</button>
+                                style="background-color: #A50000;" type="button">Kembali</button>
+                            <button class="btn btn-danger btn-modified float-end btn-next"
+                                style="background-color: #A50000;" type="button">Lanjut</button>
                         </div>
                     </div>
 
-                    <div class="col-md-12 row">
+                    <div class="col-md-12 row d-none" id="form-4">
                         <div class="col-md-12" style="margin: 0; padding: 0;">
-                            <h3 class="text-center border-bottom pb-2" >Laporan</h3>
+                            <h3 class="text-center border-bottom pb-2">Laporan</h3>
                         </div>
                         <div class="col-md-8 row">
                             <div class="col-md-6">
                                 <h5>Tipe Kerusakan</h5>
-                                <p>Infrastruktur</p>
+                                <p class="summary-damage">Infrastruktur</p>
                             </div>
                             <div class="col-md-6">
                                 <h5>Provinsi, Kota, Kecamatan, Kelurahan</h5>
-                                <p>Jawa Barat, Kabupaten Bogor, Babakan Madang, Babakan Madang</p>
+                                <p class="summary-lokasi">Jawa Barat, Kabupaten Bogor, Babakan Madang, Babakan Madang</p>
                             </div>
                             <div class="col-md-6">
                                 <h5>Detail Kerusakan</h5>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure nisi veritatis iusto
+                                <p class="summary-detail">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure
+                                    nisi veritatis iusto
                                     eveniet dolorem, at dignissimos dolores animi magnam quasi obcaecati explicabo tempora.
                                     Officia itaque dicta doloremque, non iusto cupiditate!</p>
                             </div>
                             <div class="col-md-6">
                                 <h5>Alamat</h5>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                                <p class="summary-alamat">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="col-md-12">
                                 <h5>Gambar Terlampir</h5>
-                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
-                                    alt="" height="100px" width="auto">
-                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
-                                    alt="" height="100px" width="auto">
-                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
-                                    alt="" height="100px" width="auto">
-                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
-                                    alt="" height="100px" width="auto">
-                                <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
-                                    alt="" height="100px" width="auto">
+                                <div class="summary-image">
+                                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                        alt="" height="100px" width="auto">
+                                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                        alt="" height="100px" width="auto">
+                                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                        alt="" height="100px" width="auto">
+                                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                        alt="" height="100px" width="auto">
+                                    <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmFuZG9tfGVufDB8fDB8fHww"
+                                        alt="" height="100px" width="auto">
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <label for="email" class="form-label">E-mail</label>
-                            <input type="email" name="email" id="email" style="background-color: rgb(214, 212, 212);" class="form-control form-input-modified">
+                            <label for="email" class="form-label" style="font-size: 1.2rem;">E-mail</label>
+                            <input type="email" name="email" id="email"
+                                style="background-color: rgb(214, 212, 212);" class="form-control form-input-modified">
+                        </div>
+                        <div class="col-md-12 d-flex align-items-center gap-2 mt-2">
+                            <input type="hidden" value="0" id="hiddenAnonymous" name="anonymous">
+                            <input class="form-check-input form-check-modified" type="checkbox"
+                                id="flexCheckDefault" style="width: 30px; height: 30px;">
+                            <label class="form-check-label" for="flexCheckDefault" style="font-size: 1.2rem;">
+                                Melapor secara anonim? Dengan melapor secara anonim, alamat email tidak akan disimpan.
+                            </label>
                         </div>
                         <div class="col-md-12 d-flex justify-content-end align-items-center gap-3 mt-3 pt-2">
                             <button class="btn btn-danger btn-modified float-end btn-back"
-                                style="background-color: #A50000;">Kembali</button>
-                            <button class="btn btn-danger btn-modified float-end"
-                                style="background-color: #A50000;">Submit</button>
+                                style="background-color: #A50000;" type="button">Kembali</button>
+                            <button class="btn btn-danger btn-modified float-end" style="background-color: #A50000;"
+                                type="submit">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -258,6 +286,108 @@
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function() {
+            let counter = 1;
+
+            function transitionForms(currentForm, nextForm) {
+                currentForm.addClass('swipe-left-exit');
+                nextForm.addClass('d-none swipe-left-enter');
+
+                setTimeout(() => {
+                    currentForm.removeClass('swipe-left-exit').addClass('d-none');
+                    nextForm.removeClass('d-none swipe-left-enter').addClass('swipe-left-enter-active');
+
+                    setTimeout(() => {
+                        nextForm.removeClass('swipe-left-enter-active');
+                    }, 500); // Duration of the animation
+                }, 0);
+            }
+
+            $('.btn-next').on('click', function() {
+                if (counter < 4) {
+                    let currentForm = $(`#form-${counter}`);
+                    counter++;
+                    let nextForm = $(`#form-${counter}`);
+                    transitionForms(currentForm, nextForm);
+                }
+            });
+
+            $('.btn-back').on('click', function() {
+                if (counter > 1) {
+                    let currentForm = $(`#form-${counter}`);
+                    counter--;
+                    let nextForm = $(`#form-${counter}`);
+                    transitionForms(currentForm, nextForm);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            let counter = 1;
+            $('.btn-next').on('click', function() {
+                counter++;
+                if (counter == 2) {
+                    $('#form-1').addClass('d-none');
+                    $('#form-2').removeClass('d-none');
+                    $('#form-3').addClass('d-none');
+                    $('#form-4').addClass('d-none');
+                } else if (counter == 3) {
+                    $('#form-1').addClass('d-none');
+                    $('#form-2').addClass('d-none');
+                    $('#form-3').removeClass('d-none');
+                    $('#form-4').addClass('d-none');
+                } else if (counter == 4) {
+                    $('#form-1').addClass('d-none');
+                    $('#form-2').addClass('d-none');
+                    $('#form-3').addClass('d-none');
+                    $('#form-4').removeClass('d-none');
+
+                    $('.summary-damage').text($('select[name="damage"] option:selected').text());
+                    $('.summary-lokasi').text($('select[name="provinsi"] option:selected').text() + ', ' +
+                        $('select[name="kota"] option:selected').text() + ', ' +
+                        $('select[name="kecamatan"] option:selected').text() + ', ' +
+                        $('select[name="kelurahan"] option:selected').text());
+
+                    $('.summary-detail').text($('textarea[name="description"]').val());
+                    $('.summary-alamat').text($('textarea[name="address"]').val());
+
+                    $('.summary-image').empty();
+                    let images = $('#input-image')[0].files;
+                    // console.log(images)
+                    for (let i = 0; i < images.length; i++) {
+                        let reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('.summary-image').append(
+                                `<img src="${e.target.result}" alt="" height="100px" width="auto">`);
+                        }
+                        reader.readAsDataURL(images[i]);
+                    }
+                }
+            });
+
+            $('.btn-back').on('click', function() {
+                counter--;
+                if (counter == 1) {
+                    $('#form-1').removeClass('d-none');
+                    $('#form-2').addClass('d-none');
+                    $('#form-3').addClass('d-none');
+                    $('#form-4').addClass('d-none');
+                } else if (counter == 2) {
+                    $('#form-1').addClass('d-none');
+                    $('#form-2').removeClass('d-none');
+                    $('#form-3').addClass('d-none');
+                    $('#form-4').addClass('d-none');
+                } else if (counter == 3) {
+                    $('#form-1').addClass('d-none');
+                    $('#form-2').addClass('d-none');
+                    $('#form-3').removeClass('d-none');
+                    $('#form-4').addClass('d-none');
+                }
+            });
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             // Prevent default drag behaviors
@@ -323,20 +453,123 @@
             });
 
             $(document).on('click', '.uploaded-image-delete', function() {
-                $(this).parent().remove();
-                var file_name = $(this).parent().find('.uploaded-image-label').text();
-                var file_input = $('#input-image')[0];
-                var files = file_input.files;
+                let file_name = $(this).parent().find('.uploaded-image-label').text();
+                let file_input = $('#input-image')[0];
+                let files = file_input.files;
 
-                for (var i = 0; i < files.length; i++) {
-                    if (files[i].name == file_name) {
-                        files = Array.from(files);
-                        files.splice(i, 1);
-                        file_input.files = new FileList(files);
-                        break;
+                // Create a new DataTransfer object
+                let dt = new DataTransfer();
+
+                // Loop through the files and add them to the DataTransfer object
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].name !== file_name) {
+                        dt.items.add(files[i]);
                     }
                 }
+
+                // Assign the new FileList to the input element
+                file_input.files = dt.files;
+
+                // Remove the parent element
+                $(this).parent().remove();
             });
+
+            $('.form-check-input').on('click', function(){
+                $('#hiddenAnonymous').val($('#hiddenAnonymous').val() == 0 ? 1 : 0);
+                // console.log($('#hiddenAnonymous').val());
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#provinsi').on('change', function() {
+                var provinsi_id = $(this).val();
+                if (provinsi_id) {
+                    $.ajax({
+                        url: '{{ route('report.show_kota') }}',
+                        type: 'GET',
+                        data: {
+                            id: provinsi_id
+                        },
+                        success: function(data) {
+                            // console.log(data);
+                            $('#kota').empty();
+                            $('#kota').append(
+                                '<option value="" disabled selected>Pilih Kota/Kabupaten</option>'
+                            );
+                            $.each(data['data'], function(key, value) {
+                                $('#kota').append(
+                                    '<option value="' + key + '">' + value +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#kota').empty();
+                    $('#kecamatan').empty();
+                    $('#kelurahan').empty();
+                }
+            });
+
+            $('#kota').on('change', function() {
+                var kota_id = $(this).val();
+                if (kota_id) {
+                    $.ajax({
+                        url: '{{ route('report.show_kecamatan') }}',
+                        type: 'GET',
+                        data: {
+                            id: kota_id
+                        },
+                        success: function(data) {
+                            console.log(data);
+                            $('#kecamatan').empty();
+                            $('#kecamatan').append(
+                                '<option value="" disabled selected>Pilih Kecamatan</option>'
+                            );
+                            $.each(data['data'], function(key, value) {
+                                $('#kecamatan').append(
+                                    '<option value="' + key + '">' + value +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#kecamatan').empty();
+                    $('#kelurahan').empty();
+                }
+            });
+
+            $('#kecamatan').on('change', function() {
+                var kecamatan_id = $(this).val();
+                if (kecamatan_id) {
+                    $.ajax({
+                        url: '{{ route('report.show_kelurahan') }}',
+                        type: 'GET',
+                        data: {
+                            id: kecamatan_id
+                        },
+                        success: function(data) {
+                            // console.log(data);
+                            $('#kelurahan').empty();
+                            $('#kelurahan').append(
+                                '<option value="" disabled selected>Pilih Kelurahan</option>'
+                            );
+                            $.each(data['data'], function(key, value) {
+                                $('#kelurahan').append(
+                                    '<option value="' + key + '">' + value +
+                                    '</option>'
+                                );
+                            });
+                        }
+                    });
+                } else {
+                    $('#kelurahan').empty();
+                }
+            });
+
+
         });
     </script>
 @endsection

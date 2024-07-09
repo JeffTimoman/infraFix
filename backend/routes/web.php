@@ -28,9 +28,16 @@ Route::prefix('testjeff')->group(function () {
 });
 
 Route::prefix('report')->group(function () {
-    Route::get('', [ReportController::class, 'index']);
-});
+    Route::get('', [ReportController::class, 'index'])->name('report.index');
+    Route::post('', [ReportController::class, 'store'])->name('report.store');
 
+    Route::get('/show', [ReportController::class, 'show'])->name('report.show');
+    Route::post('/show', [ReportController::class, 'showPost'])->name('report.show');
+
+    Route::get('/show_kota', [ReportController::class, 'showKota'])->name('report.show_kota');
+    Route::get('/show_kecamatan', [ReportController::class, 'showKecamatan'])->name('report.show_kecamatan');
+    Route::get('/show_kelurahan', [ReportController::class, 'showKelurahan'])->name('report.show_kelurahan');
+});
 
 
 
@@ -39,7 +46,7 @@ Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login');
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
-
+`````
     Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register');
     Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 })->middleware(isNotLogin::class);
@@ -164,9 +171,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function () {
-        return view('manager.dashboard');
-    })->name('manager.dashboard');
+    Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
 
     Route::prefix('/laporan')->group(function () {
         Route::get('/semua', function () {

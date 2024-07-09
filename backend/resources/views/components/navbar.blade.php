@@ -8,7 +8,7 @@
             background-color: #A50000 !important;
         }
     </style>
-    <nav class="navbar bg-body-tertiary navbar-dark navbar-expand-lg fixed-top">
+    <nav class="navbar bg-body-tertiary navbar-dark navbar-expand-lg sticky-top">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" width="100">
@@ -144,7 +144,7 @@
             transition: ease-in-out 0.3s;
         }
     </style>
-    <nav class="navbar  navbar-dark navbar-expand-lg fixed-top bg-body-tertiary">
+    <nav class="navbar  navbar-dark navbar-expand-lg sticky-top bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('components/img/icon/infrafix.png') }}" alt="" width="100">

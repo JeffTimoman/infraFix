@@ -7,12 +7,16 @@ use App\Models\Kecamatan;
 use App\Models\Kelurahan;
 use App\Models\Kota;
 use App\Models\Provinsi;
+use App\Models\Report;
+use App\Models\ReportImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $damage_types = DamageType::orderBy('name', 'asc')->get();
         $provinsis = Provinsi::orderBy('name', 'asc')->get();
         $kotas = Kota::orderBy('name', 'asc')->get();
@@ -27,7 +31,104 @@ class ReportController extends Controller
         ];
         return view('report.index', ['data' => $data]);
     }
-    public function indexDep(){
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'damage' => 'required|exists:App\Models\DamageType,id',
+            'description' => 'required',
+            'kelurahan' => 'required|exists:App\Models\Kelurahan,id',
+            'address' => 'required',
+            'email' => 'required|email',
+            'anonymous' => 'required|boolean',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate each image
+        ]);
+
+        // dd($request->all());
+
+        $damage = DamageType::find($request->damage);
+        $kelurahan = Kelurahan::find($request->kelurahan);
+        $report_code = uniqid() . bin2hex(random_bytes(20));
+        // $random_access_key = bin2hex(random_bytes(2));
+        $random_access_key = 'iniaccesskey';
+        $hashed_report_code = encrypt($report_code, $random_access_key);
+        $data = [
+            'damage_type_id' => $damage->id,
+            'description' => $request->description,
+            'hashed_report_code' => $hashed_report_code,
+            'kelurahan_id' => $kelurahan->id,
+            'title' => 'title',
+            'address' => $request->address,
+            'email' => $request->email,
+            'anonymous' => $request->anonymous,
+            'report_code' => $report_code,
+        ];
+        dump($data);
+
+        if ($request->anonymous) {
+            $data['user_id'] = null;
+            $data['email'] = '';
+        } else {
+            $user_id = User::where('email', $request->email)->first();
+            if ($user_id) {
+                $data['user_id'] = $user_id->id;
+            }
+        }
+        dump($data);
+
+        $report = Report::create($data);
+        dump($report);
+        $images = $request->file('images');
+        $images_name = [];
+        foreach ($images as $image) {
+            $uniqueName = date('YmdHis') . uniqid() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('upload/reportimage'), $uniqueName);
+            $images_name[] = $uniqueName;
+        }
+
+        foreach ($images_name as $image_name) {
+            ReportImage::create([
+                'report_id' => $report->id,
+                'name' => $image_name,
+                'case_id' => null
+            ]);
+        }
+        $res = [
+            'report_code' => $report_code,
+            'access_key' => $random_access_key,
+        ];
+        return view('report.success', ['data' => $res]);
+    }
+
+    public function show()
+    {
+        return view('report.view');
+    }
+
+    public function showPost(Request $request)
+    {
+        $request->validate([
+            'report_code' => 'required',
+            'access_key' => 'required'
+        ]);
+        $report_code = $request->report_code;
+        $access_key = $request->access_key;
+        // dump($images);
+        // dd($report_code, $access_key);
+        $report = Report::where('report_code', $report_code)->firstOrFail();
+        $decrypted_report_code = decrypt($report->hashed_report_code, $access_key);
+        if ($decrypted_report_code == $report_code) {
+            $data = [
+                'report' => $report,
+                'images' => ReportImage::where('report_id', $report->id)->get()
+            ];
+            return view('report.view_post', ['data' => $data]);
+        }
+    }
+
+    public function indexDep()
+    {
         $report_code = 'anjay_ini_jalan';
         $access_key = 'anjay_ini_password';
         $hashed_report_code = encrypt($report_code, $access_key);
@@ -38,11 +139,13 @@ class ReportController extends Controller
         ];
         dd($data);
     }
-    public function showDep($report_code, $access_key){
+
+    public function showDep($report_code, $access_key)
+    {
         // reverse hash the report_code using the access_key
         $hashed_report_code = "eyJpdiI6IjR4VlZLSnAyYWZ3V3o3cGN2WnJHUWc9PSIsInZhbHVlIjoiK0oycE1TU05Zam5kc0ZtQ3VUMVR6VU1FNDkvQWYwN0VQU1JXRldtbmhEUT0iLCJtYWMiOiJmMDg3YjJmMzJiOWU0OTVmNjI3MDAxOGUwZjk4MGVjMDJlODQ3ZTQzMGZhMDY4MGQ3YjEyNTc5NWVmNjYxZGM3IiwidGFnIjoiIn0=";
         $decrypted_report_code = decrypt($hashed_report_code, $access_key);
-        if ($decrypted_report_code == $report_code){
+        if ($decrypted_report_code == $report_code) {
             return response()->json([
                 'message' => 'success',
                 'data' => [
@@ -61,5 +164,49 @@ class ReportController extends Controller
                 ]
             ]);
         }
+    }
+
+    public function showKota(Request $request)
+    {
+        $id = request()->query('id');
+        $kotas = Kota::where('provinsi_id', $id)->orderBy('name', 'asc')->get();
+        $kota_list = [];
+        foreach ($kotas as $kota) {
+            $kota_list[$kota->id] = $kota->name;
+        }
+        return response()->json([
+            'message' => 'success',
+            'data' => $kota_list
+        ]);
+    }
+
+    public function showKecamatan(Request $request)
+    {
+        $id = request()->query('id');
+        $kecamatans = Kecamatan::where('kota_id', $id)->orderBy('name', 'asc')->get();
+        # make it into kecamatan_id => kecamatan_name
+        $kecamatan_list = [];
+        foreach ($kecamatans as $kecamatan) {
+            $kecamatan_list[$kecamatan->id] = $kecamatan->name;
+        }
+        return response()->json([
+            'message' => 'success',
+            'data' => $kecamatan_list
+        ]);
+    }
+
+    public function showKelurahan(Request $request)
+    {
+        $id = request()->query('id');
+        $kelurahans = Kelurahan::where('kecamatan_id', $id)->orderBy('name', 'asc')->get();
+        # make it into kelurahan_id => kelurahan_name
+        $kelurahan_list = [];
+        foreach ($kelurahans as $kelurahan) {
+            $kelurahan_list[$kelurahan->id] = $kelurahan->name;
+        }
+        return response()->json([
+            'message' => 'success',
+            'data' => $kelurahan_list
+        ]);
     }
 }
