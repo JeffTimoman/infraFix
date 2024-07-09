@@ -28,9 +28,16 @@ Route::prefix('testjeff')->group(function () {
 });
 
 Route::prefix('report')->group(function(){
-    Route::get('', [ReportController::class, 'index']);
-});
+    Route::get('', [ReportController::class, 'index'])->name('report.index');
+    Route::post('', [ReportController::class, 'store'])->name('report.store');
 
+    Route::get('/show', [ReportController::class, 'show'])->name('report.show');
+    Route::post('/show', [ReportController::class, 'showPost'])->name('report.show');
+
+    Route::get('/show_kota', [ReportController::class, 'showKota'])->name('report.show_kota');
+    Route::get('/show_kecamatan', [ReportController::class, 'showKecamatan'])->name('report.show_kecamatan');
+    Route::get('/show_kelurahan', [ReportController::class, 'showKelurahan'])->name('report.show_kelurahan');
+});
 
 
 
