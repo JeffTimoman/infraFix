@@ -27,7 +27,7 @@ Route::prefix('testjeff')->group(function () {
     // Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
 });
 
-Route::prefix('report')->group(function(){
+Route::prefix('report')->group(function () {
     Route::get('', [ReportController::class, 'index']);
 });
 
@@ -57,11 +57,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
         Route::get('/{id}/details', [AdminUserController::class, 'details'])->name('user.details');
         Route::get('/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
-
     });
 
     //Case
-    Route::prefix('case')->group(function(){
+    Route::prefix('case')->group(function () {
         Route::get('', [CaseController::class, 'index'])->name('case.index');
         Route::get('create', [CaseController::class, 'create'])->name('case.create');
         Route::get('store', [CaseController::class, 'store'])->name('case.store');
@@ -69,11 +68,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CaseController::class, 'update'])->name('case.update');
         Route::get('/{id}/details', [CaseController::class, 'details'])->name('case.details');
         Route::get('/{id}/destroy', [CaseController::class, 'destroy'])->name('case.destroy');
-
     });
 
     //Report
-    Route::prefix('report')->group(function(){
+    Route::prefix('report')->group(function () {
         Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
         Route::get('/{id}/details', [AdminReportController::class, 'details'])->name('admin.report.details');
         Route::get('create', [AdminReportController::class, 'create'])->name('admin.report.create');
@@ -81,7 +79,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [AdminReportController::class, 'edit'])->name('admin.report.edit');
         Route::get('/{id}/update', [AdminReportController::class, 'update'])->name('admin.report.update');
         Route::get('/{id}/destroy', [AdminReportController::class, 'destroy'])->name('admin.report.destroy');
-
     });
 
     //Damage
@@ -92,7 +89,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [DamageTypeController::class, 'edit'])->name('damage_type.edit');
         Route::get('/{id}/update', [DamageTypeController::class, 'update'])->name('damage_type.update');
         Route::get('/{id}/destroy', [DamageTypeController::class, 'destroy'])->name('damage_type.destroy');
-
     });
 
     //Province
@@ -103,7 +99,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [ProvinceController::class, 'edit'])->name('province.edit');
         Route::get('/{id}/update', [ProvinceController::class, 'update'])->name('province.update');
         Route::get('/{id}/destroy', [ProvinceController::class, 'destroy'])->name('province.destroy');
-
     });
 
     //City
@@ -114,7 +109,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
         Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
         Route::get('/{id}/destroy', [CityController::class, 'destroy'])->name('city.destroy');
-
     });
 
     //Kecamatan
@@ -138,10 +132,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [KelurahanController::class, 'update'])->name('kelurahan.update');
         Route::get('/{id}/details', [KelurahanController::class, 'details'])->name('kelurahan.details');
         Route::get('/{id}/destroy', [KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
-
     });
 
-    Route::prefix('milestone')->group(function(){
+    Route::prefix('milestone')->group(function () {
         Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
         Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
         Route::get('create', [AdminMilestoneController::class, 'create'])->name('milestone.create');
@@ -150,10 +143,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminMilestoneController::class, 'update'])->name('milestone.update');
         Route::get('/{id}/details', [AdminMilestoneController::class, 'details'])->name('milestone.details');
         Route::get('/{id}/destroy', [AdminMilestoneController::class, 'destroy'])->name('milestone.destroy');
-
     });
 
-    Route::prefix('comment')->group(function(){
+    Route::prefix('comment')->group(function () {
         Route::get('', [CommentController::class, 'index'])->name('comment.index');
         Route::get('', [CommentController::class, 'index'])->name('comment.index');
         Route::get('create', [CommentController::class, 'create'])->name('comment.create');
@@ -162,7 +154,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CommentController::class, 'update'])->name('comment.update');
         Route::get('/{id}/details', [CommentController::class, 'details'])->name('comment.details');
         Route::get('/{id}/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
-
     });
 
     // Selalu bikin controller itu di dalam folder Controller/admin/apagitu
@@ -281,6 +272,6 @@ Route::prefix('hottopic')->group(function () {
 });
 
 
-Route::get('/coba', function(){
+Route::get('/coba', function () {
     return view('cobaBugGambar');
 });
