@@ -12,7 +12,7 @@
 <body>
 
     @include('components.navbar')
-    <div class="container my-3">
+    <div class="container-fluid my-3">
         @yield('content')
     </div>
     <div class="container fixed-bottom">

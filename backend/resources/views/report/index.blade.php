@@ -127,7 +127,8 @@
                             <textarea name="description" id="" cols="30" rows="10" class="form-control form-input-modified"
                                 style="resize: none;" name="description"></textarea>
                         </div>
-                        <div class="col-md-12 d-flex justify-content-end align-items-center gap-3">
+                        <div class="col-md-12 d-flex justify-content-between align-items-center gap-3">
+                            <span>Ingin Melihat Laporan? <a href="" class="text-danger">Klik Ini</a></span>
                             <button class="btn btn-danger btn-modified float-end btn-next"
                                 style="background-color: #A50000;" type="button">Lanjut</button>
                         </div>

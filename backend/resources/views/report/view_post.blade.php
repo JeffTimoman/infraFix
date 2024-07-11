@@ -92,9 +92,9 @@
                     <div class="col-md-12">
                         <h5>Gambar Terlampir</h5>
                         <div class="summary-image">
-                            {{ $data['report']->images }}
+                            {{-- {{ $data['report']->images }} --}}
                             @foreach ($data['report']->images as $item)
-                                <img src="{{ asset('upload/reportimage/' . $item->image) }}" alt="" height="100px"
+                                <img src="{{ asset('upload/reportimage/' . $item->name) }}" alt="" height="100px"
                                     width="auto">
                             @endforeach
                         </div>
@@ -103,7 +103,9 @@
                 <div class="col-md-12 row">
                     <div class="col-md-4">
                         <h5>Status Laporan</h5>
-                        @if ($data['report']->case_id == null)
+                        @if ($data['report']->status == -1)
+                            <p class="statuslaporan unprocessed mr-2">&nbsp &nbsp Laporan tidak valid atau dianulir.</p>
+                        @elseif ($data['report']->case_id == null)
                             <p class="statuslaporan unprocessed mr-2">&nbsp &nbsp Laporan belum di proses.</p>
                         @else
                             <p class="statuslaporan processed mr-2">&nbsp &nbsp Laporan telah di proses.</p>
@@ -112,7 +114,7 @@
                     </div>
                     <div class="col-md-4">
                         <h5>Tanggal Laporan Diterbitkan</h5>
-                        <p>{{$data['report']->created_at}}</p>
+                        <p>{{ $data['report']->created_at->format('l, d F Y, H:i:s') }}</p>
                     </div>
                 </div>
             </div>

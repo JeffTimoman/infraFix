@@ -46,22 +46,26 @@
 @section('content')
     <form action="" method="POST">
         @csrf
-        <div class="card p-3">
-            <h3 class="text-center">Cek Laporanmu Disini!</h3>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="" class="form-label">Kode Laporan</label>
-                        <input type="text" class="form-control form-input-modified" name="report_code"required>
+        <div class="justify-content-center d-flex align-items-center mt-5">
+            <div class="card p-3 col-md-8">
+                <h3 class="text-center">Cek Laporanmu Disini!</h3>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Kode Laporan</label>
+                            <input type="text" class="form-control form-input-modified" name="report_code"required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="form-label">Kode Akses</label>
+                            <input type="text" class="form-control form-input-modified" name="access_key" required>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label for="" class="form-label">Kode Akses</label>
-                        <input type="text" class="form-control form-input-modified" name="access_key" required>
-                    </div>
+
+                    <button class="btn btn-modified col-md-12 mt-3" type="submit">
+                        Cari
+                    </button>
+                    <p class="mt-2">Laporan baru? <a href="{{route('report.index')}}" style="text-decoration: none;"><span class="text-danger">Klik disini</span></a></p>
                 </div>
-                <button class="btn btn-modified col-md-12 mt-3" type="submit">
-                    Cari
-                </button>
             </div>
         </div>
     </form>

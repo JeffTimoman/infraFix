@@ -29,7 +29,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
 
             #If the report is anonymous, the user_id will be null
-            $table->string('hashed_report_code')->default('');
+            $table->longText('hashed_report_code')->default('');
 
             $table->foreignId('case_id')->nullable()->constrained('cases', 'id')->onDelete('cascade');
             $table->foreignId('damage_type_id')->nullable()->constrained('damage_types', 'id')->onDelete('set null');

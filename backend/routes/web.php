@@ -279,12 +279,13 @@ Route::prefix("government")->group(function () {
 });
 
 Route::prefix('hottopic')->group(function () {
-    Route::get('/hot_topic', function () {
-        return view('hottopic.hot_topic');
+    Route::get('/', function () {
+        return view('hottopic.index');
     })->name('hottopic.hot_topic');
-    Route::get('/hot_topic_post', function () {
-        return view('hottopic.hot_topic_post');
-    })->name('hottopic.hot_topic_post');
+
+    Route::get('/{report_code}/detail', function($report_code){
+        return view('hottopic.detail');
+    })->name('hottopic.detail');
 });
 
 
