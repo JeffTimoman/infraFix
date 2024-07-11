@@ -37,16 +37,6 @@ class Report extends Model
     {
         return $this->hasMany(ReportImage::class);
     }
-
-    public function kelurahan()
-    {
-        return $this->belongsTo(Kelurahan::class);
-    }
-
-    public function damage_type()
-    {
-        return $this->belongsTo(DamageType::class, 'damage_type_id');
-    }
 }
 
 /*
