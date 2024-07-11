@@ -9,13 +9,14 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{ route('profile.show') }}" class="sidebar-link">
                 <i class="lni lni-user"></i>
                 <span>Profile</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('user.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}">                <i class="lni lni-users"></i>
+            <a href="{{ route('user.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}">
+                <i class="lni lni-users"></i>
                 <span>User</span>
             </a>
         </li>
