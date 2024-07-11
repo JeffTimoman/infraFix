@@ -19,6 +19,8 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isNotLogin;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [MainController::class, 'index']);
 
@@ -176,6 +178,13 @@ Route::prefix('admin')->group(function () {
     // Lalu untuk view juga di buat di dalam folder resources/views/admin/apagitu
     // Cssnya tolong pake in line css aja, jangan pake file css
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/admin.blade.php
+});
+
+Route::prefix('profile')->group(function(){
+    Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
+
 });
 
 Route::prefix('manager')->group(function () {

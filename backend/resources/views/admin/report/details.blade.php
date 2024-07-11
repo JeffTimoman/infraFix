@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('title')
-    Laporan    
+    Laporan
 @endsection
 @section('style')
     <style>
-        
+
     .content {
         display: flex;
         flex-direction: column;
@@ -23,7 +23,7 @@
         'GRAD' 0,
         'opsz' 24;
         color: #a50000;
-        
+
     }
 
 
@@ -56,7 +56,7 @@
     .reportBox{
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; 
+    justify-content: space-between;
     }
 
     .report{
@@ -65,7 +65,7 @@
 
     .row-detail{
         display: flex;
-        
+
     }
 
     h5{
@@ -73,7 +73,7 @@
         font-weight: bold;
 
     }
-  
+
     h3{
         font-size: 20px;
         font-weight: bold;
@@ -90,20 +90,20 @@
 
     .created{
         display: flex;
-        background-color: #FAF9F9; 
+        background-color: #FAF9F9;
 
     }
 
     .location{
         display: flex;
-        background-color: #FAF9F9; 
+        background-color: #FAF9F9;
     }
 
     .report-table{
-    width: 100%;    
+    width: 100%;
     }
 
-    
+
     .table-header{
         display: flex;
         border-bottom: 3px solid #EDEDED;
@@ -133,7 +133,7 @@
         width: 100%;
         height: 100%;
     }
-    
+
 
     .button-header{
         display: flex;
@@ -170,7 +170,7 @@
         /* background-color: red; */
     }
 
-    </style>    
+    </style>
 @endsection
 @section('content')
     <div class="content">
@@ -204,17 +204,17 @@
 
                                     </div>
                                 </div>
-        
+
                             </div>
                             <div class="row-detail col-12 col-md-12 py-4">
                                 <div class="detail-content px-3 py-1 col-md-4">
                                     <h3>Title</h3>
                                     <h7>{{ $data->title }} </h7>
-                                </div>      
+                                </div>
                                 <div class="detail-content px-3 py-1 col-md-4">
                                     <h3>Damage Type</h3>
                                     @php
-                                    $damage_type_name = DB::table('damage_type')->where('id', $data->damage_type_id)->value('name')
+                                    $damage_type_name = DB::table('damage_types')->where('id', $data->damage_type_id)->value('name')
                                     @endphp
                                     <h7>{{ $damage_type_name }} </h7>
                                 </div>
@@ -223,7 +223,7 @@
                                     <h7>{{ $data->description }} </h7>
                                  </div>
                             </div>
-                           
+
                             <div class="location  col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Address</h3>
@@ -237,30 +237,30 @@
                                     <h3>Kelurahan</h3>
 
                                     @php
-                                    $kelurahan_name = DB::table('kelurahan')->where('id', $data->kelurahan_id)->value('name')
+                                    $kelurahan_name = DB::table('kelurahans')->where('id', $data->kelurahan_id)->value('name')
                                     @endphp
                                     <h7>{{ $kelurahan_name }} </h7>
                                 </div>
                             </div>
-                           
+
                             <div class="status col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Anonymous</h3>
-                                 
+
                                     @if($data->anonymous == 0)
                                         <h7>No</h7>
                                     @else
                                         <h7>Yes </h7>
                                     @endif
                                 </div>
-                            
+
                             </div>
-                            
+
                             <div class="created col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Created by</h3>
                                     @php
-                                    $creator = DB::table('user')->where('id', $data->user_id)->value('name')
+                                    $creator = DB::table('users')->where('id', $data->user_id)->value('name')
                                     @endphp
                                     <h7>{{ $creator }} </h7>
                                 </div>
@@ -273,18 +273,18 @@
                                     <h7>{{ $data->updated_at }} </h7>
                                 </div>
                             </div>
-                          
+
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
 
-           
+
         </div>
-    
-    
+
+
 </body>
 </html>
 @endsection
