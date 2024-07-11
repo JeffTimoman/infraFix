@@ -33,10 +33,16 @@ class GovernmentController extends Controller
         $alldata = ThisCase::where('government_id', auth()->user()->id)->get();
         $data = collect();
 
-        foreach ($alldata as $item) {
-            $milestones = $item->milestone_details()->where('milestone_id', $id)->get();
-            $data = $data->merge($milestones);
-        }
+        // foreach ($alldata as $item) {
+        //     $milestones = $item->milestone_details()->where('milestone_id', $id)->get();
+        //     $data = $data->merge($milestones);
+        // }
+
+        $data = ThisCase::where('government_id', auth()->user()->id)
+            ->whereHas('milestone_details', function ($query) use ($id) {
+            $query->where('milestone_id', $id);
+            })
+            ->get();
 
         // $data = $alldata->milestone_details()->where('milestone_id', $id)->get();
 
