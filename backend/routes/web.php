@@ -14,11 +14,14 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isNotLogin;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [MainController::class, 'index']);
 
@@ -27,7 +30,7 @@ Route::prefix('testjeff')->group(function () {
     // Route::get('report/{report_code}/{access_key}', [ReportController::class, 'show']);
 });
 
-Route::prefix('report')->group(function(){
+Route::prefix('report')->group(function () {
     Route::get('', [ReportController::class, 'index'])->name('report.index');
     Route::post('', [ReportController::class, 'store'])->name('report.store');
 
@@ -46,7 +49,6 @@ Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login');
     Route::post('login', [AuthController::class, 'login'])->name('auth.login');
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
-
     Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register');
     Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 })->middleware(isNotLogin::class);
@@ -64,11 +66,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
         Route::get('/{id}/details', [AdminUserController::class, 'details'])->name('user.details');
         Route::get('/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
-
     });
 
     //Case
-    Route::prefix('case')->group(function(){
+    Route::prefix('case')->group(function () {
         Route::get('', [CaseController::class, 'index'])->name('case.index');
         Route::get('create', [CaseController::class, 'create'])->name('case.create');
         Route::get('store', [CaseController::class, 'store'])->name('case.store');
@@ -76,11 +77,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CaseController::class, 'update'])->name('case.update');
         Route::get('/{id}/details', [CaseController::class, 'details'])->name('case.details');
         Route::get('/{id}/destroy', [CaseController::class, 'destroy'])->name('case.destroy');
-
     });
 
     //Report
-    Route::prefix('report')->group(function(){
+    Route::prefix('report')->group(function () {
         Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
         Route::get('/{id}/details', [AdminReportController::class, 'details'])->name('admin.report.details');
         Route::get('create', [AdminReportController::class, 'create'])->name('admin.report.create');
@@ -88,7 +88,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [AdminReportController::class, 'edit'])->name('admin.report.edit');
         Route::get('/{id}/update', [AdminReportController::class, 'update'])->name('admin.report.update');
         Route::get('/{id}/destroy', [AdminReportController::class, 'destroy'])->name('admin.report.destroy');
-
     });
 
     //Damage
@@ -99,7 +98,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [DamageTypeController::class, 'edit'])->name('damage_type.edit');
         Route::get('/{id}/update', [DamageTypeController::class, 'update'])->name('damage_type.update');
         Route::get('/{id}/destroy', [DamageTypeController::class, 'destroy'])->name('damage_type.destroy');
-
     });
 
     //Province
@@ -110,7 +108,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [ProvinceController::class, 'edit'])->name('province.edit');
         Route::get('/{id}/update', [ProvinceController::class, 'update'])->name('province.update');
         Route::get('/{id}/destroy', [ProvinceController::class, 'destroy'])->name('province.destroy');
-
     });
 
     //City
@@ -121,7 +118,6 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
         Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
         Route::get('/{id}/destroy', [CityController::class, 'destroy'])->name('city.destroy');
-
     });
 
     //Kecamatan
@@ -145,10 +141,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [KelurahanController::class, 'update'])->name('kelurahan.update');
         Route::get('/{id}/details', [KelurahanController::class, 'details'])->name('kelurahan.details');
         Route::get('/{id}/destroy', [KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
-
     });
 
-    Route::prefix('milestone')->group(function(){
+    Route::prefix('milestone')->group(function () {
         Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
         Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
         Route::get('create', [AdminMilestoneController::class, 'create'])->name('milestone.create');
@@ -157,10 +152,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminMilestoneController::class, 'update'])->name('milestone.update');
         Route::get('/{id}/details', [AdminMilestoneController::class, 'details'])->name('milestone.details');
         Route::get('/{id}/destroy', [AdminMilestoneController::class, 'destroy'])->name('milestone.destroy');
-
     });
 
-    Route::prefix('comment')->group(function(){
+    Route::prefix('comment')->group(function () {
         Route::get('', [CommentController::class, 'index'])->name('comment.index');
         Route::get('', [CommentController::class, 'index'])->name('comment.index');
         Route::get('create', [CommentController::class, 'create'])->name('comment.create');
@@ -169,7 +163,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CommentController::class, 'update'])->name('comment.update');
         Route::get('/{id}/details', [CommentController::class, 'details'])->name('comment.details');
         Route::get('/{id}/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
-
     });
 
     // Selalu bikin controller itu di dalam folder Controller/admin/apagitu
@@ -178,23 +171,23 @@ Route::prefix('admin')->group(function () {
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/admin.blade.php
 });
 
+Route::prefix('profile')->group(function(){
+    Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
+
+});
+
 Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', function () {
-        return view('manager.dashboard');
-    })->name('manager.dashboard');
+    Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
 
     Route::prefix('/laporan')->group(function () {
-        Route::get('/semua', function () {
-            return view('manager.laporan.laporan_semua');
-        })->name('manager.laporan_semua');
-        Route::get('/belum_unggah', function () {
-            return view('manager.laporan.laporan_belum_unggah');
-        })->name('manager.laporan_belum_unggah');
+        Route::get('/semua', [ManagerController::class, 'laporan_semua'])->name('manager.laporan_semua');
+        Route::get('/belum_unggah', [ManagerController::class, 'laporan_belum'])->name('manager.laporan_belum_unggah');
     });
-    Route::get('/hot_topic', function () {
-        return view('manager.hot_topic');
-    })->name('manager.hot_topic');
+
+    Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
         Route::get('/1', function () {
@@ -289,6 +282,6 @@ Route::prefix('hottopic')->group(function () {
 });
 
 
-Route::get('/coba', function(){
+Route::get('/coba', function () {
     return view('cobaBugGambar');
 });

@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index(Request $request){
         $query = $request->input('query');
         if($query){
-            session()->flash('query', $request->input('query')); 
+            session()->flash('query', $request->input('query'));
             $query = $request->input('query');
             $users = User::where('name', 'LIKE', "%{$query}%")
             ->orWhere('email', 'LIKE', "%{$query}%")
@@ -21,7 +21,7 @@ class UserController extends Controller
             ->paginate(5);
             return view('admin.user.search', ['data' =>$users]);
         }
-        $users = User::paginate(5);
+        $users = User::all();
         return view('admin.user.index', ['data' => $users]);
     }
 
@@ -49,7 +49,7 @@ class UserController extends Controller
             'role'=> 'required',
             'is_active'=> 'required',
             'email_verified_at' => 'required'
-        ]);       
+        ]);
 
 
         if($request->input('is_active') == 'Yes'){
@@ -71,7 +71,7 @@ class UserController extends Controller
 
         ];
 
- 
+
 
         User::create($data);
         return redirect()->route('user.index')->with('success', 'User added succesfully');
@@ -86,7 +86,7 @@ class UserController extends Controller
 
         $user = User::find($id);
 
-      
+
         $request->validate([
             'name'=> 'required',
             'username'=> 'required',
@@ -96,7 +96,7 @@ class UserController extends Controller
             'role'=> 'required',
             'is_active'=> 'required',
             'email_verified_at' => 'required'
-        ]);       
+        ]);
 
 
         if($request->input('is_active') == 'Yes'){
@@ -118,13 +118,13 @@ class UserController extends Controller
 
         ];
 
- 
+
 
         $user->update($data);
         return redirect()->route('user.index')->with('success', 'USer edited succesfully');
     }
 
- 
+
 
     public function destroy(Request $request, $id){
         $user = user::find($id);

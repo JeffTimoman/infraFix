@@ -117,9 +117,23 @@
 <style>
     .belum:hover a {
         border-color: #A50000;
-        border-width: thin;
+        border-width: 1px;
         border-style: ridge;
         transition: .2s;
+    }
+</style>
+
+<style>
+    .pagination .page-link {
+        color: #A50000;
+    }
+
+    .pagination .page-link:hover {
+        color: darkred;
+    }
+
+    .pagination .active {
+        color: #A50000;
     }
 </style>
 @endsection
@@ -152,7 +166,7 @@ Laporan
                     <button type="button" class="btn btn-warning">Belum Diunggah</button>
                     </div> -->
             </div>
-            @include('components.filter')
+            @include('components.filter', ['datas' => $filter])
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
@@ -161,34 +175,36 @@ Laporan
                     <table class="table">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
+                                <th scope="col">Kode Laporan</th>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
                                 <th scope="col">Tanggal Unggah</th>
-                                <th scope="col">Lokasi</th>
+                                <th scope="col">Alamat</th>
+                                <th scope="col">Kelurahan</th>
+                                <th scope="col">Kecamatan</th>
+                                <th scope="col">Kota</th>
+                                <th scope="col">Provinsi</th>
                             </tr>
                         </thead>
                         <tbody class="table align-middle">
+                            @foreach ($laporans as $laporan)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{$laporan->report_code}}</td>
+                                <td>{{$laporan->title}}</td>
+                                <td>{{$laporan->damage_type->name}}</td>
+                                <td>{{$laporan->created_at}}</td>
+                                <td>{{$laporan->address}}</td>
+                                <td>{{$laporan->kelurahan->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->kota->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->kota->provinsi->name}}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+                <br>
+                {{ $laporans->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>
