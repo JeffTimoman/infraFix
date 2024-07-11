@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Kelurahan extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'kecamatan_id'
     ];
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class);
+    }
 }

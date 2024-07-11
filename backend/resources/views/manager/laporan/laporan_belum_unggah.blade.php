@@ -145,9 +145,36 @@
 <style>
     .semua:hover a {
         border-color: white;
-        border-width: thin;
+        border-width: 0.5px;
         border-style: ridge;
         transition: .2s;
+    }
+
+    .bottom-button {
+        background-color: #A50000;
+        color: white;
+    }
+
+    .bottom-button:hover {
+        border-color: #A50000;
+        background-color: white;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+</style>
+
+<style>
+    .pagination .page-link {
+        color: #A50000;
+    }
+
+    .pagination .page-link:hover {
+        color: darkred;
+    }
+
+    .pagination .active {
+        color: #A50000;
     }
 </style>
 
@@ -177,7 +204,7 @@ Laporan Belum Diunggah
                     </li>
                 </ul>
             </div>
-            @include('components.filter')
+            @include('components.filter', ['datas' => $filter]);
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
@@ -186,53 +213,56 @@ Laporan Belum Diunggah
                     <table class="table align-middle">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
+                                <th scope="col">Kode Laporan</th>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
                                 <th scope="col">Tanggal Unggah</th>
-                                <th scope="col">Lokasi</th>
+                                <th scope="col">Alamat</th>
+                                <th scope="col">Kelurahan</th>
+                                <th scope="col">Kecamatan</th>
+                                <th scope="col">Kota</th>
+                                <th scope="col">Provinsi</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="table">
+                        <tbody class="table align-middle">
+                            @foreach ($laporans as $laporan)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{$laporan->report_code}}</td>
+                                <td>{{$laporan->title}}</td>
+                                <td>{{$laporan->damage_type->name}}</td>
+                                <td>{{$laporan->created_at}}</td>
+                                <td>{{$laporan->address}}</td>
+                                <td>{{$laporan->kelurahan->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->kota->name}}</td>
+                                <td>{{$laporan->kelurahan->kecamatan->kota->provinsi->name}}</td>
                                 <td>
-                                    <div class="form-check d-flex justify-content-center">
+                                    <div class="form-check d-flex justify-content-center ms-3">
                                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                                <td>
-                                    <div class="form-check d-flex justify-content-center">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
                 <div class="row">
-                    <div class="row justify-content-end align-items-end py-4">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end px-5">
+                    <div class="row-d-flex justify-content-end align-items-end" style="">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <form action="{{ route('manager.tambah_1')}}" method="GET">
-                                <button type="submit" class="btn btn-m rounded"
-                                    style="background-color: #A50000; color: white;">Tambahkan ke Kasus</button>
+                                <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan ke
+                                    Kasus</button>
                             </form>
+                            &nbsp &nbsp
                             <form action="{{ route('manager.unggah_1')}}" method="GET">
-                                <button type="submit" class="btn btn-m rounded"
-                                    style="background-color: #A50000; color: white;">Buat Kasus</button>
+                                <button type="submit" class="btn btn-m rounded bottom-button">Buat Kasus</button>
                             </form>
                         </div>
                     </div>
                 </div>
+                <br>
+                {{$laporans ->links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>

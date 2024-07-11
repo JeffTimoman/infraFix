@@ -129,13 +129,12 @@
         background-color: white;
     }
 
-    /* Mengubah warna ceklis (centang) */
     input[type="checkbox"]:checked::after {
         content: "✔";
-        /* Karakter centang */
+
         display: block;
         color: #A50000;
-        /* Warna centang */
+
         position: relative;
         top: -45%;
         left: 50%;
@@ -143,10 +142,44 @@
     }
 </style>
 
+<style>
+    .top-button {
+        background-color: #A50000;
+        color: white;
+    }
+
+    .top-button:hover {
+        border-color: #A50000;
+        background-color: white;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+
+    .laporan:hover {
+        border-color: #A50000;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+
+    .hot-topic {
+        background-color: #A50000;
+
+    }
+
+    .hot-topic:hover {
+        border-color: white;
+        border-width: 1.5px;
+        border-style: double;
+        transition: .2s;
+    }
+</style>
+
 @endsection
 
 @section('title')
-Laporan Belum Diunggah
+Beranda
 @endsection
 
 @section('content')
@@ -154,11 +187,11 @@ Laporan Belum Diunggah
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row justify-content-evenly p-5">
-            <div class="col-lg-3 rounded p-5" style="background-color: white;">
+            <div class="col-lg-3 rounded p-5 laporan" style="background-color: white;">
                 <a href="{{ route ('manager.laporan_semua')}}">
                     <div class="row justify-content-between">
                         <div class="col-lg-3">
-                            <h4 class="text-dark">600</h4>
+                            <h4 class="text-dark">{{$laporans_count}}</h4>
                         </div>
                         <div class="col-lg-3">
                             <span class="material-symbols-outlined"
@@ -170,11 +203,11 @@ Laporan Belum Diunggah
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 rounded p-5" style="background-color: white;">
+            <div class="col-lg-3 rounded p-5 laporan" style="background-color: white;">
                 <a href="{{route('manager.laporan_belum_unggah')}}">
                     <div class="row justify-content-between">
                         <div class="col-lg-3">
-                            <h4 class="text-dark">300</h4>
+                            <h4 class="text-dark">{{$laporans_belum_count}}</h4>
                         </div>
                         <div class="col-lg-3">
                             <span class="material-symbols-outlined"
@@ -186,11 +219,11 @@ Laporan Belum Diunggah
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 rounded p-5" style="background-color: #A50000;">
+            <div class="col-lg-3 rounded p-5 hot-topic">
                 <a href="{{route('manager.hot_topic')}}">
                     <div class="row justify-content-between">
                         <div class="col-lg-3">
-                            <h4 style="color: white;">600</h4>
+                            <h4 style="color: white;">{{$hot_topics_count}}</h4>
                         </div>
                         <div class="col-lg-3">
                             <span class="material-symbols-outlined" style="color: white; scale: 200%;">newspaper</span>
@@ -211,8 +244,7 @@ Laporan Belum Diunggah
                     </div>
                     <div class="col-lg-2">
                         <form action="{{ route('manager.laporan_semua')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded"
-                                style="background-color: #A50000; color: white;">Selengkapnya</button>
+                            <button type="submit" class="btn btn-lg rounded top-button">Selengkapnya</button>
                         </form>
                     </div>
                 </div>
@@ -222,29 +254,23 @@ Laporan Belum Diunggah
                             <tr>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Urgensi</th>
+                                {{-- <th scope="col">Urgensi</th> --}}
                                 <th scope="col">Tanggal Unggah</th>
                             </tr>
                         </thead>
                         <tbody class="table align-middle">
+                            @foreach ($recent_reports as $recent_report)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                {{-- <th scope="row"></th> --}}
+                                <td>{{$recent_report->title}}</td>
+                                @php
+                                $damage_type = DB::table('damage_types')->where('id', $recent_report ->
+                                damage_type_id)->value('name')
+                                @endphp
+                                <td>{{$damage_type}}</td>
+                                <td>{{$recent_report->created_at}}</td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

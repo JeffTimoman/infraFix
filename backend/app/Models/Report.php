@@ -22,6 +22,16 @@ class Report extends Model
         'access_key',
         'hashed_report_code'
     ];
+
+    public function kelurahan()
+    {
+        return $this->belongsTo(Kelurahan::class);
+    }
+
+    public function damage_type()
+    {
+        return $this->belongsTo(DamageType::class, 'damage_type_id');
+    }
 }
 
 /*
