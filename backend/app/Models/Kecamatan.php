@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Kecamatan extends Model
 {
     use HasFactory;
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'kota_id'
     ];
+
+    public function kota()
+    {
+        return $this->belongsTo(Kota::class);
+    }
 }

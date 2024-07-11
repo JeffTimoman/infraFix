@@ -9,34 +9,28 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link active">
+            <a href="{{route('manager.dashboard')}}" class="sidebar-link active">
                 <i class="lni lni-layout"></i>
-                <span>Multi Level</span>
+                <span>Beranda</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{route('manager.laporan_semua')}}" class="sidebar-link">
                 <i class="lni lni-agenda"></i>
-                <span>Task</span>
+                <span>Laporan</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-user"></i>
-                <span>Profile</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-agenda"></i>
-                <span>Task</span>
+            <a href="{{route('manager.hot_topic')}}" class="sidebar-link">
+                <i class="lni lni-popup"></i>
+                <span>Hot Topic</span>
             </a>
         </li>
         <li class="sidebar-item">
             <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
                 aria-expanded="false" aria-controls="auth">
-                <i class="lni lni-protection"></i>
-                <span>Auth</span>
+                <i class="lni lni-user"></i>
+                <span>Akun</span>
             </a>
             <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                 <li class="sidebar-item">
@@ -46,35 +40,6 @@
                     <a href="#" class="sidebar-link">Register</a>
                 </li>
             </ul>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#multi"
-                aria-expanded="false" aria-controls="multi">
-                <i class="lni lni-layout"></i>
-                <span>Multi Level</span>
-            </a>
-            <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi-two"
-                        aria-expanded="false" aria-controls="multi-two">
-                        Two Links
-                    </a>
-                    <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Link 1</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Link 2</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-popup"></i>
-                <span>Notification</span>
-            </a>
         </li>
         <li class="sidebar-item">
             <a href="#" class="sidebar-link">

@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
             'report_total' => Report::count(),
             'user_total' => User::count(),

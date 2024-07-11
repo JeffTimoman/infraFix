@@ -114,6 +114,20 @@
         text-align: center;
     }
 </style>
+
+<style>
+    .pagination .page-link {
+        color: #A50000;
+    }
+
+    .pagination .page-link:hover {
+        color: darkred;
+    }
+
+    .pagination .active {
+        color: #A50000;
+    }
+</style>
 @endsection
 
 @section('title')
@@ -129,11 +143,13 @@ Hot Topic
                 <div class="col-lg-6">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link active rounded" style="background-color: #A50000; color: white; border-color: white; scale: 120%;" aria-current="page" href="#">Semua</a>
+                            <a class="nav-link active rounded"
+                                style="background-color: #A50000; color: white; border-color: white; scale: 120%;"
+                                aria-current="page" href="#">Semua</a>
                         </li>
                 </div>
             </div>
-            @include('components.filter')
+            @include('components.filter', ['datas' => $filter])
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
@@ -142,37 +158,39 @@ Hot Topic
                     <table class="table">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
+                                <th scope="col">Nomor Kasus</th>
                                 <th scope="col">Judul Kasus</th>
                                 <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Tanggal Unggah</th>
+                                <th scope="col">Status</th>
                                 <th scope="col">Lokasi</th>
+                                <th scope="col">Pengunggah</th>
                                 <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="table align-middle">
+                            @foreach ($cases as $case)
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row">{{$case->case_number}}</th>
+                                <td>{{$case->title}}</td>
+                                @php
+                                $damage_type = DB::table('damage_types')->where('id', $case ->
+                                damage_type_id)->value('name')
+                                @endphp
+                                <td>{{$damage_type}}</td>
+                                <td>{{$case->status}}</td>
+                                <td>{{$case->address}}</td>
+                                <td>{{$case->created_by}}</td>
                                 <td>
                                     <span class="material-symbols-outlined align-middle">edit</span>
                                     <label style="color: grey;">Edit</label>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Larry the Bird</td>
-                                <td>Ngueng</td>
-                                <td>@twitter</td>
-                                <td>
-                                    <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label style="color: grey;" for="">Edit</label>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
+                <br>
+                {{$cases -> links('pagination::bootstrap-5')}}
             </div>
         </div>
     </div>

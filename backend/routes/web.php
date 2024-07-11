@@ -172,17 +172,13 @@ Route::prefix('admin')->group(function () {
 Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
     Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
+
     Route::prefix('/laporan')->group(function () {
-        Route::get('/semua', function () {
-            return view('manager.laporan.laporan_semua');
-        })->name('manager.laporan_semua');
-        Route::get('/belum_unggah', function () {
-            return view('manager.laporan.laporan_belum_unggah');
-        })->name('manager.laporan_belum_unggah');
+        Route::get('/semua', [ManagerController::class, 'laporan_semua'])->name('manager.laporan_semua');
+        Route::get('/belum_unggah', [ManagerController::class, 'laporan_belum'])->name('manager.laporan_belum_unggah');
     });
-    Route::get('/hot_topic', function () {
-        return view('manager.hot_topic');
-    })->name('manager.hot_topic');
+
+    Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
         Route::get('/1', function () {
