@@ -210,56 +210,61 @@ Laporan Belum Diunggah
         <div class="row justify-content-center mb-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                 <div class="row">
-                    <table class="table align-middle">
-                        <thead style="border-bottom-width: 3px; border-top-width: 3px;">
-                            <tr>
-                                <th scope="col">Kode Laporan</th>
-                                <th scope="col">Judul Laporan</th>
-                                <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Tanggal Unggah</th>
-                                <th scope="col">Alamat</th>
-                                <th scope="col">Kelurahan</th>
-                                <th scope="col">Kecamatan</th>
-                                <th scope="col">Kota</th>
-                                <th scope="col">Provinsi</th>
-                                <th scope="col">Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table align-middle">
-                            @foreach ($laporans as $laporan)
-                            <tr>
-                                <td>{{$laporan->report_code}}</td>
-                                <td>{{$laporan->title}}</td>
-                                <td>{{$laporan->damage_type->name}}</td>
-                                <td>{{$laporan->created_at}}</td>
-                                <td>{{$laporan->address}}</td>
-                                <td>{{$laporan->kelurahan->name}}</td>
-                                <td>{{$laporan->kelurahan->kecamatan->name}}</td>
-                                <td>{{$laporan->kelurahan->kecamatan->kota->name}}</td>
-                                <td>{{$laporan->kelurahan->kecamatan->kota->provinsi->name}}</td>
-                                <td>
-                                    <div class="form-check d-flex justify-content-center ms-3">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <form method="POST" action="{{route('manager.selectLaporans')}}" id="submit">
+                        @csrf
+                        <table class="table align-middle" id="myTable">
+                            <thead style="border-bottom-width: 3px; border-top-width: 3px;">
+                                <tr>
+                                    <th scope="col">Kode Laporan</th>
+                                    <th scope="col">Judul Laporan</th>
+                                    <th scope="col">Tipe Kerusakan</th>
+                                    <th scope="col">Tanggal Unggah</th>
+                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Kelurahan</th>
+                                    <th scope="col">Kecamatan</th>
+                                    <th scope="col">Kota</th>
+                                    <th scope="col">Provinsi</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table align-middle">
+                                @foreach ($laporans as $laporan)
+                                <tr>
+                                    <td>{{$laporan->report_code}}</td>
+                                    <td>{{$laporan->title}}</td>
+                                    <td>{{$laporan->damage_type->name}}</td>
+                                    <td>{{$laporan->created_at}}</td>
+                                    <td>{{$laporan->address}}</td>
+                                    <td>{{$laporan->kelurahan->name}}</td>
+                                    <td>{{$laporan->kelurahan->kecamatan->name}}</td>
+                                    <td>{{$laporan->kelurahan->kecamatan->kota->name}}</td>
+                                    <td>{{$laporan->kelurahan->kecamatan->kota->provinsi->name}}</td>
+                                    <td>
+                                        <div class="form-check d-flex justify-content-center ms-3">
+                                            <input class="form-check-input" type="checkbox" name="selected_ids[]"
+                                                value="{{ $laporan->id }}" id="flexCheckDefault">
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="row-d-flex justify-content-end align-items-end" style="">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <div class="button">
+                                        <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan ke
+                                            Kasus</button>
                                     </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="row">
-                    <div class="row-d-flex justify-content-end align-items-end" style="">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <form action="{{ route('manager.tambah_1')}}" method="GET">
-                                <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan ke
-                                    Kasus</button>
-                            </form>
-                            &nbsp &nbsp
-                            <form action="{{ route('manager.unggah_1')}}" method="GET">
-                                <button type="submit" class="btn btn-m rounded bottom-button">Buat Kasus</button>
-                            </form>
+                                    &nbsp &nbsp
+                                    <div class="button">
+                                        <button type="submit" class="btn btn-m rounded bottom-button">Buat
+                                            Kasus</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <br>
                 {{$laporans ->links('pagination::bootstrap-5')}}
@@ -267,4 +272,36 @@ Laporan Belum Diunggah
         </div>
     </div>
 </div>
+@endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        // Retrieve the selected IDs from the server
+        $.get('{{ route("manager.selectLaporans") }}', function(data) {
+            var selectedIds = data.selectedIds;
+            // Initialize checkboxes based on the selected IDs
+            $('input[type="checkbox"]').each(function() {
+                if (selectedIds.includes($(this).val())) {
+                    $(this).prop('checked', true);
+                }
+            });
+        });
+
+        // Handle checkbox changes
+        $('input[type="checkbox"]').change(function() {
+            var selectedIds = [];
+            $('input[type="checkbox"]:checked').each(function() {
+                selectedIds.push($(this).val());
+            });
+
+            // Update the session with the selected IDs
+            $.post('{{ route("manager.selectLaporans") }}', {
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                selected_ids: selectedIds
+            }, function(response) {
+                console.log(response);
+            });
+        });
+    });
+</script>
 @endsection
