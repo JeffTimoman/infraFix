@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
+use App\Http\Controllers\HotTopicController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Manager\HotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
@@ -244,10 +245,6 @@ Route::prefix('manager')->group(function () {
         return view('manager.index');
     })->name('manager.index');
 
-    // Selalu bikin controller itu di dalam folder Controller/manager/apagitu
-    // Lalu untuk view juga di buat di dalam folder resources/views/manager/apagitu
-    // Cssnya tolong pake in line css aja, jangan pake file css
-    // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 });
 
 Route::prefix("government")->group(function () {
@@ -265,13 +262,12 @@ Route::prefix("government")->group(function () {
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
 
-
-    // Selalu bikin controller itu di dalam folder Controller/government/apagitu
-    // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
-    // Cssnya tolong pake in line css aja, jangan pake file css
-    // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 });
 
+Route::prefix('hottopic')->group(function () {
+    Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
+    Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
+});
 
 
 Route::get('/coba', function () {

@@ -23,6 +23,34 @@ class ThisCase extends Model
     ];
 
     public function milestone_details(){
-        $this->hasMany(MilestoneDetail::class);
+        return $this->hasMany(MilestoneDetail::class, 'case_id');
+    }
+
+    public function damage_type(){
+        return $this->belongsTo(DamageType::class);
+    }
+
+    public function kelurahan(){
+        return $this->belongsTo(Kelurahan::class);
+    }
+
+    public function government(){
+        return $this->belongsTo(User::class, 'government_id');
+    }
+
+    public function reports(){
+        return $this->hasMany(Report::class, 'case_id');
+    }
+
+    public function likes(){
+        return $this->hasMany(Like::class, 'case_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'case_id');
+    }
+
+    public function bookmarks(){
+        return $this->hasMany(Bookmark::class, 'case_id');
     }
 }

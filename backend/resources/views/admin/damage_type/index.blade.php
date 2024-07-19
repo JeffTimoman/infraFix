@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('title')
-    Tipe Kerusakan    
+    Tipe Kerusakan
 @endsection
 @section('style')
     <style>
-        
+
     .content {
         display: flex;
         flex-direction: column;
@@ -23,7 +23,7 @@
         'GRAD' 0,
         'opsz' 24;
         color: #a50000;
-        
+
     }
 
 
@@ -47,7 +47,7 @@
     .reportBox{
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; 
+    justify-content: space-between;
     }
 
     .report{
@@ -80,7 +80,7 @@
 
 
     .report-table{
-    width: 100%;    
+    width: 100%;
     }
 
     .report-table th{
@@ -100,7 +100,7 @@
         width: 100%;
         height: 100%;
     }
-    
+
 
     .button-header{
         display: flex;
@@ -137,7 +137,13 @@
         /* background-color: red; */
     }
 
-    </style>    
+
+
+    .dataTables_filter{
+        display: flex;
+        justify-content: end;
+    }
+    </style>
 @endsection
 @section('content')
     <div class="content">
@@ -158,9 +164,9 @@
                             <div class="table-header py-2 px-3">
                                 <div class="table-title">
                                     <h5>Tipe Kerusakan</h5>
-                                </div>    
+                                </div>
                             </div>
-                            <table class="report-table ">              
+                            <table class="report-table " id="myTable">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -189,9 +195,9 @@
                                                     </span>
                                                 </a>
                                             </div>
-                                            
+
                                         </div>
-                                     
+
                                     </td>
                                 </tr>
                                 @endforeach
@@ -201,15 +207,45 @@
                     </div>
                 </div>
             </div>
-                <div class="row">
-                    <div class="pagination col-12 col-md-10 ">
-                        {{ $data->links('vendor.pagination.custom') }}
-                    </div>
-                </div>
-           
+
         </div>
-    
-    
+
+
 </body>
 </html>
+@endsection
+@section('script')
+
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Bootstrap 5.3 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Include DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Include DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            "pagingType": "full_numbers", // Choose the pagination type
+            "language": {
+                "paginate": {
+                    "first": "<<",
+                    "last": ">>",
+                    "next": ">",
+                    "previous": "<"
+                }
+            }
+        });
+    });
+
+</script>
 @endsection

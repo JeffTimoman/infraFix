@@ -3,8 +3,7 @@
 @endsection
 @section('style')
     <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>hot topic</title>
     <style>
@@ -14,7 +13,7 @@
 
         div.hover_konten:hover {
             transition: .3s ease-out;
-            background-color: rgba(164, 163, 163, 0.174);
+            /* background-color: rgba(164, 163, 163, 0.174); */
         }
 
         .like_button i,
@@ -189,6 +188,31 @@
             align-items: center;
         }
     </style>
+    <style>
+        .unprocessed::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            left: 0;
+            border-radius: 50%;
+            top: 50%;
+            background: red;
+            transform: translate(0%, -50%);
+            position: absolute;
+        }
+
+        .processed::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            left: 0;
+            border-radius: 50%;
+            top: 50%;
+            background: green;
+            transform: translate(0%, -50%);
+            position: absolute;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -199,8 +223,8 @@
                     style="background-color: #fff; height: 25vh">
                     <div class="col-md-12 my-auto d-flex justify-content-center">
                         <ul class="row" style=" list-style: none; padding: 0; ">
-                            <li class="py-2 ps-3"><a href="" class="text-decoration-none text-dark link-secondary"
-                                    ><i class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal;"><span
+                            <li class="py-2 ps-3"><a href="" class="text-decoration-none text-dark link-secondary"><i
+                                        class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal;"><span
                                             class="ms-2 fw-bold" style="font-size: 16px">Tersimpan</span></i></a></li>
                             <li class="py-3 ps-3 "><a href=""
                                     class=" text-dark text-decoration-none link-secondary"><i class="bi bi-bell d-flex"
@@ -365,6 +389,78 @@
                 <div class="row overflow-auto d-flex justify-content-center" style="height: 74vh;">
                     <div class="col-md-12 p-0" style="">
                         {{-- awal konten --}}
+                        @foreach ($cases as $item)
+                            <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
+                                <a href="{{route('hottopic.detail', ['case_number' => $item->case_number])}}" class="text-decoration-none border-0">
+                                    <div class="container col-md-9 overflow-hidden">
+                                        <div
+                                            class="text-capitalize text-dark d-flex justify-content-between align-items-center">
+                                            <div class="text-wrap " style="width: 90;">
+                                                <h6 style=" font-size: 12px">{{$item->title}}</h6>
+                                            </div>
+                                            <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
+
+                                                <span class="text-secondary" style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($item->created_at) }}</span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="text-danger text-capitalize" style=" font-size: 10px">
+                                            <span>{{$item->reports->count()}} Laporan</span>
+                                        </div>
+
+                                        <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
+                                            <div class="span">
+                                                Alamat: {{$item->address}}
+                                                <br>
+                                                Lokasi:  {{ $item->kelurahan->name}}, {{ $item->kelurahan->kecamatan->name}}, {{ $item->kelurahan->kecamatan->kota->name}}.
+                                                <br>
+                                                Status: @if($item->milestone_details->count() == 0) Belum diproses @else {{$item->milestone_details->last()->milestone->name}} @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
+                                            @if(strlen($item->description) > 100)
+                                                <p>{{$item->description->substr(0, 100)}} <span class="text-primary">show more...</span></p>
+                                            @else
+                                                <p>{{$item->description}}</p>
+                                            @endif
+                                        </div>
+                                        {{-- untuk show gambar --}}
+                                        <div class="col-md-12 d-flex justify-content-center">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVFP4xX1TI_zRZvvXXpJk0CbcholYv90pUYw&usqp=CAU"
+                                                alt="" width="900" height="288">
+                                        </div>
+                                        <div class="row" style=" height:5.5vh ;">
+                                            <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
+                                                <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
+                                                    id="btn_like">
+                                                    <i class="bi bi-heart"></i>
+                                                    <span class="mb-1">{{$item->likes->count()}}</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
+                                                <button onclick="" class="btn text-dark" id="btn_komen">
+                                                    <i class="bi bi-chat-left"></i>
+                                                    <span class="mb-1">{{$item->comments->count()}}</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
+                                                <button onclick="" class="btn text-dark" id="btn_bookmark">
+                                                    <i class="bi bi-bookmark"></i>
+                                                    <span class="mb-1">{{$item->bookmarks->count()}}</span>
+                                                </button>
+                                            </div>
+                                            <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
+                                                <button onclick="" class="btn text-dark" id="btn_share">
+                                                    <i class="bi bi-share"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                         <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
                             <a href="" class="text-decoration-none border-0">
                                 <div class="container col-md-9 overflow-hidden">
