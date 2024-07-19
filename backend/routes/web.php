@@ -13,7 +13,9 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
+use App\Http\Controllers\HotTopicController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Manager\HotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
@@ -171,11 +173,10 @@ Route::prefix('admin')->group(function () {
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/admin.blade.php
 });
 
-Route::prefix('profile')->group(function(){
+Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
-
 });
 
 Route::prefix('manager')->group(function () {
@@ -190,9 +191,10 @@ Route::prefix('manager')->group(function () {
     Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
-        Route::get('/1', function () {
-            return view('manager.unggah_kasus.unggah_1');
-        })->name('manager.unggah_1');
+        Route::post('/perbaruiSelectedIds', [HotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
+        Route::get('/1', [HotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::get('/hapusSelecetedIds', [HotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
+        Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
         Route::get('/2', function () {
             return view('manager.unggah_kasus.unggah_2');
         })->name('manager.unggah_2');
@@ -200,7 +202,7 @@ Route::prefix('manager')->group(function () {
             return view('manager.unggah_kasus.unggah_3');
         })->name('manager.unggah_3');
 
-        Route::prefix('/scorll')->group(function () {
+        Route::prefix('/scroll')->group(function () {
             Route::get('/isi', function () {
                 return view('manager.unggah_kasus.scroll.isi_kasus');
             })->name('manager.scroll_isi_kasus');
@@ -243,10 +245,6 @@ Route::prefix('manager')->group(function () {
         return view('manager.index');
     })->name('manager.index');
 
-    // Selalu bikin controller itu di dalam folder Controller/manager/apagitu
-    // Lalu untuk view juga di buat di dalam folder resources/views/manager/apagitu
-    // Cssnya tolong pake in line css aja, jangan pake file css
-    // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 });
 
 Route::prefix("government")->group(function () {
@@ -264,21 +262,11 @@ Route::prefix("government")->group(function () {
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
 
-
-    // Selalu bikin controller itu di dalam folder Controller/government/apagitu
-    // Lalu untuk view juga di buat di dalam folder resources/views/government/apagitu
-    // Cssnya tolong pake in line css aja, jangan pake file css
-    // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 });
 
 Route::prefix('hottopic')->group(function () {
-    Route::get('/', function () {
-        return view('hottopic.index');
-    })->name('hottopic.hot_topic');
-
-    Route::get('/{report_code}/detail', function($report_code){
-        return view('hottopic.detail');
-    })->name('hottopic.detail');
+    Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
+    Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
 });
 
 

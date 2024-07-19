@@ -53,8 +53,8 @@
                 <a href="#" class="btn btn-secondary">Cara mengakses laporanmu</a>
                 <form action="{{route('report.show')}}" method="POST">
                     @csrf
-                    <input type="hidden" class="form-control form-input-modified" name="report_code" value="$data['report_code']">
-                    <input type="hidden" class="form-control form-input-modified" name="access_key" value="$data['access_key']">
+                    <input type="hidden" class="form-control form-input-modified" name="report_code" value="{{$data['report_code']}}">
+                    <input type="hidden" class="form-control form-input-modified" name="access_key" value="{{$data['access_key']}}">
                     <button class="btn btn-modified" type="submit">Lihat Perkembangan Laporan Disini</button>
                 </form>
             </div>

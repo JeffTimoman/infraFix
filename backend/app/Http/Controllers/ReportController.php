@@ -10,6 +10,7 @@ use App\Models\Provinsi;
 use App\Models\Report;
 use App\Models\ReportImage;
 use App\Models\User;
+use App\Services\CustomEncryptor;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -34,7 +35,6 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'damage' => 'required|exists:App\Models\DamageType,id',
             'description' => 'required',
@@ -45,14 +45,17 @@ class ReportController extends Controller
             'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate each image
         ]);
 
-        // dd($request->all());
-
         $damage = DamageType::find($request->damage);
         $kelurahan = Kelurahan::find($request->kelurahan);
         $report_code = uniqid() . bin2hex(random_bytes(20));
-        // $random_access_key = bin2hex(random_bytes(2));
-        $random_access_key = 'iniaccesskey';
-        $hashed_report_code = encrypt($report_code, $random_access_key);
+        $random_access_key = bin2hex(random_bytes(4));
+
+        // Create an instance of CustomEncryptor with the random access key
+        $encryptor = new \App\Services\CustomEncryptor($random_access_key);
+
+        // Encrypt the report code using the CustomEncryptor
+        $hashed_report_code = $encryptor->encrypt($report_code);
+
         $data = [
             'damage_type_id' => $damage->id,
             'description' => $request->description,
@@ -64,21 +67,19 @@ class ReportController extends Controller
             'anonymous' => $request->anonymous,
             'report_code' => $report_code,
         ];
-        dump($data);
 
         if ($request->anonymous) {
             $data['user_id'] = null;
             $data['email'] = '';
         } else {
-            $user_id = User::where('email', $request->email)->first();
-            if ($user_id) {
-                $data['user_id'] = $user_id->id;
+            $user = User::where('email', $request->email)->first();
+            if ($user) {
+                $data['user_id'] = $user->id;
             }
         }
-        dump($data);
 
         $report = Report::create($data);
-        dump($report);
+
         $images = $request->file('images');
         $images_name = [];
         foreach ($images as $image) {
@@ -94,12 +95,15 @@ class ReportController extends Controller
                 'case_id' => null
             ]);
         }
+
         $res = [
             'report_code' => $report_code,
             'access_key' => $random_access_key,
         ];
+
         return view('report.success', ['data' => $res]);
     }
+
 
     public function show()
     {
@@ -112,12 +116,24 @@ class ReportController extends Controller
             'report_code' => 'required',
             'access_key' => 'required'
         ]);
+
         $report_code = $request->report_code;
         $access_key = $request->access_key;
-        // dump($images);
-        // dd($report_code, $access_key);
+
+        // Retrieve the report from the database
         $report = Report::where('report_code', $report_code)->firstOrFail();
-        $decrypted_report_code = decrypt($report->hashed_report_code, $access_key);
+
+        // Create an instance of CustomEncryptor with the provided access key
+        $encryptor = new CustomEncryptor($access_key);
+
+        // Decrypt the hashed report code
+        try {
+            $decrypted_report_code = $encryptor->decrypt($report->hashed_report_code);
+        } catch (\Exception $e) {
+            return redirect()->route('report.show')->withErrors('Report code or access key is invalid');
+        }
+
+        // Compare the decrypted report code with the provided report code
         if ($decrypted_report_code == $report_code) {
             $data = [
                 'report' => $report,
@@ -125,6 +141,8 @@ class ReportController extends Controller
             ];
             return view('report.view_post', ['data' => $data]);
         }
+
+        return redirect()->route('report.show')->withErrors('Report code or access key is invalid');
     }
 
     public function indexDep()

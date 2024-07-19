@@ -131,9 +131,11 @@ Unggah Kasus
         <div class="row pt-3 px-5">
             <div class="col-lg-2">
                 <!-- Kasih Aler Yakin batal Bikin Kasus -->
-                <form action="{{ route('manager.unggah_2')}}" method="GET">
-                    <button type="button" class="btn-close" disabled aria-label="Close"></button>
-                </form>
+                <div class="button">
+                    <a href="{{ route('manager.clearSelectedIds') }}">
+                        <button type="button" class="btn-close" disabled aria-label="Close"></button>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -151,43 +153,47 @@ Unggah Kasus
         <div class="row justify-content-center mt-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
                 <div class="row text-start p-3">
-                    <h4>20 Laporan Terpilih</h4>
+                    <h4>{{$selectedCount}} laporan dipilih</h4>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
+                        @if(count($selectedLaporans) > 0)
                         <table class="table">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
+                                    <th scope="col">Kode Laporan</th>
                                     <th scope="col">Judul Laporan</th>
                                     <th scope="col">Tipe Kerusakan</th>
-                                    <th scope="col">Tanggal Unggah</th>
-                                    <th scope="col">Lokasi</th>
-                                    <th scope="col">Aksi</th>
+                                    <th scope="col">Alamat</th>
+                                    <th scope="col">Kelurahan</th>
+                                    <th scope="col">Kecamatan</th>
+                                    <th scope="col">Kota</th>
+                                    <th scope="col">Provinsi</th>
                                 </tr>
                             </thead>
                             <tbody class="table align-middle">
+                                @foreach ($selectedLaporans as $selected)
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
+                                    <td>{{$selected->report_code}}</td>
+                                    <td>{{$selected->title}}</td>
+                                    <td>{{$selected->damage_type->name}}</td>
+                                    <td>{{$selected->address}}</td>
+                                    <td>{{$selected->kelurahan->name}}</td>
+                                    <td>{{$selected->kelurahan->kecamatan->name}}</td>
+                                    <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
+                                    <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
                                     <td>
-                                        <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
+                                        <span class="material-symbols-outlined align-middle"
+                                            style="color: #A50000;">delete</span>
                                         <label for="">Hapus</label>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Larry the Bird</td>
-                                    <td>Ngueng</td>
-                                    <td>@twitter</td>
-                                    <td>
-                                        <span class="material-symbols-outlined align-middle" style="color: #A50000;">delete</span>
-                                        <label for="">Hapus</label>
-                                    </td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
+                        @else
+                        <p>Silakan pilih laporan terlebih dahulu</p>
+                        @endif
                     </div>
                 </div>
                 <div class="row"></div>
@@ -195,8 +201,9 @@ Unggah Kasus
         </div>
         <div class="row justify-content-end">
             <div class="col-lg-2 p-4">
-                <form action="{{ route('manager.tambah_2')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
+                <form action="{{ route('manager.unggah_2')}}" method="GET">
+                    <button type="submit" class="btn btn-lg rounded"
+                        style="background-color: #A50000; color: white;">Selanjutnya</button>
                 </form>
             </div>
         </div>

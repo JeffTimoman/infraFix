@@ -46,11 +46,14 @@ class ManagerController extends Controller
     public function laporan_belum()
     {
         $laporans = Report::where('case_id', null)->paginate(9);
+        $selectedIds = session('selected_ids', []);
+
         $filter = $this->filter();
         return view(
             'manager.laporan.laporan_belum_unggah',
             [
                 'laporans' => $laporans,
+                'selectedIds' => $selectedIds,
                 'filter' => $filter
             ]
         );
