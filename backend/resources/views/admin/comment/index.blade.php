@@ -146,6 +146,12 @@
         /* background-color: red; */
     }
 
+
+    .dataTables_filter{
+        display: flex;
+        justify-content: end;
+    }
+
     </style>
 @endsection
 @section('content')
@@ -153,20 +159,8 @@
         <div class="mb-3">
             <div class="row mb-3">
                <div class="row mb-3 col-12 col-md-11 ">
-                    <div class="search col-md-8">
-                        <div class="form col-md-11">
-                            <form action="{{ route('comment.index')}}" class="d-flex" role="search" method="GET">
-                                <div class="input-group">
-                                    <input class="form-control" type="search" placeholder="Search" name="query" value="{{ session('query') }}">
-                                    <button class="btn btn-outline-secondary search-btn" type="submit">
-                                        <i class="lni lni-search-alt"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
 
-                    </div>
-                    <div class="add col-md-4">
+                    <div class="add col-md-12">
                         <a href="{{ route('comment.create') }}">
                             <div class="button-header ">
                                 <button class="button-add">
@@ -185,7 +179,7 @@
                                     <h5>Komentar</h5>
                                 </div>
                             </div>
-                            <table class="report-table ">
+                            <table class="report-table " id="myTable">
                                 <thead>
                                     <tr>
                                         <th class="px-3">ID</th>
@@ -245,15 +239,45 @@
                     </div>
                 </div>
             </div>
-                <div class="row">
-                    <div class="pagination col-12 col-md-10 ">
-                        {{ $data->links('vendor.pagination.custom') }}
-                    </div>
-                </div>
 
         </div>
 
 
 </body>
 </html>
+@endsection
+@section('script')
+
+
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Include Bootstrap 5.3 JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- Include DataTables JS -->
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+<!-- Include DataTables Buttons JS -->
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.bootstrap5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#myTable').DataTable({
+            "pagingType": "full_numbers", // Choose the pagination type
+            "language": {
+                "paginate": {
+                    "first": "<<",
+                    "last": ">>",
+                    "next": ">",
+                    "previous": "<"
+                }
+            }
+        });
+    });
+
+</script>
 @endsection
