@@ -76,7 +76,14 @@
                             {{-- <div class="left-arrow">
                             <img src="public/img/government/leftArrow.png" alt="">
                         </div> --}}
-                            <div class="icons-customHighLight rounded-circle d-flex justify-content-center p-2">
+
+                            {{-- <div class="icons-customHighLight rounded-circle border d-flex justify-content-center p-2">
+                                <span class="material-symbols-outlined">
+                                    report
+                                </span>
+                            </div> --}}
+
+                            <div class="icons-customHighLight rounded-circle border d-flex justify-content-center p-2">
                                 <span class="material-symbols-outlined">
                                     person_check
                                 </span>

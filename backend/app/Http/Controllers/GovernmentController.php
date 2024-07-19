@@ -8,43 +8,50 @@ use App\Models\Milestone;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Case_;
 use App\Http\Controllers\Controller;
+use App\Models\MilestoneDetail;
 
 class GovernmentController extends Controller
 {
-    function home(){
-        return view('government.home');
+    function home()
+    {
+        $dataIncomplete = auth()->user()->cases;
+        $dataIncomplete = $dataIncomplete->filter(function ($case) {
+            return MilestoneDetail::where('case_id', $case->id)->doesntExist();
+        })->count();
+
+        $dataProcess = auth()->user()->cases;
+        $dataprocess = $dataProcess->filter(function ($case) {
+            return MilestoneDetail::where('case_id', $case->id)->exists();
+        })->count();
+
+        return view('government.home', ['dataIncomplete' => $dataIncomplete, 'dataProcess' => $dataprocess]);
+
+
     }
 
-    function dashboard(){
+    function dashboard()
+    {
         return view('government.dashboard');
     }
 
-    function tindakan(){
-        $data = ThisCase::where('government_id', auth()->user()->id)->get();
+    function tindakan()
+    {
+        $data = auth()->user()->cases;
+        $data = $data->filter(function ($case) {
+            return MilestoneDetail::where('case_id', $case->id)->doesntExist();
+        });
 
         return view('government.tindakan', ['data' => $data]);
     }
 
-    function milestone($id){
+    function milestone($id)
+    {
 
-        // $milestones = Milestone::find($id);
-        // $data = $milestones->cases()->where('government_id', $govId)->paginate(5);
-
-        $alldata = ThisCase::where('government_id', auth()->user()->id)->get();
-        $data = collect();
-
-        // foreach ($alldata as $item) {
-        //     $milestones = $item->milestone_details()->where('milestone_id', $id)->get();
-        //     $data = $data->merge($milestones);
-        // }
-
-        $data = ThisCase::where('government_id', auth()->user()->id)
-            ->whereHas('milestone_details', function ($query) use ($id) {
-            $query->where('milestone_id', $id);
-            })
+        $cases = auth()->user()->cases;
+        $caseIds = $cases->pluck('id')->toArray();
+        $data = MilestoneDetail::whereIn('case_id', $caseIds)
+            ->where('milestone_id', $id)
             ->get();
-
-        // $data = $alldata->milestone_details()->where('milestone_id', $id)->get();
 
         return view('government.perkembangan.milestone', ['data' => $data]);
     }

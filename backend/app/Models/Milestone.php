@@ -12,4 +12,8 @@ class Milestone extends Model
         'title',
         'description'
     ];
+
+    public function milestone_details(){
+        $this->hasMany(MilestoneDetail::class);
+    }
 }
