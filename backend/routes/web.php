@@ -272,15 +272,6 @@ Route::prefix("government")->group(function () {
     // Untuk layoutnya, pake layout yang udah gua buat, di /layouts/manager.blade.php
 });
 
-Route::prefix('hottopic')->group(function () {
-    Route::get('/', function () {
-        return view('hottopic.index');
-    })->name('hottopic.hot_topic');
-
-    Route::get('/{report_code}/detail', function ($report_code) {
-        return view('hottopic.detail');
-    })->name('hottopic.detail');
-});
 
 
 Route::get('/coba', function () {
