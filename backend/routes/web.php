@@ -191,7 +191,7 @@ Route::prefix('manager')->group(function () {
 
     Route::prefix('/unggah')->group(function () {
         Route::post('/perbaruiSelectedIds', [HotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
-        Route::get('/1', [HotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::post('/1', [HotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
         Route::get('/hapusSelecetedIds', [HotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
         Route::get('/2', function () {
@@ -211,6 +211,9 @@ Route::prefix('manager')->group(function () {
             Route::get('/edit', function () {
                 return view('manager.unggah_kasus.scroll.edit_kasus');
             })->name('manager.scroll_edit_kasus');
+            Route::get('/pilih', function () {
+                return view('manager.unggah_kasus.scroll.pilih_kasus');
+            })->name('manager.scroll_pilih_kasus');
         });
     });
 

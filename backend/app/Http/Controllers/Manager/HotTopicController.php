@@ -35,9 +35,9 @@ class HotTopicController extends Controller
         $mergedSelectedIds = array_unique(array_merge($selectedIds, $existingSelectedIds));
         session(['finselectedIds' => $mergedSelectedIds]);
 
-        dump(session('finselectedIds'));
+        // dump(session('finselectedIds'));
 
-        // return redirect()->route('manager.unggah_1');
+        return redirect()->route('manager.unggah_1');
     }
 
     public function viewSelectedLaporans()

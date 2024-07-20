@@ -153,11 +153,11 @@ Unggah Kasus
         <div class="row justify-content-center mt-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
                 <div class="row text-start p-3">
-                    <h4>{{$selectedCount}} laporan dipilih</h4>
+                    {{-- <h4>{{$selectedCount}} laporan dipilih</h4> --}}
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
-                        @if(count($selectedLaporans) > 0)
+                        {{-- @if(count($selectedLaporans) > 0)
                         <table class="table">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
@@ -193,7 +193,7 @@ Unggah Kasus
                         </table>
                         @else
                         <p>Silakan pilih laporan terlebih dahulu</p>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
                 <div class="row"></div>
