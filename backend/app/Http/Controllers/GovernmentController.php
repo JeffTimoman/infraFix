@@ -24,6 +24,11 @@ class GovernmentController extends Controller
             return MilestoneDetail::where('case_id', $case->id)->exists();
         })->count();
 
+        $dataDone = auth()->user()->cases;
+        $dataDone = $dataDone->filter(function ($case) {
+            return MilestoneDetail::where('milestone_id', 6)->exists();
+        })->count();
+
         return view('government.home', ['dataIncomplete' => $dataIncomplete, 'dataProcess' => $dataprocess]);
 
 
