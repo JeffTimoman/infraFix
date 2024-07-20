@@ -52,6 +52,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function cases(){
+        return $this->hasMany(ThisCase::class, 'government_id');
+    }
 }
 
 /*

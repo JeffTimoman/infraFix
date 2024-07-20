@@ -63,7 +63,7 @@
 @endsection
 
 @section('content')
-    <div class="card p-3">
+    <div class="card mx-5">
 
         <div class="card-body">
             <div class="col-md-12 row" id="form-4">
@@ -76,8 +76,8 @@
                         <p class="summary-damage">{{ $data['report']->damage_type->name }}</p>
                     </div>
                     <div class="col-md-6">
-                        <h5>Kelurahan</h5>
-                        <p class="summary-lokasi">{{ $data['report']->kelurahan->name }}</p>
+                        <h5>Lokasi</h5>
+                        <p class="summary-lokasi">{{ $data['report']->kelurahan->name }}, {{$data['report']->kelurahan->kecamatan->name}}, {{$data['report']->kelurahan->kecamatan->kota->name}}, {{$data['report']->kelurahan->kecamatan->kota->provinsi->name}}</p>
                     </div>
                     <div class="col-md-6">
                         <h5>Detail Kerusakan</h5>
@@ -120,6 +120,7 @@
             </div>
         </div>
     </div>
+    <a href="{{route('report.show')}}" class="btn btn-md btn-danger btn-modified mt-2 mx-5"> < Kembali</a>
 @endsection
 
 @section('script')

@@ -202,6 +202,120 @@
             align-items: center;
         }
     </style>
+    <style>
+        .container-outter_carousell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container-inner_carousell {
+            max-width: 1200px;
+            width: 95%;
+        }
+
+        .slider-wrapper_carousell {
+            position: relative;
+        }
+
+        .slider-wrapper_carousell .slide-button {
+            position: absolute;
+            top: 50%;
+            height: 30px;
+            width: 30px;
+            color: #fff;
+            background: #000;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 50%;
+            border: none;
+            outline: none;
+            transform: translateY(30%);
+        }
+
+        .slider-wrapper_carousell .slide-button#prev-slide {
+            left: -20px;
+            display: none;
+        }
+
+        .slider-wrapper_carousell .slide-button#next-slide {
+            right: -20px;
+        }
+
+        .slider-wrapper_carousell .slide-button:hover {
+            background: #3e3e3e;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .slider-wrapper_carousell .image-list_carousell {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            font-size: 0;
+            overflow-x: auto;
+            gap: 18px;
+            margin-bottom: 30px;
+            scrollbar-width: none;
+        }
+
+        .slider-wrapper_carousell .image-list_carousell::-webkit-scrollbar {
+            display: none;
+        }
+
+        .slider-wrapper_carousell .image-list_carousell .image-item_carousell {
+            width: 325px;
+            height: 288px;
+            object-fit: contain;
+            /* object-fit: cover; */
+        }
+
+        .container-inner_carousell .slider-scrollbar_carousell {
+            height: 24px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-scrollbar_carousell .scrollbar-track_carousell {
+            height: 2px;
+            width: 100%;
+            background: #f2f2f2;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .slider-scrollbar_carousell:hover .scrollbar-track_carousell {
+            height: 4px;
+        }
+
+        .slider-scrollbar_carousell .scrollbar-thumb_carousell {
+            height: 100%;
+            width: 50%;
+            background: #000;
+            position: absolute;
+            border-radius: inherit;
+            cursor: grab;
+        }
+
+        .slider-scrollbar_carousell .scrollbar-thumb_carousell:active {
+            cursor: grabbing;
+            height: 8px;
+            top: -2px;
+        }
+
+        .slider-scrollbar_carousell .scrollbar-thumb_carousell::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            bottom: -10px;
+
+        }
+
+        /* .image-list_carousell img {
+                                                    border: solid black 1px;
+                                                } */
+    </style>
 @endsection
 
 @section('content')
@@ -360,7 +474,7 @@
             </div>
             <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
                 <div class="row mt-3 ms-1 mb-2">
-                    <a href="{{ route('hottopic.hot_topic') }}" class="text-decoration-none text-dark link-secondary"><i
+                    <a href="{{ route('hottopic.index') }}" class="text-decoration-none text-dark link-secondary"><i
                             class="bi bi-arrow-left d-flex" style="font-size: 25px; font-style:normal;"><span
                                 class="ms-2 fw-bold" style="font-size: 16px">Post</span></i>
                     </a>
@@ -370,159 +484,40 @@
                         <div class="text-decoration-none container col-md-9  border-0">
                             <div class="text-capitalize text-dark d-flex justify-content-between align-items-center">
                                 <div class="text-wrap " style="width: 90%;height: 6vh">
-                                    <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
-                                        adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
-                                        Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
-                                        asperiores quam cupiditate fuga iusto nisi.lkds</h6>
+                                    <h6 style=" font-size: 12px">{{ $case->title }}</h6>
                                 </div>
                                 <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
-                                    @php
-                                        $currentTime = now();
-                                        $timeDifference = now()->diffInHours($currentTime);
-                                        $formattedTime = $timeDifference > 0 ? $timeDifference . 'h' : '0h';
-                                    @endphp
-                                    <span class="text-secondary" style="font-size: 14px">{{ $formattedTime }}</span>
+
+                                    <span class="text-secondary"
+                                        style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($case->created_at) }}</span>
                                 </div>
                             </div>
 
                             <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                <span>4073 Laporan</span>
+                                <span>{{ $case->reports->count() }} Laporan</span>
                             </div>
 
                             <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
                                 <div class="span">
-                                    Lokasi: (nama lokasi)
+                                    Alamat: {{ $case->address }}
                                     <br>
-                                    Status: (judul status)
+                                    Lokasi: {{ $case->kelurahan->name }}, {{ $case->kelurahan->kecamatan->name }},
+                                    {{ $case->kelurahan->kecamatan->kota->name }}.
+                                    <br>
+                                    Status: @if ($case->milestone_details->count() == 0)
+                                        Belum diproses
+                                    @else
+                                        {{ $case->milestone_details->last()->milestone->name }}
+                                    @endif
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-1 text-dark" style=" font-size: 12px; ">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
-                                        assumenda
-                                        perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
-                                        exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
-                                        ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
-                                        impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
-                                        minus debitis consequatur commodi molestias ipsam ex perferendis,
-                                        repellendus quos </p>
+                                    <p>{{$case->description}}</p>
                                 </div>
                             </div>
                             {{-- untuk show gambar --}}
-                            <style>
-                                .container-outter_carousell {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                }
 
-                                .container-inner_carousell {
-                                    max-width: 1200px;
-                                    width: 95%;
-                                }
-
-                                .slider-wrapper_carousell {
-                                    position: relative;
-                                }
-
-                                .slider-wrapper_carousell .slide-button {
-                                    position: absolute;
-                                    top: 50%;
-                                    height: 30px;
-                                    width: 30px;
-                                    color: #fff;
-                                    background: #000;
-                                    font-size: 1rem;
-                                    cursor: pointer;
-                                    border-radius: 50%;
-                                    border: none;
-                                    outline: none;
-                                    transform: translateY(30%);
-                                }
-
-                                .slider-wrapper_carousell .slide-button#prev-slide {
-                                    left: -20px;
-                                    display: none;
-                                }
-
-                                .slider-wrapper_carousell .slide-button#next-slide {
-                                    right: -20px;
-                                }
-
-                                .slider-wrapper_carousell .slide-button:hover {
-                                    background: #3e3e3e;
-                                    transition: background 0.3s ease-in-out;
-                                }
-
-                                .slider-wrapper_carousell .image-list_carousell {
-                                    display: grid;
-                                    grid-template-columns: repeat(10, 1fr);
-                                    font-size: 0;
-                                    overflow-x: auto;
-                                    gap: 18px;
-                                    margin-bottom: 30px;
-                                    scrollbar-width: none;
-                                }
-
-                                .slider-wrapper_carousell .image-list_carousell::-webkit-scrollbar {
-                                    display: none;
-                                }
-
-                                .slider-wrapper_carousell .image-list_carousell .image-item_carousell {
-                                    width: 325px;
-                                    height: 288px;
-                                    object-fit: contain;
-                                    /* object-fit: cover; */
-                                }
-
-                                .container-inner_carousell .slider-scrollbar_carousell {
-                                    height: 24px;
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                }
-
-                                .slider-scrollbar_carousell .scrollbar-track_carousell {
-                                    height: 2px;
-                                    width: 100%;
-                                    background: #f2f2f2;
-                                    position: relative;
-                                    border-radius: 4px;
-                                }
-
-                                .slider-scrollbar_carousell:hover .scrollbar-track_carousell {
-                                    height: 4px;
-                                }
-
-                                .slider-scrollbar_carousell .scrollbar-thumb_carousell {
-                                    height: 100%;
-                                    width: 50%;
-                                    background: #000;
-                                    position: absolute;
-                                    border-radius: inherit;
-                                    cursor: grab;
-                                }
-
-                                .slider-scrollbar_carousell .scrollbar-thumb_carousell:active {
-                                    cursor: grabbing;
-                                    height: 8px;
-                                    top: -2px;
-                                }
-
-                                .slider-scrollbar_carousell .scrollbar-thumb_carousell::after {
-                                    content: "";
-                                    position: absolute;
-                                    left: 0;
-                                    right: 0;
-                                    top: -10px;
-                                    bottom: -10px;
-
-                                }
-
-                                /* .image-list_carousell img {
-                                    border: solid black 1px;
-                                } */
-                            </style>
                             <div class="container-outter_carousell">
                                 <div class="container-inner_carousell">
                                     <div class="slider-wrapper_carousell">
@@ -563,19 +558,19 @@
                                     <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
                                         id="btn_like">
                                         <i class="bi bi-heart"></i>
-                                        <span class="mb-1">23k</span>
+                                        <span class="mb-1">{{ $case->likes->count() }}</span>
                                     </button>
                                 </div>
                                 <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
                                     <button onclick="" class="btn text-dark komen_button border-0" id="btn_komen">
                                         <i class="bi bi-chat-left"></i>
-                                        <span class="mb-1">17k</span>
+                                        <span class="mb-1">{{ $case->comments->count() }}</span>
                                     </button>
                                 </div>
                                 <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
                                     <button onclick="" class="btn text-dark" id="btn_bookmark">
                                         <i class="bi bi-bookmark"></i>
-                                        <span class="mb-1">9k</span>
+                                        <span class="mb-1">{{ $case->bookmarks->count() }}</span>
                                     </button>
                                 </div>
                                 <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
@@ -773,262 +768,262 @@
 @endsection
 
 @section('script')
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
-<script>
-    var btn_like = document.getElementById('btn_like');
-    var btn_komen = document.getElementById('btn_komen');
-    var btn_bookmark = document.getElementById('btn_bookmark');
-    var btn_share = document.getElementById('btn_share');
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+    <script>
+        var btn_like = document.getElementById('btn_like');
+        var btn_komen = document.getElementById('btn_komen');
+        var btn_bookmark = document.getElementById('btn_bookmark');
+        var btn_share = document.getElementById('btn_share');
 
-    function ToggleLike() {
-        if (btn_like.style.color == 'red') {
-            btn_like.style.color = 'black';
-        } else {
-            btn_like.style.color = 'red';
+        function ToggleLike() {
+            if (btn_like.style.color == 'red') {
+                btn_like.style.color = 'black';
+            } else {
+                btn_like.style.color = 'red';
+            }
         }
-    }
-</script>
+    </script>
 
 
-{{-- jquery --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- jquery --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
-{{-- month slider --}}
-<script>
-    $(document).ready(function() {
-        let val = $('.range_minimal').val();
-        let min = $('.range_minimal').attr('min');
-        let max = $('.range_minimal').attr('max');
-        let percent = ((val - min) / (max - min)) * 100;
-        $('.progres').css('left', percent + '%');
-        $('.input-min').val(val);
-
-        val = $('.range_maksimal').val();
-        percent = ((val - min) / (max - min)) * 100;
-        $('.progres').css('right', (100 - percent) + '%');
-        $('.input-max').val(val);
-
-        val = $('.range_minimal_month').val();
-        min = $('.range_minimal_month').attr('min');
-        max = $('.range_minimal_month').attr('max');
-        percent = ((val - min) / (max - min)) * 100;
-        $('.progres-month').css('left', percent + '%');
-        $('.input-min-month').val(val);
-
-        val = $('.range_maksimal_month').val();
-        percent = ((val - min) / (max - min)) * 100;
-        $('.progres-month').css('right', (100 - percent) + '%');
-        $('.input-max-month').val(val);
-    });
-    $(document).ready(function() {
-
-        $('.range_minimal').on('input', function() {
-            var val = $(this).val();
-            var min = $(this).attr('min');
-            var max = $(this).attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
+    {{-- month slider --}}
+    <script>
+        $(document).ready(function() {
+            let val = $('.range_minimal').val();
+            let min = $('.range_minimal').attr('min');
+            let max = $('.range_minimal').attr('max');
+            let percent = ((val - min) / (max - min)) * 100;
             $('.progres').css('left', percent + '%');
             $('.input-min').val(val);
-        });
 
-        $('.range_maksimal').on('input', function() {
-            var val = $(this).val();
-            var min = $(this).attr('min');
-            var max = $(this).attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
+            val = $('.range_maksimal').val();
+            percent = ((val - min) / (max - min)) * 100;
             $('.progres').css('right', (100 - percent) + '%');
             $('.input-max').val(val);
-        });
 
-        $('.range_minimal_month').on('input', function() {
-            var val = $(this).val();
-            var min = $(this).attr('min');
-            var max = $(this).attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
+            val = $('.range_minimal_month').val();
+            min = $('.range_minimal_month').attr('min');
+            max = $('.range_minimal_month').attr('max');
+            percent = ((val - min) / (max - min)) * 100;
             $('.progres-month').css('left', percent + '%');
             $('.input-min-month').val(val);
-        });
 
-
-        $('.range_maksimal_month').on('input', function() {
-            var val = $(this).val();
-            var min = $(this).attr('min');
-            var max = $(this).attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
+            val = $('.range_maksimal_month').val();
+            percent = ((val - min) / (max - min)) * 100;
             $('.progres-month').css('right', (100 - percent) + '%');
             $('.input-max-month').val(val);
         });
+        $(document).ready(function() {
 
-        // detect range_minimal change on value and adjust the progress bar
-        $('.input-min').on('input', function() {
-            var val = $(this).val();
-            var min = $('.range_minimal').attr('min');
-            var max = $('.range_minimal').attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
-            $('.progres').css('left', percent + '%');
-            $('.range_minimal').val(val);
-        });
-        $('.input-max').on('input', function() {
-            var val = $(this).val();
-            var min = $('.range_minimal').attr('min');
-            var max = $('.range_minimal').attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
-            $('.progres').css('right', (100 - percent) + '%');
-            $('.range_maksimal').val(val);
-        });
+            $('.range_minimal').on('input', function() {
+                var val = $(this).val();
+                var min = $(this).attr('min');
+                var max = $(this).attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres').css('left', percent + '%');
+                $('.input-min').val(val);
+            });
 
-        $('.input-min-month').on('input', function() {
-            var val = $(this).val();
-            var min = $('.range_minimal_month').attr('min');
-            var max = $('.range_minimal_month').attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
-            $('.progres-month').css('left', percent + '%');
-            $('.range_minimal_month').val(val);
-        });
+            $('.range_maksimal').on('input', function() {
+                var val = $(this).val();
+                var min = $(this).attr('min');
+                var max = $(this).attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres').css('right', (100 - percent) + '%');
+                $('.input-max').val(val);
+            });
 
-        $('.input-max-month').on('input', function() {
-            var val = $(this).val();
-            var min = $('.range_minimal_month').attr('min');
-            var max = $('.range_minimal_month').attr('max');
-            var percent = ((val - min) / (max - min)) * 100;
-            $('.progres-month').css('right', (100 - percent) + '%');
-            $('.range_maksimal_month').val(val);
-        });
+            $('.range_minimal_month').on('input', function() {
+                var val = $(this).val();
+                var min = $(this).attr('min');
+                var max = $(this).attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres-month').css('left', percent + '%');
+                $('.input-min-month').val(val);
+            });
 
 
+            $('.range_maksimal_month').on('input', function() {
+                var val = $(this).val();
+                var min = $(this).attr('min');
+                var max = $(this).attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres-month').css('right', (100 - percent) + '%');
+                $('.input-max-month').val(val);
+            });
 
-
-
-
-
-        $('.range_minimal').on('input', function() {
-            var val = parseInt($(this).val());
-            var val2 = parseInt($('.range_maksimal').val());
-            if (val > val2) {
-                $('.range_maksimal').val(val);
+            // detect range_minimal change on value and adjust the progress bar
+            $('.input-min').on('input', function() {
+                var val = $(this).val();
                 var min = $('.range_minimal').attr('min');
                 var max = $('.range_minimal').attr('max');
                 var percent = ((val - min) / (max - min)) * 100;
                 $('.progres').css('left', percent + '%');
-                $('.progres').css('right', (100 - percent) + '%');
-                $('.input-min').val(val);
-                $('.input-max').val(val);
-            }
-        });
-
-        $('.range_maksimal').on('input', function() {
-            var val = parseInt($(this).val());
-            var val2 = parseInt($('.range_minimal').val());
-            if (val < val2) {
                 $('.range_minimal').val(val);
+            });
+            $('.input-max').on('input', function() {
+                var val = $(this).val();
                 var min = $('.range_minimal').attr('min');
                 var max = $('.range_minimal').attr('max');
                 var percent = ((val - min) / (max - min)) * 100;
-                $('.progres').css('left', percent + '%');
                 $('.progres').css('right', (100 - percent) + '%');
-                $('.input-min').val(val);
-                $('.input-max').val(val);
-            }
-        });
+                $('.range_maksimal').val(val);
+            });
 
-        // i want to make so when the range_minimal_month value after scroll is over the range_maksimal_month value, the range_maksimal_month value will be the same as the range_minimal_month value
-        $('.range_minimal_month').on('input', function() {
-            let val = parseInt($(this).val());
-            let val2 = parseInt($('.range_maksimal_month').val());
-            console.log(val, val2);
-            if (val > val2) {
-                console.log('surpass');
-                $('.range_maksimal_month').val(val);
+            $('.input-min-month').on('input', function() {
+                var val = $(this).val();
                 var min = $('.range_minimal_month').attr('min');
                 var max = $('.range_minimal_month').attr('max');
                 var percent = ((val - min) / (max - min)) * 100;
                 $('.progres-month').css('left', percent + '%');
-                $('.progres-month').css('right', (100 - percent) + '%');
-                $('.input-min-month').val(val);
-                $('.input-max-month').val(val);
-            }
-        });
-
-        $('.range_maksimal_month').on('input', function() {
-            let val = parseInt($(this).val());
-            let val2 = parseInt($('.range_minimal_month').val());
-            console.log(val, val2);
-            if (val < val2) {
-                console.log('surpass');
                 $('.range_minimal_month').val(val);
+            });
+
+            $('.input-max-month').on('input', function() {
+                var val = $(this).val();
                 var min = $('.range_minimal_month').attr('min');
                 var max = $('.range_minimal_month').attr('max');
                 var percent = ((val - min) / (max - min)) * 100;
-                $('.progres-month').css('left', percent + '%');
                 $('.progres-month').css('right', (100 - percent) + '%');
-                $('.input-min-month').val(val);
-                $('.input-max-month').val(val);
-            }
+                $('.range_maksimal_month').val(val);
+            });
+
+
+
+
+
+
+
+            $('.range_minimal').on('input', function() {
+                var val = parseInt($(this).val());
+                var val2 = parseInt($('.range_maksimal').val());
+                if (val > val2) {
+                    $('.range_maksimal').val(val);
+                    var min = $('.range_minimal').attr('min');
+                    var max = $('.range_minimal').attr('max');
+                    var percent = ((val - min) / (max - min)) * 100;
+                    $('.progres').css('left', percent + '%');
+                    $('.progres').css('right', (100 - percent) + '%');
+                    $('.input-min').val(val);
+                    $('.input-max').val(val);
+                }
+            });
+
+            $('.range_maksimal').on('input', function() {
+                var val = parseInt($(this).val());
+                var val2 = parseInt($('.range_minimal').val());
+                if (val < val2) {
+                    $('.range_minimal').val(val);
+                    var min = $('.range_minimal').attr('min');
+                    var max = $('.range_minimal').attr('max');
+                    var percent = ((val - min) / (max - min)) * 100;
+                    $('.progres').css('left', percent + '%');
+                    $('.progres').css('right', (100 - percent) + '%');
+                    $('.input-min').val(val);
+                    $('.input-max').val(val);
+                }
+            });
+
+            // i want to make so when the range_minimal_month value after scroll is over the range_maksimal_month value, the range_maksimal_month value will be the same as the range_minimal_month value
+            $('.range_minimal_month').on('input', function() {
+                let val = parseInt($(this).val());
+                let val2 = parseInt($('.range_maksimal_month').val());
+                console.log(val, val2);
+                if (val > val2) {
+                    console.log('surpass');
+                    $('.range_maksimal_month').val(val);
+                    var min = $('.range_minimal_month').attr('min');
+                    var max = $('.range_minimal_month').attr('max');
+                    var percent = ((val - min) / (max - min)) * 100;
+                    $('.progres-month').css('left', percent + '%');
+                    $('.progres-month').css('right', (100 - percent) + '%');
+                    $('.input-min-month').val(val);
+                    $('.input-max-month').val(val);
+                }
+            });
+
+            $('.range_maksimal_month').on('input', function() {
+                let val = parseInt($(this).val());
+                let val2 = parseInt($('.range_minimal_month').val());
+                console.log(val, val2);
+                if (val < val2) {
+                    console.log('surpass');
+                    $('.range_minimal_month').val(val);
+                    var min = $('.range_minimal_month').attr('min');
+                    var max = $('.range_minimal_month').attr('max');
+                    var percent = ((val - min) / (max - min)) * 100;
+                    $('.progres-month').css('left', percent + '%');
+                    $('.progres-month').css('right', (100 - percent) + '%');
+                    $('.input-min-month').val(val);
+                    $('.input-max-month').val(val);
+                }
+            });
+
         });
+    </script>
+    <script>
+        const initSlider = () => {
+            const imageList = document.querySelector(".slider-wrapper_carousell .image-list_carousell");
+            const slideButtons = document.querySelectorAll(".slider-wrapper_carousell .slide-button");
+            const sliderScrollbar = document.querySelector(".container-inner_carousell .slider-scrollbar_carousell");
+            const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb_carousell");
+            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
 
-    });
-</script>
-<script>
-    const initSlider = () => {
-        const imageList = document.querySelector(".slider-wrapper_carousell .image-list_carousell");
-        const slideButtons = document.querySelectorAll(".slider-wrapper_carousell .slide-button");
-        const sliderScrollbar = document.querySelector(".container-inner_carousell .slider-scrollbar_carousell");
-        const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb_carousell");
-        const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+            scrollbarThumb.addEventListener("mousedown", (e) => {
+                const startX = e.clientX;
+                const thumbPosition = scrollbarThumb.offsetLeft;
+                const handleMouseMove = (e) => {
+                    const deltaX = e.clientX - startX;
+                    const newThumbPosition = thumbPosition + deltaX;
+                    const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb
+                        .offsetWidth;
+                    const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+                    const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
 
-        scrollbarThumb.addEventListener("mousedown", (e) => {
-            const startX = e.clientX;
-            const thumbPosition = scrollbarThumb.offsetLeft;
-            const handleMouseMove = (e) => {
-                const deltaX = e.clientX - startX;
-                const newThumbPosition = thumbPosition + deltaX;
-                const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb
-                    .offsetWidth;
-                const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
-                const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
-
-                scrollbarThumb.style.transform = `translateX(${boundedPosition}px)`;
-                imageList.scrollLeft = scrollPosition;
+                    scrollbarThumb.style.transform = `translateX(${boundedPosition}px)`;
+                    imageList.scrollLeft = scrollPosition;
 
 
-            };
-            const handleMouseUp = () => {
-                document.removeEventListener("mousemove", handleMouseMove);
-                document.removeEventListener("mouseup", handleMouseUp);
-            };
+                };
+                const handleMouseUp = () => {
+                    document.removeEventListener("mousemove", handleMouseMove);
+                    document.removeEventListener("mouseup", handleMouseUp);
+                };
 
-            document.addEventListener("mousemove", handleMouseMove);
-            document.addEventListener("mouseup", handleMouseUp);
-        });
-        slideButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const direction = button.id === "prev-slide" ? -1 : 1;
-                const scrollAmount = imageList.clientWidth * direction;
-                imageList.scrollBy({
-                    left: scrollAmount,
-                    behavior: "smooth"
+                document.addEventListener("mousemove", handleMouseMove);
+                document.addEventListener("mouseup", handleMouseUp);
+            });
+            slideButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const direction = button.id === "prev-slide" ? -1 : 1;
+                    const scrollAmount = imageList.clientWidth * direction;
+                    imageList.scrollBy({
+                        left: scrollAmount,
+                        behavior: "smooth"
+                    });
                 });
             });
-        });
-        const handleSlideButton = () => {
-            slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "block";
-            slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
+            const handleSlideButton = () => {
+                slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "block";
+                slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
 
-        };
-        const updateScrollThumbPosition = () => {
-            const scrollPosition = imageList.scrollLeft;
-            const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth -
-                scrollbarThumb.offsetWidth);
-            scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
-        };
-        imageList.addEventListener("scroll", () => {
-            handleSlideButton();
-            updateScrollThumbPosition();
-        });
-    }
-    window.addEventListener("load", initSlider);
-</script>
+            };
+            const updateScrollThumbPosition = () => {
+                const scrollPosition = imageList.scrollLeft;
+                const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth -
+                    scrollbarThumb.offsetWidth);
+                scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
+            };
+            imageList.addEventListener("scroll", () => {
+                handleSlideButton();
+                updateScrollThumbPosition();
+            });
+        }
+        window.addEventListener("load", initSlider);
+    </script>
 @endsection

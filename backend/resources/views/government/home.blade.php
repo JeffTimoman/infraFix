@@ -7,7 +7,7 @@
     .main {
         background-color: #EDEDED;
     }
-    
+
     .tablebox {
         background-color: white;
         margin-left: 4.25%;
@@ -53,14 +53,16 @@
                         <div class="card-body d-flex py-4">
                             <div class="card-text mt-2 col-9">
                                 <h5 class="mb-2 fw-bold">
-                                    200
+                                    {{$dataIncomplete}}
                                 </h5>
                                 <p class="text-black-50 mb-2 fw-bold">
                                     Laporan Masuk
                                 </p>
                             </div>
                             <div class="card-icon col-3 d-flex justify-content-end align-items-center">
-                                <i class="fa-solid fa-gauge"></i>
+                                <span class="material-symbols-outlined">
+                                    assignment_late
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -72,14 +74,16 @@
                         <div class="card-body d-flex py-4">
                             <div class="card-text mt-2 col-9">
                                 <h5 class="mb-2 fw-bold">
-                                    1
+                                    {{$dataProcess}}
                                 </h5>
                                 <p class="text-black-50 mb-2 fw-bold">
                                     Laporan Ditindak
                                 </p>
                             </div>
                             <div class="card-icon col-3 d-flex justify-content-end align-items-center">
-                                <i class="fa-solid fa-gauge"></i>
+                                <span class="material-symbols-outlined">
+                                    contract_edit
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -99,7 +103,9 @@
                                     </p>
                                 </div>
                                 <div class="card-icon col-3 d-flex justify-content-end align-items-center">
-                                    <i class="fa-solid fa-gauge"></i>
+                                    <span class="material-symbols-outlined">
+                                        task
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -156,5 +162,5 @@
 
 </div>
 
-    
+
 @endsection
