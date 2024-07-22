@@ -210,7 +210,7 @@ Laporan Belum Diunggah
         <div class="row justify-content-center mb-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                 <div class="row">
-                    <form method="POST" action="{{route('manager.unggah_1')}}" id="submit">
+                    <form method="post" action="{{route('manager.unggah_1')}}" id="submit">
                         @csrf
                         <input type="text" class="report-data-collected" name="reports" id="reports">
                         <table class="table align-middle" id="myTable">
@@ -332,12 +332,34 @@ Laporan Belum Diunggah
             $(".report-data-collected").val(reportIsChecked);
         }
 
+        function handleRemoveButtonClick() {
+        $('.bottom-button').on('click', function() {
+            const id = $(this).data('id');
+
+            // Remove the ID from localStorage
+            let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
+            checkedValues = checkedValues.filter(value => value !== id.toString());
+            localStorage.setItem('report_is_checked', checkedValues);
+
+            // Optionally, you can remove the list item from the DOM
+            $(this).parent().remove();
+
+            // Update the hidden input field
+            collectReportData();
+        });
+    }
+
+
+
+
 
     $(document).ready(function() {
 
         removeLocalStorage();
 
         checkData();
+
+        handleRemoveButtonClick();
 
     });
 </script>
