@@ -15,7 +15,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\HotTopicController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\Manager\ManagerHotTopicController;
+
+use App\Http\Controllers\Manager\HotTopicController as ManagerHotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
@@ -193,6 +194,7 @@ Route::prefix('manager')->group(function () {
     Route::prefix('/unggah')->group(function () {
         Route::post('/perbaruiSelectedIds', [ManagerHotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
         Route::post('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::get('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
         Route::get('/hapusSelecetedIds', [ManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
         Route::get('/2', function () {
@@ -268,6 +270,7 @@ Route::prefix("government")->group(function () {
 Route::prefix('hottopic')->group(function () {
     Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
+    Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
 });
 
 
