@@ -212,7 +212,7 @@ Laporan Belum Diunggah
                 <div class="row">
                     <form method="POST" action="{{route('manager.unggah_1')}}" id="submit">
                         @csrf
-                        <input type="hidden" class="report-data-collected" name="reports">
+                        <input type="text" class="report-data-collected" name="reports" id="reports">
                         <table class="table align-middle" id="myTable">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>

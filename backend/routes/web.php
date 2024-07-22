@@ -15,7 +15,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\HotTopicController;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\Manager\HotTopicController;
+use App\Http\Controllers\Manager\ManagerHotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
@@ -191,9 +191,9 @@ Route::prefix('manager')->group(function () {
     Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
-        Route::post('/perbaruiSelectedIds', [HotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
-        Route::post('/1', [HotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
-        Route::get('/hapusSelecetedIds', [HotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
+        Route::post('/perbaruiSelectedIds', [ManagerHotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
+        Route::post('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::get('/hapusSelecetedIds', [ManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
         Route::get('/2', function () {
             return view('manager.unggah_kasus.unggah_2');
@@ -247,7 +247,6 @@ Route::prefix('manager')->group(function () {
     Route::get('/index', function () {
         return view('manager.index');
     })->name('manager.index');
-
 });
 
 Route::prefix("government")->group(function () {
@@ -264,7 +263,6 @@ Route::prefix("government")->group(function () {
     Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
-
 });
 
 Route::prefix('hottopic')->group(function () {
