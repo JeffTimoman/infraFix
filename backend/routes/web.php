@@ -267,6 +267,7 @@ Route::prefix("government")->group(function () {
 Route::prefix('hottopic')->group(function () {
     Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
+    Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
 });
 
 
