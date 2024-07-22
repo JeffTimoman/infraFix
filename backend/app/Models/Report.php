@@ -28,6 +28,10 @@ class Report extends Model
         return $this->belongsTo(DamageType::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function kelurahan()
     {
         return $this->belongsTo(Kelurahan::class);

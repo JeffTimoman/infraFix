@@ -17,8 +17,10 @@ class Comment extends Model
         'case_id'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
+    public function case(){
+        return $this->belongsTo(ThisCase::class, 'case_id');
+    }
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
