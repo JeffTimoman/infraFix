@@ -53,4 +53,8 @@ class ThisCase extends Model
     public function bookmarks(){
         return $this->hasMany(Bookmark::class, 'case_id');
     }
+
+    public function creator(){
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
