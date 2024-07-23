@@ -212,7 +212,7 @@ Laporan Belum Diunggah
                 <div class="row">
                     <form method="post" action="{{route('manager.unggah_1')}}" id="submit">
                         @csrf
-                        <input type="text" class="report-data-collected" name="reports" id="reports">
+                        <input type="hidden" class="report-data-collected" name="reports" id="reports">
                         <table class="table align-middle" id="myTable">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
@@ -267,13 +267,15 @@ Laporan Belum Diunggah
                         </div>
                     </form>
                 </div>
-                <br>
-                {{$laporans ->links('pagination::bootstrap-5')}}
+                <div class="row mt-4">
+                    {{$laporans ->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
 @section('script')
 <script>
     function removeLocalStorage(){
@@ -303,7 +305,6 @@ Laporan Belum Diunggah
             if (checkedValues.includes($(this).val())) {
                 $(this).prop("checked", true);
             }
-
         });
 
         checkedSelected.on("change", function() {
@@ -336,15 +337,15 @@ Laporan Belum Diunggah
         $('.bottom-button').on('click', function() {
             const id = $(this).data('id');
 
-            // Remove the ID from localStorage
+            // remove the ID from localStorage
             let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
             checkedValues = checkedValues.filter(value => value !== id.toString());
             localStorage.setItem('report_is_checked', checkedValues);
 
-            // Optionally, you can remove the list item from the DOM
+            // remove the list item from the DOM(?)
             $(this).parent().remove();
 
-            // Update the hidden input field
+
             collectReportData();
         });
     }

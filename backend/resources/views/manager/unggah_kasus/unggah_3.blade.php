@@ -118,6 +118,28 @@
         text-align: center;
     }
 </style>
+
+<style>
+    .semua:hover a {
+        border-color: white;
+        border-width: 0.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+
+    .bottom-button {
+        background-color: #A50000;
+        color: white;
+    }
+
+    .bottom-button:hover {
+        border-color: #A50000;
+        background-color: white;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+</style>
 @endsection
 
 @section('title')
@@ -151,16 +173,14 @@ Unggah Kasus
             <div class="col-lg-10 rounded p-1 justify-content-center"
                 style="background-color: white; height: 35rem; width: 82vw;">
                 <iframe class="" style="background-color: red; height: 34.5rem; width: 79vw;"
-                    src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0"></iframe>
+                    src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0" id="result-iframe"></iframe>
             </div>
         </div>
-        <div class="row justify-content-end">
-            <div class="col-lg-2 p-4">
-                <!-- Kasi ALert yakin kirim -->
-                <form action="{{ route('manager.hot_topic')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded"
-                        style="background-color: #A50000; color: white; margin-left: 4.3rem;">Kirim</button>
-                </form>
+        <div class="row justify-content-end mt-4" style="margin-left: 3rem">
+            <div class="col-lg-2">
+                <div class="button">
+                    <button type="submit" class="btn btn-lg rounded bottom-button">Unggah</button>
+                </div>
             </div>
         </div>
     </div>
@@ -172,5 +192,6 @@ Unggah Kasus
     function goBack() {
         window.history.back();
     }
+
 </script>
 @endsection

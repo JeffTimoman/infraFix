@@ -118,6 +118,29 @@
         text-align: center;
     }
 </style>
+
+<style>
+    .semua:hover a {
+        border-color: white;
+        border-width: 0.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+
+    .bottom-button {
+        background-color: #A50000;
+        color: white;
+    }
+
+    .bottom-button:hover {
+        border-color: #A50000;
+        background-color: white;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+</style>
+
 @endsection
 
 @section('title')
@@ -130,9 +153,11 @@ Unggah Kasus
         <!-- 1 -->
         <div class="row pt-3 px-5">
             <div class="col-lg-2">
-                <span class="back-icon" onclick="goBack()">
-                    <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
-                </span>
+                <a href="{{route('manager.laporan_belum_unggah')}}">
+                    <span class="back-icon" onclick="goBack()">
+                        <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                    </span>
+                </a>
             </div>
         </div>
         <div class="row justify-content-center">
@@ -147,26 +172,43 @@ Unggah Kasus
             </div>
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mt-4">
-            <div class="col-lg-10 rounded p-1 justify-content-center" style="background-color: white; height: 35rem; width: 82vw;">
-                <iframe class="" style="height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_isi_kasus')}}" frameborder="0"></iframe>
+        <form action="{{route('manager.unggah_3')}}" method="">
+            @csrf
+            {{-- @method(`post`) --}}
+            <div class="row justify-content-center mt-4">
+                <div class="col-lg-10 rounded p-1 justify-content-center"
+                    style="background-color: white; height: 35rem; width: 82vw;">
+                    <iframe class="" style="height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_isi_kasus')}}"
+                        frameborder="0" id="form-iframe"></iframe>
+                </div>
             </div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col-lg-2 p-4">
-                <form action="{{ route('manager.unggah_3')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
-                </form>
+            <div class="row justify-content-end mt-4" style="margin-left: 5rem">
+                <div class="col-lg-2">
+                    <div class="button">
+                        <button type="submit" class="btn btn-lg rounded bottom-button">Selanjutnya</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 @endsection
 
 @section('script')
 <script>
-    function goBack() {
-        window.history.back();
-    }
+    // function goBack() {
+    //     window.history.back();
+    // }
+    document.getElementById('submit-next').onclick = function() {
+            var iframe = document.getElementById('form-iframe');
+            var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            var inputField = iframeDocument.getElementById('inputField').value;
+            localStorage.setItem('latestInput', inputField);
+            alert("Input saved to local storage");
+        };
+
+        document.getElementById('submit-next').onclick = function() {
+            window.location.href = "{{ route('manager.unggah_3') }}";
+        };
 </script>
 @endsection

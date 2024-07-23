@@ -192,8 +192,8 @@ Unggah Kasus
                     <h4 id="selected-count"><span>{{$selectedCount}}</span> laporan dipilih</h4>
                 </div>
                 <div class="row">
-                    {{-- <form action=""> --}}
-                        {{-- @csrf --}}
+                    <form action="{{route('manager.unggah_2')}}" method="POST">
+                        @csrf
                         @if(count($selectedLaporans) > 0)
                         <div class="row">
                             <table class="table align-middle">
@@ -221,6 +221,9 @@ Unggah Kasus
                                         <td>{{$selected->kelurahan->kecamatan->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
+                                        @else
+                                        <p>Silakan pilih laporan terlebih dahulu</p>
+                                        @endif
                                         <td>
 
                                             <button class="btn-remove" data-id="{{ $selected->id }}"
@@ -245,14 +248,11 @@ Unggah Kasus
                                 </div>
                             </div>
                         </div>
-                        @else
-                        <p>Silakan pilih laporan terlebih dahulu</p>
-                        @endif
-                        {{--
-                    </form> --}}
+                    </form>
                 </div>
-                <br> <br>
-                {{$selectedLaporans ->links('pagination::bootstrap-5')}}
+                <div class="row mt-4">
+                    {{$selectedLaporans ->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>
@@ -326,21 +326,18 @@ Unggah Kasus
         $('.btn-remove').on('click', function() {
             const id = $(this).data('id');
 
-            // Remove the ID from localStorage
+            // remove the ID from localStorage
             let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
             checkedValues = checkedValues.filter(value => value !== id.toString());
             localStorage.setItem('report_is_checked', checkedValues);
 
-            // Remove the list item from the DOM
+            // remove the list item from the DOM(?)
             $(`#report-${id}`).remove();
 
-            // Update the hidden input field
             collectReportData();
             updateSelectedCount();
         });
     }
-
-
 
     $(document).ready(function() {
 
@@ -351,5 +348,6 @@ Unggah Kasus
         handleRemoveButtonClick();
 
     });
+
 </script>
 @endsection

@@ -18,6 +18,7 @@ use App\Http\Controllers\MainController;
 
 use App\Http\Controllers\Manager\HotTopicController as ManagerHotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
+use App\Http\Controllers\Manager\ManagerHotTopicController as ManagerManagerHotTopicController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
@@ -192,25 +193,26 @@ Route::prefix('manager')->group(function () {
     Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
-        Route::post('/perbaruiSelectedIds', [ManagerHotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
-        Route::post('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
-        Route::get('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
-        Route::get('/hapusSelecetedIds', [ManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
-        Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
-        Route::get('/2', function () {
+        Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
+        Route::post('/2', [function () {
             return view('manager.unggah_kasus.unggah_2');
-        })->name('manager.unggah_2');
-        Route::get('/3', function () {
+        }])->name('manager.unggah_2');
+        Route::get('/3', [function () {
             return view('manager.unggah_kasus.unggah_3');
-        })->name('manager.unggah_3');
+        }])->name('manager.unggah_3');
 
         Route::prefix('/scroll')->group(function () {
-            Route::get('/isi', function () {
-                return view('manager.unggah_kasus.scroll.isi_kasus');
-            })->name('manager.scroll_isi_kasus');
+            // Route::get('/isi', function () {
+            //     return view('manager.unggah_kasus.scroll.isi_kasus');
+            // })->name('manager.scroll_isi_kasus');
+            Route::get('/isi', [ManagerManagerHotTopicController::class, 'dropdown_unggah'])->name('manager.scroll_isi_kasus');
+            // Route::post('/storeHotTopic', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.scroll_ringkasan_kasus');
+            // Route::get('/ringkasan', [ManagerManagerHotTopicController::class, 'getSummary'])->name('manager.scroll_ringkasan_kasus');
             Route::get('/ringkasan', function () {
                 return view('manager.unggah_kasus.scroll.ringkasan_kasus');
             })->name('manager.scroll_ringkasan_kasus');
+            Route::get('/fetch-names', [ManagerManagerHotTopicController::class, 'fetchNames']);
             Route::get('/edit', function () {
                 return view('manager.unggah_kasus.scroll.edit_kasus');
             })->name('manager.scroll_edit_kasus');
