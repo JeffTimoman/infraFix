@@ -118,6 +118,42 @@
         text-align: center;
     }
 </style>
+
+<style>
+    .semua:hover a {
+        border-color: white;
+        border-width: 0.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+
+    .bottom-button {
+        background-color: #A50000;
+        color: white;
+    }
+
+    .bottom-button:hover {
+        border-color: #A50000;
+        background-color: white;
+        border-width: 1.5px;
+        border-style: ridge;
+        transition: .2s;
+    }
+</style>
+
+<style>
+    .pagination .page-link {
+        color: #A50000;
+    }
+
+    .pagination .page-link:hover {
+        color: darkred;
+    }
+
+    .pagination .active {
+        color: #A50000;
+    }
+</style>
 @endsection
 
 @section('title')
@@ -152,65 +188,166 @@ Unggah Kasus
         <!-- 2 -->
         <div class="row justify-content-center mt-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
-                <div class="row text-start p-3">
-                    <h4>{{$selectedCount}} laporan dipilih</h4>
+                <div class="row text-start p-2">
+                    <h4 id="selected-count"><span>{{$selectedCount}}</span> laporan dipilih</h4>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
+                <div class="row">
+                    <form action="{{route('manager.unggah_2')}}" method="POST">
+                        @csrf
                         @if(count($selectedLaporans) > 0)
-                        <table class="table">
-                            <thead style="border-bottom-width: 3px; border-top-width: 3px;">
-                                <tr>
-                                    <th scope="col">Kode Laporan</th>
-                                    <th scope="col">Judul Laporan</th>
-                                    <th scope="col">Tipe Kerusakan</th>
-                                    <th scope="col">Alamat</th>
-                                    <th scope="col">Kelurahan</th>
-                                    <th scope="col">Kecamatan</th>
-                                    <th scope="col">Kota</th>
-                                    <th scope="col">Provinsi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table align-middle">
-                                @foreach ($selectedLaporans as $selected)
-                                <tr>
-                                    <td>{{$selected->report_code}}</td>
-                                    <td>{{$selected->title}}</td>
-                                    <td>{{$selected->damage_type->name}}</td>
-                                    <td>{{$selected->address}}</td>
-                                    <td>{{$selected->kelurahan->name}}</td>
-                                    <td>{{$selected->kelurahan->kecamatan->name}}</td>
-                                    <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
-                                    <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
-                                    <td>
-                                        <form action="" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <span class="material-symbols-outlined align-middle"
-                                                style="color: #A50000;">delete</span>
-                                            <label for="">Hapus</label>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @else
-                        <p>Silakan pilih laporan terlebih dahulu</p>
-                        @endif
-                    </div>
+                        <div class="row">
+                            <table class="table align-middle">
+                                <thead style="border-bottom-width: 3px; border-top-width: 3px;">
+                                    <tr>
+                                        <th scope="col">Kode Laporan</th>
+                                        <th scope="col">Judul Laporan</th>
+                                        <th scope="col">Tipe Kerusakan</th>
+                                        <th scope="col">Alamat</th>
+                                        <th scope="col">Kelurahan</th>
+                                        <th scope="col">Kecamatan</th>
+                                        <th scope="col">Kota</th>
+                                        <th scope="col">Provinsi</th>
+                                        <th scope="col">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table align-middle">
+                                    @foreach ($selectedLaporans as $selected)
+                                    <tr id="report-{{ $selected->id }}">
+                                        <td>{{$selected->report_code}}</td>
+                                        <td>{{$selected->title}}</td>
+                                        <td>{{$selected->damage_type->name}}</td>
+                                        <td>{{$selected->address}}</td>
+                                        <td>{{$selected->kelurahan->name}}</td>
+                                        <td>{{$selected->kelurahan->kecamatan->name}}</td>
+                                        <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
+                                        <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
+                                        @else
+                                        <p>Silakan pilih laporan terlebih dahulu</p>
+                                        @endif
+                                        <td>
+
+                                            <button class="btn-remove" data-id="{{ $selected->id }}"
+                                                style="border: none">
+                                                <span class="material-symbols-outlined align-middle"
+                                                    style="color: #A50000;">delete</span>
+                                                <h6 style="color: black; display: inline;">Hapus</h6>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="col-lg-2">
+                                <div class="button">
+                                    <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan
+                                        ke
+                                        Kasus</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="row"></div>
-            </div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col-lg-2 p-4">
-                <form action="{{ route('manager.unggah_2')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded"
-                        style="background-color: #A50000; color: white;">Selanjutnya</button>
-                </form>
+                <div class="row mt-4">
+                    {{$selectedLaporans ->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    function removeLocalStorage(){
+        // check param page url
+        const url = new URL(window.location.href);
+            const urlParams = new URLSearchParams(url.search);
+            const paramPage = urlParams.get('page');
+            if(paramPage === null) {
+                // if refresh page => clear localStorage
+                localStorage.removeItem('report_is_checked');
+            }
+            else{
+                collectReportData();
+            }
+    }
+
+    function checkData(){
+        // to keep storing the prev values from prev pages
+        // check the value from localStorage
+
+        let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
+
+        const checkedSelected = $(".report-check");
+
+        // re-set the checked values from localStorage
+        checkedSelected.each(function() {
+            if (checkedValues.includes($(this).val())) {
+                $(this).prop("checked", true);
+            }
+
+        });
+
+        checkedSelected.on("change", function() {
+            const getValue = $(this).val();
+            if ($(this).is(":checked")) {
+                // save to array and localStorage
+                // alert(getValue);
+                if (!checkedValues.includes(getValue)) {
+                    checkedValues.push(getValue);
+                }
+
+            } else {
+                // remove from array and localStorage
+                checkedValues = checkedValues.filter(value => value !== getValue);
+            }
+
+            // store the final checked values to localStorage
+            localStorage.setItem('report_is_checked', checkedValues);
+            collectReportData();
+        });
+    }
+
+    function collectReportData()
+        {
+            const reportIsChecked = localStorage.getItem('report_is_checked');
+            $(".report-data-collected").val(reportIsChecked);
+        }
+
+        function updateSelectedCount() {
+        const count = $('#selected-count').text();
+        $('#selected-count').text(parseInt(count) - 1);
+    }
+
+        function handleRemoveButtonClick() {
+        $('.btn-remove').on('click', function() {
+            const id = $(this).data('id');
+
+            // remove the ID from localStorage
+            let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
+            checkedValues = checkedValues.filter(value => value !== id.toString());
+            localStorage.setItem('report_is_checked', checkedValues);
+
+            // remove the list item from the DOM(?)
+            $(`#report-${id}`).remove();
+
+            collectReportData();
+            updateSelectedCount();
+        });
+    }
+
+    $(document).ready(function() {
+
+        // removeLocalStorage();
+
+        checkData();
+
+        handleRemoveButtonClick();
+
+    });
+
+</script>
 @endsection
