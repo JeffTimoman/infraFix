@@ -220,6 +220,9 @@
         <div class="row mt-4 d-flex justify-content-between">
             @include('components.hot_topic_sidemenu')
         </div>
+        @php
+            $color = 'black';
+        @endphp
 
         <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
             <div class="row mt-3 d-flex justify-content-center align-items-center" style="height: 9vh;">
@@ -238,7 +241,6 @@
                 <div class="col-md-12 p-0" style="">
 
                     @if (!$cases)
-                        
                         <div class="container-fluid text-center">
                             <h3>No cases exist.</h3>
                         </div>
@@ -290,6 +292,7 @@
                                             @endif
                                         </div>
                                         {{-- untuk show gambar --}}
+                                    </a>
                                         <div class="col-md-12 d-flex justify-content-center">
                                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVFP4xX1TI_zRZvvXXpJk0CbcholYv90pUYw&usqp=CAU"
                                                 alt="" width="900" height="288">
@@ -298,21 +301,64 @@
                                             <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
                                                 <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
                                                     id="btn_like">
-                                                    <i class="bi bi-heart"></i>
-                                                    <span class="mb-1">{{ $item->likes->count() }}</span>
+                                                    <form action="{{ route('hottopic.click_like') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="case_number"
+                                                            value="{{ $item->case_number }}">
+                                                        <button type="submit" style="background: none; border:none; ">
+                                                            @if (auth()->check())
+                                                                @php
+                                                                    $isLiked = $item->likes->contains(
+                                                                        'user_id',
+                                                                        Auth::id(),
+                                                                    );
+                                                                    $color = $isLiked ? 'red' : 'black';
+                                                                @endphp
+                                                            @endif
+                                                            {{-- <i class="bi bi-heart"></i> --}}
+                                                            <i class="bi bi-heart" style="color: {{ $color }}"></i>
+                                                        </button>
+                                                    </form>
+                                                    <span class="mb-1" style="color: black;">{{ $item->likes->count() }}</span>
                                                 </button>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                                <button onclick="" class="btn text-dark" id="btn_komen">
-                                                    <i class="bi bi-chat-left"></i>
+                                                <button onclick="" class="btn text-dark komen_button border-0"
+                                                    id="btn_komen">
+                                                    @if (auth()->check())
+                                                        @php
+                                                            $isCommented = $item->comments->contains(
+                                                                'user_id',
+                                                                Auth::id(),
+                                                            );
+                                                            $color = $isCommented ? 'red' : 'black';
+                                                        @endphp
+                                                    @endif
+
+                                                    <i class="bi bi-chat-left" style="color: {{ $color }}"></i>
                                                     <span class="mb-1">{{ $item->comments->count() }}</span>
                                                 </button>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                                <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                    <i class="bi bi-bookmark"></i>
-                                                    <span class="mb-1">{{ $item->bookmarks->count() }}</span>
-                                                </button>
+                                                <form action="{{ route('hottopic.click_bookmark') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="case_number"
+                                                        value="{{ $item->case_number }}">
+                                                    <button onclick="" class="btn text-dark" id="btn_bookmark"
+                                                        type="submit">
+                                                        @if (auth()->user())
+                                                            @php
+                                                                $isBookmarked = $item->bookmarks->contains(
+                                                                    'user_id',
+                                                                    Auth::id(),
+                                                                );
+                                                                $color = $isBookmarked ? 'red' : 'black';
+                                                            @endphp
+                                                        @endif
+                                                        <i class="bi bi-bookmark" style="color: {{ $color }}"></i>
+                                                        <span class="mb-1">{{ $item->bookmarks->count() }}</span>
+                                                    </button>
+                                                </form>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
                                                 <button onclick="" class="btn text-dark" id="btn_share">
@@ -321,7 +367,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                         @endforeach
                     @endif
