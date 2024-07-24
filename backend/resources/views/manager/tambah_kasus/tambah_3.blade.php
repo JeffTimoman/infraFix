@@ -174,7 +174,8 @@ Unggah Kasus
                                     <td>@mdo</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
                                         </div>
                                     </td>
                                 </tr>
@@ -185,7 +186,8 @@ Unggah Kasus
                                     <td>@twitter</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                id="flexCheckDefault">
                                         </div>
                                     </td>
                                 </tr>
@@ -199,7 +201,8 @@ Unggah Kasus
         <div class="row justify-content-end">
             <div class="col-lg-2 p-4">
                 <form action="{{ route('manager.hot_topic')}}" method="GET">
-                    <button type="submit" class="btn btn-lg rounded" style="background-color: #A50000; color: white;">Selanjutnya</button>
+                    <button type="submit" class="btn btn-lg rounded"
+                        style="background-color: #A50000; color: white;">Selanjutnya</button>
                 </form>
             </div>
         </div>
