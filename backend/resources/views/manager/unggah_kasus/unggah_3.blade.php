@@ -170,20 +170,74 @@ Unggah Kasus
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mt-4">
+            <input type="text" class="reports" name="reports">
             <div class="col-lg-10 rounded p-1 justify-content-center"
                 style="background-color: white; height: 35rem; width: 82vw;">
-                <iframe class="" style="background-color: red; height: 34.5rem; width: 79vw;"
-                    src="{{ route('manager.scroll_ringkasan_kasus')}}" frameborder="0" id="result-iframe"></iframe>
-            </div>
-        </div>
-        <div class="row justify-content-end mt-4" style="margin-left: 3rem">
-            <div class="col-lg-2">
-                <div class="button">
-                    <button type="submit" class="btn btn-lg rounded bottom-button">Unggah</button>
+                <div class="container-fluid">
+                    <form action="{{route('manager.hot_topic_posted')}}" method="POST" id="submit">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-10 rounded p-5" style="background-color: white;  width: 82vw;"
+                                id="form-data-container">
+                                <div class="row text-center mb-5">
+                                    <h3 style="">Ringkasan Kasus</h3>
+                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 31rem;">
+                                </div>
+                                <div class="row mb-4" style="margin-top: 5rem;">
+                                    <input for="" class="form-control-plaintext title" name="title"
+                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></input>
+                                    <input class="form-control-plaintext damage_type" name="damage_type"
+                                        style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem"></input>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-lg-2">
+                                        <h5 for="" class="" style="font-size: large; font-weight: 400;">Lokasi &nbsp:
+                                        </h5>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <input for="" class="form-control-plaintext address" name="address"
+                                            style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
+                                        <input for="" class="form-control-plaintext kelurahan" name="kelurahan"
+                                            style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            <button class="rounded-pill"
+                                                style="background-color: #D8A4A4; border: none;">Baru
+                                                Dilaporkan</button>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <h5
+                                                style="color: #A50000; font-size: large; margin-top: 0.12rem; margin-left: -7rem">
+                                                150
+                                                Laporan</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-d-flex text-justify " style="width:85rem">
+                                    <textarea for="" class="form-control-plaintext description" name="description"
+                                        style="font-weight: medium; font-size: large; margin-left: 0.7rem; white-space: normal; height: 10rem;"></textarea>
+                                </div>
+                                <div class=" row">
+                                    <!-- gambar gmn gatau -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end mt-4" style="margin-right: -11rem">
+                            <div class="col-lg-2">
+                                <div class="button">
+                                    <button type="submit" class="btn btn-lg rounded bottom-button">Unggah</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
+
         </div>
+
     </div>
+</div>
 </div>
 @endsection
 
@@ -193,5 +247,36 @@ Unggah Kasus
         window.history.back();
     }
 
+    function collectReportData() {
+        let inputHotTopic = JSON.parse(localStorage.getItem('input_hot_topic'));
+        if (inputHotTopic) {
+            if (inputHotTopic.title) {
+                document.querySelector(".title").value = inputHotTopic.title;
+            }
+            if (inputHotTopic.damage_type) {
+                document.querySelector(".damage_type").value = inputHotTopic.damage_type;
+            }
+            if (inputHotTopic.address) {
+                document.querySelector(".address").value = inputHotTopic.address;
+            }
+            if (inputHotTopic.kelurahan) {
+                document.querySelector(".kelurahan").value = inputHotTopic.kelurahan;
+            }
+            if (inputHotTopic.description) {
+                document.querySelector(".description").value = inputHotTopic.description;
+            }
+        }
+
+        const reportselect = localStorage.getItem('report_is_checked');
+            $(".reports").val(reportselect);
+
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        collectReportData();
+
+    });
 </script>
 @endsection

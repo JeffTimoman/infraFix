@@ -254,7 +254,8 @@ Laporan Belum Diunggah
                             <div class="row-d-flex justify-content-end align-items-end" style="">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <div class="button">
-                                        <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan ke
+                                        <button type="submit" class="btn btn-m rounded bottom-button "
+                                            id="add_to_case">Tambahkan ke
                                             Kasus</button>
                                     </div>
                                     &nbsp &nbsp
@@ -277,6 +278,20 @@ Laporan Belum Diunggah
 @endsection
 
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        let add_to_case_route = '{{ route("manager.tambah_1")}}';
+        $('#add_to_case').click(function() {
+            let selected_ids = [];
+            $('.report-check:checked').each(function() {
+                selected_ids.push($(this).val());
+            });
+            $('#reports').val(selected_ids.join(','));
+            $('#submit').attr('action', add_to_case_route);
+        });
+    });
+</script>
 <script>
     function removeLocalStorage(){
         // check param page url
