@@ -2,16 +2,16 @@
     <div class="d-flex justify-content-center align-items-center rounded border border-secondary"
         style="background-color: #fff; height: 25vh">
         <div class="col-md-12 my-auto d-flex justify-content-center">
-            <ul class="row" style=" list-style: none; padding: 0; ">
+            <ul class="row" style=" list-style: none;  ">
                 <li class="py-2 ps-3"><a href="" class="text-decoration-none text-dark link-secondary"><i
-                            class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal;"><span
-                                class="ms-2 fw-bold" style="font-size: 16px">Tersimpan</span></i></a></li>
+                            class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal; align-items: center"><span
+                                class="ms-2 fw-bold" style="font-size: 20px">Tersimpan</span></i></a></li>
                 <li class="py-3 ps-3 "><a href="" class=" text-dark text-decoration-none link-secondary"><i
-                            class="bi bi-bell d-flex" style="font-size: 25px ;font-style:normal;"><span
-                                class="ms-2 fw-bold" style="font-size: 16px">Pemberitahuan</span></i></a></li>
-                <li class="py-2 ps-3"><a href="" class="text-decoration-none  text-dark link-secondary"><i
-                            class="bi bi-gear d-flex" style="font-size: 25px; font-style:normal;"><span
-                                class="ms-2 fw-bold" style="font-size: 16px">Pengaturan</span></i></a></li>
+                            class="bi bi-bell d-flex" style="font-size: 25px ;font-style:normal; align-items: center"><span
+                                class="ms-2 fw-bold" style="font-size: 20px">Pemberitahuan</span></i></a></li>
+                <li class="py-2 ps-3"><a href="" class="text-decoration-none  text-dark link-secondary" ><i
+                            class="bi bi-gear d-flex" style="font-size: 25px; font-style:normal; align-items: center"><span
+                                class="ms-2 fw-bold" style="font-size: 20px">Pengaturan</span></i></a></li>
             </ul>
         </div>
     </div>
@@ -29,7 +29,7 @@
                             Terbitan Tahun
                         </button>
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                            <div class="accordion-body p-0 m-0">
+                            <div class="accordion-body p-0 mt-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         id="flexRadioDefault1" checked>
@@ -37,13 +37,13 @@
                                         Rentang Tahun
                                     </label>
                                 </div>
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         id="flexRadioDefault2">
                                     <label class="form-check-label" for="flexRadioTahun">
                                         Tahun Tunggal
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 mt-3">
                                     <div class="slider">
                                         <div class="progres"></div>
@@ -74,7 +74,7 @@
                             Terbitan Bulan
                         </button>
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
-                            <div class="accordion-body p-0 " style="">
+                            <div class="accordion-body p-0 mt-2" style="">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         id="flexRadioDefault1" checked>
@@ -82,13 +82,13 @@
                                         Rentang Bulan
                                     </label>
                                 </div>
-                                <div class="form-check">
+                                {{-- <div class="form-check">
                                     <input class="form-check-input" type="radio"
                                         id="flexRadioDefault2">
                                     <label class="form-check-label" for="flexRadioBulan">
                                         Bulan Tunggal
                                     </label>
-                                </div>
+                                </div> --}}
                                 <div class="col-md-12 mt-3">
                                     <div class="slider-month">
                                         <div class="progres-month"></div>
@@ -119,7 +119,7 @@
                             Kategori
                         </button>
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
-                            <div class="accordion-body p-0">
+                            <div class="accordion-body p-0 mt-2">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="unprocessed" id="flexCheckboxDefault1" checked>
                                     <label class="form-check-label" for="flexCheckboxDefault1">
@@ -140,7 +140,12 @@
                                 </div>
                             </div>
                         </div>
-
+                        <style>
+                            .form-check input[type="checkbox"]:checked {
+                                border: 1px solid #6A040F;
+                                background-color: #6A040F;
+                            }
+                        </style>
                     </div>
 
                 </div>

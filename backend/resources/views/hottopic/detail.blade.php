@@ -335,23 +335,23 @@
             </div>
             <div class="row d-flex justify-content-center" style="height: 78vh; ">
                 <div class="col-md-12 overflow-auto" style=" height:78vh; ">
-                    <div class="text-decoration-none container col-md-9  border-0">
+                    <div class="text-decoration-none container col-md-9  border-0 mt-3">
                         <div class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                            <div class="text-wrap " style="width: 90%;height: 6vh">
-                                <h6 style=" font-size: 12px">{{ $case->title }}</h6>
+                            <div class="text-wrap " style="width: 90%;height: 6vh;">
+                                <h2 style=" font-size: 25px">{{ $case->title }}</h2>
                             </div>
-                            <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
+                            <div class="d-flex justify-content-end align-items-center" style="width: 10%; height: 6vh">
 
                                 <span class="text-secondary"
                                     style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($case->created_at) }}</span>
                             </div>
                         </div>
 
-                        <div class="text-danger text-capitalize" style=" font-size: 10px">
+                        <div class="text-danger text-capitalize" style=" font-size: 18px">
                             <span>{{ $case->reports->count() }} Laporan</span>
                         </div>
 
-                        <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
+                        <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 20px">
                             <div class="span">
                                 Alamat: {{ $case->address }}
                                 <br>
@@ -366,7 +366,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="mb-1 text-dark" style=" font-size: 12px; ">
+                            <div class="mb-1 text-dark" style=" font-size: 18px; ">
                                 <p>{{ $case->description }}</p>
                             </div>
                         </div>
@@ -510,7 +510,7 @@
                                 <div class="col-md-10 rounded justify-content-center d-flex flex-column py-1">
                                     <form action="{{ route('hottopic.add_comment') }}" method="POST">
                                         <div class="input-group text-justify ">
-                                            <textarea class="form-control " placeholder="Write down what you think..." rows="5"
+                                            <textarea class="form-control " placeholder="Tuliskan apa yang sedang kamu pikirkan..." rows="5"
                                                 style="height: 7vh; resize: none; background-color: #f2f2f2; border-radius: 15px 0 0 15px; border:1px solid black"
                                                 name="content"></textarea>
                                             @csrf
