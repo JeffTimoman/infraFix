@@ -15,8 +15,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GovernmentController;
 use App\Http\Controllers\HotTopicController;
 use App\Http\Controllers\MainController;
+
 use App\Http\Controllers\Manager\HotTopicController as ManagerHotTopicController;
 use App\Http\Controllers\Manager\ManagerController;
+use App\Http\Controllers\Manager\ManagerHotTopicController as ManagerManagerHotTopicController;
 use App\Http\Controllers\MilestoneController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
@@ -24,6 +26,7 @@ use App\Http\Middleware\isNotLogin;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\isLogin;
 
 Route::get('/', [MainController::class, 'index']);
 
@@ -191,27 +194,32 @@ Route::prefix('manager')->group(function () {
     Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
 
     Route::prefix('/unggah')->group(function () {
-        Route::post('/perbaruiSelectedIds', [ManagerHotTopicController::class, 'selectLaporans'])->name('manager.selectLaporans');
-        Route::get('/1', [ManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
-        Route::get('/hapusSelecetedIds', [ManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
-        Route::post('/manager/delete-selected-laporans', [ManagerController::class, 'deleteSelectedLaporans'])->name('manager.deleteSelectedLaporans');
-        Route::get('/2', function () {
+        Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+        Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
+        Route::post('/2', [function () {
             return view('manager.unggah_kasus.unggah_2');
-        })->name('manager.unggah_2');
-        Route::get('/3', function () {
+        }])->name('manager.unggah_2');
+        Route::get('/3', [function () {
             return view('manager.unggah_kasus.unggah_3');
-        })->name('manager.unggah_3');
+        }])->name('manager.unggah_3');
 
         Route::prefix('/scroll')->group(function () {
-            Route::get('/isi', function () {
-                return view('manager.unggah_kasus.scroll.isi_kasus');
-            })->name('manager.scroll_isi_kasus');
+            // Route::get('/isi', function () {
+            //     return view('manager.unggah_kasus.scroll.isi_kasus');
+            // })->name('manager.scroll_isi_kasus');
+            Route::get('/isi', [ManagerManagerHotTopicController::class, 'dropdown_unggah'])->name('manager.scroll_isi_kasus');
+            // Route::post('/storeHotTopic', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.scroll_ringkasan_kasus');
+            // Route::get('/ringkasan', [ManagerManagerHotTopicController::class, 'getSummary'])->name('manager.scroll_ringkasan_kasus');
             Route::get('/ringkasan', function () {
                 return view('manager.unggah_kasus.scroll.ringkasan_kasus');
             })->name('manager.scroll_ringkasan_kasus');
+            Route::get('/fetch-names', [ManagerManagerHotTopicController::class, 'fetchNames']);
             Route::get('/edit', function () {
                 return view('manager.unggah_kasus.scroll.edit_kasus');
             })->name('manager.scroll_edit_kasus');
+            Route::get('/pilih', function () {
+                return view('manager.unggah_kasus.scroll.pilih_kasus');
+            })->name('manager.scroll_pilih_kasus');
         });
     });
 
@@ -244,7 +252,6 @@ Route::prefix('manager')->group(function () {
     Route::get('/index', function () {
         return view('manager.index');
     })->name('manager.index');
-
 });
 
 Route::prefix("government")->group(function () {
@@ -267,12 +274,15 @@ Route::prefix("government")->group(function () {
     Route::post('store', [GovernmentController::class, 'tindakanStore'])->name('government.store');
 
     Route::post('destroy', [GovernmentController::class, 'tindakanDestroy'])->name('government.destroy');
-
 });
 
 Route::prefix('hottopic')->group(function () {
     Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
+    Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
+    Route::post('/click_like', [HotTopicController::class, 'click_like'])->name('hottopic.click_like')->middleware([isLogin::class]);
+    Route::post('/click_bookmark', [HotTopicController::class, 'click_bookmark'])->name('hottopic.click_bookmark')->middleware([isLogin::class]);
+    Route::post('/report', [HotTopicController::class, 'report'])->name('hottopic.report')->middleware([isLogin::class]);
 });
 
 

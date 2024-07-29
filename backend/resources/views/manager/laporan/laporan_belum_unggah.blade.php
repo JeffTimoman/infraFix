@@ -210,8 +210,9 @@ Laporan Belum Diunggah
         <div class="row justify-content-center mb-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                 <div class="row">
-                    <form method="POST" action="{{route('manager.selectLaporans')}}" id="submit">
+                    <form method="post" action="{{route('manager.unggah_1')}}" id="submit">
                         @csrf
+                        <input type="hidden" class="report-data-collected" name="reports" id="reports">
                         <table class="table align-middle" id="myTable">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
@@ -241,8 +242,8 @@ Laporan Belum Diunggah
                                     <td>{{$laporan->kelurahan->kecamatan->kota->provinsi->name}}</td>
                                     <td>
                                         <div class="form-check d-flex justify-content-center ms-3">
-                                            <input class="form-check-input" type="checkbox" name="selected_ids[]"
-                                                value="{{ $laporan->id }}" id="flexCheckDefault">
+                                            <input class="form-check-input report-check" type="checkbox"
+                                                name="selected_ids[]" value="{{ $laporan->id }}" id="flexCheckDefault">
                                         </div>
                                     </td>
                                 </tr>
@@ -266,42 +267,101 @@ Laporan Belum Diunggah
                         </div>
                     </form>
                 </div>
-                <br>
-                {{$laporans ->links('pagination::bootstrap-5')}}
+                <div class="row mt-4">
+                    {{$laporans ->links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
 @section('script')
 <script>
-    $(document).ready(function() {
-        // Retrieve the selected IDs from the server
-        $.get('{{ route("manager.selectLaporans") }}', function(data) {
-            var selectedIds = data.selectedIds;
-            // Initialize checkboxes based on the selected IDs
-            $('input[type="checkbox"]').each(function() {
-                if (selectedIds.includes($(this).val())) {
-                    $(this).prop('checked', true);
+    function removeLocalStorage(){
+        // check param page url
+        const url = new URL(window.location.href);
+            const urlParams = new URLSearchParams(url.search);
+            const paramPage = urlParams.get('page');
+            if(paramPage === null) {
+                // if refresh page => clear localStorage
+                localStorage.removeItem('report_is_checked');
+            }
+            else{
+                collectReportData();
+            }
+    }
+
+    function checkData(){
+        // to keep storing the prev values from prev pages
+        // check the value from localStorage
+
+        let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
+
+        const checkedSelected = $(".report-check");
+
+        // re-set the checked values from localStorage
+        checkedSelected.each(function() {
+            if (checkedValues.includes($(this).val())) {
+                $(this).prop("checked", true);
+            }
+        });
+
+        checkedSelected.on("change", function() {
+            const getValue = $(this).val();
+            if ($(this).is(":checked")) {
+                // save to array and localStorage
+                // alert(getValue);
+                if (!checkedValues.includes(getValue)) {
+                    checkedValues.push(getValue);
                 }
-            });
-        });
 
-        // Handle checkbox changes
-        $('input[type="checkbox"]').change(function() {
-            var selectedIds = [];
-            $('input[type="checkbox"]:checked').each(function() {
-                selectedIds.push($(this).val());
-            });
+            } else {
+                // remove from array and localStorage
+                checkedValues = checkedValues.filter(value => value !== getValue);
+            }
 
-            // Update the session with the selected IDs
-            $.post('{{ route("manager.selectLaporans") }}', {
-                _token: $('meta[name="csrf-token"]').attr('content'),
-                selected_ids: selectedIds
-            }, function(response) {
-                console.log(response);
-            });
+            // store the final checked values to localStorage
+            localStorage.setItem('report_is_checked', checkedValues);
+            collectReportData();
         });
+    }
+
+    function collectReportData()
+        {
+            const reportIsChecked = localStorage.getItem('report_is_checked');
+            $(".report-data-collected").val(reportIsChecked);
+        }
+
+        function handleRemoveButtonClick() {
+        $('.bottom-button').on('click', function() {
+            const id = $(this).data('id');
+
+            // remove the ID from localStorage
+            let checkedValues = localStorage.getItem('report_is_checked') ? localStorage.getItem('report_is_checked').split(',') : [];
+            checkedValues = checkedValues.filter(value => value !== id.toString());
+            localStorage.setItem('report_is_checked', checkedValues);
+
+            // remove the list item from the DOM(?)
+            $(this).parent().remove();
+
+
+            collectReportData();
+        });
+    }
+
+
+
+
+
+    $(document).ready(function() {
+
+        removeLocalStorage();
+
+        checkData();
+
+        handleRemoveButtonClick();
+
     });
 </script>
 @endsection

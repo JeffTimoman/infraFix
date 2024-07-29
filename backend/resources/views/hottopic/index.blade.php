@@ -218,215 +218,81 @@
 @section('content')
     <div class="container-fluid px-4">
         <div class="row mt-4 d-flex justify-content-between">
-            <div class="row col-md-2 gap-3">
-                <div class="d-flex justify-content-center align-items-center rounded border border-secondary"
-                    style="background-color: #fff; height: 25vh">
-                    <div class="col-md-12 my-auto d-flex justify-content-center">
-                        <ul class="row" style=" list-style: none; padding: 0; ">
-                            <li class="py-2 ps-3"><a href="" class="text-decoration-none text-dark link-secondary"><i
-                                        class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal;"><span
-                                            class="ms-2 fw-bold" style="font-size: 16px">Tersimpan</span></i></a></li>
-                            <li class="py-3 ps-3 "><a href=""
-                                    class=" text-dark text-decoration-none link-secondary"><i class="bi bi-bell d-flex"
-                                        style="font-size: 25px ;font-style:normal;"><span class="ms-2 fw-bold"
-                                            style="font-size: 16px">Pemberitahuan</span></i></a></li>
-                            <li class="py-2 ps-3"><a href=""
-                                    class="text-decoration-none  text-dark link-secondary"><i class="bi bi-gear d-flex"
-                                        style="font-size: 25px; font-style:normal;"><span class="ms-2 fw-bold"
-                                            style="font-size: 16px">Pengaturan</span></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-12 rounded border border-secondary p-0 overflow-auto"
-                    style="background-color: #fff;  height: 58vh; max-height:58vh;">
-                    <div class=" row w-100 m-0  ">
-                        <div class="accordion border-0 mt-1" id="accordionPanelsStayOpenExample">
-                            <div class="accordion-item border-0 pb-3" style=" width: 100%">
-                                {{-- <h2 class="accordion-header "></h2> --}}
-                                <button class="accordion-button p-1" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne"
-                                    style=" color: #6A040F;background-color: #fff; font-weight: 500;">
-                                    Terbitan Tahun
-                                </button>
-                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                    <div class="accordion-body p-0 m-0">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioTahun"
-                                                id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioTahun">
-                                                Rentang Tahun
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioTahun"
-                                                id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioTahun">
-                                                Tahun Tunggal
-                                            </label>
-                                        </div>
-                                        <div class="col-md-12 mt-3">
-                                            <div class="slider">
-                                                <div class="progres"></div>
-                                            </div>
-                                            <div class="range-input">
-                                                <input type="range" class="range_minimal" min="2000" max="2024"
-                                                    value="2000">
-                                                <input type="range" class="range_maksimal" min="2000" max="2024"
-                                                    value="2024">
-                                            </div>
-                                            <div class="year-input mt-2">
-                                                <div class="field mb-1">
-                                                    <input type="number" class="input-min" value="2000">
-                                                </div>
-                                                <div class="field mb-1">
-                                                    <input type="number" class="input-max" value="2024">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion border-0 mt-1" style=" width: 100%; ">
-                                <button class="accordion-button p-1 " type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseTwo"
-                                    style="color: #6A040F;background-color: #fff;font-weight: 500">
-                                    Terbitan Bulan
-                                </button>
-                                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
-                                    <div class="accordion-body p-0 " style="">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioBulan"
-                                                id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioBulan">
-                                                Rentang Bulan
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioBulan"
-                                                id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioBulan">
-                                                Bulan Tunggal
-                                            </label>
-                                        </div>
-                                        <div class="col-md-12 mt-3">
-                                            <div class="slider-month">
-                                                <div class="progres-month"></div>
-                                            </div>
-                                            <div class="range-input-month">
-                                                <input type="range" class="range_minimal_month" min="1"
-                                                    max="12" value="1">
-                                                <input type="range" class="range_maksimal_month" min="1"
-                                                    max="12" value="12">
-                                            </div>
-                                            <div class="month-input mt-2">
-                                                <div class="field mb-1">
-                                                    <input type="number" class="input-min-month" value="1">
-                                                </div>
-                                                <div class="field mb-1">
-                                                    <input type="number" class="input-max-month" value="12">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item border-0" style=" width: 100%">
-                                <button class="accordion-button p-1" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseThree"
-                                    style=" color: #6A040F;background-color: #fff; font-weight: 500;">
-                                    Kategori
-                                </button>
-                                <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
-                                    <div class="accordion-body p-0 " style="">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioProses"
-                                                id="flexRadioDefault1" checked>
-                                            <label class="form-check-label" for="flexRadioProses">
-                                                Belum diproses
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioProses"
-                                                id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioProses">
-                                                Sedang diproses
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioProses"
-                                                id="flexRadioDefault2">
-                                            <label class="form-check-label" for="flexRadioProses">
-                                                Selesai diproses
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            @include('components.hot_topic_sidemenu')
+        </div>
+        @php
+            $color = 'black';
+        @endphp
+
+        <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
+            <div class="row mt-3 d-flex justify-content-center align-items-center" style="height: 9vh;">
+                <div class="col-md-5 ">
+                    <form class="search " method="GET" style=" ;border-radius: 20px; !important">
+                        <div class="input-group">
+                            <span class="input-group-text border-2 border-secondary " id="basic-addon1"
+                                style=" background-color: #fff;border-right: 0; "><i class="bi bi-search"></i></span>
+                            <input type="text" class="form-control border-secondary border-2"style="border-left:0; "
+                                name="query" placeholder="Search...">
                         </div>
-                    </div>
-
-
+                    </form>
                 </div>
             </div>
+            <div class="row overflow-auto d-flex justify-content-center" style="height: 74vh;">
+                <div class="col-md-12 p-0" style="">
 
-            <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
-                <div class="row mt-3 d-flex justify-content-center align-items-center" style="height: 9vh;">
-                    <div class="col-md-5 ">
-                        <form class="search " method="GET" style=" ;border-radius: 20px; !important">
-                            <div class="input-group">
-                                <span class="input-group-text border-2 border-secondary " id="basic-addon1"
-                                    style=" background-color: #fff;border-right: 0; "><i class="bi bi-search"></i></span>
-                                <input type="text"
-                                    class="form-control border-secondary border-2"style="border-left:0; " name="query"
-                                    placeholder="Search...">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="row overflow-auto d-flex justify-content-center" style="height: 74vh;">
-                    <div class="col-md-12 p-0" style="">
-                        {{-- awal konten --}}
+                    @if (!$cases)
+                        <div class="container-fluid text-center">
+                            <h3>No cases exist.</h3>
+                        </div>
+                    @else
                         @foreach ($cases as $item)
                             <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
-                                <a href="{{route('hottopic.detail', ['case_number' => $item->case_number])}}" class="text-decoration-none border-0">
+                                <a href="{{ route('hottopic.detail', ['case_number' => $item->case_number]) }}"
+                                    class="text-decoration-none border-0">
                                     <div class="container col-md-9 overflow-hidden">
                                         <div
                                             class="text-capitalize text-dark d-flex justify-content-between align-items-center">
                                             <div class="text-wrap " style="width: 90;">
-                                                <h6 style=" font-size: 12px">{{$item->title}}</h6>
+                                                <h6 style=" font-size: 12px">{{ $item->title }}</h6>
                                             </div>
                                             <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
 
-                                                <span class="text-secondary" style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($item->created_at) }}</span>
+                                                <span class="text-secondary"
+                                                    style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($item->created_at) }}</span>
 
                                             </div>
                                         </div>
 
                                         <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                            <span>{{$item->reports->count()}} Laporan</span>
+                                            <span>{{ $item->reports->count() }} Laporan</span>
                                         </div>
 
                                         <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
                                             <div class="span">
-                                                Alamat: {{$item->address}}
+                                                Alamat: {{ $item->address }}
                                                 <br>
-                                                Lokasi:  {{ $item->kelurahan->name}}, {{ $item->kelurahan->kecamatan->name}}, {{ $item->kelurahan->kecamatan->kota->name}}.
+                                                Lokasi: {{ $item->kelurahan->name }},
+                                                {{ $item->kelurahan->kecamatan->name }},
+                                                {{ $item->kelurahan->kecamatan->kota->name }}.
                                                 <br>
-                                                Status: @if($item->milestone_details->count() == 0) Belum diproses @else {{$item->milestone_details->last()->milestone->name}} @endif
+                                                Status: @if ($item->milestone_details->count() == 0)
+                                                    Belum diproses
+                                                @else
+                                                    {{ $item->milestone_details->last()->milestone->name }}
+                                                @endif
                                             </div>
                                         </div>
 
                                         <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
-                                            @if(strlen($item->description) > 100)
-                                                <p>{{$item->description->substr(0, 100)}} <span class="text-primary">show more...</span></p>
+                                            @if (strlen($item->description) > 100)
+                                                <p>{{ $item->description->substr(0, 100) }} <span class="text-primary">show
+                                                        more...</span></p>
                                             @else
-                                                <p>{{$item->description}}</p>
+                                                <p>{{ $item->description }}</p>
                                             @endif
                                         </div>
                                         {{-- untuk show gambar --}}
+                                    </a>
                                         <div class="col-md-12 d-flex justify-content-center">
                                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVFP4xX1TI_zRZvvXXpJk0CbcholYv90pUYw&usqp=CAU"
                                                 alt="" width="900" height="288">
@@ -435,21 +301,64 @@
                                             <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
                                                 <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
                                                     id="btn_like">
-                                                    <i class="bi bi-heart"></i>
-                                                    <span class="mb-1">{{$item->likes->count()}}</span>
+                                                    <form action="{{ route('hottopic.click_like') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="case_number"
+                                                            value="{{ $item->case_number }}">
+                                                        <button type="submit" style="background: none; border:none; ">
+                                                            @if (auth()->check())
+                                                                @php
+                                                                    $isLiked = $item->likes->contains(
+                                                                        'user_id',
+                                                                        Auth::id(),
+                                                                    );
+                                                                    $color = $isLiked ? 'red' : 'black';
+                                                                @endphp
+                                                            @endif
+                                                            {{-- <i class="bi bi-heart"></i> --}}
+                                                            <i class="bi bi-heart" style="color: {{ $color }}"></i>
+                                                        </button>
+                                                    </form>
+                                                    <span class="mb-1" style="color: black;">{{ $item->likes->count() }}</span>
                                                 </button>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                                <button onclick="" class="btn text-dark" id="btn_komen">
-                                                    <i class="bi bi-chat-left"></i>
-                                                    <span class="mb-1">{{$item->comments->count()}}</span>
+                                                <button onclick="" class="btn text-dark komen_button border-0"
+                                                    id="btn_komen">
+                                                    @if (auth()->check())
+                                                        @php
+                                                            $isCommented = $item->comments->contains(
+                                                                'user_id',
+                                                                Auth::id(),
+                                                            );
+                                                            $color = $isCommented ? 'red' : 'black';
+                                                        @endphp
+                                                    @endif
+
+                                                    <i class="bi bi-chat-left" style="color: {{ $color }}"></i>
+                                                    <span class="mb-1">{{ $item->comments->count() }}</span>
                                                 </button>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                                <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                    <i class="bi bi-bookmark"></i>
-                                                    <span class="mb-1">{{$item->bookmarks->count()}}</span>
-                                                </button>
+                                                <form action="{{ route('hottopic.click_bookmark') }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="case_number"
+                                                        value="{{ $item->case_number }}">
+                                                    <button onclick="" class="btn text-dark" id="btn_bookmark"
+                                                        type="submit">
+                                                        @if (auth()->user())
+                                                            @php
+                                                                $isBookmarked = $item->bookmarks->contains(
+                                                                    'user_id',
+                                                                    Auth::id(),
+                                                                );
+                                                                $color = $isBookmarked ? 'red' : 'black';
+                                                            @endphp
+                                                        @endif
+                                                        <i class="bi bi-bookmark" style="color: {{ $color }}"></i>
+                                                        <span class="mb-1">{{ $item->bookmarks->count() }}</span>
+                                                    </button>
+                                                </form>
                                             </div>
                                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
                                                 <button onclick="" class="btn text-dark" id="btn_share">
@@ -458,167 +367,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                         @endforeach
-                        <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
-                            <a href="" class="text-decoration-none border-0">
-                                <div class="container col-md-9 overflow-hidden">
+                    @endif
 
-                                    <div
-                                        class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                                        <div class="text-wrap " style="width: 90%;height: 6vh">
-                                            <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
-                                                Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
-                                                asperiores quam cupiditate fuga iusto nisi.lkds</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
-
-                                            <span class="text-secondary" style="font-size: 14px">2h</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                        <span>4073 Laporan</span>
-                                    </div>
-
-                                    <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
-                                        <div class="span">
-                                            Lokasi: (nama lokasi)
-                                            <br>
-                                            Status: (judul status)
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
-                                            assumenda
-                                            perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
-                                            exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
-                                            ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
-                                            impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
-                                            minus debitis consequatur commodi molestias ipsam ex perferendis,
-                                            repellendus quos. <span class="text-primary">show more...</span></p>
-                                    </div>
-                                    {{-- untuk show gambar --}}
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVFP4xX1TI_zRZvvXXpJk0CbcholYv90pUYw&usqp=CAU"
-                                            alt="" width="900" height="288">
-                                    </div>
-                                    <div class="row" style=" height:5.5vh ;">
-                                        <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
-                                            <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
-                                                id="btn_like">
-                                                <i class="bi bi-heart"></i>
-                                                <span class="mb-1">23k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_komen">
-                                                <i class="bi bi-chat-left"></i>
-                                                <span class="mb-1">17k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                <i class="bi bi-bookmark"></i>
-                                                <span class="mb-1">9k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                            <button onclick="" class="btn text-dark" id="btn_share">
-                                                <i class="bi bi-share"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        {{-- akhir konten --}}
-
-                        {{-- awal konten --}}
-                        <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
-                            <a href="" class="text-decoration-none border-0">
-                                <div class="container col-md-9 overflow-hidden">
-
-                                    <div
-                                        class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                                        <div class="text-wrap " style="width: 90%;height: 6vh">
-                                            <h6 style=" font-size: 12px">Lorem ipsum dolor sit amet consectetur
-                                                adipisicing elit. Nihil qui cupiditate voluptatibus quam officiis.
-                                                Doloribus et enim nemo, dicta odit, vel officiis porro repudiandae
-                                                asperiores quam cupiditate fuga iusto nisi.lkds</h6>
-                                        </div>
-                                        <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
-
-                                            <span class="text-secondary" style="font-size: 14px">2h</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="text-danger text-capitalize" style=" font-size: 10px">
-                                        <span>4073 Laporan</span>
-                                    </div>
-
-                                    <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
-                                        <div class="span">
-                                            Lokasi: (nama lokasi)
-                                            <br>
-                                            Status: (judul status)
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti unde,
-                                            assumenda
-                                            perspiciatis odio aut et, quasi illum quae omnis tempora labore. Nobis
-                                            exercitationem iure adipisci sed id commodi assumenda laboriosam! Lorem
-                                            ipsum dolor sit amet consectetur, adipisicing elit. Assumenda aperiam,
-                                            impedit quibusdam ut nemo veritatis expedita recusandae, quo ab blanditiis
-                                            minus debitis consequatur commodi molestias ipsam ex perferendis,
-                                            repellendus quos. <span class="text-primary">show more...</span></p>
-                                    </div>
-                                    {{-- untuk show gambar --}}
-                                    <div class="col-md-12 d-flex justify-content-center">
-                                        <img src="{{ asset('components/img/konten/foto_konten1.png') }}" alt=""
-                                            width="900" height="288">
-                                    </div>
-                                    <div class="row" style=" height:5.5vh ;">
-                                        <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
-                                            <button onclick="ToggleLike()" class="btn text-dark like_button border-0"
-                                                id="btn_like">
-                                                <i class="bi bi-heart"></i>
-                                                <span class="mb-1">23k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_komen">
-                                                <i class="bi bi-chat-left"></i>
-                                                <span class="mb-1">17k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                            <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                                <i class="bi bi-bookmark"></i>
-                                                <span class="mb-1">9k</span>
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                            <button onclick="" class="btn text-dark" id="btn_share">
-                                                <i class="bi bi-share"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        {{-- akhir konten --}}
-
-
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

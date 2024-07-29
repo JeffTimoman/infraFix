@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('title')
-    Laporan    
+    Laporan
 @endsection
 @section('style')
     <style>
-        
+
     .content {
         display: flex;
         flex-direction: column;
@@ -23,7 +23,7 @@
         'GRAD' 0,
         'opsz' 24;
         color: #a50000;
-        
+
     }
 
 
@@ -56,7 +56,7 @@
     .reportBox{
     display: flex;
     align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; 
+    justify-content: space-between;
     }
 
     .report{
@@ -65,7 +65,7 @@
 
     .row-detail{
         display: flex;
-        
+
     }
 
     h5{
@@ -73,14 +73,14 @@
         font-weight: bold;
 
     }
-  
+
     h3{
         font-size: 20px;
         font-weight: bold;
 
     }
 
-    h7{
+    h6{
         word-wrap: break-word;
     }
 
@@ -90,20 +90,20 @@
 
     .created{
         display: flex;
-        background-color: #FAF9F9; 
+        background-color: #FAF9F9;
 
     }
 
     .info2{
         display: flex;
-        background-color: #FAF9F9; 
+        background-color: #FAF9F9;
     }
 
     .report-table{
-    width: 100%;    
+    width: 100%;
     }
 
-    
+
     .table-header{
         display: flex;
         border-bottom: 3px solid #EDEDED;
@@ -133,7 +133,7 @@
         width: 100%;
         height: 100%;
     }
-    
+
 
     .button-header{
         display: flex;
@@ -170,7 +170,7 @@
         /* background-color: red; */
     }
 
-    </style>    
+    </style>
 @endsection
 @section('content')
     <div class="content">
@@ -193,85 +193,85 @@
                                     {{-- <h5>Detail Kasus</h5> --}}
                                     <div class="case-id col-12 col-md-12">
                                         <div class="id col-md-4">
-                                            <h7>ID : {{ $data->id }}  </h7>
+                                            <h6>ID : {{ $data->id }}  </h6>
                                         </div>
                                         <div class="id col-md-4">
-                                            <h7>Aktif: {{ $data->is_active }} </h7>
+                                            <h6>Aktif: {{ $data->is_active }} </h6>
                                         </div>
                                         <div class="case col-md-4">
-                                            <h7>Remember Token: {{ $data->remember_token }} </h7>
+                                            <h6>Remember Token: {{ $data->remember_token }} </h6>
                                         </div>
 
                                     </div>
                                 </div>
-        
+
                             </div>
                             <div class="row-detail col-12 col-md-12 py-4">
                                 <div class="detail-content px-3 py-1 col-md-4">
                                     <h3>Name</h3>
-                                    <h7>{{ $data->name }} </h7>
-                                </div>      
+                                    <h6>{{ $data->name }} </h6>
+                                </div>
                                 <div class="detail-content px-3 py-1 col-md-4">
                                     <h3>Username</h3>
-                                    <h7>{{ $data->username }} </h7>
+                                    <h6>{{ $data->username }} </h6>
 
                                 </div>
                                 <div class="detail-content px-3 py-1 col-md-4">
                                     <h3>Email</h3>
-                                    <h7>{{ $data->email }} </h7>
+                                    <h6>{{ $data->email }} </h6>
                                  </div>
                             </div>
-                           
+
                             <div class="info2  col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Profile Picture</h3>
-                                    <h7>{{ $data->profile_pic }} </h7>
+                                    <h6>{{ $data->profile_pic }} </h6>
                                 </div>
                                 <div class="detail-content  col-md-4 px-3 py-2">
                                     <h3>Role</h3>
-                                    <h7>{{ $data->role }} </h7>
+                                    <h6>{{ $data->role }} </h6>
                                 </div>
                                 <div class="detail-content  col-md-4 px-3 py-2">
                                     <h3>Tanggal lahir</h3>
-                                    <h7>{{ $data->date_of_birth }} </h7>
+                                    <h6>{{ $data->date_of_birth }} </h6>
                                 </div>
                             </div>
-                           
+
                             <div class="status col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Password</h3>
-                                    <h7>{{ $data->password }} </h7>
+                                    <h6>{{ $data->password }} </h6>
 
                                 </div>
-                            
+
                             </div>
-                            
+
                             <div class="created col-12 col-md-12 py-4">
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Email Verified at</h3>
-                                    <h7>{{ $data->email_verified_at }} </h7>
+                                    <h6>{{ $data->email_verified_at }} </h6>
                                 </div>
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Created at</h3>
-                                    <h7>{{ $data->created_at }} </h7>
+                                    <h6>{{ $data->created_at }} </h6>
                                 </div>
                                 <div class="detail-content col-md-4 px-3 py-2">
                                     <h3>Updated at</h3>
-                                    <h7>{{ $data->updated_at }} </h7>
+                                    <h6>{{ $data->updated_at }} </h6>
                                 </div>
                             </div>
-                          
+
                         </div>
 
-                        
+
                     </div>
                 </div>
             </div>
 
-           
+
         </div>
-    
-    
+
+
 </body>
 </html>
 @endsection

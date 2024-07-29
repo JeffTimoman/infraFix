@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->longText('content')->default('');
+            $table->longText('content')->defpault('');
             $table->boolean("anonymous")->default(false);
             $table->boolean("banned")->default(false);
 

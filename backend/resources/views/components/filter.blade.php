@@ -15,7 +15,7 @@
                 <select class="form-select" style="background-color: #F2F2F2;" id="">
                     <option selected>Choose...</option>
                     @foreach ($datas['provinsi'] as $item)
-                    <option value="1" style="color: black">{{$item->name}}</option>
+                    <option value="{{$item->name}}" style="color: black">{{$item->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -24,7 +24,7 @@
                 <select class="form-select" style="background-color: #F2F2F2;" id="">
                     <option selected>Choose...</option>
                     @foreach ($datas['kota'] as $item)
-                    <option value="1" style="color: black">{{$item->name}}</option>
+                    <option value="{{$item->name}}" style="color: black">{{$item->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -33,7 +33,7 @@
                 <select class="form-select" style="background-color: #F2F2F2;" id="">
                     <option selected>Choose...</option>
                     @foreach ($datas['kecamatan'] as $item)
-                    <option value="1" style="color: black">{{$item->name}}</option>
+                    <option value="{{$item->name}}" style="color: black">{{$item->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -42,7 +42,7 @@
                 <select class="form-select" style="background-color: #F2F2F2;" id="">
                     <option selected>Choose...</option>
                     @foreach ($datas['kelurahan'] as $item)
-                    <option value="1" style="color: black">{{$item->name}}</option>
+                    <option value="{{$item->name}}" style="color: black">{{$item->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -51,7 +51,7 @@
                 <select class="form-select" style="background-color: #F2F2F2;" id="">
                     <option selected>Choose...</option>
                     @foreach ($datas['damage_type'] as $item)
-                    <option value="1" style="color: black">{{$item->name}}</option>
+                    <option value="{{$item->name}}" style="color: black">{{$item->name}}</option>
                     @endforeach
                 </select>
             </div>
