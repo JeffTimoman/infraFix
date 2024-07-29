@@ -14,4 +14,11 @@ class MilestoneDetail extends Model
         'description'
     ];
 
+    public function milestone(){
+        return $this->belongsTo(Milestone::class);
+    }
+
+    public function case(){
+        return $this->belongsTo(ThisCase::class);
+    }
 }
