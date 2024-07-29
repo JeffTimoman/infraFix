@@ -48,26 +48,24 @@
                         <h4>Change Password</h4>
                     </div>
                     <div class="row">
-                        <div class="data col-6">
-                            <form name="passwordChange" id="passwordChange" class="passwordChange">
+                        <form name="passwordChange" id="passwordChange" class="passwordChange" action="{{ route('profile.changePassword') }}">
+                            <div class="data col-6">
                                 <div class="mb-3">
                                     <label for="CurrrentPassword" class="form-label">Current Password</label>
-                                    <input type="password" class="form-control" id="CurrrentPassword" aria-describedby="CurrentPasswordhelp">
+                                    <input type="password" class="form-control" id="CurrrentPassword" name="current_password" aria-describedby="CurrentPasswordhelp">
                                 </div>
-                            </form>
-                        </div>
-                        <div class="data col-6">
-                            <form name="passwordChange" id="passwordChange" class="passwordChange">
-                                <div class="mb-3">
-                                    <label for="NewPassword" class="form-label">New Password</label>
-                                    <input type="password" class="form-control" id="NewPassword" aria-describedby="NewPasswordhelp">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="ConfirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="ConfirmPassword" aria-describedby="ConfirmPasswordhelp">
-                                </div>
-                            </form>
-                        </div>
+                            </div>
+                            <div class="data col-6">
+                                    <div class="mb-3">
+                                        <label for="NewPassword" class="form-label">New Password</label>
+                                        <input type="password" class="form-control" id="NewPassword" name="new_password" aria-describedby="NewPasswordhelp">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+                                        <input type="password" class="form-control" id="ConfirmPassword" name="confirm_password"  aria-describedby="ConfirmPasswordhelp">
+                                    </div>
+                            </div>
+                        </form>
                     </div>
 
                 </div>
@@ -75,7 +73,9 @@
         </div>
 
         <div class="row justify-content-end mt-3">
-            <button class="edit col-2">Simpan</button>
+            <button class="edit col-2" type="submit" onclick="document.getElementById('passwordChange').submit()">
+                Simpan
+            </button>
         </div>
     </div>
 </div>

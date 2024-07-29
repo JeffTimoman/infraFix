@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Dashboard    
+    Dashboard
 @endsection
 @section('style')
     <style>
@@ -207,7 +207,7 @@
                                     @foreach($data['reports'] as $item)
                                         <tr>
                                             <td>{{ $item->title}}</td>
-                                            <td>{{ $item->damage_type}}</td>
+                                            <td>{{ $item->damage_type->name}}</td>
                                             <td>{{ $item->address}}</td>
                                             <td>{{ $item->created_at}}</td>
                                         </tr>

@@ -27,9 +27,20 @@ class AuthController extends Controller
             'password' => $request->password
         ];
 
+
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'Login berhasil.');
+            $userType = auth()->user()->role;
+            // dd($userType);
+            if($userType == 'admin'){
+                return redirect()->route('admin.dashboard')->with('success', 'Login berhasil.');
+            }else if($userType == 'government'){
+                return redirect()->route('government.dashboard')->with('success', 'Login berhasil.');
+            }else if($userType == 'manager'){
+                return redirect()->route('manager.dashboard')->with('success', 'Login berhasil.');
+            }else{
+                return redirect()->route('hottopic.index')->with('success', 'Login berhasil.');
+            }
         }
         return back()->withErrors([
             'Kredensial yang diberikan tidak cocok dengan catatan kami.'

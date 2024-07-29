@@ -16,6 +16,7 @@ class AdminController extends Controller
             'reports' => Report::take(10)->get(),
             'unconfirmed' => Report::where('case_id', null)->count(),
         ];
+        
         return view('admin.dashboard', ['data' => $data]);
     }
 }
