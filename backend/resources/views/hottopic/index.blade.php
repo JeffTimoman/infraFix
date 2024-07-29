@@ -12,8 +12,8 @@
         }
 
         div.hover_konten:hover {
-            transition: .3s ease-out;
-            /* background-color: rgba(164, 163, 163, 0.174); */
+            transition: .2s ease-out;
+            background-color: rgba(164, 163, 163, 0.174);
         }
 
         .like_button i,
@@ -224,7 +224,7 @@
             $color = 'black';
         @endphp
 
-        <div class="col-md-10 rounded border border-secondary " style="background-color: #fff">
+        <div class="col-md-10 rounded border border-secondary " style="background-color: #fff;">
             <div class="row mt-3 d-flex justify-content-center align-items-center" style="height: 9vh;">
                 <div class="col-md-5 ">
                     <form class="search " method="GET" style=" ;border-radius: 20px; !important">
@@ -232,7 +232,7 @@
                             <span class="input-group-text border-2 border-secondary " id="basic-addon1"
                                 style=" background-color: #fff;border-right: 0; "><i class="bi bi-search"></i></span>
                             <input type="text" class="form-control border-secondary border-2"style="border-left:0; "
-                                name="query" placeholder="Search...">
+                                name="query" placeholder="Pencarian...">
                         </div>
                     </form>
                 </div>
@@ -246,16 +246,16 @@
                         </div>
                     @else
                         @foreach ($cases as $item)
-                            <div class="container-fluid border-secondary border-1 border-bottom mb-2 hover_konten">
-                                <a href="{{ route('hottopic.detail', ['case_number' => $item->case_number]) }}"
+                            <div class="container-fluid border-secondary border-1 border-bottom mb-0 hover_konten">
+                                <a href="{{ route('hottopic.detail', ['case_number' => $item->case_number]) }} "
                                     class="text-decoration-none border-0">
                                     <div class="container col-md-9 overflow-hidden">
                                         <div
-                                            class="text-capitalize text-dark d-flex justify-content-between align-items-center">
-                                            <div class="text-wrap " style="width: 90;">
-                                                <h6 style=" font-size: 12px">{{ $item->title }}</h6>
+                                            class="text-capitalize text-dark d-flex justify-content-between align-items-center mt-2" >
+                                            <div class="text-wrap align-items-center d-flex" style="width: 90%; height: 6vh;">
+                                                <h2 style=" font-size: 25px;">{{ $item->title }}</h2>
                                             </div>
-                                            <div class="d-flex justify-content-end" style="width: 10%; height: 6vh">
+                                            <div class="d-flex justify-content-end align-items-center" style="width: 10%; height: 6vh;">
 
                                                 <span class="text-secondary"
                                                     style="font-size: 14px">{{ \App\Helpers\TimeFormatter::formatTimeDifference($item->created_at) }}</span>
@@ -263,11 +263,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="text-danger text-capitalize" style=" font-size: 10px">
+                                        <div class="text-danger text-capitalize" style=" font-size: 18px">
                                             <span>{{ $item->reports->count() }} Laporan</span>
                                         </div>
 
-                                        <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 12px">
+                                        <div class="mt-1 mb-2 text-dark text-capitalize" style=" font-size: 18px">
                                             <div class="span">
                                                 Alamat: {{ $item->address }}
                                                 <br>
@@ -283,7 +283,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="mb-1 text-dark overflow-hidden" style=" font-size: 12px; height: 8vh">
+                                        <div class="mb-1 text-dark overflow-hidden" style=" font-size: 18px; height: 8vh;">
                                             @if (strlen($item->description) > 100)
                                                 <p>{{ $item->description->substr(0, 100) }} <span class="text-primary">show
                                                         more...</span></p>

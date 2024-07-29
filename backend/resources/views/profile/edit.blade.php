@@ -53,29 +53,21 @@
                     </div>
                     <div class="row">
                         <div class="data col-7">
-                            <form>
+                            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="submit">
+                                @csrf
                                 <div class="mb-3">
-                                  <label for="Username" class="form-label" style="font-weight: bold">Username</label>
-                                  <input type="Username" class="form-control" id="Username" aria-describedby="Usernamehelp">
+                                    <label for="Username" class="form-label" style="font-weight: bold">Username</label>
+                                    <input type="Username" class="form-control" id="Username" name="username" aria-describedby="Usernamehelp" value="{{ auth()->user()->username }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label" style="font-weight: bold">Email</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                                 </div>
-                                 <div class="mb-3">
-                                    <label for="phoneNumber" class="form-label" style="font-weight: bold">Phone Number</label>
-                                    <input type="number" class="form-control" id="phoneNumber" aria-describedby="phoneNumberhelp">
-                                  </div>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" value="{{ auth()->user()->email }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Upload Image</label>
+                                    <input type="file" name="image" id="image" class="form-control">
+                                </div>
                             </form>
-                        </div>
-                        <div class="image col-4 justify-content-end text-end">
-                            <img src="{{ asset('components/img/icon/user.png') }}" alt="" >
-                        </div>
-                        {{-- <div class="editIcon col-1">
-                            <span class="material-symbols-outlined">
-                                edit
-                            </span>
-                        </div> --}}
                     </div>
 
                 </div>
@@ -83,7 +75,9 @@
         </div>
 
         <div class="row justify-content-end mt-3">
-            <button class="edit col-2">Simpan</button>
+            <button class="edit col-2" type="submit" onclick="document.getElementById('submit').submit()">
+                Simpan
+            </button>
         </div>
     </div>
 </div>

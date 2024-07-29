@@ -178,9 +178,13 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('profile')->group(function () {
-    Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
+    Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+
 });
 
 Route::prefix('manager')->group(function () {
@@ -261,11 +265,17 @@ Route::prefix("government")->group(function () {
 
     Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
 
+    Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
+
     Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
 
     Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
+
+    Route::post('store', [GovernmentController::class, 'tindakanStore'])->name('government.store');
+
+    Route::post('destroy', [GovernmentController::class, 'tindakanDestroy'])->name('government.destroy');
 });
 
 Route::prefix('hottopic')->group(function () {

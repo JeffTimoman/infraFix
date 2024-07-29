@@ -33,13 +33,13 @@
                     <ul class="navbar-nav justify-content-center align-items-center   "
                         style="margin-left: 15%; margin-right: 15%;">
                         <li class="nav-item mx-5">
-                            <a class="nav-link active" aria-current="page" href="#">Beranda</a>
+                            <a class="nav-link {{ request()->is('hottopic*') ? 'active' : '' }}" aria-current="page" href="{{ route('hottopic.index') }}">Beranda</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="/report">Lapor</a>
+                            <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}" aria-current="page" href="{{ route('report.index') }}">Laporan</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="#">Tentang</a>
+                            <a class="nav-link" href="/about">Tentang</a>
                         </li>
                     </ul>
                     <!-- sudah ada akun -->
@@ -50,9 +50,16 @@
                                 class="btn btn-secondary dropdown-toggle d-flex align-items-center justify-content-end border-0 gap-2"
                                 type="button" data-bs-toggle="dropdown" aria-expanded="false"
                                 style="background-color: transparent; ">
-                                <div class=" d-flex align-items-center justify-content-start gap-2 text-capitalize">
-                                    <img class="rounded-circle" src="{{ asset('upload/profilepicture/default.png') }}"
-                                        alt="" width="32" height="32">
+                                <div class=" d-flex align-items-center justify-content-center gap-2">
+                                    @if(!Auth::user()->profile_picture)
+                                        <div class="image text-center align-items-center justify-content-center mb-3">
+                                            <img src="{{ asset('components/img/icon/user.png') }} " alt="Profile Picture" class="rounded-circle text-center d-flex align-items-center" style="width: 50px; height: 50px; object-fit: cover; ">
+                                        </div>
+                                    @else
+                                        <div class="image text-center align-items-center justify-content-center mb-3 d-flex"  >
+                                            <img src="{{ asset('images/' . Auth::user()->profile_picture) }}" alt="Profile Picture" class="rounded-circle text-center d-flex align-items-center" style="width: 50px; height: 50px; object-fit: cover; ">
+                                        </div>
+                                    @endif
                                     <span>{{ Auth::user()->name }}</span>
                                 </div>
                             </button>
@@ -62,7 +69,7 @@
                                     <li><a class="dropdown-item" href="#">Manager Dashboard</a></li>
                                     <li><a class="dropdown-item" href="#">Government Dashboard</a></li>
                                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -74,7 +81,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Manager Dashboard</a></li>
                                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item"href="{{ route('profile.show', $user = Auth::user()) }}">Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -86,7 +93,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Government Dashboard</a></li>
                                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -97,7 +104,7 @@
                             @if (Auth::user()->role == 'user')
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('profile.show', $user = Auth::user()) }}">Profile</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>

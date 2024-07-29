@@ -96,7 +96,7 @@
                             <div class="card-body d-flex py-4">
                                 <div class="card-text mt-2 col-9">
                                     <h5 class="mb-2 text-white fw-bold">
-                                        2
+                                        {{$dataDone}}
                                     </h5>
                                     <p class="text-white-50 mb-2 fw-bold">
                                         Laporan Selesai
@@ -132,12 +132,19 @@
                                         <th>Judul Laporan</th>
                                         <th>Daerah</th>
                                         <th>Jumlah Laporan</th>
-                                        <th>Urgensi</th>
                                         <th>Tanggal Unggah</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td>{{$item->title}}</td>
+                                            <td>{{$item->address}}</td>
+                                            <td>{{$item->reports->count()}}</td>
+                                            <td>{{$item->created_at}}</td>
+                                        </tr>
+                                    @endforeach
+                                    {{-- <tr>
                                         <td>Woilah</td>
                                         <td>Sukabumi</td>
                                         <td>107</td>
@@ -150,7 +157,7 @@
                                         <td>2000</td>
                                         <td>Low</td>
                                         <td>2025-13-60</td>
-                                    </tr>
+                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
