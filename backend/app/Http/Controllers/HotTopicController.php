@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookmark;
 use App\Models\Comment;
+use App\Models\CommentReport;
+use App\Models\Like;
 use App\Models\ThisCase;
 use Illuminate\Http\Request;
 
@@ -54,5 +57,73 @@ class HotTopicController extends Controller
             'user_id' => auth()->user()->id
         ]);
         return redirect()->back()->with('success', 'Comment added successfully.');
+    }
+
+    public function click_like(Request $request){
+        $case_number = $request->input('case_number');
+        $case = ThisCase::where('case_number', $case_number)->first();
+        if(!$case){
+            return redirect()->back();
+        }
+        $check = Like::where('user_id', auth()->user()->id)->where('case_id', $case->id)->first();
+
+        if($check){
+            //delete the like
+            Like::where('user_id', auth()->user()->id)->where('case_id', $case->id)->delete();
+            return redirect()->back();
+        }
+
+        //add the like
+        Like::create([
+            'user_id' => auth()->user()->id,
+            'case_id' => $case->id
+        ]);
+        return redirect()->back();
+    }
+
+    public function click_bookmark(Request $request){
+        $case_number = $request->input('case_number');
+        $case = ThisCase::where('case_number', $case_number)->first();
+        if(!$case){
+            return redirect()->back();
+        }
+
+        $check = Bookmark::where('user_id', auth()->user()->id)->where('case_id', $case->id)->first();
+
+        if($check){
+            //delete the bookmark
+            Bookmark::where('user_id', auth()->user()->id)->where('case_id', $case->id)->delete();
+            return redirect()->back();
+        }
+
+        //add the bookmark
+        Bookmark::create([
+            'user_id' => auth()->user()->id,
+            'case_id' => $case->id
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function report(Request $request){
+        $comment_id = $request->input('comment_id');
+        $comment = Comment::find($comment_id);
+        if(!$comment){
+            return redirect()->back();
+        }
+
+        $check = CommentReport::where('user_id', auth()->user()->id)->where('comment_id', $comment_id)->first();
+
+        if($check){
+            return redirect()->back();
+        }
+
+        //add the report
+        CommentReport::create([
+            'user_id' => auth()->user()->id,
+            'comment_id' => $comment_id
+        ]);
+
+        return redirect()->back();
     }
 }

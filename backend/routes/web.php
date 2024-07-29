@@ -26,6 +26,7 @@ use App\Http\Middleware\isNotLogin;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\isLogin;
 use Illuminate\Http\Request as HttpRequest;
 
 Route::get('/', [MainController::class, 'index']);
@@ -271,6 +272,9 @@ Route::prefix('hottopic')->group(function () {
     Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
     Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
+    Route::post('/click_like', [HotTopicController::class, 'click_like'])->name('hottopic.click_like')->middleware([isLogin::class]);
+    Route::post('/click_bookmark', [HotTopicController::class, 'click_bookmark'])->name('hottopic.click_bookmark')->middleware([isLogin::class]);
+    Route::post('/report', [HotTopicController::class, 'report'])->name('hottopic.report')->middleware([isLogin::class]);
 });
 
 

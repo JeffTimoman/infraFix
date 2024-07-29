@@ -313,12 +313,15 @@
         }
 
         /* .image-list_carousell img {
-                                                                border: solid black 1px;
-                                                            } */
+                                                                                            border: solid black 1px;
+                                                                                        } */
     </style>
 @endsection
 
 @section('content')
+    @php
+        $color = 'black';
+    @endphp
     <div class="container-fluid">
         <div class="row mt-4 d-flex justify-content-between">
             @include('components.hot_topic_sidemenu')
@@ -375,7 +378,17 @@
                                     <button id="prev-slide" class="slide-button material-symbols-rounded">
                                         <i class="bi bi-arrow-left"></i>
                                     </button>
+                                    @php
+                                        $images = \App\Models\ReportImage::where('case_id', $case->id)->get();
+                                        // dump($images);
+                                    @endphp
                                     <div class="image-list_carousell">
+                                        @foreach ($images as $image)
+                                            <a href="#">
+                                                <img src="{{ asset('upload/reportimage/' . $image->name) }}" height="288"
+                                                    class="image-item_carousell">
+                                            </a>
+                                        @endforeach
                                         <a href="#">
                                             <img src="https://akcdn.detik.net.id/community/media/visual/2024/07/08/pembangunan-jalan-tol-serbaraja-seksi-1b_169.jpeg?w=700&q=90"
                                                 height="288" class="image-item_carousell">
@@ -407,21 +420,51 @@
                         <div class="row" style="height: 5.5vh;">
                             <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
                                 <button onclick="ToggleLike()" class="btn text-dark like_button border-0" id="btn_like">
-                                    <i class="bi bi-heart"></i>
+                                    <form action="{{ route('hottopic.click_like') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="case_number" value="{{ $case->case_number }}">
+                                        <button type="submit" style="background: none; border:none;">
+                                            @if (auth()->check())
+                                                @php
+                                                    $isLiked = $case->likes->contains('user_id', Auth::id());
+                                                    $color = $isLiked ? 'red' : 'black';
+                                                @endphp
+                                            @endif
+                                            {{-- <i class="bi bi-heart"></i> --}}
+                                            <i class="bi bi-heart" style="color: {{ $color }}"></i>
+                                        </button>
+                                    </form>
                                     <span class="mb-1">{{ $case->likes->count() }}</span>
                                 </button>
                             </div>
                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
                                 <button onclick="" class="btn text-dark komen_button border-0" id="btn_komen">
-                                    <i class="bi bi-chat-left"></i>
+                                    @if (auth()->check())
+                                        @php
+                                            $isCommented = $case->comments->contains('user_id', Auth::id());
+                                            $color = $isCommented ? 'red' : 'black';
+                                        @endphp
+                                    @endif
+
+                                    <i class="bi bi-chat-left" style="color: {{ $color }}"></i>
                                     <span class="mb-1">{{ $case->comments->count() }}</span>
                                 </button>
                             </div>
                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center ">
-                                <button onclick="" class="btn text-dark" id="btn_bookmark">
-                                    <i class="bi bi-bookmark"></i>
-                                    <span class="mb-1">{{ $case->bookmarks->count() }}</span>
-                                </button>
+                                <form action="{{ route('hottopic.click_bookmark') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="case_number" value="{{ $case->case_number }}">
+                                    <button onclick="" class="btn text-dark" id="btn_bookmark" type="submit">
+                                        @if (auth()->user())
+                                            @php
+                                                $isBookmarked = $case->bookmarks->contains('user_id', Auth::id());
+                                                $color = $isBookmarked ? 'red' : 'black';
+                                            @endphp
+                                        @endif
+                                        <i class="bi bi-bookmark" style="color: {{ $color }}"></i>
+                                        <span class="mb-1">{{ $case->bookmarks->count() }}</span>
+                                    </button>
+                                </form>
                             </div>
                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
                                 <button onclick="" class="btn text-dark" id="btn_share">
@@ -447,9 +490,10 @@
                                         </div>
                                     </div>
                                     <div class="col-md-1 d-flex justify-content-center align-items-center">
-                                        <button class="btn text-dark border-0" style="background-color: #fff"
-                                            data-bs-toggle="modal" data-bs-target="#popupReporting">
-                                            <i class="bi bi-exclamation-circle "></i>
+                                        <button class="btn text-dark border-0 btn-report" style="background-color: #fff"
+                                            data-bs-toggle="modal" data-bs-target="#popupReporting" value="{{$item->id}}">
+                                            <i class="bi bi-exclamation-circle">
+                                            </i>
                                         </button>
                                     </div>
                                 </div>
@@ -514,14 +558,14 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" style="background-color: red; border-color: black"
-                            onclick="handleReportClick()">Laporkan</button>
+                        <form action="{{ route('hottopic.report') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="comment_id" value="">
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: red; border-color: black" onclick=""
+                                type="submit">Laporkan</button>
+                        </form>
                     </div>
-                    <script>
-                        function handleReportClick() {
-                            alert('Laporan berhasil dikirim');
-                        }
-                    </script>
                 </div>
             </div>
         </div>
@@ -555,6 +599,13 @@
 
     {{-- month slider --}}
     <script>
+        $(document).ready(function(){
+            $('.btn-report').click(function(){
+                var value = $(this).val();
+                console.log(value);
+                $('input[name="comment_id"]').val(value);
+            });
+        });
         $(document).ready(function() {
             let val = $('.range_minimal').val();
             let min = $('.range_minimal').attr('min');

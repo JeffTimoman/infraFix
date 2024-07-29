@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->id();
-            $table->string("case_number");
+            $table->string("case_number")->default(bin2hex(random_bytes(30)).date('YmdHis'))->unique();
 
             $table->string('title');
             $table->longText('description')->nullable(true);
