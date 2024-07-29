@@ -177,9 +177,13 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::prefix('profile')->group(function () {
-    Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.show');
     Route::get('/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
+    Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+
+
 });
 
 Route::prefix('manager')->group(function () {

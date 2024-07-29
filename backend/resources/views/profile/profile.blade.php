@@ -39,6 +39,11 @@
 @endsection
 @section('content')
 <div class="content">
+    @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
     <div class="container mt-5">
         <div class="row " style="border-radius: 20px">
             @include('profile.sidebar')
@@ -47,17 +52,20 @@
                     <div class="title mt-2">
                         <h4>Profile</h4>
                     </div>
-                    <div class="image text-center justify-content-center mb-3"  >
-                        <img src="{{ asset('components/img/icon/user.png') }}" alt="" >
-                    </div>
+                    @if(!$user->profile_picture)
+                        <div class="image text-center justify-content-center mb-3"  >
+                            <img src="{{ asset('components/img/icon/user.png') }}" alt="" >
+                        </div>
+                    @else
+                        <div class="image text-center justify-content-center mb-3"  >
+                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="Profile Picture" style="width: 150px;">
+                        </div>
+                    @endif
                     <div class="username text-center">
-                        <h4 style="color: #626262;">@cremecheeze</h4>
+                        <h4 style="color: #626262;">{{ $user->username }}</h4>
                     </div>
                     <div class="email text-center">
-                        <h4>chizu@gmail.com</h4>
-                    </div>
-                    <div class="no-telp text-center">
-                        <h4>08121929120</h4>
+                        <h4>{{ $user->email }}</h4>
                     </div>
                 </div>
             </div>
