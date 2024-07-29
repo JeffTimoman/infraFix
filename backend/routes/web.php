@@ -263,11 +263,17 @@ Route::prefix("government")->group(function () {
 
     Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
 
+    Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
+
     Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
 
     Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
+
+    Route::post('store', [GovernmentController::class, 'tindakanStore'])->name('government.store');
+
+    Route::post('destroy', [GovernmentController::class, 'tindakanDestroy'])->name('government.destroy');
 });
 
 Route::prefix('hottopic')->group(function () {

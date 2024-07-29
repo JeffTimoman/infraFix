@@ -52,28 +52,43 @@
 
                                     @foreach ($data as $item)
                                         <tr>
-                                           <td>{{$item->title}}</td>
-                                            <td>{{$item->address}}</td>
-                                            <td>{{$item->case_number}}</td>
-                                            <td>{{$item->created_at}}</td>
-                                            <td>
-                                                <button class="btn btn-outline-success m-0" type="submit">Kutindak</button>
-                                            </td>
+                                        <td>{{$item->title}}</td>
+                                        <td>{{$item->address}}</td>
+                                        <td>{{$item->reports->count()}}</td>
+                                        <td>{{$item->created_at}}</td>
+                                        <td>
+                                            <button class="btn btn-outline-success m-0" type="button" data-bs-toggle="modal" data-bs-target="#uploadModal{{$item->id}}">Kutindak</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel{{$item->id}}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="uploadModalLabel">Berikan Deskripsi Perkembangan</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{route('government.store')}}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="case_id" value="{{$item->case->id}}">
+                                                                <div class="form-group">
+                                                                    <label for="description}">Description</label>
+                                                                    <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">Upload</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                         </tr>
                                     @endforeach
-
-                                    {{-- <a href="government.home">
-                                    </a>
-                                    <tr>
-                                        <td>Hahaha Pize</td>
-                                        <td>Sukatanah</td>
-                                        <td>2000</td>
-                                        <td>Low</td>
-                                        <td>2025-13-60</td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
-                            {{-- {{$data->links()}} --}}
+
                         </div>
                     </div>
                 </div>
