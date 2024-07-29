@@ -155,6 +155,7 @@ Hot Topic
         <div class="row justify-content-center mb-4">
             <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
                 <div class="row">
+                    {{-- <h3>{{$hotTopic}}</h3> --}}
                     <table class="table">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>

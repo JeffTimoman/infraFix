@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\isLogin;
+use Illuminate\Http\Request as HttpRequest;
 
 Route::get('/', [MainController::class, 'index']);
 
@@ -196,9 +197,11 @@ Route::prefix('manager')->group(function () {
     });
 
     Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
+    Route::post('/hot_topic_posted', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
 
     Route::prefix('/unggah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
+
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/2', [function () {
             return view('manager.unggah_kasus.unggah_2');
@@ -208,12 +211,7 @@ Route::prefix('manager')->group(function () {
         }])->name('manager.unggah_3');
 
         Route::prefix('/scroll')->group(function () {
-            // Route::get('/isi', function () {
-            //     return view('manager.unggah_kasus.scroll.isi_kasus');
-            // })->name('manager.scroll_isi_kasus');
             Route::get('/isi', [ManagerManagerHotTopicController::class, 'dropdown_unggah'])->name('manager.scroll_isi_kasus');
-            // Route::post('/storeHotTopic', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.scroll_ringkasan_kasus');
-            // Route::get('/ringkasan', [ManagerManagerHotTopicController::class, 'getSummary'])->name('manager.scroll_ringkasan_kasus');
             Route::get('/ringkasan', function () {
                 return view('manager.unggah_kasus.scroll.ringkasan_kasus');
             })->name('manager.scroll_ringkasan_kasus');
@@ -228,9 +226,9 @@ Route::prefix('manager')->group(function () {
     });
 
     Route::prefix('/tambah')->group(function () {
-        Route::get('/1', function () {
-            return view('manager.tambah_kasus.tambah_1');
-        })->name('manager.tambah_1');
+        Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedReports'])->name('manager.tambah_1');
+        Route::post('/updateHotTopic', [ManagerManagerHotTopicController::class, 'update_case_id'])->name('manager.updateHotTopic');
+        Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::get('/2', function () {
             return view('manager.tambah_kasus.tambah_2');
         })->name('manager.tambah_2');
@@ -292,4 +290,16 @@ Route::prefix('hottopic')->group(function () {
 
 Route::get('/coba', function () {
     return view('cobaBugGambar');
+});
+
+Route::get('/coba2', function (HttpRequest $request) {
+    // dump($request->all());
+    return view('test.omg');
+});
+Route::post('/coba2', function (HttpRequest $request) {
+    dump($request->all());
+    echo $request->input('title');
+    echo $request->input('damage_type');
+    echo $request->input('address');
+    return view('test.omg');
 });

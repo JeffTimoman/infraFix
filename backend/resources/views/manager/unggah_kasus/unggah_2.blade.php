@@ -185,7 +185,8 @@ Unggah Kasus
             <div class="row justify-content-end mt-4" style="margin-left: 5rem">
                 <div class="col-lg-2">
                     <div class="button">
-                        <button type="submit" class="btn btn-lg rounded bottom-button">Selanjutnya</button>
+                        <button type="submit" id="submitButton"
+                            class="btn btn-lg rounded bottom-button">Selanjutnya</button>
                     </div>
                 </div>
             </div>
@@ -195,6 +196,7 @@ Unggah Kasus
 @endsection
 
 @section('script')
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     // function goBack() {
     //     window.history.back();
@@ -210,5 +212,7 @@ Unggah Kasus
         document.getElementById('submit-next').onclick = function() {
             window.location.href = "{{ route('manager.unggah_3') }}";
         };
+
+
 </script>
 @endsection

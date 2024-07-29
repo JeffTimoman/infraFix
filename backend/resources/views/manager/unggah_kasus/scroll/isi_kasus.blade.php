@@ -38,7 +38,7 @@
                                 name="damage_type">
                                 <option selected>Pilih...</option>
                                 @foreach ($datas['damage_type'] as $item)
-                                <option value="{{ $item->id }}" style="color: black;">
+                                <option value="{{ $item->name }}" style="color: black;">
                                     {{$item->name}}</option>
                                 @endforeach
                             </select>
@@ -72,7 +72,7 @@
                                     id="" name="kelurahan">
                                     <option selected>Pilih...</option>
                                     @foreach ($datas['kelurahan'] as $item)
-                                    <option value="{{ $item->id }}" style="color: black;">
+                                    <option value="{{ $item->name }}" style="color: black;">
                                         {{$item->name}}</option>
                                     @endforeach
                                 </select>
