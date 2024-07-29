@@ -8,7 +8,7 @@ use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class HotTopicController extends Controller
+class ManagerHotTopicController extends Controller
 {
     // public function selectLaporans(Request $request)
     // {
@@ -35,18 +35,18 @@ class HotTopicController extends Controller
         $mergedSelectedIds = array_unique(array_merge($selectedIds, $existingSelectedIds));
         session(['finselectedIds' => $mergedSelectedIds]);
 
-        dump(session('finselectedIds'));
+        // dump(session('finselectedIds'));
 
-        // return redirect()->route('manager.unggah_1');
+        return redirect()->route('manager.unggah_1');
     }
 
-    public function viewSelectedLaporans()
-    {
-        $finselectedIds = session('finselectedIds', []);
-        $selectedLaporans = Report::whereIn('id', $finselectedIds)->get();
-        $selectedCount = count($selectedLaporans);
-        return view('manager.unggah_kasus.unggah_1', ['selectedLaporans' => $selectedLaporans, 'selectedCount' => $selectedCount]);
-    }
+    // public function viewSelectedLaporans()
+    // {
+    //     $finselectedIds = session('finselectedIds', []);
+    //     $selectedLaporans = Report::whereIn('id', $finselectedIds)->get();
+    //     $selectedCount = count($selectedLaporans);
+    //     return view('manager.unggah_kasus.unggah_1', ['selectedLaporans' => $selectedLaporans, 'selectedCount' => $selectedCount]);
+    // }
 
     public function clearSelectedLaporans()
     {
@@ -72,5 +72,23 @@ class HotTopicController extends Controller
 
         $request->session()->put('finselectedIds', $laporans);
         return redirect()->route('manager.unggah_1');
+    }
+
+    public function viewSelectedLaporans(Request $request)
+    {
+        // save input to database
+        // Data::create(['field_name' => $finselectedIds]);
+
+        // convert string input to array
+        $finselectedIds = explode(',', $request->input('reports'));
+
+        // Filter valid ID(?)
+        $finselectedIds = array_filter($finselectedIds, function ($id) {
+            return is_numeric($id);
+        });
+
+        $selectedLaporans = Report::whereIn('id', $finselectedIds)->get();
+        $selectedCount = count($selectedLaporans);
+        return view('manager.unggah_kasus.unggah_1', ['selectedLaporans' => $selectedLaporans, 'selectedCount' => $selectedCount]);
     }
 }
