@@ -175,7 +175,7 @@
         @include('components.manager_sidebar')
         <div class="main">
 
-            @include('components.sidebar_navbar')
+            {{-- @include('components.sidebar_navbar') --}}
 
             @yield('content')
         </div>
@@ -186,13 +186,11 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         const hamBurger = document.querySelector(".toggle-btn");
-
         hamBurger.addEventListener("click", function() {
             document.querySelector("#sidebar").classList.toggle("expand");
         });
     </script>
     @yield('script')
 </body>
-
 
 </html>

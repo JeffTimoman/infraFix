@@ -131,7 +131,7 @@ Unggah Kasus
         <div class="row pt-3 px-5">
             <div class="col-lg-2">
                 <span class="back-icon" onclick="goBack()">
-                    <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                    <span class="material-symbols-outlined back" style="scale: 120%;">arrow_back</span>
                 </span>
             </div>
         </div>

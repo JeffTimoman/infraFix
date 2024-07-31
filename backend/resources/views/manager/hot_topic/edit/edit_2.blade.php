@@ -143,7 +143,7 @@
 @endsection
 
 @section('title')
-Unggah Kasus
+Edit Kasus
 @endsection
 
 @section('content')
@@ -163,7 +163,6 @@ Unggah Kasus
                     <div class="step-progress">
                         <div class="step done"></div>
                         <div class="step done"></div>
-                        <div class="step done"></div>
                     </div>
                 </div>
             </div>
@@ -173,20 +172,22 @@ Unggah Kasus
             <div class="col-lg-10 rounded p-1 justify-content-center"
                 style="background-color: white; height: 35rem; width: 82vw;">
                 <div class="container-fluid">
-                    <form action="{{route('manager.hot_topic_posted')}}" method="POST" id="submit">
-                        <input type="hidden" class="reports" name="reports">
+                    <form action="{{route('manager.updateHotTopic')}}" method="put" id="submit">
                         @csrf
-                        <div class="row">
+                        <input type="hidden" name="id" value="{{$case->id}}">
+                        <div class=" row">
                             <div class="col-lg-10 rounded p-5" style="background-color: white;  width: 82vw;"
                                 id="form-data-container">
                                 <div class="row text-center mb-5">
                                     <h3 style="">Ringkasan Kasus</h3>
-                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 31rem;">
+                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 34rem;">
                                 </div>
-                                <div class="row mb-4" style="margin-top: 5rem;">
-                                    <input for="" class="form-control-plaintext title" name="title"
+                                <div class="row mb-4">
+                                    <input for="" class=" form-control-plaintext title" name="title"
+                                        value="{{$data['title']}}"
                                         style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></input>
                                     <input class="form-control-plaintext damage_type" name="damage_type"
+                                        value="{{$data['damage_type']}}"
                                         style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem"></input>
                                 </div>
                                 <div class="row mb-4">
@@ -196,27 +197,22 @@ Unggah Kasus
                                     </div>
                                     <div class="col-lg-10">
                                         <input for="" class="form-control-plaintext address" name="address"
+                                            value="{{$data['address']}}"
                                             style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
                                         <input for="" class="form-control-plaintext kelurahan" name="kelurahan"
+                                            value="{{$data['kelurahan']}}"
                                             style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">
                                             <button class="rounded-pill"
-                                                style="background-color: #D8A4A4; border: none;">Baru
-                                                Dilaporkan</button>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <h5
-                                                style="color: #A50000; font-size: large; margin-top: 0.12rem; margin-left: -7rem">
-                                                150
-                                                Laporan</h5>
+                                                style="background-color: #D8A4A4; border: none;">{{$data['status']}}</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row-d-flex text-justify " style="width:85rem">
-                                    <textarea for="" class="form-control-plaintext description" name="description"
-                                        style="font-weight: medium; font-size: large; margin-left: 0.7rem; white-space: normal; height: 10rem;"></textarea>
+                                    <textarea for="" lass="form-control-plaintext description" name="description"
+                                        style="font-weight: medium; font-size: large; margin-left: 0.7rem; white-space: normal; height: 10rem; width: 85rem">{{$data['description']}}</textarea>
                                 </div>
                                 <div class=" row">
                                     <!-- gambar gmn gatau -->
@@ -271,7 +267,6 @@ Unggah Kasus
             $(".reports").val(reportselect);
 
     }
-
 
 
     document.addEventListener('DOMContentLoaded', function() {

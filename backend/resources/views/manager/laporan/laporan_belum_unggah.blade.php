@@ -204,7 +204,7 @@ Laporan Belum Diunggah
                     </li>
                 </ul>
             </div>
-            @include('components.filter', ['datas' => $filter]);
+            @include('components.filter', ['datas' => $filter])
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">

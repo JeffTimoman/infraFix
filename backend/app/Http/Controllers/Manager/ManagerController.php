@@ -64,7 +64,7 @@ class ManagerController extends Controller
         $cases = ThisCase::paginate(13);
         $filter = $this->filter();
         return view(
-            'manager.hot_topic',
+            'manager.hot_topic.hot_topic',
             [
                 'cases' => $cases,
                 'filter' => $filter

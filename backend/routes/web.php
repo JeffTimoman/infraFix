@@ -183,8 +183,6 @@ Route::prefix('profile')->group(function () {
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-
-
 });
 
 Route::prefix('manager')->group(function () {
@@ -196,8 +194,21 @@ Route::prefix('manager')->group(function () {
         Route::get('/belum_unggah', [ManagerController::class, 'laporan_belum'])->name('manager.laporan_belum_unggah');
     });
 
-    Route::get('/hot_topic', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
-    Route::post('/hot_topic_posted', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
+    Route::prefix('/hot_topic')->group(function () {
+        Route::get('/semua', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
+        Route::post('/posted', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
+        Route::get('/{case}/edit', [ManagerManagerHotTopicController::class, 'editHotTopic'])->name('manager.hot_topic_edit');
+
+        Route::prefix('/edit')->group(function () {
+            Route::post('/{case}/ringkasan', [ManagerManagerHotTopicController::class, 'showRingkasan'])->name('manager.edit_2');
+            Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.updateHotTopic');
+
+            // Route::prefix('/scroll')->group(function () {
+            //     Route::get('/isi/{case}', [ManagerManagerHotTopicController::class, 'showIframeContent'])->name('manager.scroll.edit_isi_kasus');
+            // });
+        });
+    });
+
 
     Route::prefix('/unggah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
@@ -215,13 +226,6 @@ Route::prefix('manager')->group(function () {
             Route::get('/ringkasan', function () {
                 return view('manager.unggah_kasus.scroll.ringkasan_kasus');
             })->name('manager.scroll_ringkasan_kasus');
-            Route::get('/fetch-names', [ManagerManagerHotTopicController::class, 'fetchNames']);
-            Route::get('/edit', function () {
-                return view('manager.unggah_kasus.scroll.edit_kasus');
-            })->name('manager.scroll_edit_kasus');
-            Route::get('/pilih', function () {
-                return view('manager.unggah_kasus.scroll.pilih_kasus');
-            })->name('manager.scroll_pilih_kasus');
         });
     });
 

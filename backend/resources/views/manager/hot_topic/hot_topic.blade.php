@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.manager')
 
 @section('style')
 <style>
@@ -182,8 +182,14 @@ Hot Topic
                                 <td>{{$case->address}}</td>
                                 <td>{{$case->created_by}}</td>
                                 <td>
-                                    <span class="material-symbols-outlined align-middle">edit</span>
-                                    <label style="color: grey;">Edit</label>
+                                    <a href="{{route('manager.hot_topic_edit', ['case' => $case])}}">
+                                        <button class="btn-remove" data-id="{{ $case->id }}"
+                                            style="border: none; background: none">
+                                            <span class="material-symbols-outlined align-middle"
+                                                style="color: #A50000;">edit</span>
+                                            <h6 style="color: black; display: inline;">Edit</h6>
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
                             @endforeach

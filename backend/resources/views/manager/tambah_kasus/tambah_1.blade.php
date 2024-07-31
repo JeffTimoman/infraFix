@@ -169,7 +169,7 @@ Unggah Kasus
             <div class="col-lg-2">
                 <!-- Kasih Aler Yakin batal Bikin Kasus -->
                 <div class="button">
-                    <a href="{{ route('manager.updateHotTopic') }}" id="submit">
+                    <a href="{{ route('manager.laporan_belum_unggah') }}" id="submit">
                         <button type="button" class="btn-close" disabled aria-label="Close"></button>
                     </a>
                 </div>
@@ -194,7 +194,6 @@ Unggah Kasus
                 </div>
                 <div class="row">
                     <form action="{{route('manager.updateHotTopic')}}" method="POST">
-                        <input class="reports" type="text" name="reports">
                         @csrf
                         @if(count($selectedLaporans) > 0)
                         <div class="row text-center">
@@ -240,11 +239,10 @@ Unggah Kasus
                         @else
                         <p>Silakan pilih laporan terlebih dahulu</p>
                         @endif
-                        <div class="row mb-4 ms-3">
+                        <div class="row mb-4 ms-3 mt-2">
                             <div class="col-lg-3">
-                                <label for="" class="form-label"
-                                    style="margin-left: -1rem; font-size: large; font-weight: 400;">Pilih Hot
-                                    Topic</label>
+                                <h4 style=" margin-left: -1rem">Pilih Hot
+                                    Topic</h4>
                                 <select class="form-select" name="report_selected"
                                     style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                     name="hot_topic_selected">
@@ -265,6 +263,7 @@ Unggah Kasus
                                 </div>
                             </div>
                         </div>
+                        <input class="reports" type="hidden" name="reports">
                     </form>
                 </div>
                 <div class="row mt-4">

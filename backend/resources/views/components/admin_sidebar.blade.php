@@ -1,5 +1,5 @@
 <style>
-    .sidebar a{
+    .sidebar a {
         text-decoration: none;
     }
 </style>
@@ -15,71 +15,80 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="{{ route('profile.show', $user = Auth::user()) }}" class="sidebar-link">
+            {{-- <a href="{{ route('profile.show', $user = Auth::user()) }}" class="sidebar-link"> --}}
                 <i class="lni lni-user"></i>
                 <span>Profile</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('user.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}">
+            <a href="{{ route('user.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'user.index' ? 'active' : '' }}">
                 <i class="lni lni-users"></i>
                 <span>User</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('admin.report.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'admin.report.index' ? 'active' : '' }}">
+            <a href="{{ route('admin.report.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'admin.report.index' ? 'active' : '' }}">
                 <i class="lni lni-warning"></i>
                 <span>Laporan</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('damage_type.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'damage_type.index' ? 'active' : '' }}">
+            <a href="{{ route('damage_type.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'damage_type.index' ? 'active' : '' }}">
                 <i class="lni lni-line-double"></i>
                 <span>Tipe Kerusakan</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('comment.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'comment.index' ? 'active' : '' }}">
+            <a href="{{ route('comment.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'comment.index' ? 'active' : '' }}">
                 <i class="lni lni-comments"></i>
                 <span>Komentar</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('milestone.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'milestone.index' ? 'active' : '' }}">
+            <a href="{{ route('milestone.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'milestone.index' ? 'active' : '' }}">
                 <i class="lni lni-flag-alt"></i>
                 <span>Milestone</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('province.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'province.index' ? 'active' : '' }}">
+            <a href="{{ route('province.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'province.index' ? 'active' : '' }}">
                 <i class="lni lni-map"></i>
                 <span>Provinsi</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('city.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'city.index' ? 'active' : '' }}">
+            <a href="{{ route('city.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'city.index' ? 'active' : '' }}">
                 <i class="lni lni-apartment"></i>
                 <span>Kota</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('kecamatan.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'kecamatan.index' ? 'active' : '' }}">
+            <a href="{{ route('kecamatan.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'kecamatan.index' ? 'active' : '' }}">
                 <i class="lni lni-map-marker"></i>
                 <span>Kecamatan</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('kelurahan.index') }}" class="sidebar-link {{ Route::currentRouteName() == 'kelurahan.index' ? 'active' : '' }}">
+            <a href="{{ route('kelurahan.index') }}"
+                class="sidebar-link {{ Route::currentRouteName() == 'kelurahan.index' ? 'active' : '' }}">
                 <i class="lni lni-home"></i>
                 <span>Kelurahan</span>
             </a>
         </li>
 
 
-    <div class="sidebar-footer">
-        <a href="{{ route('auth.logout') }}" class="sidebar-link">
-            <i class="lni lni-exit"></i>
-            <span>Logout</span>
-        </a>
-    </div>
+        <div class="sidebar-footer">
+            <a href="{{ route('auth.logout') }}" class="sidebar-link">
+                <i class="lni lni-exit"></i>
+                <span>Logout</span>
+            </a>
+        </div>
 </aside>
