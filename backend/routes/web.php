@@ -194,6 +194,10 @@ Route::prefix('manager')->group(function () {
         Route::get('/belum_unggah', [ManagerController::class, 'laporan_belum'])->name('manager.laporan_belum_unggah');
     });
 
+    // Route::get('/filter', [ManagerController::class, 'filterData'])->name('manager.filter');
+    Route::get('/seach/laporan', [ManagerController::class, 'searchLaporan'])->name('manager.search_laporan');
+    Route::get('/seach/hot_topic', [ManagerController::class, 'searchHotTopic'])->name('manager.search_hot_topic');
+
     Route::prefix('/hot_topic')->group(function () {
         Route::get('/semua', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
         Route::post('/posted', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
@@ -201,18 +205,12 @@ Route::prefix('manager')->group(function () {
 
         Route::prefix('/edit')->group(function () {
             Route::post('/{case}/ringkasan', [ManagerManagerHotTopicController::class, 'showRingkasan'])->name('manager.edit_2');
-            Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.updateHotTopic');
-
-            // Route::prefix('/scroll')->group(function () {
-            //     Route::get('/isi/{case}', [ManagerManagerHotTopicController::class, 'showIframeContent'])->name('manager.scroll.edit_isi_kasus');
-            // });
+            Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.postupdateHotTopic');
         });
     });
 
-
     Route::prefix('/unggah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
-
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/2', [function () {
             return view('manager.unggah_kasus.unggah_2');
@@ -223,9 +221,6 @@ Route::prefix('manager')->group(function () {
 
         Route::prefix('/scroll')->group(function () {
             Route::get('/isi', [ManagerManagerHotTopicController::class, 'dropdown_unggah'])->name('manager.scroll_isi_kasus');
-            Route::get('/ringkasan', function () {
-                return view('manager.unggah_kasus.scroll.ringkasan_kasus');
-            })->name('manager.scroll_ringkasan_kasus');
         });
     });
 
@@ -233,31 +228,7 @@ Route::prefix('manager')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedReports'])->name('manager.tambah_1');
         Route::post('/updateHotTopic', [ManagerManagerHotTopicController::class, 'update_case_id'])->name('manager.updateHotTopic');
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
-        Route::get('/2', function () {
-            return view('manager.tambah_kasus.tambah_2');
-        })->name('manager.tambah_2');
-        Route::get('/3', function () {
-            return view('manager.tambah_kasus.tambah_3');
-        })->name('manager.tambah_3');
-
-        // Route::prefix('/scorll')->group(function () {
-        //     Route::get('/isi', function () {
-        //         return view('manager.tambah_kasus.scroll.isi_kasus');
-        //     })->name('manager.scroll_isi_kasus');
-        //     Route::get('/ringkasan', function () {
-        //         return view('manager.tambah_kasus.scroll.ringkasan_kasus');
-        //     })->name('manager.scroll_ringkasan_kasus');
-        //     Route::get('/edit', function () {
-        //         return view('manager.tambah_kasus.scroll.edit_kasus');
-        //     })->name('manager.scroll_edit_kasus');
-        // });
     });
-
-
-
-    Route::get('/index', function () {
-        return view('manager.index');
-    })->name('manager.index');
 });
 
 Route::prefix("government")->group(function () {

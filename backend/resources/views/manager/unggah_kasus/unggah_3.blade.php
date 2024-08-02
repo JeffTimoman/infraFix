@@ -148,12 +148,18 @@ Unggah Kasus
 
 @section('content')
 <div class="container-fluid">
+    @if ($errors->any())
+    <div class="alert alert-danger" style="">
+        Gagal Unggah.
+    </div>
+    @endif
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row pt-3 px-5">
             <div class="col-lg-2">
                 <span class="back-icon" onclick="goBack()">
-                    <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                    <span class="material-symbols-outlined"
+                        style="scale: 120%; color: #A50000 !important">arrow_back</span>
                 </span>
             </div>
         </div>
@@ -174,52 +180,88 @@ Unggah Kasus
                 style="background-color: white; height: 35rem; width: 82vw;">
                 <div class="container-fluid">
                     <form action="{{route('manager.hot_topic_posted')}}" method="POST" id="submit">
-                        <input type="hidden" class="reports" name="reports">
                         @csrf
-                        <div class="row">
+                        <input type="hidden" class="reports" name="reports">
+                        <div class=" row">
                             <div class="col-lg-10 rounded p-5" style="background-color: white;  width: 82vw;"
                                 id="form-data-container">
                                 <div class="row text-center mb-5">
                                     <h3 style="">Ringkasan Kasus</h3>
-                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 31rem;">
-                                </div>
-                                <div class="row mb-4" style="margin-top: 5rem;">
-                                    <input for="" class="form-control-plaintext title" name="title"
-                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></input>
-                                    <input class="form-control-plaintext damage_type" name="damage_type"
-                                        style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem"></input>
+                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 34rem;">
                                 </div>
                                 <div class="row mb-4">
-                                    <div class="col-lg-2">
-                                        <h5 for="" class="" style="font-size: large; font-weight: 400;">Lokasi &nbsp:
+                                    <h1 id="disabledTextInput" class="form-control-plaintext title" name="title"
+                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></h1>
+                                    <h6 class="form-control-plaintext damage_type" name="damage_type"
+                                        style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
+                                    </h6>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="d-flex flex-row align-items-center mb-2">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 550; width: 200px;">
+                                            Penanggung Jawab</h5>
+                                        </h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        </h5>
+                                        <h5 class="m-0 government" style="font-size: 20px; font-weight: 550;">
                                         </h5>
                                     </div>
-                                    <div class="col-lg-10">
-                                        <input for="" class="form-control-plaintext address" name="address"
-                                            style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
-                                        <input for="" class="form-control-plaintext kelurahan" name="kelurahan"
-                                            style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
+                                    <div class="d-flex flex-row align-items-center mb-2">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">Lokasi
+                                        </h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        </h5>
+                                        <h5 class="m-0 address" style="font-size: 20px; font-weight: 400;">
+                                        </h5>
+                                    </div>
+                                    <div class="d-flex flex-row align-items-center mb-2">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">
+                                            Kelurahan</h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        </h5>
+                                        <h5 class="m-0 kelurahan" style="font-size: 20px; font-weight: 400;">
+                                        </h5>
+                                    </div>
+                                    <div class=" d-flex flex-row align-items-center">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">
+                                            Status
+                                        </h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        </h5>
+                                        <h5 class="m-0 status" style="font-size: 20px; font-weight: 400;">
+                                        </h5>
+                                    </div>
+                                    <div class=" col-lg-10 d-none">
+                                        <div>
+                                            <input class="form-control-plaintext title" name="title"
+                                                style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></input>
+                                            <input class="form-control-plaintext damage_type" name="damage_type"
+                                                style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
+                                            </input>
+                                            <input class="form-control-plaintext government" name="government"
+                                                style="font-size: medium; margin-top: -0.8rem; margin-left: 0.7rem">
+                                            </input>
+                                            <input for="" class="form-control-plaintext address" name="address"
+                                                style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
+                                            <input for="" class="form-control-plaintext kelurahan" name="kelurahan"
+                                                style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">
-                                            <button class="rounded-pill"
-                                                style="background-color: #D8A4A4; border: none;">Baru
-                                                Dilaporkan</button>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <h5
-                                                style="color: #A50000; font-size: large; margin-top: 0.12rem; margin-left: -7rem">
-                                                150
-                                                Laporan</h5>
+                                            <input class="rounded-pill d-none" name="status"
+                                                style="background-color: #D8A4A4; border: none;"></input>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row-d-flex text-justify " style="width:85rem">
-                                    <textarea for="" class="form-control-plaintext description" name="description"
-                                        style="font-weight: medium; font-size: large; margin-left: 0.7rem; white-space: normal; height: 10rem;"></textarea>
-                                </div>
-                                <div class=" row">
-                                    <!-- gambar gmn gatau -->
+                                <div class="row-d-flex text-justify " style="width:85rem; height: 180px;">
+                                    <h5 style="font-weight: 700;">Deskripsi</h5>
+                                    <p class="description" name="description"
+                                        style="font-weight: 400; font-size: large;">
+
+                                    </p>
+                                    <textarea name="description" class="d-none" id="" cols="30" rows="10"></textarea>
+
                                 </div>
                             </div>
                         </div>
@@ -228,6 +270,7 @@ Unggah Kasus
                                 <div class="button">
                                     <button type="submit" class="btn btn-lg rounded bottom-button">Unggah</button>
                                 </div>
+
                             </div>
                         </div>
                     </form>
@@ -248,29 +291,49 @@ Unggah Kasus
     }
 
     function collectReportData() {
-        let inputHotTopic = JSON.parse(localStorage.getItem('input_hot_topic'));
-        if (inputHotTopic) {
-            if (inputHotTopic.title) {
-                document.querySelector(".title").value = inputHotTopic.title;
-            }
-            if (inputHotTopic.damage_type) {
-                document.querySelector(".damage_type").value = inputHotTopic.damage_type;
-            }
-            if (inputHotTopic.address) {
-                document.querySelector(".address").value = inputHotTopic.address;
-            }
-            if (inputHotTopic.kelurahan) {
-                document.querySelector(".kelurahan").value = inputHotTopic.kelurahan;
-            }
-            if (inputHotTopic.description) {
-                document.querySelector(".description").value = inputHotTopic.description;
-            }
+    let inputHotTopic = JSON.parse(localStorage.getItem('input_hot_topic'));
+
+    if (inputHotTopic) {
+        if (inputHotTopic.title) {
+            document.querySelector("input[name='title']").value = inputHotTopic.title;
+            document.querySelector(".title").textContent = inputHotTopic.title;
         }
-
-        const reportselect = localStorage.getItem('report_is_checked');
-            $(".reports").val(reportselect);
-
+        if (inputHotTopic.damage_type) {
+            document.querySelector("input[name='damage_type']").value = inputHotTopic.damage_type;
+            document.querySelector(".damage_type").textContent = inputHotTopic.damage_type;
+        }
+        if (inputHotTopic.government) {
+            document.querySelector("input[name='government']").value = inputHotTopic.governmnet;
+            document.querySelector(".government").textContent = inputHotTopic.government;
+        }
+        if (inputHotTopic.address) {
+            document.querySelector("input[name='address']").value = inputHotTopic.address;
+            document.querySelector(".address").textContent = inputHotTopic.address;
+        }
+        if (inputHotTopic.kelurahan) {
+            document.querySelector("input[name='kelurahan']").value = inputHotTopic.kelurahan;
+            document.querySelector(".kelurahan").textContent = inputHotTopic.kelurahan;
+        }
+        if (inputHotTopic.description) {
+            document.querySelector("textarea[name='description']").value = inputHotTopic.description;
+            document.querySelector(".description").textContent = inputHotTopic.description;
+        }
+        if (inputHotTopic.status) {
+            document.querySelector("input[name='status']").value = inputHotTopic.status;
+            document.querySelector(".status").textContent = inputHotTopic.status;
+        }
     }
+
+    const reportselect = localStorage.getItem('report_is_checked');
+    if (reportselect) {
+        document.querySelector("input[name='reports']").value = reportselect;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    collectReportData();
+});
+
 
 
 

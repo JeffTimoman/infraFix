@@ -188,7 +188,7 @@ Laporan Belum Diunggah
 <div class="container-fluid">
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
-        <div class="row justify-content-evenly p-5">
+        <div class="row p-5">
             <div class="col-lg-6">
                 <ul class="nav nav-pills">
                     <li class="nav-item semua">
@@ -204,7 +204,18 @@ Laporan Belum Diunggah
                     </li>
                 </ul>
             </div>
-            @include('components.filter', ['datas' => $filter])
+            <div class="col-lg-3" style="margin-left: 22rem">
+                <div class="form-group">
+                    <form action="{{route('manager.search_laporan')}}" method="GET">
+                        <div class="input-group">
+                            <input class="form-control" name="search" placeholder="Cari..."
+                                value="{{ isset($search) ? $search : ''}}">
+                            <button type="submit" class="btn btn-danger" style="background-color: #A50000">Cari</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            {{-- @include('components.filter', ['datas' => $filter]) --}}
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
@@ -229,6 +240,11 @@ Laporan Belum Diunggah
                                 </tr>
                             </thead>
                             <tbody class="table align-middle">
+                                @if($laporans->isEmpty())
+                                <tr>
+                                    <td colspan="10" class="text-center">Tidak ada hasil ditemukan</td>
+                                </tr>
+                                @else
                                 @foreach ($laporans as $laporan)
                                 <tr>
                                     <td>{{$laporan->report_code}}</td>
@@ -248,6 +264,7 @@ Laporan Belum Diunggah
                                     </td>
                                 </tr>
                                 @endforeach
+                                @endif
                             </tbody>
                         </table>
                         <div class="row">
@@ -268,8 +285,10 @@ Laporan Belum Diunggah
                         </div>
                     </form>
                 </div>
-                <div class="row mt-4">
-                    {{$laporans ->links('pagination::bootstrap-5')}}
+            </div>
+            <div class="col-lg-10 mt-3">
+                <div>
+                    {{$laporans -> links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>
@@ -365,11 +384,9 @@ Laporan Belum Diunggah
         });
     }
 
-
-
-
-
     $(document).ready(function() {
+
+        localStorage.removeItem('input_hot_topic');
 
         removeLocalStorage();
 

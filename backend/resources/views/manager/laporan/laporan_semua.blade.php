@@ -146,7 +146,7 @@ Laporan
 <div class="container-fluid">
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
-        <div class="row justify-content-evenly p-5">
+        <div class="row p-5">
             <div class="col-lg-6">
                 <ul class="nav nav-pills">
                     <li class="nav-item1">
@@ -161,12 +161,8 @@ Laporan
                             Diunggah</a>
                     </li>
                 </ul>
-                <!-- <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" class="btn btn-danger">Semua</button>
-                    <button type="button" class="btn btn-warning">Belum Diunggah</button>
-                    </div> -->
             </div>
-            @include('components.filter', ['datas' => $filter])
+            {{-- @include('components.filter', ['datas' => $filter]) --}}
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mb-4">
@@ -203,8 +199,11 @@ Laporan
                         </tbody>
                     </table>
                 </div>
-                <br>
-                {{ $laporans->links('pagination::bootstrap-5')}}
+            </div>
+            <div class="col-lg-10 mt-3">
+                <div>
+                    {{$laporans -> links('pagination::bootstrap-5')}}
+                </div>
             </div>
         </div>
     </div>

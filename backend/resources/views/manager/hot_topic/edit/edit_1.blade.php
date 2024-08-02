@@ -171,10 +171,12 @@ Edit Kasus
             </div>
         </div>
         <!-- 2 -->
-        <form action="{{route('manager.edit_2', ['case' => $case])}}" method="post" id="submit">
+        <form action="{{route('manager.edit_2', ['case' => $case])}}" method="POST" id="submit">
+            @method('POST')
             @csrf
-            <div class="row justify-content-center mt-4">
-                <div class="col-lg-10 rounded p-5" style="background-color: white; height: 40rem; width: 82vw;">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 rounded pt-3 ps-5"
+                    style="background-color: white; height: 43rem; width: 82vw; scale: 95%">
                     {{-- <input type="text" class="report-data-collected" name="reports" id="reports"> --}}
                     <div class="row mb-4">
                         <div class="col-lg-12">
@@ -209,6 +211,21 @@ Edit Kasus
                                 @foreach ($datas['milestone'] as $item)
                                 <option value="{{ $item->title }}" style="color: black;">
                                     {{$item->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-lg-3">
+                            <label for="" class="form-label"
+                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Pemerintah
+                                Penanggung</label>
+                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                                name="government">
+                                <option selected>Pilih...</option>
+                                @foreach ($datas['government'] as $item)
+                                <option value="{{ $item->name }}" style="color: black;">
+                                    {{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -250,7 +267,7 @@ Edit Kasus
 
                 </div>
             </div>
-            <div class="row justify-content-end mt-4" style="margin-right: -2.5rem">
+            <div class="row justify-content-end mt-1" style="margin-left: -7rem">
                 <div class="col-lg-2">
                     <div class="button">
                         <button type="submit" id="submit" class="btn btn-lg rounded bottom-button">Selanjutnya</button>
