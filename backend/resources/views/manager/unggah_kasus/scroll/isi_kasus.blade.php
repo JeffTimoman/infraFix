@@ -56,7 +56,8 @@
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Penanggung Jawab</label>
+                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Pemerintah
+                                Penanggung</label>
                             <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                 name="government">
                                 <option selected>Pilih...</option>

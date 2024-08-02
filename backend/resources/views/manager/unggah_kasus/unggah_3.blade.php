@@ -198,8 +198,8 @@ Unggah Kasus
                                 </div>
                                 <div class="row mb-4">
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 550; width: 200px;">
-                                            Penanggung Jawab</h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 550; width: 250px;">
+                                            Pemerintah Penanggung</h5>
                                         </h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
@@ -207,7 +207,7 @@ Unggah Kasus
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">Lokasi
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">Lokasi
                                         </h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
@@ -215,7 +215,7 @@ Unggah Kasus
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
                                             Kelurahan</h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
@@ -223,7 +223,7 @@ Unggah Kasus
                                         </h5>
                                     </div>
                                     <div class=" d-flex flex-row align-items-center">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 200px;">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
                                             Status
                                         </h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;

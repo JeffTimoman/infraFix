@@ -222,7 +222,7 @@ Edit Kasus
                                 Penanggung</label>
                             <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                 name="government">
-                                <option selected>Pilih...</option>
+                                <option selected>{{$case->government_title}}</option>
                                 @foreach ($datas['government'] as $item)
                                 <option value="{{ $item->name }}" style="color: black;">
                                     {{$item->name}}</option>
