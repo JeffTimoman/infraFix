@@ -486,7 +486,7 @@
                                                 class="rounded-circle border">
                                         </div>
                                         <div class="col-md-10 rounded justify-content-center d-flex flex-column py-1 px-3">
-                                            <h6>{{ $item->user->name }}</h6>
+                                            <h6>{{ $item->user->name }} | <small>{{'@'.$item->user->username}}</small></h6>
                                             <p>
                                                 {{ $item->content }}
                                             </p>
@@ -796,7 +796,7 @@
     </script>
 
     {{-- newest --}}
-    
+
 {{-- month slider --}}
 <script>
     $(document).ready(function() {

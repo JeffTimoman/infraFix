@@ -58,7 +58,7 @@
                                         <img src="{{ asset('upload/profilepicture/default.png') }}"
                                             alt="" width="50" height="50" class="rounded-circle border">
                                     @endif
-                                    <span>{{ Auth::user()->name }}</span>
+                                    <span>{{ Auth::user()->username }}</span>
                                 </div>
                             </button>
                             @if (Auth::user()->role == 'admin')
