@@ -171,11 +171,11 @@
                     style="font-weight: 600; ">
                     <ul class="navbar-nav justify-content-center align-items-center   "
                         style="margin-left: 15%; margin-right: 15%;">
-                        <li class="nav-item mx-5">
-                            <a class="nav-link" aria-current="page" href="{{route('hottopic.index')}}">Beranda</a>
+                       <li class="nav-item mx-5">
+                            <a class="nav-link {{ request()->is('hottopic*') ? 'active' : '' }}" aria-current="page" href="{{ route('hottopic.index') }}">Beranda</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link" href="/report">Lapor</a>
+                            <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}" aria-current="page" href="{{ route('report.index') }}">Lapor</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link" href="{{route('main.about')}}">Tentang</a>

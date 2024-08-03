@@ -66,7 +66,7 @@ class AuthController extends Controller
             'birth' => 'required|date',
             'password' => 'required|min:6',
             'confirm' => 'required_with:password|same:password|min:6',
-            'username' => 'required|string'
+            'username' => 'required|string',
         ]);
 
 
@@ -77,7 +77,8 @@ class AuthController extends Controller
             'birth' => $request->birth,
             'profile_pic' => 'default.jpg',
             'password' => bcrypt($request->password),
-            'username' => $request->username
+            'username' => $request->username,
+            'role' => 'user'
         ];
 
         $check = User::where('email', $request->email)->orWhere('username', $request->username)->first();
