@@ -26,7 +26,10 @@ use App\Http\Middleware\isNotLogin;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\isAdmin;
+use App\Http\Middleware\isGovernment;
 use App\Http\Middleware\isLogin;
+use App\Http\Middleware\isManager;
 use Illuminate\Http\Request as HttpRequest;
 
 Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
@@ -47,16 +50,16 @@ Route::prefix('report')->group(function () {
 
 
 Route::prefix('auth')->group(function () {
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login');
-    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
-    Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register');
-    Route::post('register', [AuthController::class, 'register'])->name('auth.register');
+    Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login')->middleware(isNotLogin::class);
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login')->middleware(isNotLogin::class);
+    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(isLogin::class);
+    Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register')->middleware(isNotLogin::class);
+    Route::post('register', [AuthController::class, 'register'])->name('auth.register')->middleware(isNotLogin::class);
 })->middleware(isNotLogin::class);
 
 Route::prefix('admin')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard')->middleware([isLogin::class, isAdmin::class]);
 
     //User
     Route::prefix('user')->group(function () {
@@ -67,7 +70,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminUserController::class, 'update'])->name('user.update');
         Route::get('/{id}/details', [AdminUserController::class, 'details'])->name('user.details');
         Route::get('/{id}/destroy', [AdminUserController::class, 'destroy'])->name('user.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Case
     Route::prefix('case')->group(function () {
@@ -78,7 +81,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CaseController::class, 'update'])->name('case.update');
         Route::get('/{id}/details', [CaseController::class, 'details'])->name('case.details');
         Route::get('/{id}/destroy', [CaseController::class, 'destroy'])->name('case.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Report
     Route::prefix('report')->group(function () {
@@ -90,7 +93,7 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [AdminReportController::class, 'edit'])->name('admin.report.edit');
         Route::get('/{id}/update', [AdminReportController::class, 'update'])->name('admin.report.update');
         Route::get('/{id}/destroy', [AdminReportController::class, 'destroy'])->name('admin.report.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Damage
     Route::prefix('damage')->group(function () {
@@ -100,7 +103,7 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [DamageTypeController::class, 'edit'])->name('damage_type.edit');
         Route::get('/{id}/update', [DamageTypeController::class, 'update'])->name('damage_type.update');
         Route::get('/{id}/destroy', [DamageTypeController::class, 'destroy'])->name('damage_type.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Province
     Route::prefix('province')->group(function () {
@@ -110,7 +113,7 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [ProvinceController::class, 'edit'])->name('province.edit');
         Route::get('/{id}/update', [ProvinceController::class, 'update'])->name('province.update');
         Route::get('/{id}/destroy', [ProvinceController::class, 'destroy'])->name('province.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //City
     Route::prefix('city')->group(function () {
@@ -120,7 +123,7 @@ Route::prefix('admin')->group(function () {
         Route::get('{id}', [CityController::class, 'edit'])->name('city.edit');
         Route::get('/{id}/update', [CityController::class, 'update'])->name('city.update');
         Route::get('/{id}/destroy', [CityController::class, 'destroy'])->name('city.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Kecamatan
     Route::prefix('kecamatan')->group(function () {
@@ -131,7 +134,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [KecamatanController::class, 'update'])->name('kecamatan.update');
         Route::get('/{id}/details', [KecamatanController::class, 'details'])->name('kecamatan.details');
         Route::get('/{id}/destroy', [KecamatanController::class, 'destroy'])->name('kecamatan.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     //Kelurahan
     Route::prefix('kelurahan')->group(function () {
@@ -143,7 +146,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [KelurahanController::class, 'update'])->name('kelurahan.update');
         Route::get('/{id}/details', [KelurahanController::class, 'details'])->name('kelurahan.details');
         Route::get('/{id}/destroy', [KelurahanController::class, 'destroy'])->name('kelurahan.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     Route::prefix('milestone')->group(function () {
         Route::get('', [AdminMilestoneController::class, 'index'])->name('milestone.index');
@@ -154,7 +157,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [AdminMilestoneController::class, 'update'])->name('milestone.update');
         Route::get('/{id}/details', [AdminMilestoneController::class, 'details'])->name('milestone.details');
         Route::get('/{id}/destroy', [AdminMilestoneController::class, 'destroy'])->name('milestone.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     Route::prefix('comment')->group(function () {
         Route::get('', [CommentController::class, 'index'])->name('comment.index');
@@ -165,7 +168,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/update', [CommentController::class, 'update'])->name('comment.update');
         Route::get('/{id}/details', [CommentController::class, 'details'])->name('comment.details');
         Route::get('/{id}/destroy', [CommentController::class, 'destroy'])->name('comment.destroy');
-    });
+    })->middleware([isLogin::class, isAdmin::class]);
 
     // Selalu bikin controller itu di dalam folder Controller/admin/apagitu
     // Lalu untuk view juga di buat di dalam folder resources/views/admin/apagitu
@@ -179,20 +182,20 @@ Route::prefix('profile')->group(function () {
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::post('/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-});
+})->middleware(isLogin::class);
 
 Route::prefix('manager')->group(function () {
     //pastiin ada dashboard ini buat dipake nanti pas mau redirect dari login
-    Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
+    Route::get('dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard')->middleware([isLogin::class, isManager::class]);
 
     Route::prefix('/laporan')->group(function () {
         Route::get('/semua', [ManagerController::class, 'laporan_semua'])->name('manager.laporan_semua');
         Route::get('/belum_unggah', [ManagerController::class, 'laporan_belum'])->name('manager.laporan_belum_unggah');
-    });
+    })->middleware([isLogin::class, isManager::class]);
 
     // Route::get('/filter', [ManagerController::class, 'filterData'])->name('manager.filter');
-    Route::get('/seach/laporan', [ManagerController::class, 'searchLaporan'])->name('manager.search_laporan');
-    Route::get('/seach/kasus', [ManagerController::class, 'searchHotTopic'])->name('manager.search_hot_topic');
+    Route::get('/seach/laporan', [ManagerController::class, 'searchLaporan'])->name('manager.search_laporan')->middleware([isLogin::class, isManager::class]);
+    Route::get('/seach/kasus', [ManagerController::class, 'searchHotTopic'])->name('manager.search_hot_topic')->middleware([isLogin::class, isManager::class]);
 
     Route::prefix('/kasus')->group(function () {
         Route::get('/semua', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
@@ -202,29 +205,29 @@ Route::prefix('manager')->group(function () {
         Route::prefix('/edit')->group(function () {
             Route::post('/{case}/ringkasan', [ManagerManagerHotTopicController::class, 'showRingkasan'])->name('manager.edit_2');
             Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.postupdateHotTopic');
-        });
-    });
+        })->middleware([isLogin::class, isManager::class]);;
+    })->middleware([isLogin::class, isManager::class]);;
 
     Route::prefix('/unggah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
         Route::post('/2', [function () {
             return view('manager.unggah_kasus.unggah_2');
-        }])->name('manager.unggah_2');
+        }])->name('manager.unggah_2')->middleware([isLogin::class, isManager::class]);
         Route::get('/3', [function () {
             return view('manager.unggah_kasus.unggah_3');
-        }])->name('manager.unggah_3');
+        }])->name('manager.unggah_3')->middleware([isLogin::class, isManager::class]);
 
         Route::prefix('/scroll')->group(function () {
             Route::get('/isi', [ManagerManagerHotTopicController::class, 'dropdown_unggah'])->name('manager.scroll_isi_kasus');
-        });
+        })->middleware([isLogin::class, isManager::class]);
     });
 
     Route::prefix('/tambah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedReports'])->name('manager.tambah_1');
         Route::post('/ubah/case_id', [ManagerManagerHotTopicController::class, 'update_case_id'])->name('manager.updateHotTopic');
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
-    });
+    })->middleware([isLogin::class, isManager::class]);
 });
 
 Route::prefix("government")->group(function () {
@@ -234,19 +237,19 @@ Route::prefix("government")->group(function () {
     //     Route::get('/{id}', [GovernmentController::class, 'perkembangan'])->name('perkembangan.milestone1');
     // });
 
-    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone'])->name('government.milestone');
+    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone'])->name('government.milestone')->middleware([isLogin::class, isGovernment::class]);
 
     // Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
 
-    Route::get('dashboard', [GovernmentController::class, 'home'])->name('government.dashboard');
+    Route::get('dashboard', [GovernmentController::class, 'home'])->name('government.dashboard')->middleware([isLogin::class, isGovernment::class]);
 
     // Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
 
-    Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
+    Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan')->middleware([isLogin::class, isGovernment::class]);
 
-    Route::post('store', [GovernmentController::class, 'tindakanStore'])->name('government.store');
+    Route::post('store', [GovernmentController::class, 'tindakanStore'])->name('government.store')->middleware([isLogin::class, isGovernment::class]);
 
-    Route::post('destroy', [GovernmentController::class, 'tindakanDestroy'])->name('government.destroy');
+    Route::post('destroy', [GovernmentController::class, 'tindakanDestroy'])->name('government.destroy')->middleware([isLogin::class, isGovernment::class]);
 });
 
 Route::prefix('hottopic')->group(function () {
@@ -254,10 +257,10 @@ Route::prefix('hottopic')->group(function () {
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
     Route::get('/bookmarks', [HotTopicController::class, 'bookmarks'])->name('hottopic.bookmarks')->middleware([isLogin::class]);
     Route::get('/get_random_image/{case_number}', [HotTopicController::class, 'getRandomReportImage'])->name('hottopic.get_random_image');
-    Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
+    Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment')->middleware([isLogin::class]);
     Route::post('/click_like', [HotTopicController::class, 'click_like'])->name('hottopic.click_like')->middleware([isLogin::class]);
     Route::post('/click_bookmark', [HotTopicController::class, 'click_bookmark'])->name('hottopic.click_bookmark')->middleware([isLogin::class]);
-    Route::post('/report', [HotTopicController::class, 'report'])->name('hottopic.report')->middleware([isLogin::class]);
+    Route::post('/report', [HotTopicController::class, 'report'])->name('hottopic.report')->middleware([isLogin::class])->middleware(isLogin::class);
 });
 
 
