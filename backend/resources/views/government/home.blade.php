@@ -46,7 +46,7 @@
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid pt-4">
     <div class="mb-3">
         <div class="row">
             <div class="col-12 col-md-4">

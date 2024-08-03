@@ -238,7 +238,7 @@ Route::prefix("government")->group(function () {
     //     Route::get('/{id}', [GovernmentController::class, 'perkembangan'])->name('perkembangan.milestone1');
     // });
 
-    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
+    Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone'])->name('government.milestone');
 
     // Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
 

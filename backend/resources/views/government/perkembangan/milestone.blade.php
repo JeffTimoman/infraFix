@@ -104,7 +104,7 @@
         $current_id = request()->route('id');
     @endphp
     <div class="container-fluid p-0 pt-4 pe-5 ps-5">
-        <div class="mb-0">
+        <div class="mb-0 pt-2">
             <div class="row">
 
                 <div class="LeftArrow col-md-1 d-flex align-items-center p-0 pb-2">
