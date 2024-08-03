@@ -25,7 +25,7 @@
             <form action="{{ route('auth.login') }}" class="col-md-12 row d-flex justify-content-center align-item-center"
                 method="POST">
                 @csrf
-                <h2 class="text-center">Login</h2>
+                <h2 class="text-center">Masuk</h2>
                 <div class="col-md-12 mb-2">
                     <input class="form-control register-input" placeholder="Username/Email" name="email" value="{{session('email')}}">
                 </div>
