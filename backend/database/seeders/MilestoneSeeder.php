@@ -43,5 +43,10 @@ class MilestoneSeeder extends Seeder
             'title' => 'Status Perbaikan',
             'description' => 'Pemerintah telah mengirim bukti serta status perbaikan dari masalah yang dilaporkan'
         ]);
+
+        Milestone::create([
+            'title' => 'Selesai',
+            'description' => 'Masalah yang dilaporkan telah selesai'
+        ]);
     }
 }

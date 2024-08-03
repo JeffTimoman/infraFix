@@ -17,22 +17,22 @@ class GovernmentController extends Controller
     {
         $dataIncomplete = auth()->user()->cases;
         $dataIncomplete = $dataIncomplete->filter(function ($case) {
-            return MilestoneDetail::where('milestone_id', $case->id)->doesntExist();
+            return MilestoneDetail::where('case_id', $case->id)->doesntExist();
         })->count();
 
         $dataProcess = auth()->user()->cases;
         $dataprocess = $dataProcess->filter(function ($case) {
-            return MilestoneDetail::where('case_id', $case->id)->where('milestone_id', 6)->doesntExist() && MilestoneDetail::where('milestone_id', $case->id)->exists();
+            return MilestoneDetail::where('case_id', $case->id)->where('milestone_id', 7)->doesntExist() && MilestoneDetail::where('case_id', $case->id)->exists();
         })->count();
 
         $dataDone = auth()->user()->cases;
         $dataDone = $dataDone->filter(function ($case) {
-            return MilestoneDetail::where('case_id', $case->id)->where('milestone_id', 6)->exists();
+            return MilestoneDetail::where('case_id', $case->id)->where('milestone_id', 7)->exists();
         })->count();
 
         $data = auth()->user()->cases;
         $data = $data->filter(function ($case) {
-            return MilestoneDetail::where('milestone_id', $case->id)->doesntExist();
+            return MilestoneDetail::where('case_id', $case->id)->doesntExist();
         });
 
         return view('government.home', ['dataIncomplete' => $dataIncomplete, 'dataProcess' => $dataprocess, 'dataDone' => $dataDone, "data" => $data]);
@@ -49,7 +49,7 @@ class GovernmentController extends Controller
         $data = $data->filter(function ($case) {
             return MilestoneDetail::where('case_id', $case->id)->doesntExist();
         });
-
+        // dd($data);
         return view('government.tindakan', ['data' => $data]);
     }
 
@@ -109,7 +109,7 @@ class GovernmentController extends Controller
         }
 
         $lastMilestone = $milestone_details->last();
-        if($lastMilestone->milestone_id == 6){
+        if($lastMilestone->milestone_id == 7){
             return redirect()->back()->withErrors(['Tindakan sudah selesai']);
         }
 
