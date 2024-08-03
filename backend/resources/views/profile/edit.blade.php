@@ -53,7 +53,7 @@
                     </div>
                     <div class="row">
                         <div class="data col-7">
-                            <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" id="submit">
+                            <form action="{{ route('profile.update', $userId = auth()->user()->id) }}" method="POST" enctype="multipart/form-data" id="submit">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="Username" class="form-label" style="font-weight: bold">Username</label>

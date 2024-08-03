@@ -72,7 +72,7 @@
         </div>
 
         <div class="row justify-content-end mt-3">
-            <a href="{{ route('profile.edit') }}" class="justify-content-end text-end">
+            <a href="{{ route('profile.edit', ['user' => $user->id]) }}" class="justify-content-end text-end">
                 <button class="edit col-2">Ubah Profile</button>
             </a>
         </div>
