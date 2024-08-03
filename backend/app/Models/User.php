@@ -56,6 +56,10 @@ class User extends Authenticatable
     public function cases(){
         return $this->hasMany(ThisCase::class, 'government_id');
     }
+
+    public function bookmarks(){
+        return $this->hasMany(Bookmark::class);
+    }
 }
 
 /*

@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('title')
+    Detail
 @endsection
 @section('style')
     <link rel="stylesheet"
@@ -313,8 +314,8 @@
         }
 
         /* .image-list_carousell img {
-                                                                                            border: solid black 1px;
-                                                                                        } */
+                                                                                                border: solid black 1px;
+                                                                                            } */
     </style>
 @endsection
 
@@ -479,8 +480,9 @@
                                 <div class="col-md-12 p-0 d-flex justify-content-center">
                                     <div class="col-md-9 d-flex flex-row justify-content-center align-items-start">
                                         <div class="col-md-1 pt-2 justify-content-center d-flex">
-                                            <img src="{{ asset('components/img/icon/infrafix.png') }}" alt=""
-                                                width="50" height="50" class="rounded-circle border">
+                                            <img src="{{ asset('upload/profilepicture/' . $item->user->profile_picture) }}"
+                                                alt="" width="50" height="50"
+                                                class="rounded-circle border">
                                         </div>
                                         <div class="col-md-10 rounded justify-content-center d-flex flex-column py-1 px-3">
                                             <h6>{{ $item->user->name }}</h6>
@@ -491,7 +493,8 @@
                                     </div>
                                     <div class="col-md-1 d-flex justify-content-center align-items-center">
                                         <button class="btn text-dark border-0 btn-report" style="background-color: #fff"
-                                            data-bs-toggle="modal" data-bs-target="#popupReporting" value="{{$item->id}}">
+                                            data-bs-toggle="modal" data-bs-target="#popupReporting"
+                                            value="{{ $item->id }}">
                                             <i class="bi bi-exclamation-circle">
                                             </i>
                                         </button>
@@ -504,8 +507,14 @@
                         <div class="col-md-12 p-0 d-flex justify-content-center my-1">
                             <div class="col-md-10 d-flex flex-row justify-content-center align-items-start mt-2">
                                 <div class="col-md-1  justify-content-center d-flex">
-                                    <img src="{{ asset('components/img/konten/foto_konten1.png') }}" alt=""
-                                        width="50" height="50" class="rounded-circle border">
+
+                                    @if (auth()->check())
+                                        <img src="{{ asset('upload/profilepicture/' . auth()->user()->profile_picture) }}"
+                                            alt="" width="50" height="50" class="rounded-circle border">
+                                    @else
+                                        <img src="{{ asset('upload/profilepicture/default.png') }}"
+                                            alt="" width="50" height="50" class="rounded-circle border">
+                                    @endif
                                 </div>
                                 <div class="col-md-10 rounded justify-content-center d-flex flex-column py-1">
                                     <form action="{{ route('hottopic.add_comment') }}" method="POST">
@@ -554,7 +563,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>apakah anda yakin akan melaporkan komentar ini?</p>
+                        <p>Apakah anda yakin akan melaporkan komentar ini?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -595,12 +604,14 @@
 
     {{-- jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    {{-- boostrap js --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 
     {{-- month slider --}}
     <script>
-        $(document).ready(function(){
-            $('.btn-report').click(function(){
+        $(document).ready(function() {
+            $('.btn-report').click(function() {
                 var value = $(this).val();
                 console.log(value);
                 $('input[name="comment_id"]').val(value);

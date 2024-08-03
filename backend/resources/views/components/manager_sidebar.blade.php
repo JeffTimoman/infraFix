@@ -26,30 +26,9 @@
                 <span>Hot Topic</span>
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse" data-bs-target="#auth"
-                aria-expanded="false" aria-controls="auth">
-                <i class="lni lni-user"></i>
-                <span>Akun</span>
-            </a>
-            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Login</a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">Register</a>
-                </li>
-            </ul>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="lni lni-cog"></i>
-                <span>Setting</span>
-            </a>
-        </li>
     </ul>
     <div class="sidebar-footer">
-        <a href="#" class="sidebar-link">
+        <a href="{{route('auth.logout')}}" class="sidebar-link">
             <i class="lni lni-exit"></i>
             <span>Logout</span>
         </a>

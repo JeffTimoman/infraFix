@@ -3,13 +3,13 @@
         style="background-color: #fff; height: 25vh">
         <div class="col-md-12 my-auto d-flex justify-content-center">
             <ul class="row" style=" list-style: none;  ">
-                <li class="py-2 ps-3"><a href="" class="text-decoration-none text-dark link-secondary"><i
+                <li class="py-2 ps-3"><a href="{{route('hottopic.bookmarks')}}" class="text-decoration-none text-dark link-secondary"><i
                             class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal; align-items: center"><span
                                 class="ms-2 fw-bold" style="font-size: 20px">Tersimpan</span></i></a></li>
-                <li class="py-3 ps-3 "><a href="" class=" text-dark text-decoration-none link-secondary"><i
+                <li class="py-3 ps-3 "><a href="#" class=" text-dark text-decoration-none link-secondary"><i
                             class="bi bi-bell d-flex" style="font-size: 25px ;font-style:normal; align-items: center"><span
                                 class="ms-2 fw-bold" style="font-size: 20px">Pemberitahuan</span></i></a></li>
-                <li class="py-2 ps-3"><a href="" class="text-decoration-none  text-dark link-secondary" ><i
+                <li class="py-2 ps-3"><a href="@if(auth()->check()){{route('profile.show', ['user' => auth()->user()])}}@endif" class="text-decoration-none  text-dark link-secondary" ><i
                             class="bi bi-gear d-flex" style="font-size: 25px; font-style:normal; align-items: center"><span
                                 class="ms-2 fw-bold" style="font-size: 20px">Pengaturan</span></i></a></li>
             </ul>

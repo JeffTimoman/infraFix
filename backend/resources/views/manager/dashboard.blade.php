@@ -254,7 +254,7 @@ Beranda
                             <tr>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
-                                <th scope="col">Kota</th>
+                                <th scope="col">Kelurahan</th>
                                 <th scope="col">Tanggal Unggah</th>
                             </tr>
                         </thead>

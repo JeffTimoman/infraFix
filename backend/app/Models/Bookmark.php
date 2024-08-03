@@ -10,4 +10,12 @@ class Bookmark extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'case_id'];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function case(){
+        return $this->belongsTo(ThisCase::class);
+    }
 }
