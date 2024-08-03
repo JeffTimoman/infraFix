@@ -8,16 +8,7 @@ use Illuminate\Http\Request;
 
 class ProvinceController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $provinces = Provinsi::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('id', 'LIKE', "%{$query}%")
-            ->paginate(5);
-            return view('admin.province.search', ['data' =>$provinces]);
-        }
+    public function index(){
         $provinces = Provinsi::paginate(5);
         return view('admin.province.index', ['data' => $provinces]);
     }

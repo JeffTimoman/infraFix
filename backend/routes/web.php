@@ -83,6 +83,7 @@ Route::prefix('admin')->group(function () {
     //Report
     Route::prefix('report')->group(function () {
         Route::get('', [AdminReportController::class, 'index'])->name('admin.report.index');
+        Route::get('/unsolved', [AdminReportController::class, 'unsolvedIndex'])->name('admin.report.unsolvedIndex');
         Route::get('/{id}/details', [AdminReportController::class, 'details'])->name('admin.report.details');
         Route::get('create', [AdminReportController::class, 'create'])->name('admin.report.create');
         Route::get('store', [AdminReportController::class, 'store'])->name('admin.report.store');

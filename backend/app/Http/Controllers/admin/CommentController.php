@@ -11,17 +11,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $comments = Comment::where('content', 'LIKE', "%{$query}%")
-            ->orWhere('id', "%{$query}%")
-            ->orWhere('created_at', 'LIKE',  "%{$query}%")
-            ->paginate(5);
-            return view('admin.comment.search', ['data' =>$comments]);
-        }
+    public function index(){
         $comments = Comment::paginate(5);
         // dd($comments);
         return view('admin.comment.index', ['data' => $comments]);

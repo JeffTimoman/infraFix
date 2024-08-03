@@ -9,16 +9,7 @@ use Illuminate\Http\Request;
 
 class KelurahanController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $kelurahans = Kelurahan::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('id', 'LIKE', "%{$query}%")
-            ->paginate(5);
-            return view('admin.kelurahan.search', ['data' =>$kelurahans]);
-        }
+    public function index(){
         $kelurahans = Kelurahan::paginate(5);
         return view('admin.kelurahan.index', ['data' => $kelurahans]);
     }
