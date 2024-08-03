@@ -50,7 +50,6 @@
             <h5 class="text-danger text-center">Apabila alamat emailmu valid, maka akan dikirimkan salinan dari halaman ini
                 yang berisi ID Laporan dan Kode Akses.</h5>
             <div>
-                <a href="#" class="btn btn-secondary">Cara mengakses laporanmu</a>
                 <form action="{{route('report.show')}}" method="POST">
                     @csrf
                     <input type="hidden" class="form-control form-input-modified" name="report_code" value="{{$data['report_code']}}">

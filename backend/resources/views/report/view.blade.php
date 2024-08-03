@@ -53,11 +53,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <label for="" class="form-label">Kode Laporan</label>
-                            <input type="text" class="form-control form-input-modified" name="report_code"required>
+                            <input type="text" class="form-control form-input-modified" name="report_code" value="{{ session('report_code') }}" required>
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label">Kode Akses</label>
-                            <input type="text" class="form-control form-input-modified" name="access_key" required>
+                            <input type="text" class="form-control form-input-modified" name="access_key" value="{{ session('access_key') }}" required>
                         </div>
                     </div>
 

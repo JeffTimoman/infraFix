@@ -117,11 +117,17 @@ class ReportController extends Controller
             'access_key' => 'required'
         ]);
 
+        $request->session()->put('report_code', $request->report_code);
+        $request->session()->put('access_key', $request->access_key);
+
         $report_code = $request->report_code;
         $access_key = $request->access_key;
 
         // Retrieve the report from the database
-        $report = Report::where('report_code', $report_code)->firstOrFail();
+        $report = Report::where('report_code', $report_code)->first;
+        if(!$report) {
+            return redirect()->route('report.show')->withErrors('Kode laporan atau kode akses tidak benar.');
+        }
 
         // Create an instance of CustomEncryptor with the provided access key
         $encryptor = new CustomEncryptor($access_key);
@@ -130,7 +136,7 @@ class ReportController extends Controller
         try {
             $decrypted_report_code = $encryptor->decrypt($report->hashed_report_code);
         } catch (\Exception $e) {
-            return redirect()->route('report.show')->withErrors('Report code or access key is invalid');
+            return redirect()->route('report.show')->withErrors('Kode laporan atau kode akses tidak benar.');
         }
 
         // Compare the decrypted report code with the provided report code
@@ -142,7 +148,7 @@ class ReportController extends Controller
             return view('report.view_post', ['data' => $data]);
         }
 
-        return redirect()->route('report.show')->withErrors('Report code or access key is invalid');
+        return redirect()->route('report.show')->withErrors('Kode laporan atau kode akses tidak benar.');
     }
 
     public function indexDep()
