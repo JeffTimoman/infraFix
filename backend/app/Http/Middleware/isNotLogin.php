@@ -17,7 +17,7 @@ class isNotLogin
     public function handle(Request $request, Closure $next): Response
     {
         if(Auth::check()){
-            return redirect()->route('main.index');
+            return redirect()->route('/');
         }
         return $next($request);
     }

@@ -32,7 +32,7 @@ use App\Http\Middleware\isLogin;
 use App\Http\Middleware\isManager;
 use Illuminate\Http\Request as HttpRequest;
 
-Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index')->name('main.index');
+Route::get('/', [HotTopicController::class, 'index'])->name('main.index');
 Route::get('/about', [MainController::class, 'about'])->name('main.about');
 
 
