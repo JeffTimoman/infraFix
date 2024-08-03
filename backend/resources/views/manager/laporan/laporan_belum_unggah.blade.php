@@ -189,7 +189,7 @@ Laporan Belum Diunggah
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row p-5">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="scale: 70%; margin-left: -5rem">
                 <ul class="nav nav-pills">
                     <li class="nav-item semua">
                         <a class="nav-link rounded"
@@ -204,7 +204,7 @@ Laporan Belum Diunggah
                     </li>
                 </ul>
             </div>
-            <div class="col-lg-3" style="margin-left: 22rem">
+            <div class="col-lg-3" style="margin-left: 22rem; scale: 80%">
                 <div class="form-group">
                     <form action="{{route('manager.search_laporan')}}" method="GET">
                         <div class="input-group">
@@ -218,13 +218,13 @@ Laporan Belum Diunggah
             {{-- @include('components.filter', ['datas' => $filter]) --}}
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
+        <div class="row justify-content-center mb-4" style="margin-top: -1rem">
+            <div class="col-lg-12 text-center rounded" style="background-color: white; width: 85vw;">
                 <div class="row">
                     <form method="post" action="{{route('manager.unggah_1')}}" id="submit">
                         @csrf
                         <input type="hidden" class="report-data-collected" name="reports" id="reports">
-                        <table class="table align-middle" id="myTable">
+                        <table class="table align-middle" style="font-size: 65%" id="myTable">
                             <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                 <tr>
                                     <th scope="col">Kode Laporan</th>
@@ -267,8 +267,9 @@ Laporan Belum Diunggah
                                 @endif
                             </tbody>
                         </table>
-                        <div class="row">
-                            <div class="row-d-flex justify-content-end align-items-end" style="">
+                        <div class="row" style="scale: 80%">
+                            <div class="row-d-flex justify-content-end align-items-end mb-2"
+                                style="margin-top: -0.5rem; margin-left: 8rem">
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <div class="button">
                                         <button type="submit" class="btn btn-m rounded bottom-button "
@@ -286,7 +287,7 @@ Laporan Belum Diunggah
                     </form>
                 </div>
             </div>
-            <div class="col-lg-10 mt-3">
+            <div class="col-lg-12 mt-3" style="scale: 80%">
                 <div>
                     {{$laporans -> links('pagination::bootstrap-5')}}
                 </div>

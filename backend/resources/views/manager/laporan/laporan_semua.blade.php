@@ -147,7 +147,7 @@ Laporan
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row p-5">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="scale: 70%; margin-left: -5rem">
                 <ul class="nav nav-pills">
                     <li class="nav-item1">
                         <a class="nav-link active rounded"
@@ -165,10 +165,10 @@ Laporan
             {{-- @include('components.filter', ['datas' => $filter]) --}}
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
+        <div class="row justify-content-center mb-4" style="margin-top: -1rem">
+            <div class="col-lg-12 text-center rounded" style="background-color: white;  width: 82vw;">
                 <div class="row justify-content-center">
-                    <table class="table">
+                    <table class="table" style="font-size: 70%">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
                                 <th scope="col">Kode Laporan</th>
@@ -200,7 +200,7 @@ Laporan
                     </table>
                 </div>
             </div>
-            <div class="col-lg-10 mt-3">
+            <div class="col-m-12 mt-3" style="scale: 80%">
                 <div>
                     {{$laporans -> links('pagination::bootstrap-5')}}
                 </div>

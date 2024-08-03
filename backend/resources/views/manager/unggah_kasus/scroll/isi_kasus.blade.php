@@ -25,16 +25,17 @@
                     <div class="row mb-4">
                         <div class="col-lg-12">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Judul Kasus</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Judul Kasus</label>
                             <input type="text" id="title" class="form-control" name="title"
-                                style="background-color: #F2F2F2; width: 93vw; margin-left: -0.7rem;">
+                                style="background-color: #F2F2F2; width: 90vw; margin-left: -0.7rem;">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Tipe Kerusakan</label>
-                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Tipe Kerusakan</label>
+                            <select class="form-select"
+                                style="background-color: #F2F2F2; margin-left: -0.7rem; font-size: 80%" id=""
                                 name="damage_type">
                                 <option selected>Pilih...</option>
                                 @foreach ($datas['damage_type'] as $item)
@@ -47,18 +48,19 @@
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Status</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Status</label>
                             <input type="text" id="status" readonly class="form-control" name="status"
-                                style="background-color: #cdcaca; width: 17vw; margin-left: -0.7rem;"
+                                style="background-color: #cdcaca; font-size: 80%; width: 17vw; margin-left: -0.7rem;"
                                 value="Baru Dilaporkan">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Pemerintah
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Pemerintah
                                 Penanggung</label>
-                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                            <select class="form-select"
+                                style="background-color: #F2F2F2;font-size: 80%; margin-left: -0.7rem;" id=""
                                 name="government">
                                 <option selected>Pilih...</option>
                                 @foreach ($datas['government'] as $item)
@@ -71,20 +73,21 @@
                     <div class="row mb-4">
                         <div class="row">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Lokasi</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Lokasi</label>
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
                                 <label for="" class="form-label"
-                                    style="margin-left: -0.7rem; font-size: medium; font-weight: 100;">Alamat</label>
+                                    style="margin-left: -0.7rem; font-size: small; font-weight: 100;">Alamat</label>
                                 <input type="text" id="address" class="form-control" name="address"
-                                    style="background-color: #F2F2F2; width: 66rem; margin-left: -0.7rem;">
+                                    style="background-color: #F2F2F2; width: 45rem; margin-left: -0.7rem;">
                             </div>
                             <div class="col-lg-3">
                                 <label for="" class="form-label"
-                                    style="margin-left: 16.5rem; font-size: medium; font-weight: 100;">Kelurahan</label>
-                                <select class="form-select" style="background-color: #F2F2F2; margin-left: 16.5rem;"
-                                    id="" name="kelurahan">
+                                    style="margin-left: 12rem; font-size: small; font-weight: 100;">Kelurahan</label>
+                                <select class="form-select"
+                                    style="background-color: #F2F2F2; font-size: 80%;margin-left: 12rem;" id=""
+                                    name="kelurahan">
                                     <option selected>Pilih...</option>
                                     @foreach ($datas['kelurahan'] as $item)
                                     <option value="{{ $item->name }}" style="color: black;">
@@ -97,9 +100,9 @@
                     <div class="row mb-4">
                         <div class="col-lg-2">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Deskripsi</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Deskripsi</label>
                             <textarea class="form-control" id="description" rows="3" name="description"
-                                style="background-color: #F2F2F2; margin-left: -0.5rem; width: 93vw;"></textarea>
+                                style="background-color: #F2F2F2; margin-left: -0.5rem; width: 90vw;"></textarea>
                         </div>
                     </div>
                 </form>

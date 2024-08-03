@@ -150,8 +150,8 @@ Hot Topic
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row p-5">
-            <div class="col-lg-6">
-                <div class="col-lg-6">
+            <div class="col-lg-5">
+                <div class="col-lg-6" style="scale: 70%; ">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
                             <a class="nav-link active rounded"
@@ -160,7 +160,7 @@ Hot Topic
                         </li>
                 </div>
             </div>
-            <div class="col-lg-3" style="margin-left: 22rem">
+            <div class="col-lg-3" style="margin-left: 22rem; scale: 80%">
                 <div class="form-group">
                     <form action="{{route('manager.search_hot_topic')}}" method="GET">
                         <div class="input-group">
@@ -174,11 +174,11 @@ Hot Topic
             {{-- @include('components.filter', ['datas' => $filter]) --}}
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mb-4">
-            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 38.1rem; width: 82vw;">
+        <div class="row justify-content-center mb-4" style="margin-top: -1rem">
+            <div class="col-lg-12 text-center rounded" style="background-color: white; width: 80vw;">
                 <div class="row">
                     {{-- <h3>{{$hotTopic}}</h3> --}}
-                    <table class="table">
+                    <table class="table" style="font-size: 80%">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
                                 {{-- <th scope="col">Nomor Kasus</th> --}}
@@ -205,7 +205,7 @@ Hot Topic
                                 <td>{{$case->address}}</td>
                                 <td>{{ $case->creator ? $case->creator->name : '-' }}</td>
                                 <td>{{ $case->government ? $case->government->name : 'Belum ada' }}</td>
-                                <td>
+                                <td style="scale: 80%">
                                     <a href="{{route('manager.hot_topic_edit', ['case' => $case])}}">
                                         <button class="btn-remove" data-id="{{ $case->id }}"
                                             style="border: none; background: none">
@@ -221,7 +221,7 @@ Hot Topic
                     </table>
                 </div>
             </div>
-            <div class="col-lg-10 mt-3">
+            <div class="col-lg-12 mt-3" style="scale: 80%">
                 <div>
                     {{$cases -> links('pagination::bootstrap-5')}}
                 </div>

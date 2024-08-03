@@ -163,7 +163,7 @@ Edit Kasus
                 </span>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="scale: 80%">
             <div class="col-lg-8">
                 <div class="container">
                     <div class="step-progress">
@@ -174,65 +174,65 @@ Edit Kasus
             </div>
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center m2-4">
             <div class="col-lg-10 rounded p-1 justify-content-center"
-                style="background-color: white; height: 35rem; width: 82vw;">
+                style="background-color: white; height: 28rem; width: 82vw;">
                 <div class="container-fluid">
                     <form action="{{route('manager.postupdateHotTopic', ['case' => $case])}}" method="post" id="submit">
                         @csrf
                         @method('put')
                         <input type="hidden" name="id" value="{{$case->id}}">
                         <div class=" row">
-                            <div class="col-lg-10 rounded p-5" style="background-color: white;  width: 82vw;"
-                                id="form-data-container">
+                            <div class="col-lg-10 rounded p-5"
+                                style="background-color: white;  width: 82vw; height: 60vh;" id="form-data-container">
                                 <div class="row text-center mb-5">
-                                    <h3 style="">Ringkasan Kasus</h3>
-                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 34rem;">
+                                    <h5 style="">Ringkasan Kasus</h5>
+                                    <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 18rem;">
                                 </div>
                                 <div class="row mb-4">
                                     <h1 class=" form-control-plaintext title"
-                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem">
+                                        style="font-weight: bold; font-size: large; margin-left: 0.7rem">
                                         {{$data['title']}}</h1>
                                     <h6 class="form-control-plaintext damage_type"
-                                        style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
+                                        style="font-size: small; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
                                         {{$data['damage_type']}}
                                     </h6>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 550; width: 250px;">
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 550; width: 180px;">
                                             Pemerintah Penanggung</h5>
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 550;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0 government" style="font-size: 20px; font-weight: 550;">
+                                        <h5 class="m-0 government" style="font-size: 13px; font-weight: 550;">
                                             {{$data['government']}}
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 550; width: 180px;">
                                             Lokasi
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">{{$data['address']}}
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">{{$data['address']}}
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400; width: 180px;">
                                             Kelurahan</h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">
                                             {{$data['kelurahan']}}</h5>
                                     </div>
                                     <div class=" d-flex flex-row align-items-center">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400; width: 180px;">
                                             Status
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">{{$data['status']}}
+                                        <h5 class="m-0" style="font-size: 13px; font-weight: 400;">{{$data['status']}}
                                         </h5>
                                     </div>
                                     <div class=" col-lg-10 d-none">
@@ -265,9 +265,9 @@ Edit Kasus
                                     </div>
                                 </div>
                                 <div class="row-d-flex text-justify " style="width:85rem; height: 180px;">
-                                    <h5 style="font-weight: 700;">Deskripsi</h5>
+                                    <h5 style="font-weight: 700; font-size: 80%">Deskripsi</h5>
                                     <p class="description" name="description"
-                                        style="font-weight: 400; font-size: large;">
+                                        style="font-weight: 400; font-size: small;">
                                         {{$data['description']}}
                                     </p>
                                     <textarea name="description" class="d-none" id="" cols="30"
@@ -276,10 +276,10 @@ Edit Kasus
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-end mt-4" style="margin-right: -11rem">
+                        <div class="row justify-content-end mb-2" style="margin-right: -5rem; margin-top: 2.5rem">
                             <div class="col-lg-2">
-                                <div class="button">
-                                    <button type="submit" class="btn btn-lg rounded bottom-button">Perbarui</button>
+                                <div class="button" style="scale: 80%">
+                                    <button type="submit" class="btn btn-s rounded bottom-button">Perbarui</button>
                                 </div>
 
                             </div>
