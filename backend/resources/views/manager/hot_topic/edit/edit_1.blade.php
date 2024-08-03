@@ -160,7 +160,7 @@ Edit Kasus
                 </a>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="scale: 80%">
             <div class="col-lg-8">
                 <div class="container">
                     <div class="step-progress">
@@ -174,24 +174,25 @@ Edit Kasus
         <form action="{{route('manager.edit_2', ['case' => $case])}}" method="POST" id="submit">
             @method('POST')
             @csrf
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="margin-top: -1rem">
                 <div class="col-lg-10 rounded pt-3 ps-5"
-                    style="background-color: white; height: 43rem; width: 82vw; scale: 95%">
+                    style="background-color: white; height: 38rem; width: 82vw; scale: 90%">
                     {{-- <input type="text" class="report-data-collected" name="reports" id="reports"> --}}
-                    <div class="row mb-4">
+                    <div class="row mb-4" sca>
                         <div class="col-lg-12">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Judul Kasus</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Judul Kasus</label>
                             <input type="text" id="title" class="form-control" name="title" value="{{$case->title}}"
-                                style="background-color: #F2F2F2; margin-left: -0.7rem;">
+                                style="font-size: 80%; background-color: #F2F2F2; margin-left: -0.7rem;">
                         </div>
                     </div>
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Tipe
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Tipe
                                 Kerusakan</label>
-                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                            <select class="form-select"
+                                style="font-size: 80%;background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                 name="damage_type">
                                 <option selected>{{$case->damage_type_title}}</option>
                                 @foreach ($datas['damage_type'] as $item)
@@ -204,9 +205,10 @@ Edit Kasus
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Status</label>
-                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;"
-                                id="status" name="status">
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Status</label>
+                            <select class="form-select"
+                                style="font-size: 80%;background-color: #F2F2F2; margin-left: -0.7rem;" id="status"
+                                name="status">
                                 <option selected>{{$case->status_title}}</option>
                                 @foreach ($datas['milestone'] as $item)
                                 <option value="{{ $item->title }}" style="color: black;">
@@ -218,9 +220,10 @@ Edit Kasus
                     <div class="row mb-4">
                         <div class="col-lg-3">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Pemerintah
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Pemerintah
                                 Penanggung</label>
-                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                            <select class="form-select"
+                                style="font-size: 80%;background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                 name="government">
                                 <option selected>{{$case->government_title}}</option>
                                 @foreach ($datas['government'] as $item)
@@ -233,20 +236,21 @@ Edit Kasus
                     <div class="row mb-4">
                         <div class="row">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Lokasi</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Lokasi</label>
                         </div>
                         <div class="row">
                             <div class="col-lg-9">
                                 <label for="" class="form-label"
-                                    style="margin-left: -0.7rem; font-size: medium; font-weight: 100;">Alamat</label>
+                                    style="margin-left: -0.7rem; font-size: small; font-weight: 100;">Alamat</label>
                                 <input type="text" id="address" class="form-control" name="address"
                                     value="{{$case->address}}"
-                                    style="background-color: #F2F2F2; width: 66rem; margin-left: -0.7rem;">
+                                    style="font-size: 80%;background-color: #F2F2F2; width: 45rem; margin-left: -0.7rem;">
                             </div>
                             <div class="col-lg-3">
                                 <label for="" class="form-label"
-                                    style=" font-size: medium; font-weight: 100;">Kelurahan</label>
-                                <select class="form-select" style="background-color: #F2F2F2; " id="" name="kelurahan">
+                                    style=" font-size: small; font-weight: 100;">Kelurahan</label>
+                                <select class="form-select" style="font-size: 80%;background-color: #F2F2F2; " id=""
+                                    name="kelurahan">
                                     <option selected>{{$case->kelurahan_title}}</option>
                                     @foreach ($datas['kelurahan'] as $item)
                                     <option value="{{ $item->name }}" style="color: black;">
@@ -256,21 +260,21 @@ Edit Kasus
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-4">
+                    <div class="row">
                         <div class="col-lg-2">
                             <label for="" class="form-label"
-                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Deskripsi</label>
+                                style="margin-left: -1rem; font-size: small; font-weight: 400;">Deskripsi</label>
                             <textarea class="form-control" id="description" rows="3" name="description"
-                                style="background-color: #F2F2F2; margin-left: -0.5rem; width: 76vw;">{{$case->description}}</textarea>
+                                style="font-size: 80%;background-color: #F2F2F2; margin-left: -0.5rem; width: 76vw;">{{$case->description}}</textarea>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="row justify-content-end mt-1" style="margin-left: -7rem">
+            <div class="row justify-content-end" style="margin-left: -16rem; margin-top: -1rem">
                 <div class="col-lg-2">
-                    <div class="button">
-                        <button type="submit" id="submit" class="btn btn-lg rounded bottom-button">Selanjutnya</button>
+                    <div class="button" style="scale: 80%">
+                        <button type="submit" id="submit" class="btn btn-s rounded bottom-button">Selanjutnya</button>
                     </div>
                 </div>
             </div>

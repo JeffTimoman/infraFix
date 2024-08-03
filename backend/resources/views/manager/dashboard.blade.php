@@ -187,69 +187,71 @@ Beranda
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row justify-content-evenly p-5">
-            <div class="col-lg-3 rounded p-5 laporan" style="background-color: white;">
+            <div class="col-lg-3 d-flex align-items-center rounded p-5 laporan"
+                style="background-color: white;  height: 10vh;">
                 <a href="{{ route ('manager.laporan_semua')}}">
                     <div class="row justify-content-between">
                         <div class="col-lg-3">
-                            <h4 class="text-dark">{{$laporans_count}}</h4>
+                            <h6 class="text-dark">{{$laporans_count}}</h6>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-left: 6rem">
                             <span class="material-symbols-outlined"
-                                style="color: #A50000; scale: 200%;">assignment</span>
+                                style="color: #A50000; scale: 100%;">assignment</span>
                         </div>
                     </div>
                     <div class="row">
-                        <h4 style="color: grey;">Laporan</h4>
+                        <h6 style="color: grey;">Laporan</h6>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 rounded p-5 laporan" style="background-color: white;">
-                <a href="{{route('manager.laporan_belum_unggah')}}">
+            <div class="col-lg-3 rounded p-5 laporan d-flex align-items-center"
+                style="background-color: white; height: 10vh;">
+                <a href=" {{route('manager.laporan_belum_unggah')}}">
                     <div class="row justify-content-between">
                         <div class="col-lg-3">
-                            <h4 class="text-dark">{{$laporans_belum_count}}</h4>
+                            <h6 class="text-dark">{{$laporans_belum_count}}</h6>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="margin-left: 6rem">
                             <span class="material-symbols-outlined"
-                                style="color: #A50000; scale: 200%;">pending_actions</span>
+                                style="color: #A50000; scale: 100%;">pending_actions</span>
                         </div>
                     </div>
                     <div class="row">
-                        <h4 style="color: grey;">Belum Diunggah</h4>
+                        <h6 style="color: grey;">Belum Diunggah</h6>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-3 rounded p-5 hot-topic">
+            <div class="col-lg-3 rounded p-5 hot-topic d-flex align-items-center" style="height: 10vh;">
                 <a href="{{route('manager.hot_topic')}}">
                     <div class="row justify-content-between">
-                        <div class="col-lg-3">
-                            <h4 style="color: white;">{{$hot_topics_count}}</h4>
+                        <div class="col-lg-3" style="margin-right: 5rem">
+                            <h6 style="color: white;">{{$hot_topics_count}}</h6>
                         </div>
                         <div class="col-lg-3">
-                            <span class="material-symbols-outlined" style="color: white; scale: 200%;">newspaper</span>
+                            <span class="material-symbols-outlined" style="color: white; scale: 100%;">newspaper</span>
                         </div>
                     </div>
                     <div class="row">
-                        <h4 style="color: #D8A4A4;">Hot Topic</h4>
+                        <h6 style="color: #D8A4A4;">Hot Topic</h6>
                     </div>
                 </a>
             </div>
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center mb-5">
-            <div class="col-lg-10 text-center rounded" style="background-color: white; height: 36rem;">
-                <div class="row justify-content-between align-items-center p-3">
-                    <div class="col-lg-2">
-                        <h3 class="" style="font-weight: bold;">Laporan Terkini</h3>
+        <div class="row justify-content-center mb-3" style="margin-top: -1rem">
+            <div class="col-lg-10 text-center rounded" style="background-color: white; ">
+                <div class="row justify-content-between align-items-center py-2" style="scale: 90%">
+                    <div class="col-lg-3">
+                        <h5 class="" style="font-weight: bold; margin-left: -5rem">Laporan Terkini</h5>
                     </div>
                     <div class="col-lg-2">
                         <form action="{{ route('manager.laporan_semua')}}" method="GET">
-                            <button type="submit" class="btn btn-lg rounded top-button">Selengkapnya</button>
+                            <button type="submit" class="btn btn-s rounded top-button">Selengkapnya</button>
                         </form>
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <table class="table">
+                    <table class="table" style="font-size: 80%">
                         <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                             <tr>
                                 <th scope="col">Judul Laporan</th>

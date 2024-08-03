@@ -9,19 +9,22 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="{{ route('manager.dashboard') }}" class="sidebar-link {{ Request::routeIs('manager.dashboard') ? 'active' : '' }}">
+            <a href="{{ route('manager.dashboard') }}"
+                class="sidebar-link {{ Request::routeIs('manager.dashboard') ? 'active' : '' }}">
                 <i class="lni lni-layout"></i>
                 <span>Beranda</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('manager.laporan_semua') }}" class="sidebar-link {{ Request::routeIs('manager.laporan_semua') ? 'active' : '' }}">
+            <a href="{{ route('manager.laporan_semua') }}"
+                class="sidebar-link {{ Request::routeIs('manager.laporan_semua') ? 'active' : '' }}">
                 <i class="lni lni-agenda"></i>
                 <span>Laporan</span>
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('manager.hot_topic') }}" class="sidebar-link {{ Request::routeIs('manager.hot_topic') ? 'active' : '' }}">
+            <a href="{{ route('manager.hot_topic') }}"
+                class="sidebar-link {{ Request::routeIs('manager.hot_topic') ? 'active' : '' }}">
                 <i class="lni lni-popup"></i>
                 <span>Hot Topic</span>
             </a>

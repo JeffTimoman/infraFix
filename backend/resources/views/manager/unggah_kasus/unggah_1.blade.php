@@ -175,7 +175,7 @@ Unggah Kasus
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="scale: 80%">
             <div class="col-lg-10">
                 <div class="container">
                     <div class="step-progress">
@@ -188,15 +188,15 @@ Unggah Kasus
         </div>
         <!-- 2 -->
         <div class="row justify-content-center mt-4">
-            <div class="col-lg-10 rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
-                <div class="row text-start p-2" style="display: inline-block">
+            <div class="col-lg-10 rounded" style="background-color: white; width: 82vw;">
+                <div class="row text-start p-2" style="display: inline-block; scale: 70%">
                     <h4><span id="selected-count">{{$selectedCount}}</span> laporan dipilih</h4>
                 </div>
                 <div class="row">
                     <form action="{{route('manager.unggah_2')}}" method="POST">
                         @csrf
                         @if(count($selectedLaporans) > 0)
-                        <div class="row text-center">
+                        <div class="row text-center" style="scale: 90%; font-size: 80%">
                             <table class="table align-middle">
                                 <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                     <tr>
@@ -222,9 +222,9 @@ Unggah Kasus
                                         <td>{{$selected->kelurahan->kecamatan->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
-                                        <td>
+                                        <td style="scale: 80%">
                                             <button class="btn-remove" data-id="{{ $selected->id }}"
-                                                style="border: none">
+                                                style="border: none;">
                                                 <span class="material-symbols-outlined align-middle"
                                                     style="color: #A50000;">delete</span>
                                                 <h6 style="color: black; display: inline;">Hapus</h6>
@@ -240,10 +240,10 @@ Unggah Kasus
                         <p>Silakan pilih laporan terlebih dahulu</p>
                         @endif
 
-                        <div class="row justify-content-end">
-                            <div class="col-lg-2">
-                                <div class="button">
-                                    <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan
+                        <div class="row ">
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <div class="button" style="scale: 80%">
+                                    <button type="submit" class="btn btn-s rounded bottom-button">Tambahkan
                                         ke
                                         Kasus</button>
                                 </div>
@@ -251,7 +251,7 @@ Unggah Kasus
                         </div>
                     </form>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-4" style="scale: 80%">
                     {{$selectedLaporans ->links('pagination::bootstrap-5')}}
                 </div>
             </div>

@@ -20,7 +20,7 @@ class ManagerController extends Controller
         $laporans_count = Report::count();
         $laporans_belum_count = Report::where('case_id', null)->count();
         $hot_topics_count = ThisCase::count();
-        $recent_reports = Report::orderBy('created_at', 'desc')->paginate(11);
+        $recent_reports = Report::orderBy('created_at', 'desc')->paginate(8);
         return view(
             'manager.dashboard',
             [
@@ -34,7 +34,7 @@ class ManagerController extends Controller
 
     public function laporan_semua()
     {
-        $laporans = Report::paginate(13);
+        $laporans = Report::paginate(9);
 
         return view(
             'manager.laporan.laporan_semua',
@@ -45,7 +45,7 @@ class ManagerController extends Controller
     }
     public function laporan_belum()
     {
-        $laporans = Report::where('case_id', null)->paginate(9);
+        $laporans = Report::where('case_id', null)->paginate(6);
 
         return view(
             'manager.laporan.laporan_belum_unggah',
@@ -57,7 +57,7 @@ class ManagerController extends Controller
 
     public function hot_topic()
     {
-        $cases = ThisCase::paginate(13);
+        $cases = ThisCase::paginate(8);
         return view(
             'manager.hot_topic.hot_topic',
             [

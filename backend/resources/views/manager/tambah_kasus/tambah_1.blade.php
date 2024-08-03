@@ -180,16 +180,16 @@ Menambahkan Kasus
             </div>
         </div>
         <!-- 2 -->
-        <div class="row justify-content-center" style="margin-top: 7rem">
-            <div class="col-lg-10 rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
-                <div class="row text-start p-2" style="display: inline-block">
+        <div class="row justify-content-center" style="margin-top: 2rem">
+            <div class="col-lg-10 rounded" style="background-color: white;  width: 82vw;">
+                <div class="row text-start p-2" style="display: inline-block; scale: 70%">
                     <h4><span id="selected-count">{{$selectedCount}}</span> laporan dipilih</h4>
                 </div>
                 <div class="row">
                     <form action="{{route('manager.updateHotTopic')}}" method="POST">
                         @csrf
                         @if(count($selectedLaporans) > 0)
-                        <div class="row text-center">
+                        <div class="row text-center" style="scale: 90%; font-size: 80%">
                             <table class="table align-middle">
                                 <thead style="border-bottom-width: 3px; border-top-width: 3px;">
                                     <tr>
@@ -215,7 +215,7 @@ Menambahkan Kasus
                                         <td>{{$selected->kelurahan->kecamatan->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->name}}</td>
                                         <td>{{$selected->kelurahan->kecamatan->kota->provinsi->name}}</td>
-                                        <td>
+                                        <td style="scale: 80%">
                                             <button class="btn-remove" data-id="{{ $selected->id }}"
                                                 style="border: none">
                                                 <span class="material-symbols-outlined align-middle"
@@ -233,11 +233,11 @@ Menambahkan Kasus
                         <p>Silakan pilih laporan terlebih dahulu</p>
                         @endif
                         <div class="row mb-4 ms-3 mt-2">
-                            <div class="col-lg-3">
-                                <h4 style=" margin-left: -1rem">Pilih Hot
-                                    Topic</h4>
+                            <div class="col-lg-3" style="scale: 80%">
+                                <h6 style=" margin-left: -1rem; font-weight: 600; font-style: bold  ">Pilih Hot
+                                    Topic</h6>
                                 <select class="form-select" name="report_selected"
-                                    style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                                    style="background-color: #F2F2F2; margin-left: -0.7rem; font-size: 80%" id=""
                                     name="hot_topic_selected">
                                     <option selected>Pilih...</option>
                                     @foreach ($hot_topics as $item)
@@ -247,10 +247,10 @@ Menambahkan Kasus
                                 </select>
                             </div>
                         </div>
-                        <div class="row justify-content-end">
-                            <div class="col-lg-2">
-                                <div class="button">
-                                    <button type="submit" class="btn btn-m rounded bottom-button">Tambahkan
+                        <div class="row mb-3">
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <div class="button" style="scale: 80%">
+                                    <button type="submit" class="btn btn-s rounded bottom-button">Tambahkan
                                         ke
                                         Kasus</button>
                                 </div>

@@ -161,7 +161,7 @@ Unggah Kasus
                 </a>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="scale: 80%">
             <div class="col-lg-8">
                 <div class="container">
                     <div class="step-progress">
@@ -176,18 +176,18 @@ Unggah Kasus
         <form action="{{route('manager.unggah_3')}}" method="">
             @csrf
             {{-- @method(`post`) --}}
-            <div class="row justify-content-center mt-4">
+            <div class="row justify-content-center mt-2">
                 <div class="col-lg-10 rounded p-1 justify-content-center"
-                    style="background-color: white; height: 35rem; width: 82vw;">
-                    <iframe class="" style="height: 34.5rem; width: 79vw;" src="{{ route('manager.scroll_isi_kasus')}}"
+                    style="background-color: white; scale: 80% width: 82vw;">
+                    <iframe class="" style="height: 25rem; width: 79vw;" src="{{ route('manager.scroll_isi_kasus')}}"
                         frameborder="0" id="form-iframe"></iframe>
                 </div>
             </div>
-            <div class="row justify-content-end mt-4" style="margin-left: 5rem">
+            <div class="row justify-content-end mt-3" style="margin-left: 20rem; scale: 80%">
                 <div class="col-lg-2">
                     <div class="button">
-                        <button type="submit" id="submitButton"
-                            class="btn btn-lg rounded bottom-button">Selanjutnya</button>
+                        <button type="submit" id="submitButton" style="80%"
+                            class="btn btn-s rounded bottom-button">Selanjutnya</button>
                     </div>
                 </div>
             </div>
