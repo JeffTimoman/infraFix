@@ -9,16 +9,7 @@ use Illuminate\Http\Request;
 
 class CityController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $cities = Kota::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('id', 'LIKE', "%{$query}%")
-            ->paginate(5);
-            return view('admin.city.search', ['data' =>$cities]);
-        }
+    public function index(){
         $cities = Kota::paginate(5);
         return view('admin.city.index', ['data' => $cities]);
     }

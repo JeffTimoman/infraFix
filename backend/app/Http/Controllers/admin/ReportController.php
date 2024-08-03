@@ -12,24 +12,15 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $reports = Report::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('description', 'LIKE', "%{$query}%")
-            ->orWhere('id', "%{$query}%")
-            ->orWhere('user_id', "%{$query}%")
-            ->orWhere('case_id',  "%{$query}%")
-            ->orWhere('damage_type_id',  "%{$query}%")
-            ->paginate(5);
-            return view('admin.report.search', ['data' =>$reports]);
-        }
+    public function index(){
         $reports = Report::paginate(5);
         return view('admin.report.index', ['data' => $reports]);
     }
 
+    public function unsolvedIndex(){
+        $reports = Report::where('case_id', null)->paginate(5);
+        return view('admin.report.index', ['data' => $reports]);
+    }
 
     public function details($id){
         $report = Report::where('id', $id)->first();

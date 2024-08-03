@@ -151,6 +151,15 @@
         /* margin-left: 20px; */
     }
 
+    .paginate_button.active a {
+            background-color: #A50000 !important;
+            color: white !important;
+            border: 0;
+        }
+
+    .paginate_button a {
+        color: black !important;
+    }
     </style>
 @endsection
 @section('content')

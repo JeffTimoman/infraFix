@@ -9,17 +9,7 @@ use Illuminate\Http\Request;
 
 class MilestoneController extends Controller
 {
-    public function index(Request $request){
-        $query = $request->input('query');
-        if($query){
-            session()->flash('query', $request->input('query'));
-            $query = $request->input('query');
-            $milestones = Milestone::where('title', 'LIKE', "%{$query}%")
-            ->orWhere('description', 'LIKE', "%{$query}%")
-            ->orWhere('id', 'LIKE', "%{$query}%")
-            ->paginate(5);
-            return view('admin.milestone.search', ['data' =>$milestones]);
-        }
+    public function index(){
         $milestones = Milestone::paginate(5);
         return view('admin.milestone.index', ['data' => $milestones]);
     }

@@ -124,56 +124,64 @@
             <div class="row">
                 <div class="cardbox col-12 col-md-4 ">
                     <div class="card border-0">
-                        <div class="card-body py-4">
-                            <div class="card-text">
-                                <h5 class="mb-2 fw-bold">
-                                    {{ $data['report_total'] }}
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    Laporan
-                                </p>
+                        <a href="{{ route('admin.report.index') }}"  style="text-decoration: none; color: inherit;">
+                            <div class="card-body py-4">
+                                <div class="card-text">
+                                    <h5 class="mb-2 fw-bold">
+                                        {{ $data['report_total'] }}
+                                    </h5>
+                                    <p class="mb-2 fw-bold">
+                                        Laporan
+                                    </p>
+                                </div>
+                                <div class="card-icon">
+                                    <span class="material-symbols-outlined">
+                                        lab_profile
+                                    </span>                            </div>
                             </div>
-                            <div class="card-icon">
-                                <span class="material-symbols-outlined">
-                                    lab_profile
-                                </span>                            </div>
-                        </div>
+                        </a>
+
                     </div>
                 </div>
                 <div class="cardbox col-12 col-md-4 ">
                     <div class="card border-0">
-                        <div class="card-body py-4">
-                            <div class="card-text">
-                                <h5 class="mb-2 fw-bold">
-                                    {{ $data['user_total'] }}
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    Pengguna
-                                </p>
+                        <a href="{{ route('user.index') }}"  style="text-decoration: none; color: inherit;">
+                            <div class="card-body py-4">
+                                <div class="card-text">
+                                    <h5 class="mb-2 fw-bold">
+                                        {{ $data['user_total'] }}
+                                    </h5>
+                                    <p class="mb-2 fw-bold">
+                                        Pengguna
+                                    </p>
+                                </div>
+                                <div class="card-icon">
+                                    <span class="material-symbols-outlined">
+                                        group
+                                    </span>                              </div>
                             </div>
-                            <div class="card-icon">
-                                <span class="material-symbols-outlined">
-                                    group
-                                </span>                              </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="cardbox col-12 col-md-4 ">
                     <div class="card border-0">
-                        <div class="card-body py-4">
-                            <div class="card-text">
-                                <h5 class="mb-2 fw-bold">
-                                    {{ $data['unconfirmed'] }}
-                                </h5>
-                                <p class="mb-2 fw-bold">
-                                    Laporan belum terkonfirmasi
-                                </p>
+                        <a href="{{ route('admin.report.unsolvedIndex') }}"  style="text-decoration: none; color: inherit;">
+                            <div class="card-body py-4">
+                                <div class="card-text">
+                                    <h5 class="mb-2 fw-bold">
+                                        {{ $data['unconfirmed'] }}
+                                    </h5>
+                                    <p class="mb-2 fw-bold">
+                                        Laporan belum terkonfirmasi
+                                    </p>
+                                </div>
+                                <div class="card-icon">
+                                    <span class="material-symbols-outlined">
+                                        brightness_alert
+                                    </span>
+                                </div>
                             </div>
-                            <div class="card-icon">
-                                <span class="material-symbols-outlined">
-                                    brightness_alert
-                                </span>                          </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
