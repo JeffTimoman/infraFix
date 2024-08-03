@@ -2,14 +2,14 @@
     <div class="d-flex justify-content-center align-items-center rounded border border-secondary"
         style="background-color: #fff; height: 25vh">
         <div class="col-md-12 my-auto d-flex justify-content-center">
-            <ul class="row" style=" list-style: none;  ">
+            <ul class="row mt-3" style=" list-style: none; ">
                 {{-- Check if we are in the hottopic bookmarks route --}}
                 <li class="py-2 ps-3">
                     @if (Route::currentRouteName() === 'hottopic.bookmarks')
                         <a href="{{ route('hottopic.index') }}" class="text-decoration-none text-dark link-secondary">
                             <i class="bi bi-list d-flex"
                                 style="font-size: 25px; font-style: normal; align-items: center">
-                                <span class="ms-2 fw-bold" style="font-size: 20px">Selengkapnya</span>
+                                <span class="ms-2 fw-bold" style="font-size: 15px">Selengkapnya</span>
                             </i>
                         </a>
                     @else
@@ -17,7 +17,7 @@
                             class="text-decoration-none text-dark link-secondary">
                             <i class="bi bi-bookmark d-flex"
                                 style="font-size: 25px; font-style: normal; align-items: center">
-                                <span class="ms-2 fw-bold" style="font-size: 20px">Tersimpan</span>
+                                <span class="ms-2 fw-bold" style="font-size: 15px">Tersimpan</span>
                             </i>
                         </a>
                     @endif
@@ -26,18 +26,18 @@
                 <li class="py-3 ps-3 "><a href="#" class=" text-dark text-decoration-none link-secondary"><i
                             class="bi bi-bell d-flex"
                             style="font-size: 25px ;font-style:normal; align-items: center"><span class="ms-2 fw-bold"
-                                style="font-size: 20px">Pemberitahuan</span></i></a></li>
+                                style="font-size: 15px">Pemberitahuan</span></i></a></li>
                 <li class="py-2 ps-3"><a
                         href="@if (auth()->check()) {{ route('profile.show', ['user' => auth()->user()]) }} @endif"
                         class="text-decoration-none  text-dark link-secondary"><i class="bi bi-gear d-flex"
                             style="font-size: 25px; font-style:normal; align-items: center"><span class="ms-2 fw-bold"
-                                style="font-size: 20px">Pengaturan</span></i></a></li>
+                                style="font-size: 15px">Pengaturan</span></i></a></li>
             </ul>
         </div>
     </div>
     <form action="">
         <div class="col-md-12 rounded border border-secondary p-0 overflow-auto"
-            style="background-color: #fff;  height: 58vh; max-height:58vh; position: relative; ">
+            style="background-color: #fff;  height: 62vh; max-height:62vh; position: relative; ">
             <div class=" row w-100 m-0  ">
                 <div class="accordion border-0 mt-1" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item border-0 pb-3" style=" width: 100%">
