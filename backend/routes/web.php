@@ -182,7 +182,7 @@ Route::prefix('profile')->group(function () {
     Route::get('/password', [ProfileController::class, 'password'])->name('profile.password');
     Route::get('/forget/{email}', [ProfileController::class, 'password'])->name('profile.forgetpassword');
     Route::post('/update/{user}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::get('/changePassword/{user}', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 })->middleware(isLogin::class);
 
 Route::prefix('manager')->group(function () {

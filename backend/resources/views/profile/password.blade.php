@@ -48,7 +48,7 @@
                         <h4>Change Password</h4>
                     </div>
                     <div class="row">
-                        <form name="passwordChange" id="passwordChange" class="passwordChange" action="{{ route('profile.changePassword', $user = Auth::user()) }}">
+                        <form name="passwordChange" id="passwordChange" class="passwordChange" action="{{ route('profile.changePassword',  $userId = auth()->user()->id) }}">
                             <div class="data col-6">
                                 <div class="mb-3">
                                     <label for="CurrrentPassword" class="form-label">Current Password</label>

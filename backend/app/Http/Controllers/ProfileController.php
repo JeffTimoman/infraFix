@@ -48,13 +48,13 @@ class ProfileController extends Controller
         return view('profile.profile', ['user' => $user])->with('success', 'Profile updated successfully.');
     }
 
-    public function password(){
-        return view('profile.password');
+    public function password(User $user){
+        return view('profile.password', ['user' => $user]);
     }
 
-    public function changePassword(Request $request, $user){
+    public function changePassword(Request $request, $userId){
         // dump($request);
-        // $user = User::find(4);
+        $user = User::find($userId);
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required',
