@@ -157,7 +157,7 @@
 @endsection
 
 @section('title')
-Unggah Kasus
+Menambahkan Kasus
 @endsection
 
 @section('content')

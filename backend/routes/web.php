@@ -196,11 +196,11 @@ Route::prefix('manager')->group(function () {
 
     // Route::get('/filter', [ManagerController::class, 'filterData'])->name('manager.filter');
     Route::get('/seach/laporan', [ManagerController::class, 'searchLaporan'])->name('manager.search_laporan');
-    Route::get('/seach/hot_topic', [ManagerController::class, 'searchHotTopic'])->name('manager.search_hot_topic');
+    Route::get('/seach/kasus', [ManagerController::class, 'searchHotTopic'])->name('manager.search_hot_topic');
 
-    Route::prefix('/hot_topic')->group(function () {
+    Route::prefix('/kasus')->group(function () {
         Route::get('/semua', [ManagerController::class, 'hot_topic'])->name('manager.hot_topic');
-        Route::post('/posted', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
+        Route::post('/unggah', [ManagerManagerHotTopicController::class, 'storeHotTopic'])->name('manager.hot_topic_posted');
         Route::get('/{case}/edit', [ManagerManagerHotTopicController::class, 'editHotTopic'])->name('manager.hot_topic_edit');
 
         Route::prefix('/edit')->group(function () {
@@ -226,7 +226,7 @@ Route::prefix('manager')->group(function () {
 
     Route::prefix('/tambah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedReports'])->name('manager.tambah_1');
-        Route::post('/updateHotTopic', [ManagerManagerHotTopicController::class, 'update_case_id'])->name('manager.updateHotTopic');
+        Route::post('/ubah/case_id', [ManagerManagerHotTopicController::class, 'update_case_id'])->name('manager.updateHotTopic');
         Route::get('/clearSelecetedIds', [ManagerManagerHotTopicController::class, 'clearSelectedLaporans'])->name('manager.clearSelectedIds');
     });
 });
