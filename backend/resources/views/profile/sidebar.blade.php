@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="password text-center">
-            <a href="{{ route('profile.password') }}">
+            <a href="{{ route('profile.password', $user = Auth::user()) }}">
                 <span class="material-symbols-outlined">
                     password
                 </span>

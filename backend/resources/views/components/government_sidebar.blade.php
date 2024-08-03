@@ -9,6 +9,12 @@
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
+            <a href="{{ route('profile.show', $user = Auth::user()) }}" class="sidebar-link">
+                <i class="lni lni-user"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a href="{{ route('government.dashboard') }}" class="sidebar-link {{ Request::routeIs('government.dashboard') ? 'active' : '' }}">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Dashboard</span>
@@ -28,7 +34,7 @@
         </li>
     </ul>
     <div class="sidebar-footer">
-        <a href="#" class="sidebar-link">
+        <a href="{{route('auth.logout')}}" class="sidebar-link">
             <i class="lni lni-exit"></i>
             <span>Logout</span>
         </a>

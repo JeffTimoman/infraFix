@@ -13,44 +13,48 @@ class ProfileController extends Controller
         return view('profile.profile', ['user' => $user]);
     }
 
-    public function edit(){
-        return view('profile.edit');
+    public function edit($userId)
+    {
+        $user = User::findOrFail($userId);
+        return view('profile.edit', ['user' => $user]);
     }
 
-    public function update(Request $request){
-        // dump($request->all());
+    public function update(Request $request, $userId){
+        // dump($user);
+        $user = User::findOrFail($userId);
         $request->validate([
             'username' => 'required',
             'email' => 'required|email',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user) {
-            return back()->withErrors(['email' => 'User not found']);
-        }
-
-        $imageName = time() . '.' . $request->file('image')->extension();
-
-        $request->file('image')->move(public_path('upload/profilepicture'), $imageName);
-
+        // Update user details
         $user->update([
             'username' => $request->username,
             'email' => $request->email,
-            'profile_picture' => $imageName,
         ]);
 
+        // Check if an image was uploaded
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('upload/profilepicture'), $imageName);
+
+            // Update the profile picture
+            $user->update([
+                'profile_picture' => $imageName,
+            ]);
+        }
         return view('profile.profile', ['user' => $user])->with('success', 'Profile updated successfully.');
     }
 
-    public function password(){
-        return view('profile.password');
+    public function password(User $user){
+        return view('profile.password', ['user' => $user]);
     }
 
-    public function changePassword(Request $request, $user){
+    public function changePassword(Request $request, $userId){
         // dump($request);
-        // $user = User::find(4);
+        $user = User::find($userId);
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required',
@@ -67,11 +71,9 @@ class ProfileController extends Controller
         } else {
             return redirect()->back()->withErrors(['Password incorrect']);
         }
+
+
+
         return view('profile.profile',  ['user' => $user]);
     }
-    
-    public function forgetpassword(){
-        return view('profile.forgetpassword');
-    }
-
 }
