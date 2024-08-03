@@ -48,17 +48,22 @@
                         <h4>Change Password</h4>
                     </div>
                     <div class="row">
-                        <form name="passwordChange" id="passwordChange" class="passwordChange" action="{{ route('profile.changePassword', $user = Auth::user()) }}">
+                        <form name="passwordChange" id="passwordChange" class="passwordChange" action="{{ route('profile.forget_changePassword') }}">
                             <div class="data col-6">
                                 <div class="mb-3">
-                                    <label for="CurrrentPassword" class="form-label">Current Password</label>
-                                    <input type="password" class="form-control" id="CurrrentPassword" name="current_password" aria-describedby="CurrentPasswordhelp">
+                                    <label for="CurrrentPassword" class="form-label">Email</label>
+                                    <input type="password" class="form-control" id="CurrentEmail" name="email" aria-describedby="CurrentEmail">
                                 </div>
                             </div>
                             <div class="data col-6">
+                                <button class="edit">
+                                    Send OTP
+                                </button>
+                            </div>
+                            <div class="data col-6">
                                     <div class="mb-3">
-                                        <label for="NewPassword" class="form-label">New Password</label>
-                                        <input type="password" class="form-control" id="NewPassword" name="new_password" aria-describedby="NewPasswordhelp">
+                                        <label for="NewPassword" class="form-label">OTP</label>
+                                        <input type="password" class="form-control" id="otp" name="otp" aria-describedby="otp">
                                     </div>
                                     <div class="mb-3">
                                         <label for="ConfirmPassword" class="form-label">Confirm Password</label>

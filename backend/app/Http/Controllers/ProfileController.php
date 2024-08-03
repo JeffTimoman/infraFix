@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
         $imageName = time() . '.' . $request->file('image')->extension();
 
-        $request->file('image')->move(public_path('images'), $imageName);
+        $request->file('image')->move(public_path('upload/profilepicture'), $imageName);
 
         $user->update([
             'username' => $request->username,
@@ -48,9 +48,9 @@ class ProfileController extends Controller
         return view('profile.password');
     }
 
-    public function changePassword(Request $request){
+    public function changePassword(Request $request, $user){
         // dump($request);
-        $user = User::find(4);
+        // $user = User::find(4);
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required',
@@ -67,9 +67,11 @@ class ProfileController extends Controller
         } else {
             return redirect()->back()->withErrors(['Password incorrect']);
         }
-
-
-
         return view('profile.profile',  ['user' => $user]);
     }
+    
+    public function forgetpassword(){
+        return view('profile.forgetpassword');
+    }
+
 }

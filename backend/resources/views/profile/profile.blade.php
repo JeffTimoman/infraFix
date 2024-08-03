@@ -58,7 +58,7 @@
                         </div>
                     @else
                         <div class="image text-center justify-content-center mb-3"  >
-                            <img src="{{ asset('images/' . $user->profile_picture) }}" alt="Profile Picture" style="width: 150px;">
+                            <img src="{{ asset('upload/profilepicture/' . $user->profile_picture) }}" alt="Profile Picture" style="width: 150px;">
                         </div>
                     @endif
                     <div class="username text-center">
