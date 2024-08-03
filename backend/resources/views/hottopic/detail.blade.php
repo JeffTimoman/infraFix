@@ -794,4 +794,242 @@
 
         });
     </script>
+
+    {{-- newest --}}
+    
+{{-- month slider --}}
+<script>
+    $(document).ready(function() {
+        let val = $('.range_minimal').val();
+        let min = $('.range_minimal').attr('min');
+        let max = $('.range_minimal').attr('max');
+        let percent = ((val - min) / (max - min)) * 100;
+        $('.progres').css('left', percent + '%');
+        $('.input-min').val(val);
+
+        val = $('.range_maksimal').val();
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres').css('right', (100 - percent) + '%');
+        $('.input-max').val(val);
+
+        val = $('.range_minimal_month').val();
+        min = $('.range_minimal_month').attr('min');
+        max = $('.range_minimal_month').attr('max');
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres-month').css('left', percent + '%');
+        $('.input-min-month').val(val);
+
+        val = $('.range_maksimal_month').val();
+        percent = ((val - min) / (max - min)) * 100;
+        $('.progres-month').css('right', (100 - percent) + '%');
+        $('.input-max-month').val(val);
+    });
+    $(document).ready(function() {
+
+        $('.range_minimal').on('input', function() {
+            var val = $(this).val();
+            var min = $(this).attr('min');
+            var max = $(this).attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres').css('left', percent + '%');
+            $('.input-min').val(val);
+        });
+
+        $('.range_maksimal').on('input', function() {
+            var val = $(this).val();
+            var min = $(this).attr('min');
+            var max = $(this).attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres').css('right', (100 - percent) + '%');
+            $('.input-max').val(val);
+        });
+
+        $('.range_minimal_month').on('input', function() {
+            var val = $(this).val();
+            var min = $(this).attr('min');
+            var max = $(this).attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres-month').css('left', percent + '%');
+            $('.input-min-month').val(val);
+        });
+
+
+        $('.range_maksimal_month').on('input', function() {
+            var val = $(this).val();
+            var min = $(this).attr('min');
+            var max = $(this).attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres-month').css('right', (100 - percent) + '%');
+            $('.input-max-month').val(val);
+        });
+
+        // detect range_minimal change on value and adjust the progress bar
+        $('.input-min').on('input', function() {
+            var val = $(this).val();
+            var min = $('.range_minimal').attr('min');
+            var max = $('.range_minimal').attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres').css('left', percent + '%');
+            $('.range_minimal').val(val);
+        });
+        $('.input-max').on('input', function() {
+            var val = $(this).val();
+            var min = $('.range_minimal').attr('min');
+            var max = $('.range_minimal').attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres').css('right', (100 - percent) + '%');
+            $('.range_maksimal').val(val);
+        });
+
+        $('.input-min-month').on('input', function() {
+            var val = $(this).val();
+            var min = $('.range_minimal_month').attr('min');
+            var max = $('.range_minimal_month').attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres-month').css('left', percent + '%');
+            $('.range_minimal_month').val(val);
+        });
+
+        $('.input-max-month').on('input', function() {
+            var val = $(this).val();
+            var min = $('.range_minimal_month').attr('min');
+            var max = $('.range_minimal_month').attr('max');
+            var percent = ((val - min) / (max - min)) * 100;
+            $('.progres-month').css('right', (100 - percent) + '%');
+            $('.range_maksimal_month').val(val);
+        });
+
+
+
+
+
+
+
+        $('.range_minimal').on('input', function() {
+            var val = parseInt($(this).val());
+            var val2 = parseInt($('.range_maksimal').val());
+            if (val > val2) {
+                $('.range_maksimal').val(val);
+                var min = $('.range_minimal').attr('min');
+                var max = $('.range_minimal').attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres').css('left', percent + '%');
+                $('.progres').css('right', (100 - percent) + '%');
+                $('.input-min').val(val);
+                $('.input-max').val(val);
+            }
+        });
+
+        $('.range_maksimal').on('input', function() {
+            var val = parseInt($(this).val());
+            var val2 = parseInt($('.range_minimal').val());
+            if (val < val2) {
+                $('.range_minimal').val(val);
+                var min = $('.range_minimal').attr('min');
+                var max = $('.range_minimal').attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres').css('left', percent + '%');
+                $('.progres').css('right', (100 - percent) + '%');
+                $('.input-min').val(val);
+                $('.input-max').val(val);
+            }
+        });
+
+        // i want to make so when the range_minimal_month value after scroll is over the range_maksimal_month value, the range_maksimal_month value will be the same as the range_minimal_month value
+        $('.range_minimal_month').on('input', function() {
+            let val = parseInt($(this).val());
+            let val2 = parseInt($('.range_maksimal_month').val());
+            console.log(val, val2);
+            if (val > val2) {
+                console.log('surpass');
+                $('.range_maksimal_month').val(val);
+                var min = $('.range_minimal_month').attr('min');
+                var max = $('.range_minimal_month').attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres-month').css('left', percent + '%');
+                $('.progres-month').css('right', (100 - percent) + '%');
+                $('.input-min-month').val(val);
+                $('.input-max-month').val(val);
+            }
+        });
+
+        $('.range_maksimal_month').on('input', function() {
+            let val = parseInt($(this).val());
+            let val2 = parseInt($('.range_minimal_month').val());
+            console.log(val, val2);
+            if (val < val2) {
+                console.log('surpass');
+                $('.range_minimal_month').val(val);
+                var min = $('.range_minimal_month').attr('min');
+                var max = $('.range_minimal_month').attr('max');
+                var percent = ((val - min) / (max - min)) * 100;
+                $('.progres-month').css('left', percent + '%');
+                $('.progres-month').css('right', (100 - percent) + '%');
+                $('.input-min-month').val(val);
+                $('.input-max-month').val(val);
+            }
+        });
+
+    });
+</script>
+<script>
+    const initSlider = () => {
+        const imageList = document.querySelector(".slider-wrapper_carousell .image-list_carousell");
+        const slideButtons = document.querySelectorAll(".slider-wrapper_carousell .slide-button");
+        const sliderScrollbar = document.querySelector(".container-inner_carousell .slider-scrollbar_carousell");
+        const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb_carousell");
+        const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
+
+        scrollbarThumb.addEventListener("mousedown", (e) => {
+            const startX = e.clientX;
+            const thumbPosition = scrollbarThumb.offsetLeft;
+            const handleMouseMove = (e) => {
+                const deltaX = e.clientX - startX;
+                const newThumbPosition = thumbPosition + deltaX;
+                const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb
+                    .offsetWidth;
+                const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
+                const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
+
+                scrollbarThumb.style.transform = `translateX(${boundedPosition}px)`;
+                imageList.scrollLeft = scrollPosition;
+
+
+            };
+            const handleMouseUp = () => {
+                document.removeEventListener("mousemove", handleMouseMove);
+                document.removeEventListener("mouseup", handleMouseUp);
+            };
+
+            document.addEventListener("mousemove", handleMouseMove);
+            document.addEventListener("mouseup", handleMouseUp);
+        });
+        slideButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const direction = button.id === "prev-slide" ? -1 : 1;
+                const scrollAmount = imageList.clientWidth * direction;
+                imageList.scrollBy({
+                    left: scrollAmount,
+                    behavior: "smooth"
+                });
+            });
+        });
+        const handleSlideButton = () => {
+            slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "block";
+            slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
+
+        };
+        const updateScrollThumbPosition = () => {
+            const scrollPosition = imageList.scrollLeft;
+            const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth -
+                scrollbarThumb.offsetWidth);
+            scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
+        };
+        imageList.addEventListener("scroll", () => {
+            handleSlideButton();
+            updateScrollThumbPosition();
+        });
+    }
+    window.addEventListener("load", initSlider);
+</script>
 @endsection

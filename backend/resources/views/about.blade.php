@@ -157,7 +157,7 @@
                 <p>Untuk melaporkan infrastruktur yang rusak, ikuti langkah-langkah berikut:
 
                     Buka aplikasi Infrafix.
-                    Klik tombol "Laporkan Kerusakan".
+                    Klik "Lapor".
                     Isi formulir laporan dengan informasi yang diminta, termasuk lokasi dan deskripsi kerusakan.
                     Unggah foto kerusakan (opsional).
                     Klik "Kirim".</p>
@@ -180,8 +180,8 @@
                 <i class="bi bi-chevron-down"></i>
             </button>
             <div class="pannel">
-                <p>Ya, Anda bisa melihat status laporan Anda melalui menu "Laporan Saya" di aplikasi Infrafix. Anda akan
-                    mendapatkan update mengenai status penanganan laporan tersebut.</p>
+                <p>Ya, Anda bisa melihat status laporan Anda melalui menu "Lapor" di aplikasi Infrafix, lalu bisa klik tautan yang bertuliskan "klik Disini", dan masukkan Kode Laporan beserta Kode Akses laporan yang ingin di tuju. Anda akan
+                    mendapatkan update mengenai status penanganan laporan tersebut. </p>
             </div>
         </div>
         <div class="faq">
@@ -191,7 +191,7 @@
             </button>
             <div class="pannel">
                 <p>Untuk memberikan komentar pada postingan, klik pada postingan yang ingin Anda komentari, ketik
-                    komentar Anda di kolom yang disediakan, lalu klik icon " > ".</p>
+                    komentar Anda di kolom yang disediakan, lalu klik icon " -> ".</p>
             </div>
         </div>
         <div class="faq">
