@@ -92,4 +92,15 @@ class AuthController extends Controller
         User::create($data);
         return redirect()->route('auth.login')->with('success', 'Akun berhasil dibuat. Silahkan login setelah konfirmasi email.');
     }
+
+    public function try_send_email(){
+        $email = 'ppti.jeffersontimotius@gmail.com';
+        $data = [
+            'name' => 'Jefferson Timotius',
+            'email' => $email,
+            'subject' => 'Test Email',
+            'content' => 'This is a test email.'
+        ];
+        Mail::to($email)->send(new TestMail($data));
+    }
 }

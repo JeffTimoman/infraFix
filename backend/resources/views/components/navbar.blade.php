@@ -94,7 +94,7 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
-                                                Manager</small> </a></li>
+                                                Government</small> </a></li>
                                 </ul>
                             @endif
                             @if (Auth::user()->role == 'user')
@@ -105,7 +105,7 @@
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('auth.logout') }}">Keluar<small> |
-                                                Manager</small> </a></li>
+                                                User</small> </a></li>
                                 </ul>
                             @endif
                         </div>
