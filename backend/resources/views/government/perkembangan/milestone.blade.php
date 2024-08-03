@@ -419,6 +419,17 @@
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.bootstrap5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <style>
+        .paginate_button.active a {
+            background-color: #A50000 !important;
+            color: white !important;
+            border: 0;
+        }
+
+        .paginate_button a {
+            color: black !important;
+        }
+    </style>
     <script>
         $(document).ready(function() {
             var table= $('#myTable').DataTable({
