@@ -143,14 +143,14 @@
 @endsection
 
 @section('title')
-Unggah Kasus
+Edit Kasus
 @endsection
 
 @section('content')
 <div class="container-fluid">
     @if ($errors->any())
     <div class="alert alert-danger" style="">
-        Gagal Unggah.
+        Data Gagal Diperbarui.
     </div>
     @endif
     <div class="row" style="background-color: #EDEDED;">
@@ -169,7 +169,6 @@ Unggah Kasus
                     <div class="step-progress">
                         <div class="step done"></div>
                         <div class="step done"></div>
-                        <div class="step done"></div>
                     </div>
                 </div>
             </div>
@@ -179,9 +178,10 @@ Unggah Kasus
             <div class="col-lg-10 rounded p-1 justify-content-center"
                 style="background-color: white; height: 35rem; width: 82vw;">
                 <div class="container-fluid">
-                    <form action="{{route('manager.hot_topic_posted')}}" method="POST" id="submit">
+                    <form action="{{route('manager.postupdateHotTopic', ['case' => $case])}}" method="post" id="submit">
                         @csrf
-                        <input type="hidden" class="reports" name="reports">
+                        @method('put')
+                        <input type="hidden" name="id" value="{{$case->id}}">
                         <div class=" row">
                             <div class="col-lg-10 rounded p-5" style="background-color: white;  width: 82vw;"
                                 id="form-data-container">
@@ -190,10 +190,12 @@ Unggah Kasus
                                     <hr style="color: #A50000; opacity: 100; width: 25rem; margin-left: 34rem;">
                                 </div>
                                 <div class="row mb-4">
-                                    <h1 id="disabledTextInput" class="form-control-plaintext title" name="title"
-                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></h1>
-                                    <h6 class="form-control-plaintext damage_type" name="damage_type"
+                                    <h1 class=" form-control-plaintext title"
+                                        style="font-weight: bold; font-size: x-large; margin-left: 0.7rem">
+                                        {{$data['title']}}</h1>
+                                    <h6 class="form-control-plaintext damage_type"
                                         style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
+                                        {{$data['damage_type']}}
                                     </h6>
                                 </div>
                                 <div class="row mb-4">
@@ -204,14 +206,16 @@ Unggah Kasus
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
                                         <h5 class="m-0 government" style="font-size: 20px; font-weight: 550;">
+                                            {{$data['government']}}
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
-                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">Lokasi
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
+                                            Lokasi
                                         </h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0 address" style="font-size: 20px; font-weight: 400;">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">{{$data['address']}}
                                         </h5>
                                     </div>
                                     <div class="d-flex flex-row align-items-center mb-2">
@@ -219,8 +223,8 @@ Unggah Kasus
                                             Kelurahan</h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0 kelurahan" style="font-size: 20px; font-weight: 400;">
-                                        </h5>
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">
+                                            {{$data['kelurahan']}}</h5>
                                     </div>
                                     <div class=" d-flex flex-row align-items-center">
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400; width: 250px;">
@@ -228,29 +232,35 @@ Unggah Kasus
                                         </h5>
                                         <h5 class="m-0" style="font-size: 20px; font-weight: 400;">: &nbsp; &nbsp;
                                         </h5>
-                                        <h5 class="m-0 status" style="font-size: 20px; font-weight: 400;">
+                                        <h5 class="m-0" style="font-size: 20px; font-weight: 400;">{{$data['status']}}
                                         </h5>
                                     </div>
                                     <div class=" col-lg-10 d-none">
                                         <div>
-                                            <input class="form-control-plaintext title" name="title"
+                                            <input class=" form-control-plaintext title" value="{{$data['title']}}"
+                                                name="title"
                                                 style="font-weight: bold; font-size: x-large; margin-left: 0.7rem"></input>
                                             <input class="form-control-plaintext damage_type" name="damage_type"
+                                                value="{{$data['damage_type']}}"
                                                 style="font-size: medium; color: #A50000; margin-top: -0.8rem; margin-left: 0.7rem">
                                             </input>
                                             <input class="form-control-plaintext government" name="government"
+                                                value="{{$data['government']}}"
                                                 style="font-size: medium; margin-top: -0.8rem; margin-left: 0.7rem">
                                             </input>
                                             <input for="" class="form-control-plaintext address" name="address"
+                                                value="{{$data['address']}}"
                                                 style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
                                             <input for="" class="form-control-plaintext kelurahan" name="kelurahan"
+                                                value="{{$data['kelurahan']}}"
                                                 style="font-weight: medium; font-size: large; margin-left: -10rem; margin-top: -0.6rem"></input>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">
                                             <input class="rounded-pill d-none" name="status"
-                                                style="background-color: #D8A4A4; border: none;"></input>
+                                                style="background-color: #D8A4A4; border: none;"
+                                                value="{{$data['status']}}"></input>
                                         </div>
                                     </div>
                                 </div>
@@ -258,9 +268,10 @@ Unggah Kasus
                                     <h5 style="font-weight: 700;">Deskripsi</h5>
                                     <p class="description" name="description"
                                         style="font-weight: 400; font-size: large;">
-
+                                        {{$data['description']}}
                                     </p>
-                                    <textarea name="description" class="d-none" id="" cols="30" rows="10"></textarea>
+                                    <textarea name="description" class="d-none" id="" cols="30"
+                                        rows="10">{{$data['description']}}</textarea>
 
                                 </div>
                             </div>
@@ -268,7 +279,7 @@ Unggah Kasus
                         <div class="row justify-content-end mt-4" style="margin-right: -11rem">
                             <div class="col-lg-2">
                                 <div class="button">
-                                    <button type="submit" class="btn btn-lg rounded bottom-button">Unggah</button>
+                                    <button type="submit" class="btn btn-lg rounded bottom-button">Perbarui</button>
                                 </div>
 
                             </div>
@@ -290,56 +301,5 @@ Unggah Kasus
         window.history.back();
     }
 
-    function collectReportData() {
-    let inputHotTopic = JSON.parse(localStorage.getItem('input_hot_topic'));
-
-    if (inputHotTopic) {
-        if (inputHotTopic.title) {
-            document.querySelector("input[name='title']").value = inputHotTopic.title;
-            document.querySelector(".title").textContent = inputHotTopic.title;
-        }
-        if (inputHotTopic.damage_type) {
-            document.querySelector("input[name='damage_type']").value = inputHotTopic.damage_type;
-            document.querySelector(".damage_type").textContent = inputHotTopic.damage_type;
-        }
-        if (inputHotTopic.government) {
-            document.querySelector("input[name='government']").value = inputHotTopic.governmnet;
-            document.querySelector(".government").textContent = inputHotTopic.government;
-        }
-        if (inputHotTopic.address) {
-            document.querySelector("input[name='address']").value = inputHotTopic.address;
-            document.querySelector(".address").textContent = inputHotTopic.address;
-        }
-        if (inputHotTopic.kelurahan) {
-            document.querySelector("input[name='kelurahan']").value = inputHotTopic.kelurahan;
-            document.querySelector(".kelurahan").textContent = inputHotTopic.kelurahan;
-        }
-        if (inputHotTopic.description) {
-            document.querySelector("textarea[name='description']").value = inputHotTopic.description;
-            document.querySelector(".description").textContent = inputHotTopic.description;
-        }
-        if (inputHotTopic.status) {
-            document.querySelector("input[name='status']").value = inputHotTopic.status;
-            document.querySelector(".status").textContent = inputHotTopic.status;
-        }
-    }
-
-    const reportselect = localStorage.getItem('report_is_checked');
-    if (reportselect) {
-        document.querySelector("input[name='reports']").value = reportselect;
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    collectReportData();
-});
-
-
-
-
-    document.addEventListener('DOMContentLoaded', function() {
-        collectReportData();
-
-    });
 </script>
 @endsection

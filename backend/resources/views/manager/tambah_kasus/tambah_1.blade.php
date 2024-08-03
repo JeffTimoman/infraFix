@@ -157,44 +157,36 @@
 @endsection
 
 @section('title')
-Unggah Kasus
+Menambahkan Kasus
 @endsection
 
 @section('content')
 
 <div class="container-fluid">
+    @if ($errors->any())
+    <div class="alert alert-danger" style="">
+        Penambahan Laporan Gagal.
+    </div>
+    @endif
     <div class="row" style="background-color: #EDEDED;">
         <!-- 1 -->
         <div class="row pt-3 px-5">
             <div class="col-lg-2">
-                <!-- Kasih Aler Yakin batal Bikin Kasus -->
                 <div class="button">
-                    <a href="{{ route('manager.updateHotTopic') }}" id="submit">
+                    <a href="{{ route('manager.laporan_belum_unggah') }}" id="submit">
                         <button type="button" class="btn-close" disabled aria-label="Close"></button>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="container">
-                    <div class="step-progress">
-                        <div class="step done"></div>
-                        <div class="step"></div>
-                        <div class="step"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- 2 -->
-        <div class="row justify-content-center mt-4">
+        <div class="row justify-content-center" style="margin-top: 7rem">
             <div class="col-lg-10 rounded" style="background-color: white; height: 35.3rem; width: 82vw;">
                 <div class="row text-start p-2" style="display: inline-block">
                     <h4><span id="selected-count">{{$selectedCount}}</span> laporan dipilih</h4>
                 </div>
                 <div class="row">
                     <form action="{{route('manager.updateHotTopic')}}" method="POST">
-                        <input class="reports" type="text" name="reports">
                         @csrf
                         @if(count($selectedLaporans) > 0)
                         <div class="row text-center">
@@ -240,11 +232,10 @@ Unggah Kasus
                         @else
                         <p>Silakan pilih laporan terlebih dahulu</p>
                         @endif
-                        <div class="row mb-4 ms-3">
+                        <div class="row mb-4 ms-3 mt-2">
                             <div class="col-lg-3">
-                                <label for="" class="form-label"
-                                    style="margin-left: -1rem; font-size: large; font-weight: 400;">Pilih Hot
-                                    Topic</label>
+                                <h4 style=" margin-left: -1rem">Pilih Hot
+                                    Topic</h4>
                                 <select class="form-select" name="report_selected"
                                     style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
                                     name="hot_topic_selected">
@@ -265,10 +256,13 @@ Unggah Kasus
                                 </div>
                             </div>
                         </div>
+                        <input class="reports" type="hidden" name="reports">
                     </form>
                 </div>
-                <div class="row mt-4">
-                    {{$selectedLaporans ->links('pagination::bootstrap-5')}}
+            </div>
+            <div class="col-lg-10 mt-3">
+                <div>
+                    {{$selectedLaporans -> links('pagination::bootstrap-5')}}
                 </div>
             </div>
         </div>

@@ -155,7 +155,8 @@ Unggah Kasus
             <div class="col-lg-2">
                 <a href="{{route('manager.laporan_belum_unggah')}}">
                     <span class="back-icon" onclick="goBack()">
-                        <span class="material-symbols-outlined" style="scale: 120%;">arrow_back</span>
+                        <span class="material-symbols-outlined"
+                            style="scale: 120%; color: #A50000 !important">arrow_back</span>
                     </span>
                 </a>
             </div>

@@ -10,6 +10,7 @@ use App\Models\Kota;
 use App\Models\Provinsi;
 use App\Models\Report;
 use App\Models\ThisCase;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -34,27 +35,22 @@ class ManagerController extends Controller
     public function laporan_semua()
     {
         $laporans = Report::paginate(13);
-        $filter = $this->filter();
+
         return view(
             'manager.laporan.laporan_semua',
             [
-                'laporans' => $laporans,
-                'filter' => $filter
+                'laporans' => $laporans
             ]
         );
     }
     public function laporan_belum()
     {
         $laporans = Report::where('case_id', null)->paginate(9);
-        $selectedIds = session('selected_ids', []);
 
-        $filter = $this->filter();
         return view(
             'manager.laporan.laporan_belum_unggah',
             [
-                'laporans' => $laporans,
-                'selectedIds' => $selectedIds,
-                'filter' => $filter
+                'laporans' => $laporans
             ]
         );
     }
@@ -62,12 +58,10 @@ class ManagerController extends Controller
     public function hot_topic()
     {
         $cases = ThisCase::paginate(13);
-        $filter = $this->filter();
         return view(
-            'manager.hot_topic',
+            'manager.hot_topic.hot_topic',
             [
                 'cases' => $cases,
-                'filter' => $filter
             ]
         );
     }
@@ -82,5 +76,63 @@ class ManagerController extends Controller
             'provinsi' => Provinsi::all()
         ];
         return $datas;
+    }
+
+    public function searchLaporan(Request $request)
+    {
+        $search = $request->input('search');
+
+        $laporans = Report::where(function ($query) use ($search) {
+            $query->where('report_code', 'like', '%' . $search . '%')
+                ->orWhere('title', 'like', '%' . $search . '%')
+                ->orWhereHas('damage_type', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                })
+                ->orWhere('created_at', 'like', '%' . $search . '%')
+                ->orWhere('address', 'like', '%' . $search . '%')
+                ->orWhereHas('kelurahan', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%')
+                        ->orWhereHas('kecamatan', function ($q) use ($search) {
+                            $q->where('name', 'like', '%' . $search . '%')
+                                ->orWhereHas('kota', function ($q) use ($search) {
+                                    $q->where('name', 'like', '%' . $search . '%')
+                                        ->orWhereHas('provinsi', function ($q) use ($search) {
+                                            $q->where('name', 'like', '%' . $search . '%');
+                                        });
+                                });
+                        });
+                });
+        })->paginate(9);
+        return view('manager.laporan.laporan_belum_unggah', ['laporans' => $laporans, 'search' => $search]);
+    }
+
+    public function searchHotTopic(Request $request)
+    {
+        $search = $request->input('search');
+
+        $cases = ThisCase::with(['damage_type', 'kelurahan.kecamatan.kota.provinsi', 'creator', 'government'])
+            ->where(function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhereHas('damage_type', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhere('created_at', 'like', '%' . $search . '%')
+                    ->orWhere('address', 'like', '%' . $search . '%')
+                    ->orWhereHas('kelurahan', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%')
+                            ->orWhereHas('kecamatan', function ($q) use ($search) {
+                                $q->where('name', 'like', '%' . $search . '%')
+                                    ->orWhereHas('kota', function ($q) use ($search) {
+                                        $q->where('name', 'like', '%' . $search . '%')
+                                            ->orWhereHas('provinsi', function ($q) use ($search) {
+                                                $q->where('name', 'like', '%' . $search . '%');
+                                            });
+                                    });
+                            });
+                    });
+            })
+            ->paginate(9);
+
+        return view('manager.hot_topic.hot_topic', ['cases' => $cases, 'search' => $search]);
     }
 }

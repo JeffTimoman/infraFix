@@ -254,20 +254,20 @@ Beranda
                             <tr>
                                 <th scope="col">Judul Laporan</th>
                                 <th scope="col">Tipe Kerusakan</th>
-                                {{-- <th scope="col">Urgensi</th> --}}
+                                <th scope="col">Kota</th>
                                 <th scope="col">Tanggal Unggah</th>
                             </tr>
                         </thead>
                         <tbody class="table align-middle">
                             @foreach ($recent_reports as $recent_report)
                             <tr>
-                                {{-- <th scope="row"></th> --}}
                                 <td>{{$recent_report->title}}</td>
                                 @php
                                 $damage_type = DB::table('damage_types')->where('id', $recent_report ->
                                 damage_type_id)->value('name')
                                 @endphp
                                 <td>{{$damage_type}}</td>
+                                <td>{{$recent_report->kelurahan->kecamatan->name}}</td>
                                 <td>{{$recent_report->created_at}}</td>
                             </tr>
                             @endforeach

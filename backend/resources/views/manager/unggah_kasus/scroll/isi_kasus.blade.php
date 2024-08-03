@@ -54,6 +54,21 @@
                         </div>
                     </div>
                     <div class="row mb-4">
+                        <div class="col-lg-3">
+                            <label for="" class="form-label"
+                                style="margin-left: -1rem; font-size: large; font-weight: 400;">Pemerintah
+                                Penanggung</label>
+                            <select class="form-select" style="background-color: #F2F2F2; margin-left: -0.7rem;" id=""
+                                name="government">
+                                <option selected>Pilih...</option>
+                                @foreach ($datas['government'] as $item)
+                                <option value="{{ $item->name }}" style="color: black;">
+                                    {{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
                         <div class="row">
                             <label for="" class="form-label"
                                 style="margin-left: -1rem; font-size: large; font-weight: 400;">Lokasi</label>

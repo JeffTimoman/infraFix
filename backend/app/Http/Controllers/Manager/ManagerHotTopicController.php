@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Manager;
 
 use App\Http\Controllers\Controller;
 use App\Models\DamageType;
+use App\Models\Kecamatan;
 use App\Models\Kelurahan;
+use App\Models\Milestone;
 use App\Models\Report;
 use App\Models\ThisCase;
 use Illuminate\Contracts\Session\Session as SessionSession;
@@ -41,6 +43,9 @@ class ManagerHotTopicController extends Controller
         $datas = [
             'damage_type' => DamageType::all(),
             'kelurahan' => Kelurahan::all(),
+            'kecamatan' => Kecamatan::all(),
+            'milestone' => Milestone::all(),
+            'government' => User::where('role', 'government')->get()
         ];
         return $datas;
     }
@@ -54,7 +59,6 @@ class ManagerHotTopicController extends Controller
 
     public function storeHotTopic(Request $request)
     {
-        // dd($request);
         $request->validate([
             'title' => 'required|string',
             'description' => 'required|string',
@@ -71,9 +75,9 @@ class ManagerHotTopicController extends Controller
         $kelurahan_id = Kelurahan::where('name', $request->input('kelurahan'))->first()->id;
         $request->merge(['kelurahan' => $kelurahan_id]);
 
-        // find user that has role government
-        // $government_id = User::where('role', 'government');
         $government_id = User::where('role', 'government')->inRandomOrder()->first()->id;
+
+        $user_id = User::where('role', 'manager')->inRandomOrder()->first()->id;
 
         // dd($government_id);
 
@@ -86,26 +90,31 @@ class ManagerHotTopicController extends Controller
             'status' => 0,
             'case_number' => $request->input('case_number'),
             'government_id' => $government_id,
-            'created_by' => Auth::user()->id,
+            // 'created_by' => Auth::user()->id,
+            'created_by' => $user_id
         ]);
 
-        $temp = ThisCase::create($data);
+        try {
+            $temp = ThisCase::create($data);
 
-        $reports = $request->input('reports');
-        $reports = explode(',', $reports);
+            $reports = $request->input('reports');
+            $reports = explode(',', $reports);
 
-        foreach ($reports as $report) {
-            $report = Report::find($report);
-            $report->case_id = $temp->id;
-            foreach ($report->images as $image) {
-                $image->case_id = $temp->id;
-                $image->save();
+            foreach ($reports as $reportId) {
+                $report = Report::find($reportId);
+                if ($report) {
+                    $report->case_id = $temp->id;
+                    foreach ($report->images as $image) {
+                        $image->case_id = $temp->id;
+                        $image->save();
+                    }
+                    $report->save();
+                }
             }
-            $report->save();
+            return redirect()->route('manager.hot_topic')->with('success', 'Unggah Berhasil!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Unggah Gagal.' . $e->getMessage());
         }
-
-
-        return redirect()->route('manager.hot_topic');
     }
 
     public function viewSelectedReports(Request $request)
@@ -118,7 +127,7 @@ class ManagerHotTopicController extends Controller
             return is_numeric($id);
         });
 
-        $selectedLaporans = Report::whereIn('id', $finselectedIds)->paginate(7);
+        $selectedLaporans = Report::whereIn('id', $finselectedIds)->paginate(5);
         $selectedCount = count($selectedLaporans);
 
         $hot_topics = ThisCase::all();
@@ -138,12 +147,138 @@ class ManagerHotTopicController extends Controller
         $reports = explode(',', $reports);
         // dd($request->all());
         // dd($reports);
-        foreach ($reports as $report) {
-            $report = Report::find($report);
-            $report->case_id = $hot_topic_selected;
-            $report->save();
+        try {
+            foreach ($reports as $reportId) {
+                $report = Report::find($reportId);
+
+                if (!$report) {
+                    return redirect()->back()->with('error', 'Report not found.');
+                }
+
+                $report->case_id = $hot_topic_selected;
+                $report->save();
+            }
+
+            return redirect()->route('manager.hot_topic')->with('success', 'Laporan Berhasil Ditambahkan!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Penambahan Laporan Gagal.');
+        }
+    }
+
+    public function editHotTopic(ThisCase $case)
+    {
+        $damage_type = DamageType::find($case->damage_type_id);
+        $damage_type_title = $damage_type ? $damage_type->name : '';
+        $case->damage_type_title = $damage_type_title;
+
+        $kelurahan = Kelurahan::find($case->kelurahan_id);
+        $kelurahan_title = $kelurahan ? $kelurahan->name : '';
+        $case->kelurahan_title = $kelurahan_title;
+
+        $government = User::find($case->government_id);
+        $government_title = $government ? $government->name : '';
+        $case->government_title = $government_title;
+
+        if ($case->status == 0) {
+            $status_title = "Baru Dilaporkan";
+        } else {
+            $status = Milestone::find($case->status_id);
+            $status_title = $status ? $status->name : '';
+        }
+        $case->status_title = $status_title;
+
+        // dd($case);
+
+        $datas = $this->dropdownData();
+
+        return view('manager.hot_topic.edit.edit_1', ['case' => $case, 'datas' => $datas]);
+    }
+
+    public function showRingkasan(ThisCase $case, Request $request)
+    {
+        $damage_type_id = DamageType::where('name', $request->input('damage_type'))->first()->id;
+        $request->merge(['damage_type' => $damage_type_id]);
+
+        $kelurahan_id = Kelurahan::where('name', $request->input('kelurahan'))->first()->id;
+        $request->merge(['kelurahan' => $kelurahan_id]);
+
+        $government_id = User::where('name', $request->input('government'))->first()->id;
+        $request->merge(['government' => $government_id]);
+
+        $status = Milestone::where('title', $request->input('status'))->first();
+        $status_id = $status ? $status->id : 0;
+
+        $damage_type = DamageType::find($request->damage_type);
+        $damage_type_title = $damage_type ? $damage_type->name : '';
+
+        $kelurahan = Kelurahan::find($request->kelurahan);
+        $kelurahan_title = $kelurahan ? $kelurahan->name : '';
+
+        $government = User::find($request->government);
+        $government_title = $government ? $government->name : '';
+
+        if ($status_id == 0) {
+            $status_title = "Baru Dilaporkan";
+        } else {
+            $status = Milestone::find($status_id);
+            $status_title = $status ? $status->title : '';
+        }
+        $case->status_title = $status_title;
+
+        $data = ([
+            'title' => $request->title,
+            'description' => $request->description,
+            'address' => $request->address,
+            'kelurahan' => $kelurahan_title,
+            'damage_type' => $damage_type_title,
+            'status' => $status_title,
+            'kelurahan_id' => $kelurahan_id,
+            'damage_type_id' => $damage_type_id,
+            'status_id' => $status_id,
+            'government_id' => $request->government,
+            'government' => $government_title
+        ]);
+        // dd($damage_type_id);
+        // dd($case);
+        // dd($request);
+        // dd($data);
+
+        return view('manager.hot_topic.edit.edit_2', ['case' => $case, 'data' => $data]);
+    }
+
+    public function updateHotTopic(Request $request, ThisCase $case)
+    {
+        $request->validate([
+            'title' => 'required|string',
+            'description' => 'required|string',
+            'address' => 'required|string',
+            'kelurahan' => 'required|string',
+            'damage_type' => 'required|string',
+            'status' => 'required|string'
+        ]);
+
+        $kelurahan_id = Kelurahan::where('name', $request->input('kelurahan'))->first()->id;
+        $damage_type_id = DamageType::where('name', $request->input('damage_type'))->first()->id;
+        if ($request->input('status') == "Baru Dilaporkan") {
+            $status_id = 0;
+        } else {
+            $status_id = Milestone::where('title', $request->input('status'))->first()->id;
         }
 
-        return redirect()->route('manager.hot_topic');
+        try {
+            $case->update([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'address' => $request->input('address'),
+                'kelurahan_id' => $kelurahan_id,
+                'damage_type_id' => $damage_type_id,
+                'status_id' => $status_id,
+            ]);
+
+            return redirect()->route('manager.hot_topic')->with('success', 'Perbarui Data Berhasil.');
+            dd($request->all());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Data Gagal Diperbarui.')->withInput();
+        }
     }
 }
