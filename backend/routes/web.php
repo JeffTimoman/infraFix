@@ -265,11 +265,11 @@ Route::prefix("government")->group(function () {
 
     Route::get('perkembangan/{id}', [GovernmentController::class, 'milestone']);
 
-    Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
+    // Route::get('search', [GovernmentController::class, 'search'])->name('government.search');
 
-    Route::get('dashboard', [GovernmentController::class, 'dashboard'])->name('government.dashboard');
+    Route::get('dashboard', [GovernmentController::class, 'home'])->name('government.dashboard');
 
-    Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
+    // Route::get('home', [GovernmentController::class, 'home'])->name('government.home');
 
     Route::get('tindakan', [GovernmentController::class, 'tindakan'])->name('government.tindakan');
 
