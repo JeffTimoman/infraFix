@@ -15,10 +15,9 @@ class isManager
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->roles == 'manager') {
+        if (auth()->user()->role == 'manager') {
             return $next($request);
         }
-
         return redirect('/')->withErrors(['You are not authorized to access this page']);
     }
 }

@@ -15,7 +15,7 @@ class isGovernment
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->user()->roles == 'government') {
+        if (auth()->user()->role == 'government') {
             return $next($request);
         }
 

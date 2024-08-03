@@ -205,8 +205,8 @@ Route::prefix('manager')->group(function () {
         Route::prefix('/edit')->group(function () {
             Route::post('/{case}/ringkasan', [ManagerManagerHotTopicController::class, 'showRingkasan'])->name('manager.edit_2');
             Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.postupdateHotTopic');
-        })->middleware([isLogin::class, isManager::class]);;
-    })->middleware([isLogin::class, isManager::class]);;
+        })->middleware([isLogin::class, isManager::class]); 
+    })->middleware([isLogin::class, isManager::class]);
 
     Route::prefix('/unggah')->group(function () {
         Route::post('/1', [ManagerManagerHotTopicController::class, 'viewSelectedLaporans'])->name('manager.unggah_1');
