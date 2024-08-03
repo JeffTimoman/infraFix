@@ -213,6 +213,11 @@
             position: absolute;
         }
     </style>
+    <style>
+        .randomized-image {
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -240,10 +245,10 @@
             </div>
             <div class="row overflow-auto d-flex justify-content-center" style="height: 74vh;">
                 <div class="col-md-12 p-0" style="">
-
-                    @if (!$cases)
+                    {{-- @dump($cases) --}}
+                    @if ($cases->count() == 0)
                         <div class="container-fluid text-center">
-                            <h3>No cases exist.</h3>
+                            <h3>Tidak Terdapat Kasus Yang Tampil!</h3>
                         </div>
                     @else
                         @foreach ($cases as $item)
@@ -300,8 +305,10 @@
                                         {{-- untuk show gambar --}}
                                 </a>
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVFP4xX1TI_zRZvvXXpJk0CbcholYv90pUYw&usqp=CAU"
-                                        alt="" width="900" height="288">
+                                    <img class="randomized-image"
+                                        src="{{ asset('upload/reportimage/' . $item->images->random()->name) }}"
+                                        alt="" width="900" height="288"
+                                        data-case-number="{{ $item->case_number }}" width="900" height="288">
                                 </div>
                                 <div class="row" style=" height:5.5vh ;">
                                     <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
@@ -357,7 +364,8 @@
                                         </form>
                                     </div>
                                     <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                        <button onclick="" class="btn text-dark" id="btn_share">
+                                        <button class="btn text-dark share-btn"
+                                            data-link-share="{{ route('hottopic.detail', ['case_number' => $item->case_number]) }}">
                                             <i class="bi bi-share"></i>
                                         </button>
                                     </div>
@@ -393,7 +401,56 @@
 
     {{-- jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.share-btn').on('click', function() {
+                var linkToShare = $(this).data('link-share');
+                navigator.clipboard.writeText(linkToShare).then(function() {
+                    alert('Link copied to clipboard: ' + linkToShare);
+                }, function(err) {
+                    console.error('Could not copy text: ', err);
+                });
+            });
+        });
+    </script>
 
+    <script>
+        $(document).ready(function() {
+            function updateRandomImage($img) {
+                let caseNumber = $img.data('case-number');
+
+                $.ajax({
+                    url: '/hottopic/get_random_image/' + caseNumber,
+                    type: 'GET',
+                    success: function(response) {
+                        $img.fadeOut(500, function() { // Fade out the image over 500ms
+                            if (response.image) {
+                                $img.attr('src', '/upload/reportimage/' + response.image);
+                            } else {
+                                $img.attr('src', '/upload/reportimage/default.png');
+                            }
+                            $img.fadeIn(500); // Fade in the new image over 500ms
+                            console.log(response);
+                        });
+                    },
+                    error: function() {
+                        $img.fadeOut(500, function() { // Fade out the image over 500ms
+                            $img.attr('src', '/upload/reportimage/default.png');
+                            $img.fadeIn(500); // Fade in the new image over 500ms
+                        });
+                    }
+                });
+            }
+
+            // Set interval to update each image every 5 seconds (5000 milliseconds)
+            $('.randomized-image').each(function() {
+                let $img = $(this);
+                setInterval(function() {
+                    updateRandomImage($img);
+                }, 5000);
+            });
+        });
+    </script>
 
     {{-- month slider --}}
     <script>

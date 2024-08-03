@@ -36,7 +36,7 @@
                             <a class="nav-link {{ request()->is('hottopic*') ? 'active' : '' }}" aria-current="page" href="{{ route('hottopic.index') }}">Beranda</a>
                         </li>
                         <li class="nav-item mx-5">
-                            <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}" aria-current="page" href="{{ route('report.index') }}">Laporan</a>
+                            <a class="nav-link {{ request()->is('report*') ? 'active' : '' }}" aria-current="page" href="{{ route('report.index') }}">Lapor</a>
                         </li>
                         <li class="nav-item mx-5">
                             <a class="nav-link" href="{{route('main.about')}}">Tentang</a>

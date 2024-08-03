@@ -42,7 +42,7 @@ class HotTopicController extends Controller
         $processed = ($request->input('processed') == 'on') ? true : false;
         $finished = ($request->input('finished') == 'on') ? true : false;
 
-        $cases = $cases -> filter(function($case) use ($year_start, $year_end, $month_start, $month_end){
+        $cases = $cases->filter(function ($case) use ($year_start, $year_end, $month_start, $month_end) {
             $date = $case->created_at;
             $year = $date->format('Y');
             $month = $date->format('m');
@@ -52,7 +52,19 @@ class HotTopicController extends Controller
             if ($month_end && $month > $month_end) return false;
             return true;
         });
-        // dump($cases);
+
+        // if milestone_detail count is 0, then the case is unprocessed. If milestone_detail last id is 6 then the case is finished. If milestone is > 1 and < 6 then the case is processed.
+        if ($unprocessed || $processed || $finished) {
+            $cases = $cases->filter(function ($case) use ($unprocessed, $processed, $finished) {
+                $milestone_detail_count = $case->milestone_details->count();
+
+                if ($unprocessed && $milestone_detail_count == 0) return true;
+                if ($processed && $milestone_detail_count > 0 && $milestone_detail_count < 6) return true;
+                if ($finished && $milestone_detail_count == 6) return true;
+
+                return false;
+            });
+        };
         return view('hottopic.index', ['cases' => $cases]);
     }
 
@@ -172,8 +184,32 @@ class HotTopicController extends Controller
             if ($month_end && $month > $month_end) return false;
             return true;
         });
+
+        // if milestone_detail count is 0, then the case is unprocessed. If milestone_detail last id is 6 then the case is finished. If milestone is > 1 and < 6 then the case is processed.
+        if($unprocessed || $processed || $finished){
+            $cases = $cases->filter(function ($case) use ($unprocessed, $processed, $finished) {
+                $milestone_detail_count = $case->milestone_details->count();
+
+                if ($unprocessed && $milestone_detail_count == 0) return true;
+                if ($processed && $milestone_detail_count > 0 && $milestone_detail_count < 6) return true;
+                if ($finished && $milestone_detail_count == 6) return true;
+
+                return false;
+            });
+        }
         // dump($cases);
         return view('hottopic.index', ['cases' => $cases]);
+        return view('hottopic.index', ['cases' => $cases]);
+    }
+
+    public function getRandomReportImage($case_number){
+        $case = ThisCase::where('case_number', $case_number)->first();
+        if(!$case){
+            return response()->json(['image' => 'default.png']);
+        }
+
+        $image = $case->images->random();
+        return response()->json(['image' => $image->name]);
     }
 
 

@@ -314,8 +314,8 @@
         }
 
         /* .image-list_carousell img {
-                                                                                                border: solid black 1px;
-                                                                                            } */
+                                                                                                    border: solid black 1px;
+                                                                                                } */
     </style>
 @endsection
 
@@ -468,7 +468,8 @@
                                 </form>
                             </div>
                             <div class="col-md-3 gap-1 d-flex justify-content-center align-items-center  ">
-                                <button onclick="" class="btn text-dark" id="btn_share">
+                                <button class="btn text-dark share-btn"
+                                    data-link-share="{{ route('hottopic.detail', ['case_number' => $case->case_number]) }}">
                                     <i class="bi bi-share"></i>
                                 </button>
                             </div>
@@ -512,8 +513,8 @@
                                         <img src="{{ asset('upload/profilepicture/' . auth()->user()->profile_picture) }}"
                                             alt="" width="50" height="50" class="rounded-circle border">
                                     @else
-                                        <img src="{{ asset('upload/profilepicture/default.png') }}"
-                                            alt="" width="50" height="50" class="rounded-circle border">
+                                        <img src="{{ asset('upload/profilepicture/default.png') }}" alt=""
+                                            width="50" height="50" class="rounded-circle border">
                                     @endif
                                 </div>
                                 <div class="col-md-10 rounded justify-content-center d-flex flex-column py-1">
@@ -602,21 +603,24 @@
     </script>
 
 
+
     {{-- jquery --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    {{-- boostrap js --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-
-    {{-- month slider --}}
     <script>
-        $(document).ready(function() {
-            $('.btn-report').click(function() {
-                var value = $(this).val();
-                console.log(value);
-                $('input[name="comment_id"]').val(value);
+
+        $(document).ready(function(){
+        $('.share-btn').on('click', function() {
+            var linkToShare = $(this).data('link-share');
+            navigator.clipboard.writeText(linkToShare).then(function() {
+                alert('Link copied to clipboard: ' + linkToShare);
+            }, function(err) {
+                console.error('Could not copy text: ', err);
             });
         });
+    });
+    </script>
+    {{-- boostrap js --}}
+    <script>
         $(document).ready(function() {
             let val = $('.range_minimal').val();
             let min = $('.range_minimal').attr('min');
@@ -789,65 +793,5 @@
             });
 
         });
-    </script>
-    <script>
-        const initSlider = () => {
-            const imageList = document.querySelector(".slider-wrapper_carousell .image-list_carousell");
-            const slideButtons = document.querySelectorAll(".slider-wrapper_carousell .slide-button");
-            const sliderScrollbar = document.querySelector(".container-inner_carousell .slider-scrollbar_carousell");
-            const scrollbarThumb = sliderScrollbar.querySelector(".scrollbar-thumb_carousell");
-            const maxScrollLeft = imageList.scrollWidth - imageList.clientWidth;
-
-            scrollbarThumb.addEventListener("mousedown", (e) => {
-                const startX = e.clientX;
-                const thumbPosition = scrollbarThumb.offsetLeft;
-                const handleMouseMove = (e) => {
-                    const deltaX = e.clientX - startX;
-                    const newThumbPosition = thumbPosition + deltaX;
-                    const maxThumbPosition = sliderScrollbar.getBoundingClientRect().width - scrollbarThumb
-                        .offsetWidth;
-                    const boundedPosition = Math.max(0, Math.min(maxThumbPosition, newThumbPosition));
-                    const scrollPosition = (boundedPosition / maxThumbPosition) * maxScrollLeft;
-
-                    scrollbarThumb.style.transform = `translateX(${boundedPosition}px)`;
-                    imageList.scrollLeft = scrollPosition;
-
-
-                };
-                const handleMouseUp = () => {
-                    document.removeEventListener("mousemove", handleMouseMove);
-                    document.removeEventListener("mouseup", handleMouseUp);
-                };
-
-                document.addEventListener("mousemove", handleMouseMove);
-                document.addEventListener("mouseup", handleMouseUp);
-            });
-            slideButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const direction = button.id === "prev-slide" ? -1 : 1;
-                    const scrollAmount = imageList.clientWidth * direction;
-                    imageList.scrollBy({
-                        left: scrollAmount,
-                        behavior: "smooth"
-                    });
-                });
-            });
-            const handleSlideButton = () => {
-                slideButtons[0].style.display = imageList.scrollLeft <= 0 ? "none" : "block";
-                slideButtons[1].style.display = imageList.scrollLeft >= maxScrollLeft ? "none" : "block";
-
-            };
-            const updateScrollThumbPosition = () => {
-                const scrollPosition = imageList.scrollLeft;
-                const thumbPosition = (scrollPosition / maxScrollLeft) * (sliderScrollbar.clientWidth -
-                    scrollbarThumb.offsetWidth);
-                scrollbarThumb.style.transform = `translateX(${thumbPosition}px)`;
-            };
-            imageList.addEventListener("scroll", () => {
-                handleSlideButton();
-                updateScrollThumbPosition();
-            });
-        }
-        window.addEventListener("load", initSlider);
     </script>
 @endsection

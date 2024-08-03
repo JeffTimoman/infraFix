@@ -3,22 +3,42 @@
         style="background-color: #fff; height: 25vh">
         <div class="col-md-12 my-auto d-flex justify-content-center">
             <ul class="row" style=" list-style: none;  ">
-                <li class="py-2 ps-3"><a href="{{route('hottopic.bookmarks')}}" class="text-decoration-none text-dark link-secondary"><i
-                            class="bi bi-bookmark d-flex" style=" font-size: 25px; font-style:normal; align-items: center"><span
-                                class="ms-2 fw-bold" style="font-size: 20px">Tersimpan</span></i></a></li>
+                {{-- Check if we are in the hottopic bookmarks route --}}
+                <li class="py-2 ps-3">
+                    @if (Route::currentRouteName() === 'hottopic.bookmarks')
+                        <a href="{{ route('hottopic.index') }}" class="text-decoration-none text-dark link-secondary">
+                            <i class="bi bi-list d-flex"
+                                style="font-size: 25px; font-style: normal; align-items: center">
+                                <span class="ms-2 fw-bold" style="font-size: 20px">Selengkapnya</span>
+                            </i>
+                        </a>
+                    @else
+                        <a href="{{ route('hottopic.bookmarks') }}"
+                            class="text-decoration-none text-dark link-secondary">
+                            <i class="bi bi-bookmark d-flex"
+                                style="font-size: 25px; font-style: normal; align-items: center">
+                                <span class="ms-2 fw-bold" style="font-size: 20px">Tersimpan</span>
+                            </i>
+                        </a>
+                    @endif
+                </li>
+
                 <li class="py-3 ps-3 "><a href="#" class=" text-dark text-decoration-none link-secondary"><i
-                            class="bi bi-bell d-flex" style="font-size: 25px ;font-style:normal; align-items: center"><span
-                                class="ms-2 fw-bold" style="font-size: 20px">Pemberitahuan</span></i></a></li>
-                <li class="py-2 ps-3"><a href="@if(auth()->check()){{route('profile.show', ['user' => auth()->user()])}}@endif" class="text-decoration-none  text-dark link-secondary" ><i
-                            class="bi bi-gear d-flex" style="font-size: 25px; font-style:normal; align-items: center"><span
-                                class="ms-2 fw-bold" style="font-size: 20px">Pengaturan</span></i></a></li>
+                            class="bi bi-bell d-flex"
+                            style="font-size: 25px ;font-style:normal; align-items: center"><span class="ms-2 fw-bold"
+                                style="font-size: 20px">Pemberitahuan</span></i></a></li>
+                <li class="py-2 ps-3"><a
+                        href="@if (auth()->check()) {{ route('profile.show', ['user' => auth()->user()]) }} @endif"
+                        class="text-decoration-none  text-dark link-secondary"><i class="bi bi-gear d-flex"
+                            style="font-size: 25px; font-style:normal; align-items: center"><span class="ms-2 fw-bold"
+                                style="font-size: 20px">Pengaturan</span></i></a></li>
             </ul>
         </div>
     </div>
     <form action="">
         <div class="col-md-12 rounded border border-secondary p-0 overflow-auto"
             style="background-color: #fff;  height: 58vh; max-height:58vh; position: relative; ">
-            <div class=" row w-100 m-0  " >
+            <div class=" row w-100 m-0  ">
                 <div class="accordion border-0 mt-1" id="accordionPanelsStayOpenExample">
                     <div class="accordion-item border-0 pb-3" style=" width: 100%">
                         {{-- <h2 class="accordion-header "></h2> --}}
@@ -31,8 +51,7 @@
                         <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                             <div class="accordion-body p-0 mt-2">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        id="flexRadioDefault1" checked>
+                                    <input class="form-check-input" type="radio" id="flexRadioDefault1" checked>
                                     <label class="form-check-label" for="flexRadioTahun">
                                         Rentang Tahun
                                     </label>
@@ -76,8 +95,7 @@
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
                             <div class="accordion-body p-0 mt-2" style="">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                        id="flexRadioDefault1" checked>
+                                    <input class="form-check-input" type="radio" id="flexRadioDefault1" checked>
                                     <label class="form-check-label" for="flexRadioBulan">
                                         Rentang Bulan
                                     </label>
@@ -94,17 +112,19 @@
                                         <div class="progres-month"></div>
                                     </div>
                                     <div class="range-input-month">
-                                        <input type="range" class="range_minimal_month" min="1" max="12"
-                                            value="1">
-                                        <input type="range" class="range_maksimal_month" min="1" max="12"
-                                            value="12">
+                                        <input type="range" class="range_minimal_month" min="1"
+                                            max="12" value="1">
+                                        <input type="range" class="range_maksimal_month" min="1"
+                                            max="12" value="12">
                                     </div>
                                     <div class="month-input mt-2">
                                         <div class="field mb-1">
-                                            <input type="number" class="input-min-month" value="{{ request()->input('month_start', 1) }}" name="month_start">
+                                            <input type="number" class="input-min-month"
+                                                value="{{ request()->input('month_start', 1) }}" name="month_start">
                                         </div>
                                         <div class="field mb-1">
-                                            <input type="number" class="input-max-month" value="{{ request()->input('month_end', 12) }}" name="month_end">
+                                            <input type="number" class="input-max-month"
+                                                value="{{ request()->input('month_end', 12) }}" name="month_end">
                                         </div>
                                     </div>
                                 </div>
@@ -118,26 +138,59 @@
                             style=" color: #6A040F;background-color: #fff; font-weight: 500;">
                             Kategori
                         </button>
+                        @php
+                            $unprocessed = request()->input('unprocessed') == 'on' ? true : false;
+                            $processed = request()->input('processed') == 'on' ? true : false;
+                            $finished = request()->input('finished') == 'on' ? true : false;
+                        @endphp
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show">
                             <div class="accordion-body p-0 mt-2">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="unprocessed" id="flexCheckboxDefault1" checked>
-                                    <label class="form-check-label" for="flexCheckboxDefault1">
-                                        Belum diproses
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="processed" id="flexCheckboxDefault2" checked>
-                                    <label class="form-check-label" for="flexCheckboxDefault2">
-                                        Sedang diproses
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="finished" id="flexCheckboxDefault3" checked>
-                                    <label class="form-check-label" for="flexCheckboxDefault3">
-                                        Selesai diproses
-                                    </label>
-                                </div>
+                                @if ($unprocessed || $processed || $finished)
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="unprocessed"
+                                            id="flexCheckboxDefault1" <?php echo $unprocessed ? 'checked' : ''; ?>>
+                                        <label class="form-check-label" for="flexCheckboxDefault1">
+                                            Belum diproses
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="processed"
+                                            id="flexCheckboxDefault2" <?php echo $processed ? 'checked' : ''; ?>>
+                                        <label class="form-check-label" for="flexCheckboxDefault2">
+                                            Sedang diproses
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="finished"
+                                            id="flexCheckboxDefault3" <?php echo $finished ? 'checked' : ''; ?>>
+                                        <label class="form-check-label" for="flexCheckboxDefault3">
+                                            Selesai diproses
+                                        </label>
+                                    </div>
+                                @else
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="unprocessed"
+                                            id="flexCheckboxDefault1" checked>
+                                        <label class="form-check-label" for="flexCheckboxDefault1">
+                                            Belum diproses
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="processed"
+                                            id="flexCheckboxDefault2" checked>
+                                        <label class="form-check-label" for="flexCheckboxDefault2">
+                                            Sedang diproses
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="finished"
+                                            id="flexCheckboxDefault3" checked>
+                                        <label class="form-check-label" for="flexCheckboxDefault3">
+                                            Selesai diproses
+                                        </label>
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                         <style>
@@ -149,7 +202,9 @@
                     </div>
 
                 </div>
-                <button class="btn btn-sm btn-danger col-md-4" style="position: absolute; right: 2%; bottom: 1%; border-radius: 20px;" type="">Cari</button>
+                <button class="btn btn-sm btn-danger col-md-4"
+                    style="position: absolute; right: 2%; bottom: 1%; border-radius: 20px;"
+                    type="">Cari</button>
             </div>
         </div>
     </form>

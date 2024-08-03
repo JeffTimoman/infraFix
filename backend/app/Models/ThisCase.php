@@ -57,4 +57,8 @@ class ThisCase extends Model
     public function creator(){
         return $this->belongsTo(User::class, 'created_by');
     }
+
+    public function images(){
+        return $this->hasMany(ReportImage::class, 'case_id');
+    }
 }

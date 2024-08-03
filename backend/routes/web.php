@@ -252,6 +252,7 @@ Route::prefix('hottopic')->group(function () {
     Route::get('/', [HotTopicController::class, 'index'])->name('hottopic.index');
     Route::get('/{case_number}/detail', [HotTopicController::class, 'detail'])->name('hottopic.detail');
     Route::get('/bookmarks', [HotTopicController::class, 'bookmarks'])->name('hottopic.bookmarks')->middleware([isLogin::class]);
+    Route::get('/get_random_image/{case_number}', [HotTopicController::class, 'getRandomReportImage'])->name('hottopic.get_random_image');
     Route::post('/add_comment', [HotTopicController::class, 'addComment'])->name('hottopic.add_comment');
     Route::post('/click_like', [HotTopicController::class, 'click_like'])->name('hottopic.click_like')->middleware([isLogin::class]);
     Route::post('/click_bookmark', [HotTopicController::class, 'click_bookmark'])->name('hottopic.click_bookmark')->middleware([isLogin::class]);
