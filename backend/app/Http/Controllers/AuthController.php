@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PasswordResetMail;
+use App\Mail\ResetPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -93,6 +101,54 @@ class AuthController extends Controller
         return redirect()->route('auth.login')->with('success', 'Akun berhasil dibuat. Silahkan login setelah konfirmasi email.');
     }
 
+    public function resetPassword(){
+        return view('auth.reset_password');
+    }
+
+    public function resetPasswordPost(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
+
+    }
+
+    public function showResetForm($token){
+
+        return view('auth.reset_form', ['token' => $token]);
+    }
+
+    public function resetFormPost(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->save();
+
+                // Here you can also log the user in if you want:
+                // Auth::login($user);
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('auth.login')->with('success', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+
+    }
     public function try_send_email(){
         $email = 'ppti.jeffersontimotius@gmail.com';
         $data = [
@@ -101,6 +157,11 @@ class AuthController extends Controller
             'subject' => 'Test Email',
             'content' => 'This is a test email.'
         ];
-        Mail::to($email)->send(new TestMail($data));
+        Mail::send('email.test', $data, function($message) use ($data){
+            $message->to($data['email'], $data['name'])->subject($data['subject']);
+        });
+        return 'hehe';
     }
+
+
 }

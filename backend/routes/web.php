@@ -49,12 +49,17 @@ Route::prefix('report')->group(function () {
 });
 
 
+Route::get('/password/reset/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [AuthController::class, 'resetFormPost'])->name('auth.reset_password_form');
 Route::prefix('auth')->group(function () {
     Route::get('login', [AuthController::class, 'showLoginForm'])->name('auth.login')->middleware(isNotLogin::class);
     Route::post('login', [AuthController::class, 'login'])->name('auth.login')->middleware(isNotLogin::class);
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(isLogin::class);
     Route::get('register', [AuthController::class, 'showRegisterPage'])->name('auth.register')->middleware(isNotLogin::class);
     Route::post('register', [AuthController::class, 'register'])->name('auth.register')->middleware(isNotLogin::class);
+
+    Route::get('reset_password', [AuthController::class, 'resetPassword'])->name('auth.reset_password')->middleware(isNotLogin::class);
+    Route::post('reset_password', [AuthController::class, 'resetPasswordPost'])->name('auth.reset_password')->middleware(isNotLogin::class);
 })->middleware(isNotLogin::class);
 
 Route::prefix('admin')->group(function () {
@@ -206,7 +211,7 @@ Route::prefix('manager')->group(function () {
         Route::prefix('/edit')->group(function () {
             Route::post('/{case}/ringkasan', [ManagerManagerHotTopicController::class, 'showRingkasan'])->name('manager.edit_2');
             Route::put('/{case}/perbarui', [ManagerManagerHotTopicController::class, 'updateHotTopic'])->name('manager.postupdateHotTopic');
-        })->middleware([isLogin::class, isManager::class]); 
+        })->middleware([isLogin::class, isManager::class]);
     })->middleware([isLogin::class, isManager::class]);
 
     Route::prefix('/unggah')->group(function () {
@@ -280,3 +285,6 @@ Route::post('/coba2', function (HttpRequest $request) {
     echo $request->input('address');
     return view('test.omg');
 });
+
+
+Route::get('/send_email', [AuthController::class, 'try_send_email']);
