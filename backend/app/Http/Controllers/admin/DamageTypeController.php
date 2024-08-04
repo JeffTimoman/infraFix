@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class DamageTypeController extends Controller
 {
     public function index(){
-        $damage_types = DamageType::paginate(5);
+        $damage_types = DamageType::all();
         return view('admin.damage_type.index', ['data' => $damage_types]);
     }
 
@@ -22,8 +22,8 @@ class DamageTypeController extends Controller
         // dd($request);
         $request->validate([
             'name'=> 'required',
-        ]);       
-                
+        ]);
+
         $data = [
             'name' => $request->input('name')
         ];
@@ -48,12 +48,12 @@ class DamageTypeController extends Controller
         if(!$damage){
             return redirect()->back()->withErrors(['Damage Type does not exist']);
         }
-      
+
         $request->validate([
             'name'=> 'required',
-        ]);       
-        
-        
+        ]);
+
+
         $data = [
             'name' => $request->input('name')
         ];

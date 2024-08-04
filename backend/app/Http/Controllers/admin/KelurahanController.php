@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class KelurahanController extends Controller
 {
     public function index(){
-        $kelurahans = Kelurahan::paginate(5);
+        $kelurahans = Kelurahan::all();
         return view('admin.kelurahan.index', ['data' => $kelurahans]);
     }
 
