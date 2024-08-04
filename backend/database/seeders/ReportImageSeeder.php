@@ -24,22 +24,22 @@ class ReportImageSeeder extends Seeder
             ReportImage::create([
                 'report_id' => $report->id,
                 'case_id'=> NULL,
-                'name' => 'default.png'
+                'name' => 'default2.png'
             ]);
             ReportImage::create([
                 'report_id' => $report->id,
                 'case_id'=> NULL,
-                'name' => 'default.png'
+                'name' => 'default3.png'
             ]);
             ReportImage::create([
                 'report_id' => $report->id,
                 'case_id'=> NULL,
-                'name' => 'default.png'
+                'name' => 'default4.png'
             ]);
             ReportImage::create([
                 'report_id' => $report->id,
                 'case_id'=> NULL,
-                'name' => 'default.png'
+                'name' => 'default5.png'
             ]);
         }
     }
