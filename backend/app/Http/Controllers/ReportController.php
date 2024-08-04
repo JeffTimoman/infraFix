@@ -124,7 +124,7 @@ class ReportController extends Controller
         $access_key = $request->access_key;
 
         // Retrieve the report from the database
-        $report = Report::where('report_code', $report_code)->first;
+        $report = Report::where('report_code', $report_code)->get()->first();
         if(!$report) {
             return redirect()->route('report.show')->withErrors('Kode laporan atau kode akses tidak benar.');
         }

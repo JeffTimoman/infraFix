@@ -20,7 +20,7 @@ class NonAnonymousReportSeeder extends Seeder
         $kelurahan = Kelurahan::all();
         $users = User::where('role', 'user')->get();
 
-        for ($i = 1; $i <= 10000; $i++) {
+        for ($i = 1; $i <= 1000; $i++) {
             $random_report_code = bin2hex(random_bytes(10));
             $random_access_key = 'iniaccesskey';
 
