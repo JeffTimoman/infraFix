@@ -36,7 +36,7 @@ class CaseSeeder extends Seeder
                 'coordinate' => "-6.1234$i, 107.1234$i",
                 'address' => "Dummy Address $i",
             ]);
-            $reports_in_kelurahan_area = Report::where('kelurahan_id', $kelurahan_id)->where('case_id', NULL)->where('damage_type_id', $damage_types->id)->take(5)->get();
+            $reports_in_kelurahan_area = Report::where('kelurahan_id', $kelurahan_id)->where('case_id', NULL)->where('damage_type_id', $damage_types->id)->take(random_int(1, 15))->get();
             $reports_in_kelurahan_area->each(function ($report) use ($this_case) {
                 $report->update(['case_id' => $this_case->id]);
 

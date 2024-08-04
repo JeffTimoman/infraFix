@@ -305,10 +305,16 @@
                                         {{-- untuk show gambar --}}
                                 </a>
                                 <div class="col-md-12 d-flex justify-content-center">
-                                    <img class="randomized-image"
-                                        src="{{ asset('upload/reportimage/' . $item->images->random()->name) }}"
-                                        alt="" width="900" height="288"
-                                        data-case-number="{{ $item->case_number }}" width="900" height="288">
+                                    @if ($item->images->count() > 0)
+                                        <img class="randomized-image"
+                                            src="{{ asset('upload/reportimage/' . $item->images->random()->name) }}"
+                                            alt="" width="900" height="288"
+                                            data-case-number="{{ $item->case_number }}" width="900" height="288">
+                                    @else
+                                        <img class="randomized-image" src="{{ asset('upload/reportimage/default.png') }}"
+                                            alt="" width="900" height="288"
+                                            data-case-number="{{ $item->case_number }}" width="900" height="288">
+                                    @endif
                                 </div>
                                 <div class="row" style=" height:5.5vh ;">
                                     <div class=" col-md-3 gap-1 d-flex justify-content-center align-items-center">
@@ -348,7 +354,8 @@
                                         <form action="{{ route('hottopic.click_bookmark') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="case_number" value="{{ $item->case_number }}">
-                                            <button onclick="" class="btn text-dark" id="btn_bookmark" type="submit">
+                                            <button onclick="" class="btn text-dark" id="btn_bookmark"
+                                                type="submit">
                                                 @if (auth()->user())
                                                     @php
                                                         $isBookmarked = $item->bookmarks->contains(
