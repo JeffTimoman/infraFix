@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CityController extends Controller
 {
     public function index(){
-        $cities = Kota::paginate(5);
+        $cities = Kota::all();
         return view('admin.city.index', ['data' => $cities]);
     }
 

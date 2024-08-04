@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class ProvinceController extends Controller
 {
     public function index(){
-        $provinces = Provinsi::paginate(5);
+        $provinces = Provinsi::all();
         return view('admin.province.index', ['data' => $provinces]);
     }
 

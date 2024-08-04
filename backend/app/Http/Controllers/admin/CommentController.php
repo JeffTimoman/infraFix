@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class CommentController extends Controller
 {
     public function index(){
-        $comments = Comment::paginate(5);
+        $comments = Comment::all();
         // dd($comments);
         return view('admin.comment.index', ['data' => $comments]);
     }

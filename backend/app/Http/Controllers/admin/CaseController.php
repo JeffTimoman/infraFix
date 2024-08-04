@@ -15,7 +15,7 @@ use PhpParser\Node\Stmt\Case_;
 class CaseController extends Controller
 {
     public function index(){
-        $cases = ThisCase::paginate(5);
+        $cases = ThisCase::all();
         return view('admin.case.index', ['data' => $cases]);
     }
 
@@ -48,8 +48,8 @@ class CaseController extends Controller
             'government'=> 'required',
             'damage_type'=> 'required',
             'user' => 'required'
-        ]);       
-        
+        ]);
+
         $kelurahan_id = Kelurahan::where('name', $request->input('kelurahan'))->first()->id;
         $government_id = User::where('name', $request->input('government'))->first()->id;
         $created_by = User::where('name', $request->input('user'))->first()->id;
@@ -69,7 +69,7 @@ class CaseController extends Controller
 
         ];
 
- 
+
 
         ThisCase::create($data);
         return redirect()->route('case.index')->with('success', 'Case added succesfully');
@@ -99,8 +99,8 @@ class CaseController extends Controller
             'government'=> 'required',
             'damage_type'=> 'required',
             'user' => 'required'
-        ]);       
-        
+        ]);
+
         $kelurahan_id = Kelurahan::where('name', $request->input('kelurahan'))->first()->id;
         $government_id = User::where('name', $request->input('government'))->first()->id;
         $created_by = User::where('name', $request->input('user'))->first()->id;
@@ -119,13 +119,13 @@ class CaseController extends Controller
 
         ];
 
- 
+
 
         $case->update($data);
         return redirect()->route('case.index')->with('success', 'Case edited succesfully');
     }
 
- 
+
 
     public function destroy(Request $request, $id){
         $case = ThisCase::find($id);

@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 class MilestoneController extends Controller
 {
     public function index(){
-        $milestones = Milestone::paginate(5);
+        $milestones = Milestone::all();
         return view('admin.milestone.index', ['data' => $milestones]);
     }
 
     public function details($id){
         $milestone = Milestone::where('id', $id)->first();
-        $milestone_details = MilestoneDetail::where('milestone_id', $milestone->id)->paginate(5);
+        $milestone_details = MilestoneDetail::where('milestone_id', $milestone->id)->get();
         // dd($milestone_details);
         return view('admin.milestone.details', ['data' => $milestone, 'detail' =>$milestone_details]);
     }
